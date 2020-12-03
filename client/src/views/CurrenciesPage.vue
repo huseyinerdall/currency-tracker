@@ -1,19 +1,19 @@
 <template>
   <div class="home">
     <v-container>
-      <Golds />
+      <MainDoviz />
     </v-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Golds from "@/components/Golds.vue";
+import MainDoviz from "@/components/MainDoviz.vue";
 
 export default {
   name: "GoldsPage",
   components: {
-    Golds,
+    MainDoviz,
   }
 };
 </script>

@@ -12,6 +12,9 @@
     <template v-slot:item.type="{ item }">
       <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="h4" class="white--text body-1">{{ item.type }}</router-link>
     </template>
+    <template v-slot:item.time="{ item }">
+      <span>{{ item.time | onlyTime }}</span>
+    </template>
   </v-data-table>
 </template>
 
@@ -25,12 +28,12 @@ export default {
     return {
       goldloaded: true,
       headers: [
-        { text: 'Altın Kurları',align: 'start', sortable: false,value: 'type',class: 'yellow--text darken-1 font-weight-light body-1',},
+        { text: 'Döviz Kurları',align: 'start', sortable: false,value: 'type',class: 'yellow--text darken-1 font-weight-light body-1',},
         { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
         { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
         { text: 'Yüzde', value: 'Yüzde',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
         { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
-        { text: 'Saat', value: 'Saat',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
+        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
       ],
       data: []
     }

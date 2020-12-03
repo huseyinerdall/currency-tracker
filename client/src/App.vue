@@ -20,7 +20,7 @@
 
         <v-btn
             v-if="!$store.state.isAuthenticated"
-            href="/wallet"
+            href="/doviz"
             text
             style="margin-left: 6%;"
         >

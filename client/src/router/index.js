@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import About from "../views/About.vue";
+//import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Coins from "../views/Coins.vue";
@@ -9,6 +9,7 @@ import Golds from "../views/Golds.vue";
 import Wallet from "../views/Wallet.vue";
 import CryptoCurrencyPage from "../views/CryptoCurrencyPage.vue";
 import GoldsPage from "../views/GoldsPage.vue";
+import CurrenciesPage from "../views/CurrenciesPage.vue";
 import Profile from "../views/Profile.vue";
 import CaprazKurlar from "../views/CaprazKurlar.vue";
 
@@ -50,9 +51,9 @@ const routes = [{
         }
     },
     {
-        path: "/about",
-        name: "About",
-        component: About,
+        path: "/doviz",
+        name: "Doviz",
+        component: CurrenciesPage,
         meta: {
             guest: true
         }
