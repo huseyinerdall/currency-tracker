@@ -20,6 +20,9 @@
     <template v-slot:item.price="{ item }">
       <h3 style="font-weight:400;font-size:12px;" class="text-right">{{ item.price.toFixed(4) }}</h3>
     </template>
+    <template v-slot:item.priceTL="{ item }">
+      <h3 style="font-weight:400;font-size:12px;" class="text-right">{{ (item.price * dolar).toFixed(4) }}</h3>
+    </template>
     <template v-slot:item.pricechange24h="{ item }">
       <span
           :class="[item.pricechange24h>=0 ? 'green--text' : 'red--text']"
@@ -61,7 +64,7 @@ export default {
         class: 'yellow--text darken-1 font-weight-light body-1',
       }, {
         text: 'Fiyat(TL)',
-        value: 'price',
+        value: 'priceTL',
         sortable: false,
         align: 'right',
         class: 'yellow--text darken-1 font-weight-light body-1',
@@ -96,7 +99,8 @@ export default {
         align: 'right',
         class: 'yellow--text darken-1 font-weight-light body-1',
       },],
-      data: []
+      data: [],
+      dolar: 1,
     }
   },
   created() {
@@ -111,8 +115,10 @@ export default {
     },1000)*/
     socket.on("coins", fetchedData => {
       app.data = fetchedData;
-      console.log(app.data)
-    })
+    });
+    socket.on("dolar", fetchedData => {
+      app.dolar = fetchedData;
+    });
   },
   mounted() {
   },

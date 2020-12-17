@@ -485,9 +485,11 @@ db.sequelize.sync().then(() => {
     }, 1000)
 
     let BINTL = {};
+    let dolar = 0;
     setInterval(() => {
         axios.get('https://finans.truncgil.com/today.json')
             .then(response =>{
+                dolar = response.data["ABD DOLARI"]["Satış"];
                 BINTL["USD"] = 1000/(+response.data["ABD DOLARI"]["Satış"]);
                 BINTL["EUR"] = 1000/(+response.data["EURO"]["Satış"]);
                 BINTL["GBP"] = 1000/(+response.data["İNGİLİZ STERLİNİ"]["Satış"]);
@@ -501,7 +503,7 @@ db.sequelize.sync().then(() => {
                 BINTL["BTC"] = (1000/(+response.data[0]["current_price"] * +BINTL["USD"]));
             })
             .catch(err => console.log(err));*/
-
+        io.emit('dolar',dolar);
         io.emit('bintl',BINTL);
     },5000);
 })

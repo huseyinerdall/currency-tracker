@@ -19,37 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Second Stage">
-      <change afterPath="$PROJECT_DIR$/app/models/Closes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/tempfilename.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/currencies.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraph.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/Logout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Logout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/CaprazKurlar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CaprazKurlar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Coins.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Coins.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Golds.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +105,7 @@
       <workItem from="1608049999631" duration="2763000" />
       <workItem from="1608102999947" duration="8163000" />
       <workItem from="1608139618509" duration="9117000" />
-      <workItem from="1608188773520" duration="11664000" />
+      <workItem from="1608188773520" duration="12629000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -139,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607013014478</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Test">
+      <created>1608201110096</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1608201110096</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +142,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second Satge" />
     <MESSAGE value="Second Stage" />
-    <option name="LAST_COMMIT_MESSAGE" value="Second Stage" />
+    <MESSAGE value="Test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607011242964">
@@ -199,14 +182,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607011688606" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1607013024163">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1608201149773">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1607013024163" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607012995632">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608201149773" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608201041155">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1607012995632" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1608201041155" />
     <state x="390" y="0" width="585" height="728" key="find.popup" timestamp="1607796261263">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
