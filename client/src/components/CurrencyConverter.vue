@@ -1,45 +1,53 @@
 <template>
   <v-card style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;" class="mb-6">
     <v-row>
-      <v-spacer></v-spacer>
-      <v-col sm="10" lg="1">
+      <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
+      <v-col cols="6" lg="2">
         <v-text-field
+            dark
             v-model="amount"
-            style="width:80px;"
-            class="text-center"
+            :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
+            class="text-center ml-6"
             color="white"
             @change="convert"
             @input="convert"
         ></v-text-field>
       </v-col>
-      <v-col sm="10" lg="1">
+      <v-col cols="5" lg="1">
         <v-select
             :items="items"
             item-text="symbol"
             v-model="source"
+            item-value="name"
             color="white"
             @change="convert"
+            dark
         ></v-select>
       </v-col>
-      <v-col sm="2" lg="1" class="text-center">
-        <v-icon size="40" color="yellow darken-1" class="mt-1">
+      <v-col cols="12" lg="1" class="text-center">
+        <v-icon size="40" color="yellow darken-1" class="mt-1" :class="$vuetify.breakpoint.smAndDown ? 'mdi-rotate-90' : ''">
           mdi-arrow-left-right
         </v-icon>
       </v-col>
-      <v-col sm="10" lg="1">
+      <v-col cols="6" lg="2">
         <v-text-field
             v-model="result"
             color="white"
-            style="width:80px;"
+            class="ml-6"
+            :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
+            dark
+            readonly
         ></v-text-field>
       </v-col>
-      <v-col sm="10" lg="1">
+      <v-col cols="5" lg="1">
         <v-select
             :items="items"
             item-text="symbol"
+            item-value="name"
             v-model="target"
             @change="convert"
             color="white"
+            dark
         ></v-select>
       </v-col>
       <v-spacer></v-spacer>
@@ -57,8 +65,8 @@
             items: currencies,
             search: null,
             tab: null,
-            source: currencies[0]["symbol"],
-            target: currencies[2]["symbol"],
+            source: currencies[0]["name"],
+            target: currencies[2]["name"],
             amount: 1,
             resulted: false,
             result: '',
@@ -68,9 +76,7 @@
         },
         methods: {
             convert() {
-                console.log(this.amount)
                 this.amount = this.amount || 1;
-                console.log(this.amount, this.source, this.target);
                 if (!(this.amount && this.source && this.target)) return;
                 axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/converter`, {
                         source: this.source,
@@ -79,14 +85,13 @@
                     })
                     .then(response => {
                         this.resulted = true;
-                        console.log(response.data.result)
                         this.result = response.data.result;
                     })
             }
         }
     };
 </script>
-<style>
+<style scoped>
     .v-text-field__details {
         display: none;
     }
@@ -120,5 +125,25 @@
     .theme--light.v-text-field>.v-input__control>.v-input__slot:before,
     .theme--light.v-text-field:not(.v-input--has-state):hover>.v-input__control>.v-input__slot:before {
         border-color: #fff !important;
+    }
+    .v-text-field__slot > input{
+      text-align: center !important;
+      color: #fff !important;
+    }
+    .theme--light.v-text-field > .v-input__control > .v-input__slot:before{
+      border-color: #fff !important;
+    }
+    .v-select__selection{
+      color:#fff !important;
+      margin-left:10px !important;
+    }
+    input{
+      text-align: center !important;
+    }
+    .v-text-field__slot input{
+      text-align: center !important;
+    }
+    .v-text-field input{
+      text-align: center !important;
     }
 </style>

@@ -1,68 +1,128 @@
 <template>
-  <v-container>
-      <table class="mt-6">
+  <div>
+      <table class="mt-6 mb-6" style="table-layout:fixed;" v-if="$vuetify.breakpoint.mdAndUp">
           <thead>
             <tr>
                 <th style="border-left: 0 !important;width:160px;">
-                    <v-select
-                        :items="items"
-                        item-text="name"
-                        v-model="source"
-                        @change="convert"
-                        multiple
-                        style="width: 100px;"
-                        class="mx-auto"
-                    >
-                    <template v-slot:selection="{ item, index }">
-                        <span
-                        style="color: white;text-align: center;font-size:12px;"
-                        class="ml-4"
-                        v-if="index === 0">
-                            {{ source.length }} adet 
-                        </span>
-                    </template>
-</v-select>
+
 </th>
-<th>lorem</th>
-<th>lorem</th>
-<th>lorem</th>
+<th v-for="currency in value" :key="currency" style="font-size:14px;" class="yellow--text darken-1">{{currency}}</th>
 </tr>
 </thead>
 <tbody>
-    <tr>
-        <th style="border-left: 0 !important;">lorem</th>
-        <td>lorem</td>
-        <td>lorem</td>
-        <td>lorem</td>
+      <tr v-for="currencyRow in value" :key="currencyRow">
+        <th style="border-left: 0 !important;font-size:14px;" >
+          <p class="yellow--text darken-1 text-right">1 {{currencyRow}}</p>
+          <p style="font-size: 12px;">Ters Parite</p>
+        </th>
+        <td v-for="currencyCol in value" :class="[(data[currencyCol]) / (data[currencyRow]) == 1 ? 'bir' : '']" :key="currencyCol">
+          <p>{{ (data[currencyCol]) / (data[currencyRow]) | tofixedfour}}</p>
+          <p style="font-size: 12px;">{{ (data[currencyRow]) / (data[currencyCol]) | tofixedfour}}</p>
+        </td>
     </tr>
-    <tr>
-        <th style="border-left: 0 !important;">lorem</th>
-        <td>lorem</td>
-        <td>lorem</td>
-        <td>lorem</td>
-    </tr>
-    <tr>
-        <th style="border-left: 0 !important;">lorem</th>
-        <td>lorem</td>
-        <td>lorem</td>
-        <td>lorem</td>
-    </tr>
+  <tr>
+    <td :colspan="value.length+1">
+      <v-select
+          :items="items"
+          item-text="name"
+          v-model="value"
+          multiple
+          style="width: 200px"
+          dark
+          prepend-icon="mdi-plus-circle-outline"
+      >
+        <template v-slot:selection="{  index }">
+                        <span style="color: white;text-align: center;font-size:14px;" v-if="index === 0">
+                          Ekle/Kaldır
+                        </span>
+        </template>
+        <!--<template v-slot:selection="{ item, index }">
+                        <span
+                            style="color: white;text-align: center;font-size:12px;"
+                            class="ml-4"
+                            v-if="index === 0">
+                            {{ value.length }} adet
+                        </span>
+        </template>-->
+      </v-select>
+    </td>
+  </tr>
 </tbody>
 </table>
-</v-container>
+    <v-list v-else class="mobile-list">
+      <v-list-item-group
+          v-model="currentCurrency"
+          active-class="border"
+          color="indigo"
+      >
+        <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            style="border-bottom: 1px solid #5e6593;"
+        >
+          <v-list-item-icon>
+            <!--<span style="width: 50px;line-height:48px;">{{i == model ? 'from' : 'to'}}</span>-->
+            <v-avatar width="50">
+              <img
+                  width="40"
+                  :src="item.image"
+                  :alt="item.image"
+              >
+            </v-avatar>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <div class="d-flex flex-row justify-content-between">
+              <div style="color:#fff;padding-top:3px;">1 {{item.symbol}}</div>
+              <v-icon class="ml-0" color="#fff">mdi-arrow-right</v-icon>
+              <div style="color:#fff;padding-top:3px;">{{ (data[item.name]) / (data[items[currentCurrency]["name"]]) | tofixedfour}} {{items[currentCurrency]["symbol"]}}</div>
+            </div>
+
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+</div>
 </template>
 
 <script>
     import currencies from '../assets/currencies.js';
+    import io from "socket.io-client";
     export default {
         name: "MatrisTable",
         data: () => ({
-            items: currencies,
-        }),
-        created() {},
-        methods: {
+          items: currencies,
+          value:["EURO","ABD DOLARI","TÜRK LİRASI"],
+          data:{},
+          currentCurrency: 1,
 
+        }),
+        created() {
+          let app = this;
+          app.data["TÜRK LİRASI"] = 1;
+          var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+          socket.on("currencies", fetchedData => {
+            for (const currency of fetchedData) {
+              app.data[currency["type"]] = currency["Satış"];
+            }
+          })
+        },
+        methods: {
+          click: function() {
+            document.getElementsByClassName("v-menu__content")[0].style.display="block";
+          }
+        },
+      watch: {
+        /*currentCurrency(newValue,oldValue){
+          let a = newValue+oldValue;
+          console.log(a)
+        },*/
+        value(){
+          if(this.value.length >= 8){
+            this.value.shift();
+          }
         }
+      }
     };
 </script>
 
@@ -71,28 +131,48 @@
         width: 100% !important;
         background-color: rgba(0, 0, 0, .3);
         color: #fff !important;
+      border:1px solid #5e6593;
+      border-collapse: collapse;
     }
-    
+
     tr {
-        height: 50px;
-        text-align: center;
+        text-align: right;
+      border-bottom: 1pt solid #5e6593;
     }
     
     td {
         padding: 10px;
-        border-bottom: thin solid rgba(255, 255, 255, .4)!important;
-        border-left: thin solid rgba(255, 255, 255, .4)!important;
     }
     
     th {
-        padding: 10px;
-        border-bottom: thin solid rgba(255, 255, 255, .4)!important;
-        border-left: thin solid rgba(255, 255, 255, .4)!important;
-    }
-    
-    tbody tr:last-child td,
-    tbody tr:last-child th {
-        border-bottom: 0 !important;
+      padding: 10px;
     }
 
+    .bir{
+      color: gray;
+      user-select: none;
+    }
+    .border {
+      border: 2px dashed orange;
+    }
+    p{
+      margin-bottom: 0 !important;
+    }
+    .theme--light.v-text-field>.v-input__control>.v-input__slot:before, .theme--light.v-text-field:not(.v-input--has-state):hover>.v-input__control>.v-input__slot:before{
+      display: none !important;
+      border-color: transparent !important;
+    }
+    .v-sheet.v-list{
+      border-radius:0;
+    }
+    .v-list-item__title{
+      color: #fff !important;
+    }
+    .theme--light.v-list.mobile-list{
+      color: #fff !important;
+      background: rgba(0,0,0,.3) !important;
+    }
+    .v-text-field > .v-input__control > .v-input__slot:before, .v-text-field > .v-input__control > .v-input__slot:after{
+      width: 0 !important;
+    }
 </style>

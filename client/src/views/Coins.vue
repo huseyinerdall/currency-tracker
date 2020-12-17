@@ -4,10 +4,7 @@
     <v-container>
       <v-row>
         <v-col
-        lg=8 sm=12>
-        </v-col>
-        <v-col
-        lg=4 sm=12>
+        cols="12" md="6">
           <Description />
         </v-col>
       </v-row>
@@ -17,7 +14,7 @@
 </template>
 
 <script>
-import SinglePageGraph from "@/components/SinglePageGraph.vue";
+import SinglePageGraph from "@/components/SinglePageGraphCoin.vue";
 import Description from "@/components/Description.vue";
 import CommentSidebar from "@/components/common/CommentSidebar.vue";
 export default {

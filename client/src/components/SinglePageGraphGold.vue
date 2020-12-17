@@ -1,51 +1,93 @@
 <template>
-  <v-container class="ma-0 mt-6 pa-0">
+  <v-container class="mt-8 pa-0">
     <v-row>
-      <h2 class="white--text font-weight-light ml-10">
-        <v-avatar size="32" class="mb-2">
-          <img
-              src="http://localhost:4000/gold.png"
-              alt="$route.params.gold"
+
+      <v-col md7 sm12 xs12>
+        <v-row class="flex-row justify-space-between pl-4 pr-4">
+          <div class="white--text font-weight-light">
+            <v-avatar size="32" class="mb-2">
+              <img
+                  src="http://localhost:4000/gold.png"
+                  alt="$route.params.gold"
+              >
+            </v-avatar>
+            {{ $route.params.gold }}
+          </div>
+          <div class="white--text font-weight-light mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
+            {{ satis || "--.----"}} $
+          </div>
+          <div class="mt-2 white--text" :class="[1>=0 ? 'green--text' : 'red--text']">
+            {{ price_change_24h | signint  }}
+            <v-icon color="red" v-if="price_change_24h < 0">mdi-trending-down</v-icon>
+            <v-icon color="green" v-else-if="price_change_24h > 0">mdi-trending-up</v-icon>
+            <v-icon color="gray" v-else-if="price_change_24h == 0">mdi-trending-neutral</v-icon>
+          </div>
+        </v-row>
+      </v-col>
+      <v-col md5 sm12 xs12 class="justify-end align-content-end">
+        <v-row>
+          <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
+          <v-btn-toggle
+              v-model="time"
+              style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;background:transparent;"
+              mandatory
+              right
+              :class="[$vuetify.breakpoint.smAndDown ? 'mx-auto' : '' ]"
           >
-        </v-avatar>
-        {{$route.params.gold}}
-      </h2>
-      <h2 class="white--text font-weight-light ml-10" :class="[state > 0 ? 'price-up' : 'price-down']">
-        {{ alis || "--.---" }}
-        <span v-if="$route.params.gold.indexOf('Ons') == 0">$</span>
-        <span v-else>₺</span>
-      </h2>
-      <!--<h3 class="ml-4 mt-2 white&#45;&#45;text" :class="[price_change_24h>=0 ? 'green&#45;&#45;text' : 'red&#45;&#45;text']">
-        {{price_change_24h}}
-        <v-icon color="red" v-if="price_change_24h < 0">mdi-trending-down</v-icon>
-        <v-icon color="green" v-else-if="price_change_24h > 0">mdi-trending-up</v-icon>
-        <v-icon color="gray" v-else-if="price_change_24h == 0">mdi-trending-neutral</v-icon>
-      </h3>-->
+            <v-btn :value="time" style="background: transparent;">
+              <v-icon>mdi-share-variant-outline</v-icon>
+            </v-btn>
+            <v-btn value="1" style="background: transparent;" >24S</v-btn>
+            <v-btn value="7" style="background: transparent;" >7G</v-btn>
+            <v-btn value="30" style="background: transparent;" >1A</v-btn>
+            <v-btn value="90" style="background: transparent;" >3A</v-btn>
+            <v-btn value="365" style="background: transparent;" >1Y</v-btn>
+            <v-btn value="1095" style="background: transparent;" >3Y</v-btn>
+          </v-btn-toggle>
+        </v-row>
+
+      </v-col>
+
     </v-row>
 
     <div id="chart">
-      <apexchart class="ma-0 pa-0" type="area" height="350" :options="chartOptions" :series="series"></apexchart>
+      <apexchart ref="realtimeChart" class="ma-0 pa-0" type="area" height="350" :options="chartOptions"
+                 :series="series"></apexchart>
     </div>
+
+    <v-overlay
+        :opacity="1"
+        :value="overlay"
+        color="indigo"
+    >
+      <v-progress-circular indeterminate size="64">
+      </v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
 <script>
 import axios from 'axios';
+import io from "socket.io-client";
 //import dump from '../assets/dump.js'
 
 export default {
-  name: "SinglePageGraph",
+  name: "SinglePageGraphGold",
   data: (app)=>({
+    interval: 0,
+    time: 1,
     state:0,
     high: '',
     low: '',
+    overlay: false,
     current_price: '',
     last_updated: '',
     alis: '',
     satis: '',
+    price_change_24h: '',
     series: [{
       name: app.$route.params.gold,
-      data: [30, 40, 45,30, 40, 45,30, 40, 45,30, 40, 45,30, 40, 45]
+      data: []
     }],
     chartOptions: {
       chart: {
@@ -61,8 +103,8 @@ export default {
           autoSelected: 'zoom'
         }
       },
-      stroke:{
-        width:1
+      stroke: {
+        width: 1
       },
       dataLabels: {
         enabled: false
@@ -80,20 +122,16 @@ export default {
           inverseColors: false,
           opacityFrom: 0.5,
           opacityTo: 0,
-          stops: [0, 90, 100]
         },
       },
       yaxis: {
         labels: {
-          formatter: function (val) {
-            return (val / 1000000).toFixed(0);
-          },
           style: {
             colors: "#fff",
           }
         },
         title: {
-          text: 'Fiyat',
+          text: 'Fiyat($)',
           style: {
             color: '#ffffff',
             fontSize: 14,
@@ -101,7 +139,9 @@ export default {
           }
         },
         axisTicks: {
-          color: '#ffffff'
+          show:false,
+          color: '#ffffff',
+          width:0,
         },
         axisBorder: {
           color: '#ffffff'
@@ -109,12 +149,13 @@ export default {
       },
       xaxis: {
         //type: 'datetime',
+        tickAmount: 6,
         labels: {
           style: {
             colors: "#fff",
-          }
+          },
         },
-        categories: ['a','b','c'],
+        categories: ['-', '-', '-'],
         axisTicks: {
           color: '#ffffff'
         },
@@ -125,24 +166,126 @@ export default {
       tooltip: {
         shared: false,
         y: {
-          formatter: function (val) {
-            return (val / 1000000).toFixed(2)
+          formatter: function(val) {
+            return val + " $"
           }
-        }
-      }
+        },
+      },
+
     },
   }),
   created() {
-    setInterval(() =>{
+    if(this.$vuetify.breakpoint.smAndDown){
+      this.chartOptions.responsive = [
+        {
+          breakpoint: 768,
+          options: {
+            xaxis: {
+              axisTicks:{
+                show: false,
+                color: "#ff0000"
+              },
+              labels:{
+                show: false,
+              }
+            },
+            yaxis: {
+              axisTicks: {
+                show: false,
+              },
+              labels:{
+                show:false,
+              }
+            }
+          }
+        }
+      ]
+    }
+    let app = this;
+    this.interval = setInterval(() =>{
       axios.get(`http://${this.$store.state.addr}:${this.$store.state.port}/gold/${this.$route.params.gold}`)
           .then(response=>{
             this.alis = response.data["Alış"];
             this.satis = response.data["Satış"];
+            this.price_change_24h = response.data["price_change_24h"];
           })
-    },1000)
+    },1000);
+
+    let temp;
+    var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+    socket.on(app.$route.params.coin, fetchedData => {
+      if (fetchedData[fetchedData.length - 1]["Satis"] != temp || !temp) {
+
+        //app.graphData = fetchedData
+        let tempDates = [];
+        let time;
+        let tempValues = [];
+        for (let i = 0; i < fetchedData.length; i++) {
+          time = new Date(fetchedData[i]["createdAt"]);
+          tempDates.push(time.toLocaleString('tr'));
+          tempValues.push(fetchedData[i]["Satis"])
+        }
+        //if(this.time == 1){
+        this.series = [{
+          data: tempValues
+        }]
+        this.chartOptions = {
+          xaxis: {
+            categories: tempDates
+          }
+        }
+        //}
+
+        temp = fetchedData[fetchedData.length - 1]["Satis"];
+      }
+    })
+    this.getGraphData();
+  },
+  methods: {
+    getGraphData: function() {
+      axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/getgoldaccordingtotimerange`, {
+        goldName: this.$route.params.gold,
+        time: this.time,
+      })
+          .then(response => {
+            let fetchedData = response.data;
+            let tempDates = [];
+            let time;
+            let tempValues = [];
+            for (let i = 0; i < fetchedData.length; i++) {
+              time = new Date(fetchedData[i]["createdAt"]);
+              tempDates.push(time.toLocaleString('tr'));
+              tempValues.push(fetchedData[i]["Satis"])
+            }
+            this.series = [{
+              data: tempValues
+            }]
+            this.chartOptions = {
+              xaxis: {
+                categories: tempDates
+              }
+            }
+            this.overlay = false;
+          })
+    }
   },
   watch: {
-
+    time(newVal, oldVal) {
+      this.overlay = true;
+      console.log(newVal, oldVal);
+      this.getGraphData();
+    },
+    current_price(newValue, oldValue) {
+      console.log(newValue + "---" + oldValue + "degişti");
+      if (+newValue < +oldValue) {
+        this.state = -1;
+      } else {
+        this.state = 1;
+      }
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   }
 };
 </script>
@@ -171,5 +314,16 @@ export default {
 .price-down {
   -webkit-animation: 1.5s alternate price-down;
   animation: 1.5s alternate price-down;
+}
+</style>
+
+<style>
+.apexcharts-toolbar {
+  z-index: 0 !important;
+}
+@media screen and (max-width: 768px){
+  .apexcharts-yaxis{
+    display: none;
+  }
 }
 </style>

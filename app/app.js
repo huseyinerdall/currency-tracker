@@ -1,3 +1,5 @@
+let THE_BEGINNING_OF_EVERYTHING = true;
+const HOST = "localhost";
 var express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -7,13 +9,14 @@ var fs = require('fs');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 var moment = require('moment');
-
+const path = require('path');
 
 var parseString = require('xml2js').parseString;
 var utils = require('./utils');
 var upload = require('./utils/upload');
 
-console.log(upload)
+const UPLOAD_FOLDER = path.join(__dirname,"public/uploads/");
+console.log("UPLOAD FOLDER\t"+UPLOAD_FOLDER)
 
 const db = require("./models");
 
@@ -33,7 +36,7 @@ const app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server, {
     cors: {
-        origin: "http://localhost:8080",
+        origin: `http://${HOST}:8080`,
         methods: ["GET", "POST"]
     }
 });
@@ -50,6 +53,8 @@ var config = {
         //'Content-Length': 100,
     }
 };
+
+let closes = {}; // Kapanış verilerinin store edildiği global
 
 app.get('/tcmb', (req, res) => {
     let factRes = [];
@@ -115,6 +120,8 @@ app.get('/golds', (req, res) => {
 app.get('/gold/:goldName', (req, res) => {
     axios.get('https://finans.truncgil.com/today.json')
         .then(response => {
+            response.data[req.params.goldName]["price_change_24h"] = response.data[req.params.goldName]["Satış"]-closes[req.params.goldName];
+            console.log(response.data[req.params.goldName]["price_change_24h"])
             res.json(response.data[req.params.goldName])
         })
         .catch(err => console.log(err));
@@ -139,7 +146,7 @@ app.get('/coin/:coinName', (req, res) => {
     let coinSymbol = utils.search(req.params["coinName"], coins)["symbol"];
     let data;
     let temp;
-    axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinID}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+    axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinID}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d`)
         .then(async(response) => {
             if (response.data[0]["current_price"] != temp || !temp) {
                 DEFAULT = moment().startOf('day').toString();
@@ -166,7 +173,7 @@ app.get('/coin/:coinName', (req, res) => {
 app.get('/coins', (req, res) => {
     let factRes = [];
     let temp = {};
-    axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+    axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d`)
         .then((response) => {
             for (let i = 0; i < response.data.length; i++) {
                 temp = {};
@@ -180,6 +187,19 @@ app.get('/coins', (req, res) => {
             }
             res.json(factRes);
         })
+})
+
+app.get('/closes', async (req, res) => {
+    let BEGIN = moment().subtract(1, 'd').toString() || DEFAULT;
+    const NOW = new Date();
+    data = await db["Closes"].findAll({
+        where: {
+            createdAt: {
+                [Op.between]: [BEGIN, NOW],
+            }
+        }
+    });
+    res.json(data);
 })
 
 app.post('/getcoinaccordingtotimerange', async(req, res) => {
@@ -202,21 +222,54 @@ app.post('/getcoinaccordingtotimerange', async(req, res) => {
     res.json(data);
 })
 
+app.post('/getgoldaccordingtotimerange', async(req, res) => {
+    let time = req.body.time || 1;
+    console.log(time,"---",req.body.goldName);
+    //let coinID = utils.search(req.params["coinName"], coins)["id"];
+    let goldName = req.body.goldName;
+    let data;
+
+    let BEGIN = moment().subtract(time, 'd').toString() || DEFAULT;
+    const NOW = moment();
+    try{
+        data = await db["Gold" + utils.turkishToEnglish(goldName)].findAll({
+            where: {
+                createdAt: {
+                    [Op.between]: [BEGIN, NOW],
+                }
+            }
+        });
+    }catch (e){
+        data = await db[utils.turkishToEnglish(goldName)].findAll({
+            where: {
+                createdAt: {
+                    [Op.between]: [BEGIN, NOW],
+                }
+            }
+        });
+    }
+    io.emit(req.params["goldName"], data);
+    res.json(data);
+})
+
 app.post('/sendcomment', async(req, res) => {
     let fullName = req.body.fullName;
     let comment = req.body.message;
     let subject = req.body.subject;
+    let profileImage = req.body.profileImage;
     db["Comments"].create({
             fullName: fullName,
             comment: comment,
             subject: subject,
+            profileImage: profileImage
         })
         //io.emit(req.params["coinName"],data);
     res.json({
         fullName: fullName,
         comment: comment,
         subject: subject,
-        createdAt: new Date().toLocaleTimeString(),
+        profileImage: profileImage,
+        createdAt: new Date(),
     });
 })
 
@@ -243,27 +296,29 @@ app.post('/converter', (req, res) => {
     let amount = req.body.amount;
     axios.get(truncgil)
         .then((response) => {
-            let s = +response.data[source]["Alış"];
+            let s;
 
             let a = +amount;
             let result;
-            if (target == "TÜRK LİRASI") {
+            if (target == "TÜRK LİRASI" && source != "TÜRK LİRASI") {
+                s = +response.data[source]["Satış"];
                 result = (a * s);
-            } else if (source == "TÜRK LİRASI") {
-                let t = +response.data[target]["Alış"];
-                result = (a / t).toFixed(4);
-            } else {
-                let t = +response.data[target]["Alış"];
+            }
+            if (target == "TÜRK LİRASI" && source == "TÜRK LİRASI") {
+                result = a;
+            }
+            if(target != "TÜRK LİRASI" && source != "TÜRK LİRASI"){
+                let t = +response.data[target]["Satış"];
+                s = +response.data[source]["Satış"];
                 result = a * (s / t).toFixed(4);
             }
 
-            console.log("result", result)
-            res.json({ "result": result });
+            res.json({ "result": result.toFixed(4) });
         })
 })
 
 app.post('/register', (req, res) => {
-
+    console.log(req.body)
     db.User.findOne({
             where: {
                 email: req.body.email
@@ -271,11 +326,23 @@ app.post('/register', (req, res) => {
         })
         .then(user => {
             if (user) {
+                console.log(user)
                 res.send("Bu email adresi çoktan kullanılmış.");
             } else {
+                let filename = '';
+                fs.readdirSync(UPLOAD_FOLDER).forEach(file => {
+                    if(file.includes("tempfilename")){
+                        let ext = path.extname(file);
+                        fs.rename(`${UPLOAD_FOLDER}tempfilename${ext}`, `${UPLOAD_FOLDER}${req.body.profileImage}${ext}`, function(err) {
+                            if ( err ) console.log('ERROR: ' + err);
+                        });
+                        filename = `${req.body.profileImage}${ext}`;
+                    }
+                });
                 req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
+                req.body.profileImage = filename;
                 db.User.create(req.body)
-                console.log("Kullanıcı kadedildi!!!");
+                console.log("Kullanıcı kaydedildi!!!");
                 res.send("OK");
             }
         })
@@ -308,6 +375,7 @@ app.post('/login', (req, res) => {
             }
         })
         .then(user => {
+            if(!user){res.send("ERROR");return;}
             let passwordIsValid = bcrypt.compareSync(req.body.passwd, user.dataValues.passwd)
             if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
             let token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: 86400 });
@@ -320,9 +388,7 @@ app.post('/login', (req, res) => {
 })
 
 
-
-
-
+const NONCHANGE_TIME = 60 * 1/6;
 
 
 db.sequelize.sync().then(() => {
@@ -337,13 +403,17 @@ db.sequelize.sync().then(() => {
     let tempBitcoin = 0;
     let M = {}; // coin değişimini tespit için
     let C = {}; // döviz değişimini tespit için
+    /*let CCounter = 0;
+    let CCloseWritable = true;
+    let GCounter = 0;
+    let GCloseWritable = true;*/
     setInterval(() => {
         let factRes = [];
         let golds = [];
         let currencies = [];
         let temp = {};
 
-        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d`)
             .then((response) => {
                 for (let i = 0; i < response.data.length; i++) {
                     temp = {};
@@ -352,9 +422,9 @@ db.sequelize.sync().then(() => {
                     temp["price"] = response.data[i]["current_price"];
                     temp["change"] = response.data[i]["price_change_24h"];
                     temp["volume"] = response.data[i]["total_volume"];
-                    temp["pricechange24h"] = response.data[i]["price_change_24h"];
+                    temp["pricechange24h"] = response.data[i]["price_change_percentage_24h"];
+                    temp["pricechange7d"] = response.data[i]["price_change_percentage_7d_in_currency"] || 0;
                     temp["time"] = response.data[i]["last_updated"];
-                    temp["close"] = parseFloat(response.data[i]["current_price"]) + parseFloat(response.data[i]["price_change_percentage_24h"]); //close price
                     factRes.push(temp);
 
                     // aşagıdaki koşul sadece api çıktısı aynı sırada sonuçlanırsa düzgün calışır
@@ -377,7 +447,10 @@ db.sequelize.sync().then(() => {
                     if (element.indexOf("Altın") > 0 || element == '22 Ayar Bilezik' || element == 'Gümüş') {
                         response.data[element]["type"] = element;
                         response.data[element]["time"] = updatetime;
-
+                        if(moment().format('HH:mm') == "01:00" || THE_BEGINNING_OF_EVERYTHING){
+                            closes[element] = response.data[element]["Satış"];
+                        }
+                        response.data[element]["close"] = closes[element];
                         indis = "Gold" + utils.turkishToEnglish(element)
                             //db[indis].destroy({ truncate : true, cascade: true })
                         if (db[indis] && response.data[element]["Alış"] != C[indis]) {
@@ -389,6 +462,10 @@ db.sequelize.sync().then(() => {
                     } else if (element.indexOf("Güncelleme") < 0 && element.indexOf("ÇEKME") < 0) {
                         response.data[element]["type"] = element;
                         response.data[element]["time"] = updatetime;
+                        if(moment().format('HH:mm') == "01:00" || THE_BEGINNING_OF_EVERYTHING){
+                            closes[element] = response.data[element]["Satış"];
+                        }
+                        response.data[element]["close"] = closes[element];
                         indis = utils.turkishToEnglish(element)
                             //db[indis].destroy({ truncate : true, cascade: false })
                         if (db[indis] && response.data[element]["Alış"] != C[indis]) {
@@ -396,15 +473,37 @@ db.sequelize.sync().then(() => {
                                 .create({ Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"] })
                             C[indis] = response.data[element]["Alış"];
                         }
-                        currencies.push(response.data[element])
+                        currencies.push(response.data[element]);
+
                     }
                 }
                 io.emit('golds', golds);
                 io.emit('currencies', currencies);
             })
-            .catch(err => console.error("Altın ve Döviz datası alınamıyor !!!"));
-
+            .catch(err => console.error("Döviz datası alınamıyor!"));
 
     }, 1000)
 
+    let BINTL = {};
+    setInterval(() => {
+        axios.get('https://finans.truncgil.com/today.json')
+            .then(response =>{
+                BINTL["USD"] = 1000/(+response.data["ABD DOLARI"]["Satış"]);
+                BINTL["EUR"] = 1000/(+response.data["EURO"]["Satış"]);
+                BINTL["GBP"] = 1000/(+response.data["İNGİLİZ STERLİNİ"]["Satış"]);
+                BINTL["CAD"] = 1000/(+response.data["KANADA DOLARI"]["Satış"]);
+                BINTL["JPY"] = 1000/(+response.data["JAPON YENİ"]["Satış"]);
+                BINTL["SAR"] = 1000/(+response.data["SUUDİ ARABİSTAN RİYALİ"]["Satış"]);
+            })
+            .catch(err => console.log(err));
+        /*axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d")
+            .then(response => {
+                BINTL["BTC"] = (1000/(+response.data[0]["current_price"] * +BINTL["USD"]));
+            })
+            .catch(err => console.log(err));*/
+
+        io.emit('bintl',BINTL);
+    },5000);
 })
+
+setTimeout(() => { THE_BEGINNING_OF_EVERYTHING = false; },20000);

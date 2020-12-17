@@ -3,8 +3,8 @@
 
     <v-row>
       <v-col md7 sm12 xs12>
-        <v-row>
-          <h2 class="white--text font-weight-light ml-10">
+        <v-row class="flex-row justify-space-between pl-4 pr-4">
+          <div class="white--text font-weight-light">
             <v-avatar size="32" class="mb-2">
               <img
                   :src="coinImage"
@@ -12,49 +12,30 @@
               >
             </v-avatar>
             {{ $route.params.coin }}
-          </h2>
-          <h2 class="white--text font-weight-light ml-10" :class="[state > 0 ? 'price-up' : 'price-down']">
+          </div>
+          <div class="white--text font-weight-light mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
             {{ current_price || "--.----"}} $
-          </h2>
-          <h3 class="ml-4 mt-2 white--text" :class="[price_change_24h>=0 ? 'green--text' : 'red--text']">
-            {{ price_change_24h }}
+          </div>
+          <div class="mt-2 white--text" :class="[price_change_24h>=0 ? 'green--text' : 'red--text']">
+            {{ price_change_24h | tofixedfour }}
             <v-icon color="red" v-if="price_change_24h < 0">mdi-trending-down</v-icon>
             <v-icon color="green" v-else-if="price_change_24h > 0">mdi-trending-up</v-icon>
             <v-icon color="gray" v-else-if="price_change_24h == 0">mdi-trending-neutral</v-icon>
-          </h3>
+          </div>
         </v-row>
       </v-col>
       <v-col md5 sm12 xs12 class="justify-end align-content-end">
         <v-row>
-          <!--
-          <v-chip
-              class="ma-2"
-              color="orange"
-              text-color="white"
-              link
-              outlined
-              label
-              @click.stop="openComments"
-
-          >
-            Yorumlar
-            <v-icon right>
-              mdi-comment
-            </v-icon>
-          </v-chip>
-          -->
+          <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
           <v-btn-toggle
               v-model="time"
               style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;background:transparent;"
-              class="mx-auto"
               mandatory
               right
+              :class="[$vuetify.breakpoint.smAndDown ? 'mx-auto' : '' ]"
           >
-
-            <v-btn value="1" style="background: transparent;" @click.stop="openComments">
-              <v-icon>
-                mdi-comment
-              </v-icon>
+            <v-btn :value="time" style="background: transparent;">
+              <v-icon>mdi-share-variant-outline</v-icon>
             </v-btn>
             <v-btn value="1" style="background: transparent;" >24S</v-btn>
             <v-btn value="7" style="background: transparent;" >7G</v-btn>
@@ -92,9 +73,10 @@
     export default {
         name: "SinglePageGraph",
         data: (app) => ({
+            interval: 0,
             timeRange: 1,
             time: 1,
-            overlay: false,
+            overlay: true,
             state: 0,
             coinImage: '',
             high: '',
@@ -157,7 +139,9 @@
                         }
                     },
                     axisTicks: {
-                        color: '#ffffff'
+                      show:false,
+                        color: '#ffffff',
+                      width:0,
                     },
                     axisBorder: {
                         color: '#ffffff'
@@ -169,7 +153,7 @@
                     labels: {
                         style: {
                             colors: "#fff",
-                        }
+                        },
                     },
                     categories: ['-', '-', '-'],
                     axisTicks: {
@@ -186,14 +170,11 @@
                             return val + " $"
                         }
                     },
-                }
+                },
+
             },
         }),
         methods: {
-            openComments: function() {
-                this.$store.commit('commentDrawer');
-
-            },
             sleep: function(ms) {
                 return new Promise((resolve) => {
                     setTimeout(resolve, ms);
@@ -215,20 +196,47 @@
                             tempValues.push(fetchedData[i]["Fiyat"])
                         }
                         this.series = [{
-                            data: tempValues
+                          data: tempValues
                         }]
                         this.chartOptions = {
-                            xaxis: {
-                                categories: tempDates
-                            }
+                          xaxis: {
+                            categories: tempDates
+                          }
                         }
+                        this.overlay = false;
                     })
+
             }
         },
         created() {
-            console.log(this.$store)
+            if(this.$vuetify.breakpoint.smAndDown){
+              this.chartOptions.responsive = [
+                {
+                  breakpoint: 768,
+                  options: {
+                    xaxis: {
+                      axisTicks:{
+                        show: false,
+                        color: "#ff0000"
+                      },
+                      labels:{
+                        show: false,
+                      }
+                    },
+                    yaxis: {
+                      axisTicks: {
+                        show: false,
+                      },
+                      labels:{
+                        show:false,
+                      }
+                    }
+                  }
+                }
+              ]
+            }
             let app = this;
-            setInterval(() => {
+            this.interval = setInterval(() => {
                 axios.get(`http://${this.$store.state.addr}:${this.$store.state.port}/coin/${this.$route.params.coin}`)
                     .then(response => {
                         this.coinImage = response.data[0].image;
@@ -257,32 +265,39 @@
                         tempDates.push(time.toLocaleString('tr'));
                         tempValues.push(fetchedData[i]["Fiyat"])
                     }
-                    this.series = [{
+                    //if(this.time == 1){
+                      this.series = [{
                         data: tempValues
-                    }]
-                    this.chartOptions = {
+                      }]
+                      this.chartOptions = {
                         xaxis: {
-                            categories: tempDates
+                          categories: tempDates
                         }
-                    }
+                      }
+                    //}
+
                     temp = fetchedData[fetchedData.length - 1]["Fiyat"];
                 }
             })
         },
         watch: {
             time(newVal, oldVal) {
+              this.overlay = true;
                 console.log(newVal, oldVal);
                 this.getGraphData();
             },
             current_price(newValue, oldValue) {
-                console.log(newValue + "---" + oldValue + "degişti")
+                console.log(newValue + "---" + oldValue + "degişti");
                 if (+newValue < +oldValue) {
                     this.state = -1;
                 } else {
                     this.state = 1;
                 }
             }
-        }
+        },
+      beforeDestroy() {
+          clearInterval(this.interval);
+      }
     };
 </script>
 
@@ -314,11 +329,15 @@
         -webkit-animation: 1.5s alternate price-down;
         animation: 1.5s alternate price-down;
     }
-    
 
 </style>
 <style>
 .apexcharts-toolbar {
   z-index: 0 !important;
+}
+@media screen and (max-width: 768px){
+  .apexcharts-yaxis{
+    display: none;
+  }
 }
 </style>

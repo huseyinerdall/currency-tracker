@@ -5,7 +5,8 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import axios from 'axios'
 import VueAxios from 'vue-axios';
-import VueApexCharts from 'vue-apexcharts'
+import VueApexCharts from 'vue-apexcharts';
+import currencies from './assets/currencies';
 Vue.use(VueApexCharts);
 
 Vue.component('apexchart', VueApexCharts);
@@ -19,8 +20,12 @@ Vue.prototype.$addr = 'http://localhost'
 Vue.prototype.$port = '4000'
 
 Vue.filter('signint', function(value) {
-    if (value >= 0) return "+" + value.toFixed(2);
-    return value.toFixed(2);
+    try{
+        if (value >= 0) return "+" + value.toFixed(2);
+        return value.toFixed(2);
+    }catch(e){
+        return "+0.00";
+    }
 })
 
 Vue.filter('nameAvatar', function(value) {
@@ -50,6 +55,16 @@ Vue.filter('tofixedfour', function(value) {
     value = +value;
     return value.toFixed(4);
 })
+
+Vue.filter('tosymbol', function(value) {
+    for (let i = 0; i < currencies.length; i++) {
+        if(currencies[i]["name"] == value){
+            return currencies[i]["symbol"];
+        }
+    }
+    return "UNDEF";
+})
+
 
 new Vue({
     router,

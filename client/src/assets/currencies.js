@@ -1,22 +1,22 @@
 module.exports = [
   {
     "name": "ABD DOLARI",
-    "symbol": "$",
+    "symbol": "USD",
     "image": "http://localhost:4000/flags/united-states-of-america.png"
   },
   {
     "name": "EURO",
-    "symbol": "€",
+    "symbol": "EUR",
     "image": "http://localhost:4000/flags/european-union.png"
   },
   {
     "name": "TÜRK LİRASI",
-    "symbol": "₺",
+    "symbol": "TRY",
     "image": "http://localhost:4000/flags/turkey.png"
   },
   {
     "name": "AVUSTRALYA DOLARI",
-    "symbol": "AU$",
+    "symbol": "AUD",
     "image": "http://localhost:4000/flags/australia.png"
   },
   {
@@ -26,7 +26,7 @@ module.exports = [
   },
   {
     "name": "KANADA DOLARI",
-    "symbol": "CA$",
+    "symbol": "CAD",
     "image": "http://localhost:4000/flags/canada.png"
   },
   {
@@ -36,7 +36,7 @@ module.exports = [
   },
   {
     "name": "ÇİN YUANI",
-    "symbol": "CN¥",
+    "symbol": "CNY",
     "image": "http://localhost:4000/flags/china.png"
   },
   {
@@ -46,7 +46,7 @@ module.exports = [
   },
   {
     "name": "İNGİLİZ STERLİNİ",
-    "symbol": "£",
+    "symbol": "GBP",
     "image": "http://localhost:4000/flags/england.png"
   },
   {
@@ -56,18 +56,13 @@ module.exports = [
   },
   {
     "name": "JAPON YENİ",
-    "symbol": "¥",
+    "symbol": "JPY",
     "image": "http://localhost:4000/flags/japan.png"
   },
   {
     "name": "KUVEYT DİNARI",
     "symbol": "KWD",
     "image": "http://localhost:4000/flags/kuwait.png"
-  },
-  {
-    "name": "Kazakistan Tengesi",
-    "symbol": "KZT",
-    "image": "http://localhost:4000/flags/kazakhstan.png"
   },
   {
     "name": "NORVEÇ KRONU",

@@ -8,6 +8,7 @@
       disable-pagination
       style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;"
       class="mt-6"
+      mobile-breakpoint="0"
   >
     <template v-slot:item.shortName="{ item }">
       <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3">{{
@@ -19,19 +20,20 @@
     <template v-slot:item.price="{ item }">
       <h3 style="font-weight:400;font-size:12px;" class="text-right">{{ item.price.toFixed(4) }}</h3>
     </template>
-    <template v-slot:item.change="{ item }">
-      <span
-          :class="[item.change>=0 ? 'green--text' : 'red--text']"
-          style="font-size:10px;">{{ item.change | signint }}</span>
-    </template>
     <template v-slot:item.pricechange24h="{ item }">
       <span
           :class="[item.pricechange24h>=0 ? 'green--text' : 'red--text']"
           style="font-size:10px;">{{ item.pricechange24h | signint }}</span>
     </template>
+    <template v-slot:item.pricechange7d="{ item }">
+      <span
+          :class="[item.pricechange7d>=0 ? 'green--text' : 'red--text']"
+          style="font-size:10px;">{{ item.pricechange7d | signint }}</span>
+    </template>
     <template v-slot:item.time="{ item }">
       <span style="font-size:10px;">{{ item.time | onlyTime }}</span>
     </template>
+
   </v-data-table>
 </template>
 
@@ -65,7 +67,7 @@ export default {
         class: 'yellow--text darken-1 font-weight-light body-1',
       }, {
         text: 'Fark',
-        value: 'change',
+        value: 'pricechange24h',
         sortable: false,
         align: 'right',
         class: 'yellow--text darken-1 font-weight-light body-1',
@@ -83,7 +85,7 @@ export default {
         class: 'yellow--text darken-1 font-weight-light body-1',
       }, {
         text: 'Fark (7G)',
-        value: 'close',
+        value: 'pricechange7d',
         sortable: false,
         align: 'right',
         class: 'yellow--text darken-1 font-weight-light body-1',
@@ -108,17 +110,13 @@ export default {
           })
     },1000)*/
     socket.on("coins", fetchedData => {
-      app.data = fetchedData
+      app.data = fetchedData;
+      console.log(app.data)
     })
   },
   mounted() {
   },
   methods: {
-    getColor(price) {
-      if (price > 400) return 'red'
-      else if (price > 200) return 'orange'
-      else return 'green'
-    },
   },
 }
 </script>

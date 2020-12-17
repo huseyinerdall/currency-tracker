@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 //import About from "../views/About.vue";
 import Login from "../views/Login.vue";
+import Logout from "../components/common/Logout.vue";
 import Register from "../views/Register.vue";
 import Coins from "../views/Coins.vue";
 import Golds from "../views/Golds.vue";
@@ -23,7 +24,7 @@ const routes = [{
         name: "Home",
         component: Home,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
@@ -31,7 +32,7 @@ const routes = [{
         name: "CryptoCurrencyPage",
         component: CryptoCurrencyPage,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
@@ -39,7 +40,7 @@ const routes = [{
         name: "GoldsPage",
         component: GoldsPage,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
@@ -47,7 +48,7 @@ const routes = [{
         name: "CaprazKurlar",
         component: CaprazKurlar,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
@@ -55,7 +56,7 @@ const routes = [{
         name: "Doviz",
         component: CurrenciesPage,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
@@ -63,12 +64,13 @@ const routes = [{
         name: "Login",
         component: Login,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
         path: "/logout",
         name: "Logout",
+        component: Logout,
         meta: {
             requiresAuth: true
         }
@@ -86,7 +88,7 @@ const routes = [{
         name: "Register",
         component: Register,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
@@ -94,7 +96,7 @@ const routes = [{
         name: "Coins",
         component: Coins,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
@@ -102,7 +104,7 @@ const routes = [{
         name: "Golds",
         component: Golds,
         meta: {
-            guest: true
+            requiresAuth: false
         }
     },
     {
@@ -136,11 +138,11 @@ router.beforeEach((to, from, next) => {
     for (var i = 1; i < interval_id; i++) {
         window.clearInterval(i);
     }
-    if (localStorage.getItem('jwt') != null) {
+    /*if (localStorage.getItem('jwt') != null) {
         if (to.matched.some(record => record.name == 'Login')) {
             next({ name: 'Home' })
         }
-    }
+    }*/
 
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (localStorage.getItem('jwt') == null) {
@@ -150,9 +152,15 @@ router.beforeEach((to, from, next) => {
             })
         } else {
 
-            //let user = JSON.parse(localStorage.getItem('user'))
-            if (to.matched.some(record => record.meta.requiresAuth)) {
-                next()
+            let user = JSON.parse(localStorage.getItem('user'));
+            console.log(user);
+            if (to.matched.some(record => record.meta.is_admin)) {
+                if(user.is_admin){
+                    next()
+                }
+                else{
+                    next()
+                }
             } else {
                 next()
             }
@@ -161,7 +169,7 @@ router.beforeEach((to, from, next) => {
         if (localStorage.getItem('jwt') == null) {
             next()
         } else {
-            next()
+            next({name:"Home"})
         }
     } else {
         next()

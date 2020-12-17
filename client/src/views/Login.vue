@@ -32,6 +32,19 @@
             </v-icon>
           </v-btn>
           <v-btn
+              color="blue-grey"
+              class="white--text ml-12"
+              href="/register"
+          >
+            KAYDOL
+            <v-icon
+                right
+                dark
+            >
+              mdi-login
+            </v-icon>
+          </v-btn>
+          <v-btn
               style="background:#de5246;"
               class="white--text float-right"
           >
@@ -64,17 +77,23 @@
         },
         methods: {
             login() {
+              if (!this.email && !this.password){
+                alert("Alanlar boş bırakılamaz!");
+                return;
+              }
                 axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/login`, {
                         email: this.email,
                         passwd: this.password
                     })
                     .then((response) => {
-                        if(response.data == "ERROR"){
+                        if(response.data == "ERROR") {
                           alert("Kullanıcı bulunamadı");
                           return;
+                        }else{
+                          localStorage.setItem('user', JSON.stringify(response.data.user))
+                          localStorage.setItem('jwt', response.data.token)
                         }
-                        localStorage.setItem('user', JSON.stringify(response.data.user))
-                        localStorage.setItem('jwt', response.data.token)
+
 
                         if (localStorage.getItem('jwt') != null) {
                             this.$emit('loggedIn')

@@ -4,17 +4,7 @@
       <v-row>
         <v-col class="mx-auto col-sm-10 col-xs-12 col-lg-5" >
           <v-row>
-            <v-col
-            cols="12"
-            sm="12">
-              <v-text-field
-                  color="#ffffff"
-                  dark
-                  label="E-posta"
-                  append-outer-icon="mdi-card-account-mail"
-                  v-model="email"
-              ></v-text-field>
-            </v-col>
+
             <v-col
                 cols="12"
                 sm="12">
@@ -24,6 +14,17 @@
                   label="İsim Soyisim"
                   append-outer-icon="mdi-card-account-details"
                   v-model="fullName"
+              ></v-text-field>
+            </v-col>
+            <v-col
+                cols="12"
+                sm="12">
+              <v-text-field
+                  color="#ffffff"
+                  dark
+                  label="E-posta"
+                  append-outer-icon="mdi-card-account-mail"
+                  v-model="email"
               ></v-text-field>
             </v-col>
             <v-col
@@ -133,19 +134,20 @@
             },
             register() {
                 axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/register`, {
-                        fullName: this.fullname || this.guestID,
+                        fullName: this.fullName || this.guestID,
                         email: this.email,
-                        passwd: this.password1
+                        passwd: this.password1,
+                        profileImage: this.fullName.toLowerCase().replaceAll(" ","-"),
                     })
                     .then(res => {
+                      console.log(res.data)
                         if (res.data !== "OK") return;
                         if (this.$route.params.nextUrl != null) {
                             this.$router.push(this.$route.params.nextUrl)
                         } else {
-                            this.$router.push({
-                                name: 'Login'
-                            })
+                            this.$router.push('Login')
                         }
+                      this.$router.push('Login')
                     })
             },
             onFileChanged() {

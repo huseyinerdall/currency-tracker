@@ -11,8 +11,13 @@ export default {
   methods: {
     logout: function () {
       localStorage.removeItem("jwt");
+      localStorage.removeItem("user");
+      console.log("logout")
       this.$router.push("/");
     }
   },
+  created() {
+    this.logout();
+  }
 };
 </script>

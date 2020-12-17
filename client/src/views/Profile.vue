@@ -7,7 +7,7 @@
                   size="100"
                   color="red"
               >
-                <img v-if="userInfo.profileImage" :src="userInfo.profileImage" alt="avatar">
+                <img v-if="userInfo.profileImage" :src="'http://'+$store.state.addr+':'+$store.state.port+'/uploads/'+userInfo.profileImage" alt="avatar">
                 <span v-else class="white--text headline">{{userInfo.fullName | nameAvatar}}</span>
               </v-avatar>
               <v-btn

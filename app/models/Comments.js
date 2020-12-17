@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         email: DataTypes.STRING,
         subject: DataTypes.STRING,
         abusive: DataTypes.BOOLEAN,
+        responses: DataTypes.JSON,
+        like: DataTypes.INTEGER,
+        dislike: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'Comments',

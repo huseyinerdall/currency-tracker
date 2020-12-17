@@ -2,7 +2,7 @@
   <main>
     <v-app v-if="$route.path!='/admin'">
 
-      <v-app-bar app dark class="hidden-sm-and-down"
+      <v-app-bar app dark v-if="$vuetify.breakpoint.mdAndUp"
                  style="border-bottom: 1px solid #0059b2;height: 94px;background-color:#1d2460;">
         <div class="d-flex align-end">
           <router-link to="/">
@@ -101,7 +101,7 @@
       <!--Mobile menu begin-->
       <v-app-bar app dark
                  style="border-bottom: 1px solid #0059b2;background-color:#1d2460;"
-                 class="hidden-sm-and-up">
+                 v-if="$vuetify.breakpoint.smAndDown">
         <v-img
             alt="para.guru Logo"
             class="shrink mr-2"
@@ -137,7 +137,7 @@
             </v-toolbar>
 
             <v-list-item-group>
-              <v-list-item to="/doviz-kurlari" link @click="dialog=false">
+              <v-list-item to="/doviz" link @click="dialog=false">
                 <v-list-item-icon>
                   <v-icon>mdi-wallet-outline</v-icon>
                 </v-list-item-icon>

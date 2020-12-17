@@ -1,7 +1,18 @@
 <template>
+  <div>
+    <v-btn
+        :style="'top:'+ ($vuetify.breakpoint.smAndDown ? 60 : 94) + 'px'"
+        style="position:fixed;right:0;z-index: 11;font-size:14px;border-radius:0;"
+           prepend-icon="mdi-arrow-left"
+           @click="drawer=false"
+           v-show="drawer"
+    >
+      <v-icon>mdi-arrow-left</v-icon>
+      Yorumlar
+    </v-btn>
     <v-navigation-drawer
         v-model="drawer"
-        :mini-variant.sync="$store.getters.commentDrawer"
+        :mini-variant.sync="drawer"
         permanent
         fixed
         right
@@ -9,7 +20,7 @@
         width="425"
     >
       <v-main
-      class="pa-0 fill-height">
+          class="pa-0 fill-height">
         <div class="chat">
           <div class="chat-container">
             <div class="conversation">
@@ -24,22 +35,45 @@
                       width="30"
                       height="30"
                       style="position:absolute;right:6px;top:6px;"
-                      @click.stop="$store.commit('commentDrawer');"
+                      @click.stop="drawer=true"
                   >
                     <v-icon color="red">
                       mdi-close
                     </v-icon>
                   </v-btn>
                 </div>
-                <h3 v-if="data.length == 0" class="text-center">İlk yorumu siz yapın.</h3>
+                <h3 v-if="data.length == 0" class="text-center text--white" style="color: #fff !important;">İlk yorumu siz yapın.</h3>
                 <div v-for="comment in data" :key="comment.id" class="message received" >
-                  <div class="user-info d-flex flex">
-                    <v-avatar v-if="comment.profileImage" :src="comment.profileImage" size="36"></v-avatar>
+                  <div class="user-info d-flex flex mb-2">
+                    <v-avatar v-if="comment.profileImage" size="36">
+                      <img :src="'http://'+$store.state.addr+':'+$store.state.port+'/uploads/'+comment.profileImage" alt="">
+                    </v-avatar>
                     <v-avatar v-else color="indigo" size="36" class="white--text">{{comment.fullName | nameAvatar}}</v-avatar>
                     <h4 class="ml-4" style="line-height:36px;">{{comment.fullName}}</h4>
                   </div>
                   {{comment.comment}}
-                  <span class="metadata"><span class="time">{{comment.createdAt}}</span></span>
+                  <div class="d-flex flex-row text--lighten-2 mt-2">
+                    <div>
+                      212
+                      <v-btn text @click="dislike">
+                        <v-icon color="gray">mdi-heart-minus</v-icon>
+                      </v-btn>
+                    </div>
+                    <div>
+                      100
+                      <v-btn text @click="like">
+                        <v-icon>mdi-heart-plus</v-icon>
+                      </v-btn>
+                    </div>
+                    <div>
+
+                      <v-btn text class="ml-0 cursor-pointer" @click="reply">
+                        Cevapla
+                        <v-icon>mdi-comment-arrow-right</v-icon>
+                      </v-btn>
+                    </div>
+                  </div>
+                  <span class="metadata"><span class="time">{{comment.createdAt | onlyTime}}</span></span>
                 </div>
                 <!--<div class="message sent">
                   What happened last night?
@@ -54,9 +88,9 @@
         </div>
       </v-main>
       <v-footer
-        class="pa-0"
-        style="position:absolute;bottom:0;width:425px;max-width:100%;">
-        <form class="conversation-compose">
+          class="pa-0"
+          style="position:absolute;bottom:0;width:425px;max-width:100%;">
+        <form v-if="isAuthenticated" class="conversation-compose">
           <div class="emoji">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="smiley" x="3147" y="3209"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.153 11.603c.795 0 1.44-.88 1.44-1.962s-.645-1.96-1.44-1.96c-.795 0-1.44.88-1.44 1.96s.645 1.965 1.44 1.965zM5.95 12.965c-.027-.307-.132 5.218 6.062 5.55 6.066-.25 6.066-5.55 6.066-5.55-6.078 1.416-12.13 0-12.13 0zm11.362 1.108s-.67 1.96-5.05 1.96c-3.506 0-5.39-1.165-5.608-1.96 0 0 5.912 1.055 10.658 0zM11.804 1.01C5.61 1.01.978 6.034.978 12.23s4.826 10.76 11.02 10.76S23.02 18.424 23.02 12.23c0-6.197-5.02-11.22-11.216-11.22zM12 21.355c-5.273 0-9.38-3.886-9.38-9.16 0-5.272 3.94-9.547 9.214-9.547a9.548 9.548 0 0 1 9.548 9.548c0 5.272-4.11 9.16-9.382 9.16zm3.108-9.75c.795 0 1.44-.88 1.44-1.963s-.645-1.96-1.44-1.96c-.795 0-1.44.878-1.44 1.96s.645 1.963 1.44 1.963z" fill="#7d8489"/></svg>
           </div>
@@ -69,8 +103,15 @@
             </div>
           </button>
         </form>
+        <form class="conversation-compose" v-else>
+          <div class="text-center login-please">Lütfen yorum yapmak için
+            <a href="/login">giriş</a>
+            yapın!
+          </div>
+        </form>
       </v-footer>
     </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
@@ -79,20 +120,23 @@
     export default {
         data() {
             return {
-                drawer: true,
-                message: '',
-                data: [],
+              drawer: true,
+              message: '',
+              data: [],
+              isAuthenticated: false,
             }
         },
         methods: {
             sendComment: function() {
                 let userInfo = JSON.parse(localStorage.getItem('user'));
                 let fullName = userInfo["fullName"];
+                let profileImage = userInfo["profileImage"];
                 if (this.message == '') return;
                 axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/sendcomment`, {
                         message: this.message,
                         fullName: fullName,
-                        subject: this.$route.params.coin,
+                        subject: this.$route.params.coin || this.$route.params.gold,
+                        profileImage: profileImage,
                     })
                     .then(response => {
                         console.log(response)
@@ -102,16 +146,29 @@
             },
             getComments: function() {
                 axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/getcomments`, {
-                        subject: this.$route.params.coin,
+                        subject: this.$route.params.coin || this.$route.params.gold,
                     })
                     .then(response => {
                         this.data = response.data;
                     })
-            }
+            },
+            dislike: function() {
+              console.log("dislike")
+            },
+            like: function() {
+              console.log("like")
+            },
+            reply: function() {
+              console.log("replay")
+            },
         },
         created() {
             this.getComments();
+            if(localStorage.getItem('user')){
+              this.isAuthenticated = true;
+            }
         },
+        mounted() {}
     }
 </script>
 
@@ -186,6 +243,7 @@
         margin: 8px 0;
         word-wrap: break-word;
         z-index: -1;
+        max-width: 98%;
     }
     
     .message:after {
@@ -388,5 +446,13 @@
     .theme--light.v-input textarea,
     .theme--light.v-select .v-select__selection--comma {
         color: black !important;
+    }
+    .v-btn:not(.v-btn--round).v-size--default{
+      min-width: 40px !important;
+      padding: 0 4px !important;
+    }
+    .login-please{
+      line-height: 48px;
+      margin: 0 auto;
     }
 </style>
