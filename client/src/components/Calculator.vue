@@ -1,199 +1,202 @@
 <template>
-  <div class="text-xs-center">
-    <v-dialog v-model="dialog" width="400">
-      <template v-slot:activator="{ on }">
-        <div v-on.capture="on">
-          <slot>
-            <v-btn>
-              Calculator
-            </v-btn>
-          </slot>
-        </div>
-      </template>
+  <v-container>
+    <div id="calculator">
+      <div class="calculator-logs">
+        <span v-for="(log,index) in logs" :key="index">{{ log }}</span>
+      </div>
 
-      <v-card class="grey lighten-3">
-        <v-card-text style="text-align: right;">
-          <div class="subheading" style="min-height:24px;">{{displayFormula}}</div>
-          <div
-              :class="[displayResult.length > 15 ? displayResult.length > 20 ? 'headline':'display-1':'display-2']"
-              style="min-height:48px;"
-          >{{displayResult}}</div>
-        </v-card-text>
-        <v-card-text class="pa-0">
-          <v-container grid-list-xs pa-1>
-            <v-layout row wrap pa0>
-              <v-flex v-for="button in buttons" :key="button.key" xs3>
-                <v-btn
-                    :class="['ma-0', 'calcbutton', button.class]"
-                    :color="button.color"
-                    @click="InputKey(button.key)"
-                    block
-                    depressed
-                    large
-                >
-                  <v-icon v-if="button.icon" dark>{{button.icon}}</v-icon>
-                  <template v-else>{{button.label}}</template>
-                </v-btn>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn depressed large class="calcbutton" @click="dialog = false">CANCEL</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" depressed large class="calcbutton" @click="commit">OK</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
+      <input type="string" class="calculator-input" v-model="value" @keyup.enter="getResult()">
+
+      <div class="calculator-row">
+        <div class="calculator-col">
+          <button class="calculator-btn gray action" @click="clear()">C</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn gray action" @click="del()">del</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn gray action" @click="addExpresion('%')">%</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn action" @click="addExpresion('/')">/</button>
+        </div>
+      </div>
+      <div class="calculator-row">
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(7)">7</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(8)">8</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(9)">9</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn action" @click="addExpresion('*')">*</button>
+        </div>
+      </div>
+      <div class="calculator-row">
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(4)">4</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(5)">5</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(6)">6</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn action" @click="addExpresion('-')">-</button>
+        </div>
+      </div>
+      <div class="calculator-row">
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(1)">1</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(2)">2</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn" @click="addExpresion(3)">3</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn action" @click="addExpresion('+')">+</button>
+        </div>
+      </div>
+      <div class="calculator-row">
+        <div class="calculator-col wide">
+          <button class="calculator-btn" @click="addExpresion(0)">0</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn action" @click="addExpresion('.')">.</button>
+        </div>
+        <div class="calculator-col">
+          <button class="calculator-btn action" @click="getResult()">=</button>
+        </div>
+      </div>
+    </div>
+  </v-container>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-interface ICalculatorInput {
-  current: string;
-  operator: string;
-  prev: string;
-}
-@Component
-export default class Calculator extends Vue {
-  public dialog: boolean = false;
-  @Prop({ default: "" })
-  public value!: number | string;
-  public input: ICalculatorInput = {
-    current: "0",
-    operator: "",
-    prev: "",
-  };
-  public buttons = [
-    { key: "ce", label: "CE", color: "grey lighten-2", class: "" },
-    { key: "c", label: "C", color: "grey lighten-2", class: "" },
-    {
-      key: "back",
-      label: "BACK",
-      icon: "backspace",
-      color: "grey lighten-2",
-      class: "",
+<script>
+export default {
+  name: "HelloWorld",
+  data: () => ({
+    value: 0,
+    logs:  []
+  }),
+  methods: {
+    addExpresion(e) {
+      if ( Number.isInteger(this.value) )
+        this.value = '';
+      this.value += e;
     },
-    { key: "÷", label: "÷", color: "grey lighten-2", class: "" },
-    { key: "7", label: "7", color: "", class: "headline" },
-    { key: "8", label: "8", color: "", class: "headline" },
-    { key: "9", label: "9", color: "", class: "headline" },
-    { key: "×", label: "×", color: "grey lighten-2", class: "" },
-    { key: "4", label: "4", color: "", class: "headline" },
-    { key: "5", label: "5", color: "", class: "headline" },
-    { key: "6", label: "6", color: "", class: "headline" },
-    { key: "-", label: "-", color: "grey lighten-2", class: "" },
-    { key: "1", label: "1", color: "", class: "headline" },
-    { key: "2", label: "2", color: "", class: "headline" },
-    { key: "3", label: "3", color: "", class: "headline" },
-    { key: "+", label: "+", color: "grey lighten-2", class: "" },
-    { key: "±", label: "±", color: "grey lighten-2", class: "" },
-    { key: "0", label: "0", color: "", class: "headline" },
-    { key: ".", label: ".", color: "grey lighten-2", class: "" },
-    { key: "=", label: "=", color: "grey lighten-2", class: "" },
-  ];
-  public get displayResult(): string {
-    const hasDot = this.input.current.includes(".");
-    const split = this.input.current.split(".");
-    const integer = Number(split[0]);
-    const minority = split[1];
-    // return this.input.current;
-    return `${integer.toLocaleString()}${hasDot ? "." + minority : ""}`;
-  }
-  public get displayFormula(): string {
-    return `${this.input.prev} ${this.input.operator}`;
-  }
-  public InputKey(key: string): void {
-    const isNumber = /^\d$/.test(key);
-    if (isNumber) {
-      if (this.input.current.length >= 12) {
-        return;
-      }
-      if (this.input.current !== "0") {
-        this.input.current += key;
-      } else {
-        this.input.current = key;
-      }
-      return;
-    }
-    const isOperator = /^[÷×\-+]$/.test(key);
-    if (isOperator) {
-      if (this.input.current) {
-        this.input.prev = this.Calc(this.input) || this.input.current;
-      }
-      this.input.operator = key;
-      this.input.current = "";
-      return;
-    }
-    switch (key) {
-      case "=": {
-        if (this.input.operator) {
-          const result = this.Calc(this.input) || "";
-          this.input.prev = `${this.input.prev} ${this.input.operator} ${
-              this.input.current
-          } =`;
-          this.input.current = result;
-          this.input.operator = "";
-        }
-        return;
-      }
-      case ".":
-        if (!this.input.current.includes(".")) {
-          this.input.current += ".";
-        }
-        return;
-      case "±":
-        if (this.input.current.includes("-")) {
-          this.input.current = this.input.current.replace("-", "");
-        } else {
-          this.input.current = "-" + this.input.current;
-        }
-        return;
-      case "back":
-        this.input.current =
-            this.input.current.substring(0, this.input.current.length - 1) || "0";
-        return;
-      case "c":
-        this.input.current = "0";
-        this.input.operator = "";
-        this.input.prev = "";
-        return;
-      case "ce":
-        this.input.current = "0";
-        return;
+    getResult() {
+      let log = this.value;
+      this.value = eval(this.value);
+      this.logs.push( log + `=${this.value}` );
+    },
+    clear() {
+      this.value = 0;
+    },
+    del() {
+      this.value = this.value.slice(0, -1);
     }
   }
-  public Calc(input: ICalculatorInput): string | null {
-    const a = Number(input.prev);
-    const b = Number(input.current);
-    switch (input.operator) {
-      case "÷":
-      {
-        const result = a / b;
-        const resultString = result.toString();
-        if (resultString.split(".")[1].length > 5) {
-          return result.toFixed(5);
-        }
-        return resultString;
-      }
-        return (a / b).toFixed(5);
-      case "×":
-        return (a * b).toString();
-      case "-":
-        return (a - b).toString();
-      case "+":
-        return (a + b).toString();
+};
+</script>
+<style lang="scss">
+//  https://github.com/salazarr-js/v-calculator
+
+$darker: rgba(0,0,0,.3);
+$dark: rgba(0,0,0,.3);
+$gray: rgba(0,0,0,.3);
+$white: #fff;
+$light: #D4D4D2;
+$accent: rgba(0,0,0,.3);
+
+#calculator {
+  width: 100%;
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  background-color: $darker;
+
+  .calculator-logs {
+    height: 80px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    &:before {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      content: '';
+      z-index: 5;
+      position: absolute;
+      background: linear-gradient(to bottom, $darker, rgba($darker, 0));
     }
-    return null;
+    span {
+      color: $light;
+      opacity: .75;
+      display: block;
+      font-size: .8rem;
+      text-align: right;
+      margin-top: .4rem;
+      line-height: 1;
+      font-weight: lighter;
+      margin-right: 16px;
+    }
   }
-  public commit(): void {
-    this.InputKey("=");
-    this.$emit("input", this.input.current);
-    this.dialog = false;
+
+  .calculator-input {
+    color: $light;
+    width: 100%;
+    border: none;
+    padding: .8rem;
+    display: block;
+    font-size: 2.4rem;
+    background: none;
+    text-align: right;
+    font-weight: lighter;
+    &:focus, &:active {
+      outline: none;
+    }
+  }
+
+  .calculator-row {
+    display: flex;
+    padding: 0;
+    justify-content: space-around;
+    .calculator-col {
+      flex: 1;
+      box-shadow: 0 0 0 1px $darker;
+      &.wide { flex: 2; }
+    }
+  }
+
+  .calculator-btn {
+    width: 100%;
+    color: $light;
+    border: none;
+    cursor: pointer;
+    padding: .8rem;
+    outline: none;
+    font-size: 1.6rem;
+    transition: all .3s ease-in-out;
+    font-weight: 200;
+    justify-content: center;
+    background-color: $gray;
+    &.accent { background-color: $accent; color: $white; }
+    &.gray { background-color: $dark; }
+    &.action { }
+    &:active {
+      background-color: $darker;
+    }
   }
 }
-</script>
-
-<style scoped>
 </style>

@@ -67,4 +67,7 @@ export default {
 .theme--light.v-btn{
   color: #fff !important;
 }
+.v-list-item__content{
+  padding: 0 !important;
+}
 </style>

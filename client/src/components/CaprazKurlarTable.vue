@@ -1,7 +1,7 @@
 <template>
   <div>
     <table style="table-layout:fixed;">
-      <thead class="yellow--text darken-1">
+      <thead class="amber--text accent-3">
         <tr>
           <th>Çapraz Kurlar</th><th>Parite</th><th>Fark</th><th>Yüzde</th><th>Saat</th>
         </tr>

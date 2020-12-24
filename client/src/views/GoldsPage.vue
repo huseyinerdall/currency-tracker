@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <v-container>
-      <Golds />
+      <v-row>
+        <v-col>
+          <Golds />
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>

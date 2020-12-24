@@ -1,5 +1,11 @@
 <template>
   <div>
+    <v-chip
+        class="ma-0 amber accent-3"
+        label
+    >
+      Döviz Kurları Serbest Piyasa
+    </v-chip>
     <v-data-table
         :headers="headers"
         :items="data"
@@ -7,12 +13,14 @@
         :loading="!goldloaded"
         disable-pagination
         style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;"
-        height="817"
         mobile-breakpoint="0"
-        class="mt-4"
+        class="mt-1"
+        dense
     >
       <template v-slot:item.type="{ item }">
-        <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="white--text body-1" style="font-size:12px !important;">{{ item.type }}</router-link>
+        <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="white--text body-1" style="font-size:12px !important;cursor:pointer;">
+          {{ item.type == "SUUDİ ARABİSTAN RİYALİ" ? 'S.A. RİYALİ' : item.type }}
+        </router-link>
       </template>
       <template v-slot:item.Fark="{ item }">
         <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']">
@@ -28,7 +36,14 @@
         <span>{{ item.time | onlyTime }}</span>
       </template>
     </v-data-table>
-
+    <v-overlay
+        :opacity="1"
+        :value="overlay"
+        color="rgb(29, 36, 96)"
+    >
+      <v-progress-circular indeterminate size="64">
+      </v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -42,14 +57,15 @@ export default {
     return {
       goldloaded: true,
       headers: [
-        { text: 'Döviz Kurları',align: 'start', sortable: false,value: 'type',class: 'yellow--text darken-1 font-weight-light body-1',},
-        { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
-        { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
-        { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
-        { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
-        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'yellow--text darken-1 font-weight-light body-1', },
+        { text: 'Döviz Kurları',align: 'start', sortable: false,value: 'type',class: 'amber--text accent-3 font-weight-light body-1',},
+        { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
+        { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
+        { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
+        { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
+        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
       ],
-      data: []
+      data: [],
+      overlay: true,
     }
   },
   created() {
@@ -62,16 +78,14 @@ export default {
     var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
     socket.on("currencies", fetchedData => {
       app.data = fetchedData;
-      console.log(fetchedData)
+      if(app.$route.path == '/'){
+        app.data.pop();
+        app.data.pop();
+        app.data.pop();
+      }
+      app.overlay = false;
     })
-    /*this.interval = setInterval(() => {
-      let app = this;
-      axios.get("http://localhost:4000/golds")
-          .then((res)=>{
-            app.data = res.data;
-            app.goldloaded = true;
-          })
-    },1000)*/
+
   },
   methods: {
   },

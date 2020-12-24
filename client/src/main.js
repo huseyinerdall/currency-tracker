@@ -28,6 +28,32 @@ Vue.filter('signint', function(value) {
     }
 })
 
+Vue.filter('shorten', function(value) {
+    if(value.length > 15){
+        let tempArray = value.split(" ");
+        let tempString = '';
+        for (let i = 0; i < tempArray.length; i++) {
+            if(i==0){
+                tempString += tempArray[i][0] + '. ';
+            }else{
+                tempString += tempArray[i] + ' ';
+            }
+        }
+        return tempString;
+    }
+    return value;
+})
+
+Vue.filter('length', function(value) {
+    try{
+        value = JSON.parse(value);
+        return value.length;
+    }catch(e){
+        console.log(e);
+        return 0;
+    }
+})
+
 Vue.filter('nameAvatar', function(value) {
     let splited = value.split(" ");
     let len = splited.length;

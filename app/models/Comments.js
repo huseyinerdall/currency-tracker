@@ -16,8 +16,14 @@ module.exports = (sequelize, DataTypes) => {
         subject: DataTypes.STRING,
         abusive: DataTypes.BOOLEAN,
         responses: DataTypes.JSON,
-        like: DataTypes.INTEGER,
-        dislike: DataTypes.INTEGER
+        like: {
+            type: DataTypes.TEXT,
+            defaultValue: "[]"
+        },
+        dislike: {
+            type: DataTypes.TEXT,
+            defaultValue: "[]"
+        },
     }, {
         sequelize,
         modelName: 'Comments',

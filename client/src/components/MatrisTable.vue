@@ -6,13 +6,13 @@
                 <th style="border-left: 0 !important;width:160px;">
 
 </th>
-<th v-for="currency in value" :key="currency" style="font-size:14px;" class="yellow--text darken-1">{{currency}}</th>
+<th v-for="currency in value" :key="currency" style="font-size:14px;" class="amber--text accent-3">{{currency | shorten }}</th>
 </tr>
 </thead>
 <tbody>
       <tr v-for="currencyRow in value" :key="currencyRow">
         <th style="border-left: 0 !important;font-size:14px;" >
-          <p class="yellow--text darken-1 text-right">1 {{currencyRow}}</p>
+          <p class="amber--text accent-3 text-right">1 {{currencyRow | shorten }}</p>
           <p style="font-size: 12px;">Ters Parite</p>
         </th>
         <td v-for="currencyCol in value" :class="[(data[currencyCol]) / (data[currencyRow]) == 1 ? 'bir' : '']" :key="currencyCol">
@@ -36,14 +36,6 @@
                           Ekle/Kaldır
                         </span>
         </template>
-        <!--<template v-slot:selection="{ item, index }">
-                        <span
-                            style="color: white;text-align: center;font-size:12px;"
-                            class="ml-4"
-                            v-if="index === 0">
-                            {{ value.length }} adet
-                        </span>
-        </template>-->
       </v-select>
     </td>
   </tr>
@@ -82,6 +74,14 @@
         </v-list-item>
       </v-list-item-group>
     </v-list>
+    <v-overlay
+        :opacity="1"
+        :value="overlay"
+        color="rgb(29, 36, 96)"
+    >
+      <v-progress-circular indeterminate size="64">
+      </v-progress-circular>
+    </v-overlay>
 </div>
 </template>
 
@@ -92,21 +92,11 @@
         name: "MatrisTable",
         data: () => ({
           items: currencies,
+          overlay: true,
           value:["EURO","ABD DOLARI","TÜRK LİRASI"],
           data:{},
           currentCurrency: 1,
-
         }),
-        created() {
-          let app = this;
-          app.data["TÜRK LİRASI"] = 1;
-          var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
-          socket.on("currencies", fetchedData => {
-            for (const currency of fetchedData) {
-              app.data[currency["type"]] = currency["Satış"];
-            }
-          })
-        },
         methods: {
           click: function() {
             document.getElementsByClassName("v-menu__content")[0].style.display="block";
@@ -119,9 +109,26 @@
         },*/
         value(){
           if(this.value.length >= 8){
-            this.value.shift();
+            this.value.splice(3,1);
           }
         }
+      },
+      created() {
+        let app = this;
+        app.data["TÜRK LİRASI"] = 1;
+        let ONE = 1;
+        var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+        socket.on("currencies", fetchedData => {
+          if(ONE==1){
+            app.value = ["EURO","ABD DOLARI","TÜRK LİRASI"];
+            ONE = 2;
+          }
+          for (const currency of fetchedData) {
+            app.data[currency["type"]] = currency["Satış"];
+          }
+          app.overlay =false;
+        })
+
       }
     };
 </script>
@@ -141,11 +148,11 @@
     }
     
     td {
-        padding: 10px;
+        padding: 1px;
     }
     
     th {
-      padding: 10px;
+      padding: 1px;
     }
 
     .bir{

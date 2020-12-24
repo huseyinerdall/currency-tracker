@@ -7,7 +7,7 @@
           <div class="white--text font-weight-light">
             <v-avatar size="32" class="mb-2">
               <img
-                  src="http://localhost:4000/gold.png"
+                  :src="'http://'+$store.state.addr+':'+$store.state.port+'/gold.png'"
                   alt="$route.params.gold"
               >
             </v-avatar>
@@ -58,7 +58,7 @@
     <v-overlay
         :opacity="1"
         :value="overlay"
-        color="indigo"
+        color="rgb(29, 36, 96)"
     >
       <v-progress-circular indeterminate size="64">
       </v-progress-circular>
@@ -103,6 +103,15 @@ export default {
           autoSelected: 'zoom'
         }
       },
+      locales: [{
+        name: 'en',
+        options: {
+          months: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
+          shortMonths: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Agu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+          days: ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'],
+          shortDays: ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'],
+        }
+      }],
       stroke: {
         width: 1
       },
@@ -131,7 +140,7 @@ export default {
           }
         },
         title: {
-          text: 'Fiyat($)',
+          text: 'Fiyat(TL)',
           style: {
             color: '#ffffff',
             fontSize: 14,
@@ -148,14 +157,20 @@ export default {
         }
       },
       xaxis: {
-        //type: 'datetime',
+        type: 'datetime',
         tickAmount: 6,
         labels: {
+
           style: {
             colors: "#fff",
           },
+          datetimeFormatter: {
+            year: 'yyyy',
+            month: 'MMM \'yy',
+            day: 'dd MMM',
+            hour: 'HH:mm'
+          }
         },
-        categories: ['-', '-', '-'],
         axisTicks: {
           color: '#ffffff'
         },
@@ -170,6 +185,12 @@ export default {
             return val + " $"
           }
         },
+        x: {
+          format:'dd MMM yyyy HH:mm:ss',
+          formatter: function(val) {
+            return new Date(val).toLocaleString("tr")
+          }
+        }
       },
 
     },
@@ -217,24 +238,19 @@ export default {
       if (fetchedData[fetchedData.length - 1]["Satis"] != temp || !temp) {
 
         //app.graphData = fetchedData
-        let tempDates = [];
+        //let tempDates = [];
         let time;
         let tempValues = [];
         for (let i = 0; i < fetchedData.length; i++) {
-          time = new Date(fetchedData[i]["createdAt"]);
-          tempDates.push(time.toLocaleString('tr'));
-          tempValues.push(fetchedData[i]["Satis"])
+          time = new Date(fetchedData[i]["createdAt"]).getTime();;
+          //tempDates.push(time.toLocaleString('tr'));
+          tempValues.push([time,fetchedData[i]["Satis"]]);
         }
-        //if(this.time == 1){
-        this.series = [{
-          data: tempValues
-        }]
-        this.chartOptions = {
-          xaxis: {
-            categories: tempDates
-          }
+        if(app.time == 1){
+          app.series = [{
+            data: tempValues
+          }]
         }
-        //}
 
         temp = fetchedData[fetchedData.length - 1]["Satis"];
       }
@@ -249,22 +265,17 @@ export default {
       })
           .then(response => {
             let fetchedData = response.data;
-            let tempDates = [];
+            //let tempDates = [];
             let time;
             let tempValues = [];
             for (let i = 0; i < fetchedData.length; i++) {
-              time = new Date(fetchedData[i]["createdAt"]);
-              tempDates.push(time.toLocaleString('tr'));
-              tempValues.push(fetchedData[i]["Satis"])
+              time = new Date(fetchedData[i]["createdAt"]).getTime();
+              //tempDates.push(time.toLocaleString('tr'));
+              tempValues.push([time,fetchedData[i]["Satis"]])
             }
             this.series = [{
               data: tempValues
             }]
-            this.chartOptions = {
-              xaxis: {
-                categories: tempDates
-              }
-            }
             this.overlay = false;
           })
     }
@@ -276,7 +287,6 @@ export default {
       this.getGraphData();
     },
     current_price(newValue, oldValue) {
-      console.log(newValue + "---" + oldValue + "degişti");
       if (+newValue < +oldValue) {
         this.state = -1;
       } else {

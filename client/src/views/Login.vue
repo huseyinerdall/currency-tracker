@@ -18,44 +18,56 @@
               append-outer-icon="mdi-key-variant"
               v-model="password"
           ></v-text-field>
-          <v-btn
-              color="blue-grey"
-              class="white--text mx-auto"
-              @click="login"
-          >
-            GİRİŞ
-            <v-icon
-                right
-                dark
-            >
-              mdi-login
-            </v-icon>
-          </v-btn>
-          <v-btn
-              color="blue-grey"
-              class="white--text ml-12"
-              href="/register"
-          >
-            KAYDOL
-            <v-icon
-                right
-                dark
-            >
-              mdi-login
-            </v-icon>
-          </v-btn>
-          <v-btn
-              style="background:#de5246;"
-              class="white--text float-right"
-          >
-            Google
-            <v-icon
-                right
-                dark
-            >
-              mdi-google
-            </v-icon>
-          </v-btn>
+          <v-row>
+            <v-col cols="4">
+              <v-btn
+                  color="blue-grey"
+                  class="white--text"
+                  @click="login"
+                  small
+              >
+                GİRİŞ
+                <v-icon
+                    right
+                    dark
+                >
+                  mdi-login
+                </v-icon>
+              </v-btn>
+
+            </v-col>
+            <v-col cols="4">
+              <v-btn
+                  style="background:#de5246;"
+                  class="white--text"
+                  small
+              >
+                Google
+                <v-icon
+                    right
+                    dark
+                >
+                  mdi-google
+                </v-icon>
+              </v-btn>
+            </v-col>
+            <v-col cols="4">
+              <v-btn
+                  color="blue-grey"
+                  class="white--text"
+                  href="/register"
+                  small
+              >
+                KAYDOL
+                <v-icon
+                    right
+                    dark
+                >
+                  mdi-login
+                </v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>

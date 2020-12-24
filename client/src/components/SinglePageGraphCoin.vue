@@ -56,7 +56,7 @@
     <v-overlay
         :opacity="1"
         :value="overlay"
-        color="indigo"
+        color="rgb(29, 36, 96)"
     >
       <v-progress-circular indeterminate size="64">
       </v-progress-circular>
@@ -101,7 +101,17 @@
                     },
                     toolbar: {
                         autoSelected: 'zoom'
+                    },
+                  locales: [{
+                    name: 'en',
+                    options: {
+                      months: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
+                      shortMonths: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Agu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+                      days: ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'],
+                      shortDays: ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'],
                     }
+                  }]
+
                 },
                 stroke: {
                     width: 1
@@ -148,14 +158,20 @@
                     }
                 },
                 xaxis: {
-                    //type: 'datetime',
+                    type: 'datetime',
                     tickAmount: 6,
                     labels: {
+
                         style: {
                             colors: "#fff",
                         },
+                        datetimeFormatter: {
+                          year: 'yyyy',
+                          month: 'MMM \'yy',
+                          day: 'dd MMM',
+                          hour: 'HH:mm'
+                        }
                     },
-                    categories: ['-', '-', '-'],
                     axisTicks: {
                         color: '#ffffff'
                     },
@@ -170,6 +186,12 @@
                             return val + " $"
                         }
                     },
+                    x: {
+                      format:'dd MMM yyyy HH:mm:ss',
+                      formatter: function(val) {
+                        return new Date(val).toLocaleString("tr")
+                      }
+                    }
                 },
 
             },
@@ -187,22 +209,22 @@
                     })
                     .then(response => {
                         let fetchedData = response.data;
-                        let tempDates = [];
+                        //let tempDates = [];
                         let time;
                         let tempValues = [];
                         for (let i = 0; i < fetchedData.length; i++) {
-                            time = new Date(fetchedData[i]["createdAt"]);
-                            tempDates.push(time.toLocaleString('tr'));
-                            tempValues.push(fetchedData[i]["Fiyat"])
+                            time = new Date(fetchedData[i]["createdAt"]).getTime();
+                            //tempDates.push(time.toLocaleString('tr'));
+                            tempValues.push([time,fetchedData[i]["Fiyat"]])
                         }
                         this.series = [{
                           data: tempValues
                         }]
-                        this.chartOptions = {
+                        /*this.chartOptions = {
                           xaxis: {
                             categories: tempDates
                           }
-                        }
+                        }*/
                         this.overlay = false;
                     })
 
@@ -257,24 +279,18 @@
                 if (fetchedData[fetchedData.length - 1]["Fiyat"] != temp || !temp) {
 
                     //app.graphData = fetchedData
-                    let tempDates = [];
                     let time;
                     let tempValues = [];
                     for (let i = 0; i < fetchedData.length; i++) {
-                        time = new Date(fetchedData[i]["createdAt"]);
-                        tempDates.push(time.toLocaleString('tr'));
-                        tempValues.push(fetchedData[i]["Fiyat"])
+                        time = new Date(fetchedData[i]["createdAt"]).getTime();
+                        //tempDates.push(time.toLocaleString('tr'));
+                        tempValues.push([time,fetchedData[i]["Fiyat"]]);
                     }
-                    //if(this.time == 1){
-                      this.series = [{
+                    if(app.time == 1){
+                      app.series = [{
                         data: tempValues
                       }]
-                      this.chartOptions = {
-                        xaxis: {
-                          categories: tempDates
-                        }
-                      }
-                    //}
+                    }
 
                     temp = fetchedData[fetchedData.length - 1]["Fiyat"];
                 }
@@ -334,6 +350,10 @@
 <style>
 .apexcharts-toolbar {
   z-index: 0 !important;
+}
+.apexcharts-tooltip{
+  text-align: center !important;
+  border-radius: 0 !important;
 }
 @media screen and (max-width: 768px){
   .apexcharts-yaxis{

@@ -1,5 +1,5 @@
 <template>
-  <v-card style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;" class="mb-6">
+  <v-card style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;" class="mb-6 pa-0">
     <v-row>
       <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
       <v-col cols="6" lg="2">
@@ -7,7 +7,8 @@
             dark
             v-model="amount"
             :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
-            class="text-center ml-6"
+            style="padding: 0 16px !important;"
+            class="centered-input ml-6"
             color="white"
             @change="convert"
             @input="convert"
@@ -21,11 +22,12 @@
             item-value="name"
             color="white"
             @change="convert"
+            style="padding: 0 16px !important;"
             dark
         ></v-select>
       </v-col>
-      <v-col cols="12" lg="1" class="text-center">
-        <v-icon size="40" color="yellow darken-1" class="mt-1" :class="$vuetify.breakpoint.smAndDown ? 'mdi-rotate-90' : ''">
+      <v-col cols="12" lg="1" class="text-center pa-0 ma-0">
+        <v-icon size="40" color="#ffbf00" class="mt-1" :class="$vuetify.breakpoint.smAndDown ? 'mdi-rotate-90' : ''">
           mdi-arrow-left-right
         </v-icon>
       </v-col>
@@ -33,8 +35,9 @@
         <v-text-field
             v-model="result"
             color="white"
-            class="ml-6"
+            class="ml-6 centered-input"
             :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
+            style="padding: 0 16px !important;"
             dark
             readonly
         ></v-text-field>
@@ -47,6 +50,7 @@
             v-model="target"
             @change="convert"
             color="white"
+            style="padding: 0 16px !important;"
             dark
         ></v-select>
       </v-col>
@@ -145,5 +149,12 @@
     }
     .v-text-field input{
       text-align: center !important;
+    }
+    .centered-input >>> input {
+      text-align: center !important;
+    }
+    .v-icon.v-icon{
+      color: rgb(255, 191, 0) !important;
+      caret-color: rgb(255, 191, 0) !important;
     }
 </style>

@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
 var moment = require('moment');
 const path = require('path');
 
+
 var parseString = require('xml2js').parseString;
 var utils = require('./utils');
 var upload = require('./utils/upload');
@@ -40,6 +41,30 @@ var io = require('socket.io')(server, {
         methods: ["GET", "POST"]
     }
 });
+
+/*  PASSPORT SETUP  */
+
+const passport = require('passport');
+var userProfile;
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.set('view engine', 'ejs');
+
+app.get('/success', (req, res) => res.send(userProfile));
+app.get('/error', (req, res) => res.send("error logging in"));
+
+passport.serializeUser(function(user, cb) {
+    cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+    cb(null, obj);
+});
+
+/*  END OF PASSPORT SETUP  */
+
 app.use(morgan('tiny'));
 app.use(cors({ credentials: true }));
 app.use(bodyParser.json());
@@ -121,7 +146,6 @@ app.get('/gold/:goldName', (req, res) => {
     axios.get('https://finans.truncgil.com/today.json')
         .then(response => {
             response.data[req.params.goldName]["price_change_24h"] = response.data[req.params.goldName]["Satış"]-closes[req.params.goldName];
-            console.log(response.data[req.params.goldName]["price_change_24h"])
             res.json(response.data[req.params.goldName])
         })
         .catch(err => console.log(err));
@@ -215,7 +239,7 @@ app.post('/getcoinaccordingtotimerange', async(req, res) => {
         where: {
             createdAt: {
                 [Op.between]: [BEGIN, NOW],
-            }
+            },
         }
     });
     io.emit(req.params["coinName"], data);
@@ -263,14 +287,29 @@ app.post('/sendcomment', async(req, res) => {
             subject: subject,
             profileImage: profileImage
         })
-        //io.emit(req.params["coinName"],data);
-    res.json({
+        .then( async()=>{
+            let data;
+            let BEGIN = moment().subtract(1, 'd').toString() || DEFAULT;
+            const NOW = new Date();
+            data = await db["Comments"].findAll({
+                where: {
+                    createdAt: {
+                        [Op.between]: [BEGIN, NOW],
+                    },
+                    subject: subject
+                }
+            });
+            io.emit(subject+"-comments",data);
+        })
+
+
+    /*res.json({
         fullName: fullName,
         comment: comment,
         subject: subject,
         profileImage: profileImage,
         createdAt: new Date(),
-    });
+    });*/
 })
 
 app.post('/getcomments', async(req, res) => {
@@ -286,8 +325,47 @@ app.post('/getcomments', async(req, res) => {
             subject: subject
         }
     });
-    io.emit(req.params["comments"], data);
+    //io.emit(subject+"-comments", data);
     res.json(data);
+})
+
+app.post('/likecomment', async(req, res) => {
+    let id = req.body.commentId;
+    let userId = req.body.userId;
+    console.log(id)
+    db["Comments"].findOne({
+        where: {
+            id: id
+        }
+    })
+        .then(async(record) => {
+            let temp = JSON.parse(record.like);
+            if(temp.indexOf(userId)<0){
+                temp.push(userId);
+            }
+            record.like = JSON.stringify(temp);
+            await record.save();
+            res.json({"result" : "OK"});
+        })
+})
+
+app.post('/dislikecomment', async(req, res) => {
+    let id = req.body.commentId;
+    let userId = req.body.userId;
+    console.log(id)
+    db["Comments"].findOne({
+        where: {
+            id: id
+        }
+    })
+        .then(async(record) => {
+            let temp = JSON.parse(record.like);
+            if(temp.indexOf(userId)<0){
+                temp.push(userId);
+            }
+            record.like = JSON.stringify(temp);
+            await record.save();
+        })
 })
 
 app.post('/converter', (req, res) => {
@@ -315,6 +393,7 @@ app.post('/converter', (req, res) => {
 
             res.json({ "result": result.toFixed(4) });
         })
+        .catch((err) => console.log("Bekleyin!"))
 })
 
 app.post('/register', (req, res) => {
@@ -425,6 +504,7 @@ db.sequelize.sync().then(() => {
                     temp["pricechange24h"] = response.data[i]["price_change_percentage_24h"];
                     temp["pricechange7d"] = response.data[i]["price_change_percentage_7d_in_currency"] || 0;
                     temp["time"] = response.data[i]["last_updated"];
+                    temp["image"] = response.data[i]["image"];
                     factRes.push(temp);
 
                     // aşagıdaki koşul sadece api çıktısı aynı sırada sonuçlanırsa düzgün calışır
@@ -497,7 +577,7 @@ db.sequelize.sync().then(() => {
                 BINTL["JPY"] = 1000/(+response.data["JAPON YENİ"]["Satış"]);
                 BINTL["SAR"] = 1000/(+response.data["SUUDİ ARABİSTAN RİYALİ"]["Satış"]);
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log("Döviz datası alınamıyor!"));
         /*axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d")
             .then(response => {
                 BINTL["BTC"] = (1000/(+response.data[0]["current_price"] * +BINTL["USD"]));

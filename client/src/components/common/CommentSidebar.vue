@@ -44,7 +44,7 @@
                 </div>
                 <h3 v-if="data.length == 0" class="text-center text--white" style="color: #fff !important;">İlk yorumu siz yapın.</h3>
                 <div v-for="comment in data" :key="comment.id" class="message received" >
-                  <div class="user-info d-flex flex mb-2">
+                  <div class="user-info d-flex mb-2">
                     <v-avatar v-if="comment.profileImage" size="36">
                       <img :src="'http://'+$store.state.addr+':'+$store.state.port+'/uploads/'+comment.profileImage" alt="">
                     </v-avatar>
@@ -52,35 +52,29 @@
                     <h4 class="ml-4" style="line-height:36px;">{{comment.fullName}}</h4>
                   </div>
                   {{comment.comment}}
-                  <div class="d-flex flex-row text--lighten-2 mt-2">
+                  <div class="d-flex flex-row text--lighten-2 mt-2 justify-space-around" style="width: 200px;">
                     <div>
-                      212
-                      <v-btn text @click="dislike">
-                        <v-icon color="gray">mdi-heart-minus</v-icon>
-                      </v-btn>
+                      {{comment.dislike | length}}
+                      <span style="cursor: pointer;" @click="dislike(comment.id)">
+                        <v-icon color="gray">mdi-thumb-down</v-icon>
+                      </span>
                     </div>
                     <div>
-                      100
-                      <v-btn text @click="like">
-                        <v-icon>mdi-heart-plus</v-icon>
-                      </v-btn>
+                      {{comment.like | length}}
+                      <span style="cursor: pointer;" @click="like(comment.id)">
+                        <v-icon :color="comment.like.indexOf(userInfo['id']) > -1 ? 'red' : ''">mdi-thumb-up</v-icon>
+                      </span>
                     </div>
                     <div>
 
-                      <v-btn text class="ml-0 cursor-pointer" @click="reply">
+                      <span text class="ml-0" style="cursor:pointer;" @click="reply(comment.id)">
                         Cevapla
                         <v-icon>mdi-comment-arrow-right</v-icon>
-                      </v-btn>
+                      </span>
                     </div>
                   </div>
                   <span class="metadata"><span class="time">{{comment.createdAt | onlyTime}}</span></span>
                 </div>
-                <!--<div class="message sent">
-                  What happened last night?
-                  <span class="metadata">
-                      <span class="time"></span><span class="tick"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" id="msg-dblcheck-ack" x="2063" y="2076"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88a.32.32 0 0 1-.484.032l-.358-.325a.32.32 0 0 0-.484.032l-.378.48a.418.418 0 0 0 .036.54l1.32 1.267a.32.32 0 0 0 .484-.034l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.88a.32.32 0 0 1-.484.032L1.892 7.77a.366.366 0 0 0-.516.005l-.423.433a.364.364 0 0 0 .006.514l3.255 3.185a.32.32 0 0 0 .484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" fill="#4fc3f7"/></svg></span>
-                  </span>
-                </div>-->
 
               </div>
             </div>
@@ -116,6 +110,7 @@
 
 <script>
     import axios from 'axios';
+    import io from "socket.io-client";
 
     export default {
         data() {
@@ -124,6 +119,8 @@
               message: '',
               data: [],
               isAuthenticated: false,
+              liked: false,
+              userInfo: JSON.parse(localStorage.getItem('user') || '{"id":-1}'),
             }
         },
         methods: {
@@ -138,35 +135,60 @@
                         subject: this.$route.params.coin || this.$route.params.gold,
                         profileImage: profileImage,
                     })
-                    .then(response => {
+                    /*.then(response => {
                         console.log(response)
                         this.message = '';
                         this.data.push(response.data);
-                    })
+                    })*/
             },
             getComments: function() {
-                axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/getcomments`, {
+              axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/getcomments`, {
                         subject: this.$route.params.coin || this.$route.params.gold,
                     })
                     .then(response => {
                         this.data = response.data;
                     })
             },
-            dislike: function() {
-              console.log("dislike")
+            dislike: function(id) {
+              let userInfo = JSON.parse(localStorage.getItem('user'));
+              let userId = userInfo["id"];
+              axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/dislikecomment`, {
+                commentId: id,
+                userId: userId
+              })
             },
-            like: function() {
-              console.log("like")
+            like: function(id) {
+              let userInfo = JSON.parse(localStorage.getItem('user'));
+              let userId = userInfo["id"];
+              axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/likecomment`, {
+                commentId: id,
+                userId: userId
+              })
+              /*.then((res) => {
+                if(res.data.result == "OK"){
+
+                }
+              })*/
             },
             reply: function() {
-              console.log("replay")
+              alert("replay")
             },
         },
         created() {
+            let app = this;
+            let userInfo = JSON.parse(localStorage.getItem('user'));
+            var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+            socket.on(app.$route.params.coin+"-comments", fetchedData => {
+              app.data = fetchedData;
+              if(JSON.parse(fetchedData.like).indexOf(userInfo.id)>-1){
+                app.liked = true;
+              }
+            })
             this.getComments();
             if(localStorage.getItem('user')){
               this.isAuthenticated = true;
             }
+
         },
         mounted() {}
     }
@@ -181,17 +203,18 @@
         height: 100%;
     }
     /* Chat */
-    
-    .chat * {
-        user-select: none;
-    }
+
     
     .chat {
         height: 100%;
+        user-select: initial !important;
     }
     
     .chat-container {
         height: 100%;
+    }
+    .chat-container *  {
+      user-select: initial !important;
     }
     /* Conversation */
     
@@ -242,7 +265,6 @@
         position: relative;
         margin: 8px 0;
         word-wrap: break-word;
-        z-index: -1;
         max-width: 98%;
     }
     

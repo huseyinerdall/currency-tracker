@@ -49,6 +49,7 @@
         <v-menu
             offset-y
             style="margin-top: 30px;"
+            v-if="isAuthenticated"
         >
           <template v-slot:activator="{ attrs, on }">
             <v-btn
@@ -59,7 +60,7 @@
                 style="margin-top: 50px !important;font-weight:800;"
                 @click="isDropped=!isDropped"
             >
-              ARAÇLAR
+              HESAP
               <v-icon size="16" class="ml-2" :class="[isDropped ? 'mdi-rotate-180' : '']">mdi-arrow-down</v-icon>
             </v-btn>
           </template>
@@ -67,49 +68,37 @@
           <v-list>
             <v-list-item
                 link
-                href="/arac1"
+                href="/profil"
                 dense
             >
-              <v-list-item-title>ARAÇ 1</v-list-item-title>
+              <v-list-item-title>Profil</v-list-item-title>
             </v-list-item>
             <v-list-item
                 link
-                href="/arac1"
+                href="/logout"
                 dense
             >
-              <v-list-item-title>ARAÇ 1</v-list-item-title>
-            </v-list-item>
-            <v-list-item
-                link
-                href="/arac1"
-                dense
-            >
-              <v-list-item-title>ARAÇ 1</v-list-item-title>
+              <v-list-item-title>Çıkış</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
-        <v-btn
-            href="/profil"
-            text
-            v-if="isAuthenticated"
-        >
-          <span class="mr-4">PROFİL</span>
-        </v-btn>
-        <h1 class="body-1" style="padding-top: 30px;margin-left: 8%;font-size:32px !important;">{{clock}}</h1>
+        <h1 class="body-1" style="padding-top: 30px;margin-left: 8%;font-size:27px !important;">{{clock}}</h1>
       </v-app-bar>
       <!--Desktop menu end-->
       <!--Mobile menu begin-->
       <v-app-bar app dark
                  style="border-bottom: 1px solid #0059b2;background-color:#1d2460;"
                  v-if="$vuetify.breakpoint.smAndDown">
-        <v-img
-            alt="para.guru Logo"
-            class="shrink mr-2"
-            contain
-            src="./assets/logo.png"
-            transition="scale-transition"
-            width="40"
-        />
+        <router-link to="/" class="pa-0 ma-0">
+          <v-img
+              alt="para.guru Logo"
+              class="shrink mr-2"
+              contain
+              src="./assets/logo.png"
+              transition="scale-transition"
+              width="40"
+          />
+        </router-link>
         <h3 class="text-xl-h4 ml-2">{{ $store.state.appName }}</h3>
         <v-spacer></v-spacer>
         <v-app-bar-nav-icon dark @click="dialog = true" style="margin-right: -10px;">
@@ -137,7 +126,7 @@
             </v-toolbar>
 
             <v-list-item-group>
-              <v-list-item to="/doviz" link @click="dialog=false">
+              <v-list-item to="/doviz" @click="dialog=false">
                 <v-list-item-icon>
                   <v-icon>mdi-wallet-outline</v-icon>
                 </v-list-item-icon>
@@ -220,7 +209,7 @@ export default {
   },
 
   data: () => ({
-    isAuthenticated: true,
+    isAuthenticated: false,
     dialog: false,
     isDropped: false,
     clock: '',
@@ -238,18 +227,22 @@ export default {
     //let decoded = VueJwtDecode.decode(token);
     //console.log(decoded)
     setInterval(this.updateTime,1000);
+    this.isAuthenticated = localStorage.getItem('user') != undefined;
   }
 };
 </script>
 
 <style media="screen">
 body, * {
-  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 .v-main {
   background-image: url('assets/back.fw.png') !important;
   background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .v-toolbar__content a{
   margin-top:30px;
