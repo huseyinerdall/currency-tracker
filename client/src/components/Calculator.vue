@@ -1,6 +1,12 @@
 <template>
-  <v-container>
-    <div id="calculator">
+  <div>
+    <v-chip
+        class="ma-0 mt-2 amber accent-3"
+        label
+    >
+      Hesaplama
+    </v-chip>
+    <div id="calculator" class="mt-1">
       <div class="calculator-logs">
         <span v-for="(log,index) in logs" :key="index">{{ log }}</span>
       </div>
@@ -12,7 +18,7 @@
           <button class="calculator-btn gray action" @click="clear()">C</button>
         </div>
         <div class="calculator-col">
-          <button class="calculator-btn gray action" @click="del()">del</button>
+          <button class="calculator-btn gray action" @click="del()">sil</button>
         </div>
         <div class="calculator-col">
           <button class="calculator-btn gray action" @click="addExpresion('%')">%</button>
@@ -75,7 +81,7 @@
         </div>
       </div>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -121,6 +127,7 @@ $accent: rgba(0,0,0,.3);
   padding: 0;
   flex-direction: column;
   background-color: $darker;
+  border: 1px solid #444767;
 
   .calculator-logs {
     height: 80px;

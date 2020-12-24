@@ -82,7 +82,8 @@
             </v-list-item>
           </v-list>
         </v-menu>
-        <h1 class="body-1" style="padding-top: 30px;margin-left: 8%;font-size:27px !important;">{{clock}}</h1>
+        <v-spacer></v-spacer>
+        <h1 class="body-1 mr-lg-12" style="padding-top: 30px;font-size:24px !important;">{{clock}}</h1>
       </v-app-bar>
       <!--Desktop menu end-->
       <!--Mobile menu begin-->

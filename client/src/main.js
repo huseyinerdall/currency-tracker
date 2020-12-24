@@ -12,7 +12,7 @@ Vue.use(VueApexCharts);
 Vue.component('apexchart', VueApexCharts);
 Vue.config.productionTip = false;
 
-axios.defaults.baseConfig = "http://localhost:4000/";
+//axios.defaults.baseConfig = "http://localhost:4000/";
 Vue.use(VueAxios, axios)
 
 //for server
@@ -25,6 +25,15 @@ Vue.filter('signint', function(value) {
         return value.toFixed(2);
     }catch(e){
         return "+0.00";
+    }
+})
+
+Vue.filter('signintt', function(value) {
+    try{
+        if (value >= 0) return "+" + value.toFixed(4);
+        return value.toFixed(4);
+    }catch(e){
+        return "+0.0000";
     }
 })
 

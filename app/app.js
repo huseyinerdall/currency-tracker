@@ -276,6 +276,102 @@ app.post('/getgoldaccordingtotimerange', async(req, res) => {
     res.json(data);
 })
 
+
+const BINTLTABLE_LIST = ["ABDDOLARI", "EURO", "INGILIZSTERLINI", "KANADADOLARI", "SUUDIARABISTANRIYALI", "BTC","JAPONYENI"];
+app.post('/bintltable', async(req, res) => {
+    let time = req.body.time || 1;
+    console.log(time)
+    let temp;
+    let BINTL = {};
+    let BEGIN = moment().subtract(time, 'd').toDate() || DEFAULT;
+    const NOW = moment().toDate();
+    console.log(BEGIN,NOW)
+    let data = [];
+
+    axios.get('https://finans.truncgil.com/today.json')
+        .then(response =>{
+            BINTL["ABDDOLARI"] = +(response.data["ABD DOLARI"]["Satış"]);
+            BINTL["EURO"] = +(response.data["EURO"]["Satış"]);
+            BINTL["INGILIZSTERLINI"] = +(response.data["İNGİLİZ STERLİNİ"]["Satış"]);
+            BINTL["KANADADOLARI"] = +(response.data["KANADA DOLARI"]["Satış"]);
+            BINTL["JAPONYENI"] = +(response.data["JAPON YENİ"]["Satış"]);
+            BINTL["SUUDIARABISTANRIYALI"] = +(response.data["SUUDİ ARABİSTAN RİYALİ"]["Satış"]);
+
+            axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d")
+                .then(async response => {
+                    BINTL["BTC"] = +(response.data[0]["current_price"]*BINTL["ABDDOLARI"]);
+
+                    for (let i = 0; i < BINTLTABLE_LIST.length; i++) {
+                        temp = {};
+                        if(BINTLTABLE_LIST[i] != "BTC"){
+                            a = await db[BINTLTABLE_LIST[i]].findOne({
+                                where: {
+                                    createdAt: {
+                                        [Op.gte]: moment().subtract(time, 'days').toDate()
+                                    }
+                                }
+                            })
+                            temp["type"] = BINTLTABLE_LIST[i];
+                            temp["value"] = (BINTL[BINTLTABLE_LIST[i]] - a["dataValues"]["Satis"]) * (1000/BINTL[BINTLTABLE_LIST[i]]);
+                        }else{
+                            a = await db[BINTLTABLE_LIST[i]].findOne({
+                                where: {
+                                    createdAt: {
+                                        [Op.gte]: moment().subtract(time, 'days').toDate()
+                                    }
+                                }
+                            })
+                            temp["type"] = BINTLTABLE_LIST[i];
+                            temp["value"] = (BINTL[BINTLTABLE_LIST[i]] - a["dataValues"]["Fiyat"]) * (1000/(BINTL[BINTLTABLE_LIST[i]] * BINTL["ABDDOLARI"]));
+                        }
+                        data.push(temp);
+                    }
+                    res.json(data);
+                })
+                .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+})
+
+
+app.get('/pariteler', async(req, res) => {
+    let temp;
+    let BEGIN = moment().subtract(1, 'd').toDate() || DEFAULT;
+    const NOW = moment().toDate();
+    let data = [];
+
+    axios.get('https://finans.truncgil.com/today.json')
+        .then(async response => {
+
+            let updatetime = response.data["Güncelleme Tarihi"];
+            for (const element in response.data) {
+                temp = {};
+                if (element.indexOf("Altın") > 0 || element == '22 Ayar Bilezik' || element == 'Gümüş') {continue;}
+                else if (element.indexOf("Güncelleme") < 0 && element.indexOf("ÇEKME") < 0) {
+                    temp["type"] = element;
+                    temp["time"] = updatetime;
+                    temp["today"] = response.data[element]["Satış"];
+                    indis = utils.turkishToEnglish(element);
+                    a = await db[indis].findOne({
+                        where: {
+                            createdAt: {
+                                [Op.gte]: moment().subtract(2, 'days').toDate()
+                            }
+                        }
+                    }).catch((err)=>console.log("GEç"))
+                    temp["yesterday"] = a["dataValues"]["Satis"];
+                    data.push(temp);
+                    console.log(temp)
+                }
+
+            }
+            console.log(data)
+            res.json(data);
+        })
+        .catch(err => console.log(err));
+})
+
+
 app.post('/sendcomment', async(req, res) => {
     let fullName = req.body.fullName;
     let comment = req.body.message;
@@ -289,7 +385,7 @@ app.post('/sendcomment', async(req, res) => {
         })
         .then( async()=>{
             let data;
-            let BEGIN = moment().subtract(1, 'd').toString() || DEFAULT;
+            let BEGIN = moment().subtract(7, 'd').toString() || DEFAULT;
             const NOW = new Date();
             data = await db["Comments"].findAll({
                 where: {
@@ -405,7 +501,6 @@ app.post('/register', (req, res) => {
         })
         .then(user => {
             if (user) {
-                console.log(user)
                 res.send("Bu email adresi çoktan kullanılmış.");
             } else {
                 let filename = '';
@@ -564,27 +659,15 @@ db.sequelize.sync().then(() => {
 
     }, 1000)
 
-    let BINTL = {};
     let dolar = 0;
+
     setInterval(() => {
         axios.get('https://finans.truncgil.com/today.json')
             .then(response =>{
                 dolar = response.data["ABD DOLARI"]["Satış"];
-                BINTL["USD"] = 1000/(+response.data["ABD DOLARI"]["Satış"]);
-                BINTL["EUR"] = 1000/(+response.data["EURO"]["Satış"]);
-                BINTL["GBP"] = 1000/(+response.data["İNGİLİZ STERLİNİ"]["Satış"]);
-                BINTL["CAD"] = 1000/(+response.data["KANADA DOLARI"]["Satış"]);
-                BINTL["JPY"] = 1000/(+response.data["JAPON YENİ"]["Satış"]);
-                BINTL["SAR"] = 1000/(+response.data["SUUDİ ARABİSTAN RİYALİ"]["Satış"]);
             })
             .catch(err => console.log("Döviz datası alınamıyor!"));
-        /*axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d")
-            .then(response => {
-                BINTL["BTC"] = (1000/(+response.data[0]["current_price"] * +BINTL["USD"]));
-            })
-            .catch(err => console.log(err));*/
         io.emit('dolar',dolar);
-        io.emit('bintl',BINTL);
     },5000);
 })
 

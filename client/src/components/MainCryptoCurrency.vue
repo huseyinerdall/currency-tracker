@@ -20,12 +20,12 @@
     >
       <template v-slot:item.shortName="{ item }">
         <v-row >
-          <v-col cols="5" sm="5" class="pa-0 pa-lg-2"  v-if="!isHomepage && $vuetify.breakpoint.mdAndUp">
+          <v-col cols="5" lg="2" class="pa-0 pa-lg-2"  v-if="!isHomepage && $vuetify.breakpoint.mdAndUp">
             <v-avatar size="32" class="mt-2">
               <img :src="item.image" alt="">
             </v-avatar>
           </v-col>
-          <v-col :class="[isHomepage || $vuetify.breakpoint.smAndDown ? 'pa-0' : 'pa-2 pl-0']">
+          <v-col :class="[isHomepage || $vuetify.breakpoint.smAndDown ? 'pa-0' : 'pa-2 pl-0']" cols="10">
             <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3">{{
                 item.shortName | uppercase
               }}
@@ -175,5 +175,11 @@ h3 {
 <style>
 .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
   background: transparent !important;
+}
+.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th{
+  border-bottom: thin solid #444767 !important;
+}
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row){
+  border-bottom: thin solid #444767 !important;
 }
 </style>

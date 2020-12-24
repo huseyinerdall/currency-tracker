@@ -1,6 +1,12 @@
 <template>
   <div>
-      <table class="mt-6 mb-6" style="table-layout:fixed;" v-if="$vuetify.breakpoint.mdAndUp">
+    <v-chip
+        class="ma-0 mt-6 amber accent-3"
+        label
+    >
+      Matris Tablo
+    </v-chip>
+      <table class="mt-1 mb-6" style="table-layout:fixed;" v-if="$vuetify.breakpoint.mdAndUp">
           <thead>
             <tr>
                 <th style="border-left: 0 !important;width:160px;">
@@ -66,7 +72,7 @@
           <v-list-item-content>
             <div class="d-flex flex-row justify-content-between">
               <div style="color:#fff;padding-top:3px;">1 {{item.symbol}}</div>
-              <v-icon class="ml-0" color="#fff">mdi-arrow-right</v-icon>
+              <v-icon class="ml-1 mr-1" color="#fff">mdi-arrow-right</v-icon>
               <div style="color:#fff;padding-top:3px;">{{ (data[item.name]) / (data[items[currentCurrency]["name"]]) | tofixedfour}} {{items[currentCurrency]["symbol"]}}</div>
             </div>
 
@@ -92,7 +98,7 @@
         name: "MatrisTable",
         data: () => ({
           items: currencies,
-          overlay: true,
+          overlay: false,//true
           value:["EURO","ABD DOLARI","TÜRK LİRASI"],
           data:{},
           currentCurrency: 1,
@@ -122,6 +128,7 @@
           if(ONE==1){
             app.value = ["EURO","ABD DOLARI","TÜRK LİRASI"];
             ONE = 2;
+            app.currentCurrency = 0;
           }
           for (const currency of fetchedData) {
             app.data[currency["type"]] = currency["Satış"];
@@ -129,6 +136,8 @@
           app.overlay =false;
         })
 
+      },
+      mounted() {
       }
     };
 </script>

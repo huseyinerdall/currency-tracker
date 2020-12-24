@@ -1,13 +1,13 @@
 <template>
   <v-footer
     dark
-
     padless
   >
     <v-card
       flat
       width="100%"
-      class="indigo white--text text-center"
+      class="white--text text-center"
+      color="rgb(29, 36, 96)"
     >
       <v-card-text>
         <v-btn

@@ -2,7 +2,7 @@
   <v-card style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;" class="mb-6 pa-0">
     <v-row>
       <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
-      <v-col cols="6" lg="2">
+      <v-col cols="6" lg="2" class="pb-0 pt-0">
         <v-text-field
             dark
             v-model="amount"
@@ -14,7 +14,7 @@
             @input="convert"
         ></v-text-field>
       </v-col>
-      <v-col cols="5" lg="1">
+      <v-col cols="5" lg="1" class="pb-0 pt-0">
         <v-select
             :items="items"
             item-text="symbol"
@@ -22,16 +22,16 @@
             item-value="name"
             color="white"
             @change="convert"
-            style="padding: 0 16px !important;"
+            style="padding: 0 !important;"
             dark
         ></v-select>
       </v-col>
-      <v-col cols="12" lg="1" class="text-center pa-0 ma-0">
+      <v-col cols="12" lg="1" class="text-center pb-0 pt-0 ma-0">
         <v-icon size="40" color="#ffbf00" class="mt-1" :class="$vuetify.breakpoint.smAndDown ? 'mdi-rotate-90' : ''">
-          mdi-arrow-left-right
+          mdi-arrow-right-thick
         </v-icon>
       </v-col>
-      <v-col cols="6" lg="2">
+      <v-col cols="6" lg="2" class="pb-0 pt-0">
         <v-text-field
             v-model="result"
             color="white"
@@ -42,7 +42,7 @@
             readonly
         ></v-text-field>
       </v-col>
-      <v-col cols="5" lg="1">
+      <v-col cols="5" lg="1" class="pb-0 pt-0">
         <v-select
             :items="items"
             item-text="symbol"
@@ -50,7 +50,7 @@
             v-model="target"
             @change="convert"
             color="white"
-            style="padding: 0 16px !important;"
+            style="padding: 0 !important;"
             dark
         ></v-select>
       </v-col>
