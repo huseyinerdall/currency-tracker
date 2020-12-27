@@ -93,7 +93,7 @@
                 alert("Alanlar boş bırakılamaz!");
                 return;
               }
-                axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/login`, {
+                axios.post(`${this.$store.state.api}/login`, {
                         email: this.email,
                         passwd: this.password
                     })

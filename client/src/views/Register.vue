@@ -133,7 +133,7 @@
                 return ID;
             },
             register() {
-                axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/register`, {
+                axios.post(`${this.$store.state.api}/register`, {
                         fullName: this.fullName || this.guestID,
                         email: this.email,
                         passwd: this.password1,
@@ -155,7 +155,7 @@
                 this.file.fullName = this.fullName || this.guestID;
                 const formData = new FormData();
                 formData.append('file', this.file);
-                axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/avatar`, formData, {
+                axios.post(`${this.$store.state.api}/avatar`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'fullName': this.fullName || this.guestID

@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-chip
-        class="ma-0 mt-2 amber accent-3"
-        label
-    >
-      Hesaplama
-    </v-chip>
+
     <div id="calculator" class="mt-1">
       <div class="calculator-logs">
         <span v-for="(log,index) in logs" :key="index">{{ log }}</span>
@@ -86,7 +81,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Calculator",
   data: () => ({
     value: 0,
     logs:  []
@@ -143,7 +138,7 @@ $accent: rgba(0,0,0,.3);
       right: 0;
       height: 48px;
       content: '';
-      z-index: 5;
+      z-index: 1;
       position: absolute;
       background: linear-gradient(to bottom, $darker, rgba($darker, 0));
     }

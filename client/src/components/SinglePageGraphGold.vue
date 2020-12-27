@@ -7,14 +7,14 @@
           <div class="white--text font-weight-light">
             <v-avatar size="32" class="mb-2">
               <img
-                  :src="'http://'+$store.state.addr+':'+$store.state.port+'/gold.png'"
-                  alt="$route.params.gold"
+                  :src="flag ||$store.state.addr+'/gold.png'"
+                  :alt="$route.params.gold"
               >
             </v-avatar>
             {{ $route.params.gold }}
           </div>
           <div class="white--text font-weight-light mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
-            {{ satis || "--.----"}} $
+            {{ satis || "--.----"}} {{ $route.params.gold == "Ons Altın" ? '$' : 'TL' }}
           </div>
           <div class="mt-2 white--text" :class="[1>=0 ? 'green--text' : 'red--text']">
             {{ price_change_24h | signint  }}
@@ -70,10 +70,11 @@
 import axios from 'axios';
 import io from "socket.io-client";
 //import dump from '../assets/dump.js'
-
+import currencies from '../assets/currencies.js';
 export default {
   name: "SinglePageGraphGold",
   data: (app)=>({
+    flag: '',
     interval: 0,
     time: 1,
     state:0,
@@ -196,6 +197,12 @@ export default {
     },
   }),
   created() {
+    for (let i = 0; i < currencies.length; i++){
+      if(currencies[i]["name"]==this.$route.params.gold){
+        this.flag = currencies[i]["image"];
+      }
+    }
+
     if(this.$vuetify.breakpoint.smAndDown){
       this.chartOptions.responsive = [
         {
@@ -224,7 +231,7 @@ export default {
     }
     let app = this;
     this.interval = setInterval(() =>{
-      axios.get(`http://${this.$store.state.addr}:${this.$store.state.port}/gold/${this.$route.params.gold}`)
+      axios.get(`${this.$store.state.api}/gold/${this.$route.params.gold}`)
           .then(response=>{
             this.alis = response.data["Alış"];
             this.satis = response.data["Satış"];
@@ -233,8 +240,8 @@ export default {
     },1000);
 
     let temp;
-    var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
-    socket.on(app.$route.params.coin, fetchedData => {
+    var socket = io.connect(`${this.$store.state.addr}`);
+    socket.on(app.$route.params.gold, fetchedData => {
       if (fetchedData[fetchedData.length - 1]["Satis"] != temp || !temp) {
 
         //app.graphData = fetchedData
@@ -259,7 +266,7 @@ export default {
   },
   methods: {
     getGraphData: function() {
-      axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/getgoldaccordingtotimerange`, {
+      axios.post(`${this.$store.state.api}/getgoldaccordingtotimerange`, {
         goldName: this.$route.params.gold,
         time: this.time,
       })

@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     appName: "Para.Guru",
     domainName: "para.guru",
-    addr: "localhost",
+    addr: "http://localhost:4000",
+    api:"http://localhost:4000",
     port: "4000",
     token: localStorage.getItem('jwt') || '',
     status: '',

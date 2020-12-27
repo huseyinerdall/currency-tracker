@@ -4,7 +4,7 @@
 
       <v-app-bar app dark v-if="$vuetify.breakpoint.mdAndUp"
                  style="border-bottom: 1px solid #0059b2;height: 94px;background-color:#1d2460;">
-        <div class="d-flex align-end">
+        <div class="d-flex align-end" style="max-width: 88%;">
           <router-link to="/">
             <v-img
                 alt="para.guru Logo"
@@ -83,7 +83,8 @@
           </v-list>
         </v-menu>
         <v-spacer></v-spacer>
-        <h1 class="body-1 mr-lg-12" style="padding-top: 30px;font-size:24px !important;">{{clock}}</h1>
+        <h1 class="body-1" style="padding-top: 30px;font-size:24px !important;">{{clock}}</h1>
+
       </v-app-bar>
       <!--Desktop menu end-->
       <!--Mobile menu begin-->
@@ -108,7 +109,7 @@
 
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
 
-          <v-card style="background-color: rgba(0,0,0,.8);">
+          <v-card style="background-color: rgba(0,0,0,.9);">
             <v-toolbar style="border-bottom: 1px solid #0059b2;background-color:#1d2460;">
               <v-toolbar-title>
                 <v-img
@@ -131,7 +132,7 @@
                 <v-list-item-icon>
                   <v-icon>mdi-wallet-outline</v-icon>
                 </v-list-item-icon>
-                <v-list-item-content v-if="isAuthenticated">
+                <v-list-item-content>
                   <v-list-item-title>
                     <v-btn text class="white--text">
                       DÖVİZ
@@ -248,5 +249,9 @@ body, * {
 .v-toolbar__content a{
   margin-top:30px;
   font-weight:800;
+}
+.v-toolbar__content{
+  max-width: 88%;
+  margin: 0 auto;
 }
 </style>

@@ -6,7 +6,7 @@
           <Golds />
         </v-col>
         <v-col cols="12" md="4">
-          <TCMBCurrencyTable />
+          <BinTLTable />
         </v-col>
       </v-row>
 
@@ -16,12 +16,14 @@
 <script>
     // @ is an alias to /src
     import Golds from "@/components/Golds.vue";
-    import TCMBCurrencyTable from "@/components/TCMBCurrencyTable.vue";
+    //import Calculator from "@/components/Calculator.vue";
+    import BinTLTable from "@/components/BinTLTable.vue";
     export default {
         name: "GoldsPage",
         components: {
           Golds,
-          TCMBCurrencyTable
+          //Calculator,
+          BinTLTable
         }
     };
 </script>

@@ -4,7 +4,7 @@
     <v-container>
       <v-row>
         <v-col
-            cols="12" md="6">
+            cols="12" md="12">
           <Description />
         </v-col>
       </v-row>

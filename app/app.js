@@ -197,7 +197,7 @@ app.get('/coin/:coinName', (req, res) => {
 app.get('/coins', (req, res) => {
     let factRes = [];
     let temp = {};
-    axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d`)
+    axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=550&page=1&sparkline=false&price_change_percentage=24h,7d`)
         .then((response) => {
             for (let i = 0; i < response.data.length; i++) {
                 temp = {};
@@ -563,7 +563,7 @@ app.post('/login', (req, res) => {
 
 
 const NONCHANGE_TIME = 60 * 1/6;
-
+const MAINLOOPINTERVAL = 2000;
 
 db.sequelize.sync().then(() => {
 
@@ -587,7 +587,7 @@ db.sequelize.sync().then(() => {
         let currencies = [];
         let temp = {};
 
-        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d`)
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h,7d`)
             .then((response) => {
                 for (let i = 0; i < response.data.length; i++) {
                     temp = {};
@@ -595,6 +595,7 @@ db.sequelize.sync().then(() => {
                     temp["shortName"] = response.data[i]["symbol"];
                     temp["price"] = response.data[i]["current_price"];
                     temp["change"] = response.data[i]["price_change_24h"];
+                    temp["market_cap"] = response.data[i]["market_cap"];
                     temp["volume"] = response.data[i]["total_volume"];
                     temp["pricechange24h"] = response.data[i]["price_change_percentage_24h"];
                     temp["pricechange7d"] = response.data[i]["price_change_percentage_7d_in_currency"] || 0;
@@ -604,7 +605,8 @@ db.sequelize.sync().then(() => {
 
                     // aşagıdaki koşul sadece api çıktısı aynı sırada sonuçlanırsa düzgün calışır
                     if (response.data[i]["current_price"] != M[response.data[i]["symbol"]] && db[response.data[i]["symbol"].toUpperCase()]) {
-
+                        if(response.data[i]["symbol"].toUpperCase() == "1INCH"){response.data[i]["symbol"] = "ONEINCH"}
+                        if(response.data[i]["symbol"].toUpperCase() == "YVAULT-LP-YCURVE"){response.data[i]["symbol"] = "YVAULTLPYCURVE"}
                         db[response.data[i]["symbol"].toUpperCase()].create({ Fiyat: response.data[i]["current_price"] })
                             //db[response.data[i]["symbol"]].destroy({ truncate : true, cascade: false })
                         M[response.data[i]["symbol"]] = response.data[i]["current_price"];
@@ -613,7 +615,7 @@ db.sequelize.sync().then(() => {
                 }
                 io.emit('coins', factRes);
             })
-            .catch(err => console.error("Kripto para datası alınamıyor !!!"));
+            .catch(err => console.error(err));
 
         axios.get('https://finans.truncgil.com/today.json')
             .then(response => {
@@ -657,7 +659,7 @@ db.sequelize.sync().then(() => {
             })
             .catch(err => console.error("Döviz datası alınamıyor!"));
 
-    }, 1000)
+    }, MAINLOOPINTERVAL)
 
     let dolar = 0;
 

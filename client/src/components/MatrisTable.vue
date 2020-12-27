@@ -1,14 +1,8 @@
 <template>
   <div>
-    <v-chip
-        class="ma-0 mt-6 amber accent-3"
-        label
-    >
-      Matris Tablo
-    </v-chip>
-      <table class="mt-1 mb-6" style="table-layout:fixed;" v-if="$vuetify.breakpoint.mdAndUp">
+      <table class="mt-6 mb-6" style="table-layout:fixed;" v-if="$vuetify.breakpoint.mdAndUp">
           <thead>
-            <tr>
+            <tr style="width:32px;">
                 <th style="border-left: 0 !important;width:160px;">
 
 </th>
@@ -123,7 +117,7 @@
         let app = this;
         app.data["TÜRK LİRASI"] = 1;
         let ONE = 1;
-        var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+        var socket = io.connect(`${this.$store.state.addr}`);
         socket.on("currencies", fetchedData => {
           if(ONE==1){
             app.value = ["EURO","ABD DOLARI","TÜRK LİRASI"];

@@ -1,11 +1,5 @@
 <template>
   <div>
-    <v-chip
-        class="amber accent-3"
-        label
-    >
-      Altın
-    </v-chip>
     <v-data-table
         :headers="headers"
         :items="data"
@@ -18,7 +12,7 @@
         dense
     >
       <template v-slot:item.type="{ item }">
-        <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="white--text body-1" style="font-size:12px !important;cursor:pointer;">{{ item.type }}</router-link>
+        <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="white--text body-1 text-uppercase" style="font-size:12px !important;cursor:pointer;">{{ item.type | shorten }}</router-link>
       </template>
       <template v-slot:item.Fark="{ item }">
         <span :class="[(parseFloat(item['Satış']) - parseFloat(item.close))>=0 ? 'green--text' : 'red--text']">
@@ -73,7 +67,7 @@ export default {
       this.headers.pop();
     }
     let app = this;
-    var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+    var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("golds", fetchedData => {
       app.data = fetchedData;
       app.overlay = false;

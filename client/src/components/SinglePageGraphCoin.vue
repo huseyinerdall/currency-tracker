@@ -203,7 +203,7 @@
                 });
             },
             getGraphData: function() {
-                axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/getcoinaccordingtotimerange`, {
+                axios.post(`${this.$store.state.api}/getcoinaccordingtotimerange`, {
                         coinName: this.$route.params.coin,
                         time: this.time,
                     })
@@ -259,7 +259,7 @@
             }
             let app = this;
             this.interval = setInterval(() => {
-                axios.get(`http://${this.$store.state.addr}:${this.$store.state.port}/coin/${this.$route.params.coin}`)
+                axios.get(`${this.$store.state.api}/coin/${this.$route.params.coin}`)
                     .then(response => {
                         this.coinImage = response.data[0].image;
                         this.high = response.data[0].high_24h;
@@ -274,7 +274,7 @@
 
 
             let temp;
-            var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+            var socket = io.connect(`${this.$store.state.addr}`);
             socket.on(app.$route.params.coin, fetchedData => {
                 if (fetchedData[fetchedData.length - 1]["Fiyat"] != temp || !temp) {
 

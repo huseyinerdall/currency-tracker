@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-chip
-        class="ma-0 amber accent-3"
-        label
-    >
-      Merkez Bankası Verileri
-    </v-chip>
+
     <v-data-table
         :headers="headers"
         :items="data"
@@ -38,9 +33,9 @@ export default {
     data:[]
   }),
   created(){
-    axios.get(`http://${this.$store.state.addr}:${this.$store.state.port}/tcmb`);
+    axios.get(`${this.$store.state.api}/tcmb`);
     let app = this;
-    var socket = io.connect(`http://${this.$store.state.addr}:${this.$store.state.port}`);
+    var socket = io.connect(`${this.$store.state.addr}`);
 
 
     socket.on("tcmb", fetchedData => {

@@ -65,13 +65,6 @@
                         <v-icon :color="comment.like.indexOf(userInfo['id']) > -1 ? 'red' : ''">mdi-thumb-up</v-icon>
                       </span>
                     </div>
-                    <div>
-
-                      <span text class="ml-0" style="cursor:pointer;" @click="reply(comment.id)">
-                        Cevapla
-                        <v-icon>mdi-comment-arrow-right</v-icon>
-                      </span>
-                    </div>
                   </div>
                   <span class="metadata"><span class="time">{{comment.createdAt | onlyTime}}</span></span>
                 </div>
@@ -99,12 +92,87 @@
         </form>
         <form class="conversation-compose" v-else>
           <div class="text-center login-please">Lütfen yorum yapmak için
-            <a href="/login">giriş</a>
+            <span @click="dialog=true" style="cursor:pointer;font-weight: bold;">giriş</span>
             yapın!
           </div>
         </form>
       </v-footer>
     </v-navigation-drawer>
+    <v-dialog
+        style="border-radius: 0;"
+        v-model="dialog"
+        width="500"
+    >
+      <v-card>
+
+
+            <v-card flat>
+              <v-card-text>
+                <v-text-field
+                    label="E-posta"
+                    append-outer-icon="mdi-account"
+                    v-model="email"
+                ></v-text-field>
+                <v-text-field
+                    type="password"
+                    label="Parola"
+                    append-outer-icon="mdi-key-variant"
+                    v-model="password"
+                ></v-text-field>
+              </v-card-text>
+            </v-card>
+        <v-row class="mx-auto">
+          <v-col cols="4">
+            <v-btn
+                color="blue-grey"
+                class="white--text"
+                @click="login"
+                small
+            >
+              GİRİŞ
+              <v-icon
+                  right
+                  dark
+              >
+                mdi-login
+              </v-icon>
+            </v-btn>
+
+          </v-col>
+          <v-col cols="4">
+            <v-btn
+                style="background:#de5246;"
+                class="white--text"
+                small
+            >
+              Google
+              <v-icon
+                  right
+                  dark
+              >
+                mdi-google
+              </v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="4">
+            <v-btn
+                color="blue-grey"
+                class="white--text"
+                href="/register"
+                small
+            >
+              KAYDOL
+              <v-icon
+                  right
+                  dark
+              >
+                mdi-login
+              </v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -115,6 +183,9 @@
     export default {
         data() {
             return {
+              dialog: false,
+              email: '',
+              password: '',
               drawer: true,
               message: '',
               data: [],
@@ -129,7 +200,7 @@
                 let fullName = userInfo["fullName"];
                 let profileImage = userInfo["profileImage"];
                 if (this.message == '') return;
-                axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/sendcomment`, {
+                axios.post(`${this.$store.state.api}/sendcomment`, {
                         message: this.message,
                         fullName: fullName,
                         subject: this.$route.params.coin || this.$route.params.gold,
@@ -142,7 +213,7 @@
                     })*/
             },
             getComments: function() {
-              axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/getcomments`, {
+              axios.post(`${this.$store.state.api}/getcomments`, {
                         subject: this.$route.params.coin || this.$route.params.gold,
                     })
                     .then(response => {
@@ -152,7 +223,7 @@
             dislike: function(id) {
               let userInfo = JSON.parse(localStorage.getItem('user'));
               let userId = userInfo["id"];
-              axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/dislikecomment`, {
+              axios.post(`${this.$store.state.api}/dislikecomment`, {
                 commentId: id,
                 userId: userId
               })
@@ -160,7 +231,7 @@
             like: function(id) {
               let userInfo = JSON.parse(localStorage.getItem('user'));
               let userId = userInfo["id"];
-              axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/likecomment`, {
+              axios.post(`${this.$store.state.api}/likecomment`, {
                 commentId: id,
                 userId: userId
               })
@@ -173,11 +244,45 @@
             reply: function() {
               alert("replay")
             },
+            login() {
+              if (!this.email && !this.password){
+                alert("Alanlar boş bırakılamaz!");
+                return;
+              }
+              axios.post(`${this.$store.state.api}/login`, {
+                email: this.email,
+                passwd: this.password
+              })
+                  .then((response) => {
+                    if(response.data == "ERROR") {
+                      alert("Kullanıcı bulunamadı");
+                      return;
+                    }else{
+                      localStorage.setItem('user', JSON.stringify(response.data.user))
+                      localStorage.setItem('jwt', response.data.token)
+                    }
+
+
+                    if (localStorage.getItem('jwt') != null) {
+                      this.$emit('loggedIn')
+                      if (this.$route.params.nextUrl != null) {
+                        this.$router.push(this.$route.params.nextUrl)
+                      } else {
+                        this.$router.push({
+                          name: 'Home'
+                        })
+                      }
+                    }
+                  })
+                  .catch(err => {
+                    console.log(err.response);
+                  })
+            }
         },
         created() {
             let app = this;
             let userInfo = JSON.parse(localStorage.getItem('user'));
-            var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+            var socket = io.connect(`${this.$store.state.addr}`);
             socket.on(app.$route.params.coin+"-comments", fetchedData => {
               app.data = fetchedData;
               if(JSON.parse(fetchedData.like).indexOf(userInfo.id)>-1){

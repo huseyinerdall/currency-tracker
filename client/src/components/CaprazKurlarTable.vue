@@ -1,11 +1,5 @@
 <template>
   <div>
-    <v-chip
-        class="ma-0 amber accent-3"
-        label
-    >
-      Pariteler
-    </v-chip>
     <table style="table-layout:fixed;" class="mt-1">
       <thead class="amber--text accent-3">
         <tr style="font-size:14px !important;">
@@ -233,7 +227,7 @@ export default {
   },
   created() {
     //let app = this;
-    axios.get(`http://${this.$store.state.addr}:${this.$store.state.port}/pariteler`)
+    axios.get(`${this.$store.state.api}/pariteler`)
         .then(response => {
           let fetchedData = response.data;
           console.log(fetchedData)
@@ -259,6 +253,7 @@ tr {
   text-align: center;
   border-bottom: 1pt solid #5e6593;
   font-size: 12px !important;
+  height:32px;
 }
 
 td {

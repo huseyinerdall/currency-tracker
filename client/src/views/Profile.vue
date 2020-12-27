@@ -104,7 +104,7 @@
                 this.file = this.$refs.file.files[0];
                 const formData = new FormData();
                 formData.append('file', this.file);
-                axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/avatar`, formData, {
+                axios.post(`${this.$store.state.api}/avatar`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

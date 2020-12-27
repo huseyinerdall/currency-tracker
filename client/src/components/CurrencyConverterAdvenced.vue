@@ -178,7 +178,7 @@ export default {
   methods: {
     convert(){
       if(!(this.model1 && this.model2 && this.amount))return;
-      axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/converter`,{
+      axios.post(`${this.$store.state.api}/converter`,{
         source: this.model1,
         target: this.model2,
         amount: this.amount,

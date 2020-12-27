@@ -1,14 +1,9 @@
 <template>
   <div>
-    <v-chip
-        class="ma-0 amber accent-3"
-        label
-    >
-      1000 TL ne oldu?
-    </v-chip>
-    <v-list style="border: 1px solid #5e6593;" class="mt-1" dense>
-      <v-subheader style="border-bottom: 1px solid #5e6593;">
-        <v-row class="justify-space-around">
+    <v-list style="border: 1px solid #5e6593;" class="mt-1 pt-0" dense>
+      <v-subheader style="border-bottom: 1px solid #5e6593;" class="mobile-tr" :style="$route.path != '/capraz-kurlar' ? 'height:56px !important;' : ''">
+        <v-row class="justify-space-between pl-2 pr-2">
+          <h3 class="amber--text">1000 TL Ne Oldu?</h3>
           <div class="d-flex flex-row">
             <v-btn x-small color="#71402c" style="border-radius: 0;" @click="time = 2">Dün</v-btn>
             <v-btn x-small color="#720e60" style="border-radius: 0;" @click="time = 7">Geçen Hafta</v-btn>
@@ -17,33 +12,33 @@
           </div>
         </v-row>
       </v-subheader>
-
       <v-list-item v-for="value in data" :key="value.type">
         <v-list-item-content>
+
           <v-row>
-            <v-col cols="2">
-              <span class="white--text">{{ bintltable[value.type] }}</span>
+            <v-col cols="2" class="">
+              <div class="white--text" style="font-size:14px;margin-top:-2px;">{{ bintltable[value.type] }}</div>
             </v-col>
-            <v-col cols="10">
+            <v-col cols="10" style="height: 10px;" class="pt-2">
 
               <v-progress-linear
                   v-if="value.value>0"
                   color="yellow darken-1"
-                  height="20"
-                  :value="value.value/2"
+                  height="16"
+                  :value="(1000+value.value)/20"
               >
                 <template v-slot:default="{}">
-                  <strong>{{value.value | tofixedfour}} TL</strong>
+                  <strong>{{1000+value.value | tofixedfour}} TL</strong>
                 </template>
               </v-progress-linear>
               <v-progress-linear
                   v-else
                   color="error"
-                  height="20"
-                  :value="-value.value/2"
+                  height="16"
+                  :value="(1000+value.value)/20"
               >
                 <template v-slot:default="{}">
-                  <strong>{{ (value.value) | tofixedfour}} TL</strong>
+                  <strong>{{ (1000+value.value) | tofixedfour}} TL</strong>
                 </template>
               </v-progress-linear>
             </v-col>
@@ -77,7 +72,7 @@ export default {
   }),
   created() {
     //let app = this;
-    /*var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+    /*var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("bintl", fetchedData => {
       app.data = fetchedData
     })*/
@@ -85,7 +80,7 @@ export default {
   },
   methods: {
     getData() {
-      axios.post(`http://${this.$store.state.addr}:${this.$store.state.port}/bintltable`, {
+      axios.post(`${this.$store.state.api}/bintltable`, {
         time: this.time,
       })
           .then(response => {
@@ -114,5 +109,13 @@ export default {
 }
 .v-list-item__content{
   padding: 0 !important;
+}
+.mobile-tr{
+  height: 32px;
+}
+@media screen and (max-width:768px){
+  .mobile-tr{
+    height: 56px;
+  }
 }
 </style>

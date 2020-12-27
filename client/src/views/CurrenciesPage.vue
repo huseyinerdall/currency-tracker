@@ -6,7 +6,7 @@
           <MainDoviz />
         </v-col>
         <v-col cols="12" md="4">
-          <TCMBCurrencyTable />
+          <BinTLTable />
         </v-col>
       </v-row>
 
@@ -17,13 +17,13 @@
 <script>
 // @ is an alias to /src
 import MainDoviz from "@/components/MainDoviz.vue";
-import TCMBCurrencyTable from "@/components/TCMBCurrencyTable.vue";
+import BinTLTable from "@/components/BinTLTable.vue";
 
 export default {
   name: "GoldsPage",
   components: {
     MainDoviz,
-    TCMBCurrencyTable,
+    BinTLTable,
   }
 };
 </script>

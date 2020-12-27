@@ -1,38 +1,46 @@
 <template>
   <div>
-    <v-chip
-        class="mt-3 amber accent-3"
-        label
-    >
-      Kripto Kurlar
-    </v-chip>
+    <v-text-field
+        v-if="!isHomepage"
+        v-model="search"
+        dark
+        color="white"
+        append-icon="mdi-magnify"
+        label="Kripto para ara"
+        single-line
+        hide-details
+    ></v-text-field>
     <v-data-table
         :headers="headers"
         :items="data"
         item-class="d-none"
         hide-default-footer
         :loading="!coinloaded"
-        disable-pagination
+        :items-per-page="itemPerPage"
+        :page.sync="page"
+        @page-count="pageCount = $event"
         style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;"
-        class="mt-1"
+        class="mt-2"
         mobile-breakpoint="0"
         dense
+        :search="search"
     >
-      <template v-slot:item.shortName="{ item }">
-        <v-row >
-          <v-col cols="5" lg="2" class="pa-0 pa-lg-2"  v-if="!isHomepage && $vuetify.breakpoint.mdAndUp">
-            <v-avatar size="32" class="mt-2">
-              <img :src="item.image" alt="">
-            </v-avatar>
-          </v-col>
-          <v-col :class="[isHomepage || $vuetify.breakpoint.smAndDown ? 'pa-0' : 'pa-2 pl-0']" cols="10">
+      <template v-slot:item.image="{ item }">
+          <v-avatar size="32">
+            <img :src="item.image" alt="">
+          </v-avatar>
+      </template>
+      <template v-slot:item.name="{ item }">
             <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3">{{
-                item.shortName | uppercase
+                item.name
               }}
             </router-link>
-            <h4 v-if="!isHomepage" style="font-weight:400;">{{ item.name }}</h4>
-          </v-col>
-        </v-row>
+      </template>
+      <template v-slot:item.shortName="{ item }">
+        <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3">{{
+            item.shortName | uppercase
+          }}
+        </router-link>
       </template>
       <template v-slot:item.price="{ item }">
         <h3 style="font-weight:400;font-size:12px;" class="text-right">{{ item.price.toFixed(4) }}</h3>
@@ -43,18 +51,23 @@
       <template v-slot:item.pricechange24h="{ item }">
       <span
           :class="[item.pricechange24h>=0 ? 'green--text' : 'red--text']"
-          style="font-size:10px;">{{ item.pricechange24h | signint }}</span>
+          style="font-size:12px;">{{ item.pricechange24h | signint }}</span>
       </template>
       <template v-slot:item.pricechange7d="{ item }">
       <span
           :class="[item.pricechange7d>=0 ? 'green--text' : 'red--text']"
-          style="font-size:10px;">{{ item.pricechange7d | signint }}</span>
+          style="font-size:12px;">{{ item.pricechange7d | signint }}</span>
       </template>
       <template v-slot:item.time="{ item }">
-        <span style="font-size:10px;">{{ item.time | onlyTime }}</span>
+        <span style="font-size:12px;">{{ item.time | onlyTime }}</span>
       </template>
 
     </v-data-table>
+    <v-pagination
+        v-if="!isHomepage"
+        v-model="page"
+        :length="pageCount"
+    ></v-pagination>
     <v-overlay
         :opacity="1"
         :value="overlay"
@@ -78,65 +91,94 @@ export default {
       coinloaded: true,
       isHomepage: true,
       overlay: true,
+      page: 1,
+      pageCount: 0,
+      itemPerPage: 50,
       headers: [{
+        text: '',
+        align: 'start',
+        sortable: false,
+        value: 'image',
+        class: 'amber--text accent-3 body-1',
+        filterable: false,
+      },{
         text: 'Kurlar',
         align: 'start',
         sortable: false,
-        value: 'shortName',
-        class: 'amber--text accent-3 font-weight-light body-1',
+        value: 'name',
+        class: 'amber--text accent-3 body-1',
+      }, {
+          text: 'Sembol',
+          align: 'start',
+          sortable: false,
+          value: 'shortName',
+          class: 'amber--text accent-3 body-1',
       },{
         text: 'Fiyat(USD)',
         value: 'price',
         sortable: false,
         align: 'right',
-        class: 'amber--text accent-3 font-weight-light body-1',
+        class: 'amber--text accent-3 body-1',
+        filterable: false,
       }, {
         text: 'Fiyat(TL)',
         value: 'priceTL',
         sortable: false,
         align: 'right',
-        class: 'amber--text accent-3 font-weight-light body-1',
+        class: 'amber--text accent-3 body-1',
+        filterable: false,
       }, {
-        text: 'Fark',
-        value: 'pricechange24h',
-        sortable: false,
-        align: 'right',
-        class: 'amber--text accent-3 font-weight-light body-1',
-      }, {
+          text: 'Değeri',
+          value: 'market_cap',
+          sortable: false,
+          align: 'right',
+          class: 'amber--text accent-3 body-1',
+        filterable: false,
+      },{
         text: 'Piyasa Hacmi',
         value: 'volume',
         sortable: false,
         align: 'right',
-        class: 'amber--text accent-3 font-weight-light body-1',
+        class: 'amber--text accent-3 body-1',
+        filterable: false,
       }, {
         text: 'Fark (24S)',
         value: 'pricechange24h',
         sortable: false,
         align: 'right',
-        class: 'amber--text accent-3 font-weight-light body-1',
+        class: 'amber--text accent-3 body-1',
+        filterable: false,
       }, {
         text: 'Fark (7G)',
         value: 'pricechange7d',
         sortable: false,
         align: 'right',
-        class: 'amber--text accent-3 font-weight-light body-1',
+        class: 'amber--text accent-3 body-1',
+        filterable: false,
       }, {
         text: 'Saat',
         value: 'time',
         sortable: false,
         align: 'right',
-        class: 'amber--text accent-3 font-weight-light body-1',
+        class: 'amber--text accent-3 body-1',
+        filterable: false,
       },],
       data: [],
       dolar: 1,
+      search: '',
     }
   },
   created() {
     let app = this;
     app.isHomepage = app.$route.path == '/';
-    var socket = io.connect(`http://${this.$store.state.addr}:${this.$store.state.port}`);
+    if(this.$vuetify.breakpoint.smAndDown){
+      this.headers.splice(1,1);
+      this.headers.splice(3,3);
+      this.headers.splice(4,1);
+    }
+    var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("coins", fetchedData => {
-      app.data = fetchedData.splice(0,60);
+      app.data = fetchedData;
       app.overlay = false;
     });
     socket.on("dolar", fetchedData => {
@@ -181,5 +223,8 @@ h3 {
 }
 .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row){
   border-bottom: thin solid #444767 !important;
+}
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > th{
+  padding: 0 10px !important;
 }
 </style>

@@ -19,21 +19,195 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Test">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="persembe">
+      <change afterPath="$PROJECT_DIR$/app/models/1INCH.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ADX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/AE.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/AGI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/AION.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ALBT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ALPHA.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ANKR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/API3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ARDR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ARK.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ARRR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ATUSD.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/AVA.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/AVAX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/AXS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/BAS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/BCD.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/BNT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/BTM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/BTS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/BTU.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/C20.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CAKE.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CHZ.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CKB.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CORE.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/COVER.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CREAM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CUNI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CVC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CYF.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/CZRX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/DATA.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/DGB.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/DIA.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/DIVI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/DNT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/DSD.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/EDG.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ELF.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ENG.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ETN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/EURS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/FARM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/FET.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/FIRO.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/FTM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/FTT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/GLM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/GNO.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/GT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/HC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/HIVE.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/HNS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/HNT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/HOT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/HXRO.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/HYN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/INJ.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/IOC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/IOST.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/IOTX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/IRIS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/JST.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/KAI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/KAVA.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/KCS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/KMD.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/KP3R.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/KSM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/LEND.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/LOKI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/LPT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/MAID.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/MATH.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/MATIC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/MLN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/MONA.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/NANO.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/NEAR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/NEST.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/NOIA.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/NPXS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/NRG.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/NU.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ONE.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ONT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ORN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/PAXG.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/PNK.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/POLY.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/POWR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/PRQ.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/QKC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/RDD.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/REP.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/RFOX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/RIF.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/RLC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ROSE.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/RPL.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/RVN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SAFE2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SBTC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SCRT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SERO.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SETH.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SHR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SKL.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SNT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SOL.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SOLVE.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SRM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/STAKE.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/STEEM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/STORJ.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/STRAX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SUSD.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SWAP.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SXP.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SYS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/TBTC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/TITAN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/TOMO.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/TRAC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/TT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/UBT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/UOS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/UQC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/USDK.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/USDN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/UST.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/UTK.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/VGX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/VLX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/VSYS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/WAN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/WAXP.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/WICC.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/WNXM.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/WOZX.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/XAUT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/XHV.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/XOR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/XVG.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/YFII.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/YVAULT-LP-YCURVE .js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/ZEN.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/AaveLINK .js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ALINK .js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/BasicAttentionToken.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/BAT.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Filecoin.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/FIL.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Kusama.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ADAI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/OMGNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/OMG.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Ontology.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/PaxosStandard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/PAX.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/currencies.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Calculator.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Calculator.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverterAdvenced.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverterAdvenced.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyMatrixTable.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/EmtiaTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/EmtiaTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TCMBCurrencyTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TCMBCurrencyTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/common/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/Logout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Logout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/About.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Coins.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Coins.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Golds.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,16 +226,18 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/models" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\models" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\views" />
     </key>
   </component>
@@ -124,7 +300,16 @@
       <workItem from="1608654328104" duration="2487000" />
       <workItem from="1608707552949" duration="7524000" />
       <workItem from="1608744760919" duration="4414000" />
-      <workItem from="1608793870092" duration="18036000" />
+      <workItem from="1608793870092" duration="18118000" />
+      <workItem from="1608833353990" duration="1655000" />
+      <workItem from="1608892460427" duration="3509000" />
+      <workItem from="1608976719341" duration="131000" />
+      <workItem from="1609000145089" duration="2911000" />
+      <workItem from="1609005227359" duration="4000" />
+      <workItem from="1609049598101" duration="1529000" />
+      <workItem from="1609057998094" duration="11770000" />
+      <workItem from="1609077768965" duration="3884000" />
+      <workItem from="1609087402963" duration="10792000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -154,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608202056874</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="persembe">
+      <created>1608812117233</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1608812117233</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,7 +368,8 @@
     <MESSAGE value="Second Satge" />
     <MESSAGE value="Second Stage" />
     <MESSAGE value="Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test" />
+    <MESSAGE value="persembe" />
+    <option name="LAST_COMMIT_MESSAGE" value="persembe" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607011242964">
@@ -195,38 +388,42 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="480" y="69" key="Github.UntrackedFilesDialog/0.0.1366.728@0.0.1366.728" timestamp="1607012077071" />
-    <state width="1345" height="196" key="GridCell.Tab.0.bottom" timestamp="1608811182929">
+    <state width="1345" height="248" key="GridCell.Tab.0.bottom" timestamp="1609094072124">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="196" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608811182929" />
-    <state width="1345" height="196" key="GridCell.Tab.0.center" timestamp="1608811182929">
+    <state width="1345" height="248" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609094072124" />
+    <state width="1345" height="248" key="GridCell.Tab.0.center" timestamp="1609094072123">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="196" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608811182929" />
-    <state width="1345" height="196" key="GridCell.Tab.0.left" timestamp="1608811182929">
+    <state width="1345" height="248" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609094072123" />
+    <state width="1345" height="248" key="GridCell.Tab.0.left" timestamp="1609094072123">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="196" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608811182929" />
-    <state width="1345" height="196" key="GridCell.Tab.0.right" timestamp="1608811182929">
+    <state width="1345" height="248" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609094072123" />
+    <state width="1345" height="248" key="GridCell.Tab.0.right" timestamp="1609094072123">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="196" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608811182929" />
+    <state width="1345" height="248" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609094072123" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1607011688606">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607011688606" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1608202065264">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1608812136024">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608202065263" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608202020339">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1608812136024" />
+    <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609088746177">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1608202020339" />
-    <state x="340" y="0" width="585" height="728" key="find.popup" timestamp="1608745856431">
+    <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1609088746177" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608812082719">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="340" y="0" width="585" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1608745856431" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1608812082719" />
+    <state x="340" y="0" width="895" height="728" key="find.popup" timestamp="1609051296721">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="340" y="0" width="895" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1609051296721" />
     <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1607011697073">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

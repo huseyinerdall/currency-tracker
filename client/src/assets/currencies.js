@@ -1,4 +1,4 @@
-let IP = "http://192.168.43.68:4000/"
+let IP = "http://localhost:4000/"
 module.exports = [
   {
     "name": "ABD DOLARI",

@@ -24,7 +24,6 @@
       <CurrencyConverter />
       <MainCryptoCurrency />
     </div>
-    <Calculator />
   </div>
 </template>
 
@@ -35,7 +34,7 @@ import MainCryptoCurrency from "@/components/MainCryptoCurrency.vue";
 import Golds from "@/components/Golds.vue";
 import MainDoviz from "@/components/MainDoviz.vue";
 import CurrencyConverter from "@/components/CurrencyConverter.vue";
-import Calculator from "@/components/Calculator.vue";
+/*import Calculator from "@/components/Calculator.vue";*/
 /*import CurrencyMatrixTable from "@/components/CurrencyMatrixTable.vue";
 import TCMBCurrencyTable from "@/components/TCMBCurrencyTable.vue";*/
 
@@ -47,7 +46,7 @@ export default {
     Golds,
     CurrencyConverter,
     MainDoviz,
-    Calculator,
+    //  Calculator,
     //TCMBCurrencyTable
   }
 };

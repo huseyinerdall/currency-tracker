@@ -41,7 +41,7 @@ export default {
   }),
   created () {
     let app = this;
-    var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+    var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("emtia", fetchedData => {
       app.data = fetchedData;
       console.log(fetchedData)

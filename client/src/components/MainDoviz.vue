@@ -1,11 +1,5 @@
 <template>
   <div>
-    <v-chip
-        class="ma-0 amber accent-3"
-        label
-    >
-      Döviz Kurları Serbest Piyasa
-    </v-chip>
     <v-data-table
         :headers="headers"
         :items="data"
@@ -75,7 +69,7 @@ export default {
       this.headers.pop();
     }
     let app = this;
-    var socket = io.connect(`${this.$store.state.addr}:${this.$store.state.port}`);
+    var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
       app.data = fetchedData;
       if(app.$route.path == '/'){
