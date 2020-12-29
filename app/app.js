@@ -37,7 +37,7 @@ const app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server, {
     cors: {
-        origin: `http://${HOST}:8080`,
+        origin: [`http://${HOST}:8080`,"*"],
         methods: ["GET", "POST"]
     }
 });
@@ -618,16 +618,12 @@ db.sequelize.sync().then(() => {
             .catch(err => console.error(err));
 
         axios.get('https://finans.truncgil.com/today.json')
-            .then(response => {
+            .then(async response => {
                 let updatetime = response.data["Güncelleme Tarihi"];
                 for (const element in response.data) {
                     if (element.indexOf("Altın") > 0 || element == '22 Ayar Bilezik' || element == 'Gümüş') {
                         response.data[element]["type"] = element;
                         response.data[element]["time"] = updatetime;
-                        if(moment().format('HH:mm') == "01:00" || THE_BEGINNING_OF_EVERYTHING){
-                            closes[element] = response.data[element]["Satış"];
-                        }
-                        response.data[element]["close"] = closes[element];
                         indis = "Gold" + utils.turkishToEnglish(element)
                             //db[indis].destroy({ truncate : true, cascade: true })
                         if (db[indis] && response.data[element]["Alış"] != C[indis]) {
@@ -635,20 +631,47 @@ db.sequelize.sync().then(() => {
                                 .create({ Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"] })
                             C[indis] = response.data[element]["Alış"];
                         }
+                        let date = new Date().toLocaleDateString("ISO");
+                        let prevTime = "03:00";
+                        let nextTime = "06:00";
+                        a = await db[indis].findOne({
+                            where: {
+                                createdAt: {
+                                    [Op.between]: [moment(date + ' ' + prevTime).toDate(), moment(date + ' ' + nextTime).toDate()]
+                                }
+                            }
+                        }).catch((err)=>console.log("Geç"))
+                        try {
+                            response.data[element]["close"] = a["dataValues"]["Satis"];
+                        }catch {
+                            response.data[element]["close"] = response.data[element]["Satış"]
+                        }
+
                         golds.push(response.data[element]);
                     } else if (element.indexOf("Güncelleme") < 0 && element.indexOf("ÇEKME") < 0) {
                         response.data[element]["type"] = element;
                         response.data[element]["time"] = updatetime;
-                        if(moment().format('HH:mm') == "01:00" || THE_BEGINNING_OF_EVERYTHING){
-                            closes[element] = response.data[element]["Satış"];
-                        }
-                        response.data[element]["close"] = closes[element];
                         indis = utils.turkishToEnglish(element)
                             //db[indis].destroy({ truncate : true, cascade: false })
                         if (db[indis] && response.data[element]["Alış"] != C[indis]) {
                             db[indis]
                                 .create({ Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"] })
                             C[indis] = response.data[element]["Alış"];
+                        }
+                        let date = new Date().toLocaleDateString("ISO");
+                        let prevTime = "03:00";
+                        let nextTime = "06:00";
+                        a = await db[indis].findOne({
+                            where: {
+                                createdAt: {
+                                    [Op.between]: [moment(date + ' ' + prevTime).toDate(), moment(date + ' ' + nextTime).toDate()]
+                                }
+                            }
+                        }).catch((err)=>console.log("Geç"))
+                        try {
+                            response.data[element]["close"] = a["dataValues"]["Satis"];
+                        }catch {
+                            response.data[element]["close"] = response.data[element]["Satış"]
                         }
                         currencies.push(response.data[element]);
 
@@ -657,7 +680,7 @@ db.sequelize.sync().then(() => {
                 io.emit('golds', golds);
                 io.emit('currencies', currencies);
             })
-            .catch(err => console.error("Döviz datası alınamıyor!"));
+            .catch(err => console.error(err));
 
     }, MAINLOOPINTERVAL)
 

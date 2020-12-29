@@ -18,12 +18,12 @@
       </template>
       <template v-slot:item.Fark="{ item }">
         <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']">
-          {{ item["Satış"] - item.close | signint }}
+          {{ item["Satış"] - item.yesterday | signint }}
         </span>
       </template>
       <template v-slot:item.Yuzde="{ item }">
         <span :class="[((item['Satış'] - item.close)/item.close)>=0 ? 'green--text' : 'red--text']">
-          {{ ((item["Satış"] - item.close)/item.close) | signint }}%
+          {{ ((item["Satış"] - item.yesterday)/item.yesterday) | signint }}%
         </span>
       </template>
       <template v-slot:item.time="{ item }">

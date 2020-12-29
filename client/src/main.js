@@ -19,6 +19,16 @@ Vue.use(VueAxios, axios)
 Vue.prototype.$addr = 'http://localhost'
 Vue.prototype.$port = '4000'
 
+Vue.filter('currencyformat', function(value) {
+    let temp = +value;
+    try{
+        value = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(temp);
+        return value;
+    }catch(e){
+        return value;
+    }
+})
+
 Vue.filter('signint', function(value) {
     try{
         if (value >= 0) return "+" + value.toFixed(2);

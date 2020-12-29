@@ -7,7 +7,7 @@
           <div class="white--text font-weight-light">
             <v-avatar size="32" class="mb-2">
               <img
-                  :src="flag ||$store.state.addr+'/gold.png'"
+                  :src="flag || $store.state.api+'/gold.png'"
                   :alt="$route.params.gold"
               >
             </v-avatar>
@@ -183,7 +183,8 @@ export default {
         shared: false,
         y: {
           formatter: function(val) {
-            return val + " $"
+            let simge = app.$route.params.gold == "Ons Altın" ? " $" : " TL";
+            return val + simge;
           }
         },
         x: {

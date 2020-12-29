@@ -61,6 +61,12 @@
       <template v-slot:item.time="{ item }">
         <span style="font-size:12px;">{{ item.time | onlyTime }}</span>
       </template>
+      <template v-slot:item.market_cap="{ item }">
+        <span style="font-size:12px;">{{ item.market_cap | currencyformat }}</span>
+      </template>
+      <template v-slot:item.volume="{ item }">
+        <span style="font-size:12px;">{{ item.volume | currencyformat }}</span>
+      </template>
 
     </v-data-table>
     <v-pagination
