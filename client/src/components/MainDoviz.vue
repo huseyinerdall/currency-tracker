@@ -18,12 +18,12 @@
       </template>
       <template v-slot:item.Fark="{ item }">
         <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-          {{ item["Satış"] - item.yesterday | signint }}
+          {{ item["Satış"] - item.close | signint }}
         </span>
       </template>
       <template v-slot:item.Yuzde="{ item }">
         <span :class="[((item['Satış'] - item.close)/item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-          {{ ((item["Satış"] - item.yesterday)/item.yesterday) | signint }}%
+          {{ ((item["Satış"] - item.close)/item.close) | signint }}%
         </span>
       </template>
       <template v-slot:item.time="{ item }" >
@@ -51,7 +51,7 @@ export default {
     return {
       goldloaded: true,
       headers: [
-        { text: 'Döviz Kurları',align: 'start', sortable: false,value: 'type',class: 'amber--text accent-3 font-weight-light body-1',},
+        { text: 'Döviz Kurları',align: 'start', sortable: false,value: 'type',class: 'amber--text accent-3 font-weight-light body-1',width:"160px"},
         { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
         { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
         { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
@@ -72,6 +72,13 @@ export default {
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
       app.data = fetchedData;
+      let temp = app.data[3];
+      app.data[3] = app.data[1];
+      app.data[1] = temp;
+      temp = app.data[3];
+      app.data[3] = app.data[2];
+      app.data[2] = temp;
+
       if(app.$route.path == '/'){
         app.data.pop();
         app.data.pop();

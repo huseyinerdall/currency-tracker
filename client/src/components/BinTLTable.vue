@@ -3,7 +3,7 @@
     <v-list style="border: 1px solid #5e6593;" class="mt-1 pt-0" dense>
       <v-subheader style="border-bottom: 1px solid #5e6593;" class="mobile-tr" :style="$route.path != '/capraz-kurlar' ? 'height:56px !important;' : ''">
         <v-row class="justify-space-between pl-2 pr-2">
-          <h3 class="amber--text">1000 TL Ne Oldu?</h3>
+          <h3 class="amber--text">1000 TL NE OLDU?</h3>
           <div class="d-flex flex-row">
             <v-btn x-small color="#71402c" style="border-radius: 0;" @click="time = 2">Dün</v-btn>
             <v-btn x-small color="#720e60" style="border-radius: 0;" @click="time = 7">Geçen Hafta</v-btn>

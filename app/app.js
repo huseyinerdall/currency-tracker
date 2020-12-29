@@ -89,8 +89,9 @@ app.get('/tcmb', (req, res) => {
         .then(response => {
             xml = response.data.toString();
             parseString(xml, function(err, result) {
-
+                console.log(result["Tarih_Date"])
                 result = result["Tarih_Date"]["Currency"];
+
                 for (let i = 0; i < result.length; i++) {
                     temp = {};
                     temp["name"] = result[i]["Isim"][0];
@@ -99,8 +100,32 @@ app.get('/tcmb', (req, res) => {
                     factRes.push(temp);
                 }
                 io.emit('tcmb', factRes);
+                res.json(factRes)
             });
         }).catch(err => console.log(err));
+})
+
+app.post('/tcmbone', (req, res) => {
+    let temp = {};
+    let one = req.body.one;
+    console.log(one)
+    axios.get('https://www.tcmb.gov.tr/kurlar/today.xml')
+        .then(response => {
+            xml = response.data.toString();
+            parseString(xml, function(err, result) {
+                result = result["Tarih_Date"]["Currency"];
+                temp = {};
+                for (let i = 0; i < result.length; i++) {
+                    if(one == result[i]["Isim"][0]){
+                        temp["name"] = result[i]["Isim"][0];
+                        temp["sell"] = result[i]["BanknoteSelling"][0] || result[i]["ForexSelling"][0];
+                        temp["buy"] = result[i]["BanknoteBuying"][0] || result[i]["ForexBuying"][0];
+                    }
+
+                }
+                res.json(temp);
+            });
+        }).catch(err => console.log("TCMB veri alınamadı"));
 })
 
 /*app.get('/golds', (req, res) => {
@@ -144,12 +169,53 @@ app.get('/golds', (req, res) => {
 })
 
 app.get('/gold/:goldName', (req, res) => {
+    let element = req.params.goldName;
     axios.get('https://finans.truncgil.com/today.json')
-        .then(response => {
-            response.data[req.params.goldName]["price_change_24h"] = response.data[req.params.goldName]["Satış"]-closes[req.params.goldName];
-            res.json(response.data[req.params.goldName])
+        .then(async response => {
+            response.data[element]["time"] = response.data["Güncelleme Tarihi"];
+            if (element.indexOf("Altın") > 0 || element == '22 Ayar Bilezik' || element == 'Gümüş') {
+                response.data[element]["type"] = element;
+                indis = "Gold" + utils.turkishToEnglish(element)
+                let date = new Date().toLocaleDateString("ISO");
+                let prevTime = "03:00";
+                let nextTime = "06:00";
+                a = await db[indis].findOne({
+                    where: {
+                        createdAt: {
+                            [Op.between]: [moment(date + ' ' + prevTime).toDate(), moment(date + ' ' + nextTime).toDate()]
+                        }
+                    }
+                }).catch((err)=>console.log("Geç"))
+                try {
+                    response.data[element]["close"] = a["dataValues"]["Satis"];
+                }catch {
+                    response.data[element]["close"] = response.data[element]["Satış"]
+                }
+
+            } else if (element.indexOf("Güncelleme") < 0 && element.indexOf("ÇEKME") < 0) {
+                response.data[element]["type"] = element;
+                indis = utils.turkishToEnglish(element)
+                let date = new Date().toLocaleDateString("ISO");
+                let prevTime = "03:00";
+                let nextTime = "06:00";
+                a = await db[indis].findOne({
+                    where: {
+                        createdAt: {
+                            [Op.between]: [moment(date + ' ' + prevTime).toDate(), moment(date + ' ' + nextTime).toDate()]
+                        }
+                    }
+                }).catch((err)=>console.log("Geç"))
+                try {
+                    response.data[element]["close"] = a["dataValues"]["Satis"];
+                }catch {
+                    response.data[element]["close"] = response.data[element]["Satış"]
+                }
+
+            }
+            res.json(response.data[element]);
         })
         .catch(err => console.log(err));
+
 })
 
 app.get('/currencies', (req, res) => {
@@ -185,7 +251,6 @@ app.get('/coin/:coinName', (req, res) => {
                         }
                     }
                 });
-                console.log(new Date(BEGIN))
                 io.emit(req.params["coinName"], data);
             }
             temp = response.data[0]["current_price"];
@@ -626,8 +691,9 @@ db.sequelize.sync().then(() => {
                         response.data[element]["type"] = element;
                         response.data[element]["time"] = updatetime;
                         indis = "Gold" + utils.turkishToEnglish(element)
-                            //db[indis].destroy({ truncate : true, cascade: true })
-                        if (db[indis] && response.data[element]["Alış"] != C[indis]) {
+                        //db[indis].destroy({ truncate : true, cascade: true })
+                        if (db[indis] && response.data[element]["Alış"] != C[indis] ||
+                            (new Date().getHours() == "1" && new Date().getMinutes() == "20" && new Date().getSeconds() < 15)) {
                             db[indis]
                                 .create({ Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"] })
                             C[indis] = response.data[element]["Alış"];
@@ -654,7 +720,8 @@ db.sequelize.sync().then(() => {
                         response.data[element]["time"] = updatetime;
                         indis = utils.turkishToEnglish(element)
                             //db[indis].destroy({ truncate : true, cascade: false })
-                        if (db[indis] && response.data[element]["Alış"] != C[indis]) {
+                        if (db[indis] && response.data[element]["Alış"] != C[indis] ||
+                        (new Date().getHours() == "1" && new Date().getMinutes() == "21" && new Date().getSeconds() < 15)) {
                             db[indis]
                                 .create({ Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"] })
                             C[indis] = response.data[element]["Alış"];

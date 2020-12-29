@@ -1,54 +1,66 @@
 <template>
   <v-container class="mt-8 pa-0">
-
-    <v-row>
-      <v-col md7 sm12 xs12>
-        <v-row class="flex-row justify-space-between pl-4 pr-4">
-          <div class="white--text font-weight-light">
-            <v-avatar size="32" class="mb-2">
-              <img
-                  :src="coinImage"
-                  :alt="$route.params.coin"
-              >
-            </v-avatar>
-            {{ $route.params.coin }}
-          </div>
-          <div class="white--text font-weight-light mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
-            {{ current_price || "--.----"}} $
-          </div>
-          <div class="mt-2 white--text" :class="[price_change_24h>=0 ? 'green--text' : 'red--text']">
-            {{ price_change_24h | tofixedfour }}
-            <v-icon color="red" v-if="price_change_24h < 0">mdi-trending-down</v-icon>
-            <v-icon color="green" v-else-if="price_change_24h > 0">mdi-trending-up</v-icon>
-            <v-icon color="gray" v-else-if="price_change_24h == 0">mdi-trending-neutral</v-icon>
-          </div>
-        </v-row>
-      </v-col>
-      <v-col md5 sm12 xs12 class="justify-end align-content-end">
-        <v-row>
-          <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
-          <v-btn-toggle
-              v-model="time"
-              style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;background:transparent;"
-              mandatory
-              right
-              :class="[$vuetify.breakpoint.smAndDown ? 'mx-auto' : '' ]"
+    <v-row class="flex-row pl-4 pr-4">
+      <div>
+        <v-avatar size="56" class="mb-2">
+          <img
+              :src="coinImage"
+              :alt="$route.params.coin"
           >
-            <v-btn :value="time" style="background: transparent;">
-              <v-icon>mdi-share-variant-outline</v-icon>
-            </v-btn>
-            <v-btn value="1" style="background: transparent;" >24S</v-btn>
-            <v-btn value="7" style="background: transparent;" >7G</v-btn>
-            <v-btn value="30" style="background: transparent;" >1A</v-btn>
-            <v-btn value="90" style="background: transparent;" >3A</v-btn>
-            <v-btn value="365" style="background: transparent;" >1Y</v-btn>
-            <v-btn value="1095" style="background: transparent;" >3Y</v-btn>
-          </v-btn-toggle>
-        </v-row>
-
-      </v-col>
+        </v-avatar>
+      </div>
+      <div class="flex-column d-flex text--white ml-2" style="width: 200px;">
+        <div>
+          <h3 style="color:#fff;">{{ $route.params.coin }} - {{ symbol | uppercase }}</h3>
+        </div>
+        <div class="d-flex flex-row justify-space-between">
+          <span style="font-size:12px;color:#fff;padding-top:9px;">{{last_updated | onlyTime}}</span>
+        </div>
+      </div>
     </v-row>
-    <div id="chart">
+
+    <v-row class="pl-4 pr-4">
+      <v-row class="pl-4 pr-4 justify-space-between" style="font-size: 18px;">
+        <div class="white--text mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
+          {{ current_price || "--.----"}} $
+        </div>
+        <div class="white--text mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
+          {{ current_price || "--.----"}} $
+        </div>
+        <div class="mt-2 white--text" :class="[price_change_24h>=0 ? 'green--text' : 'red--text']">
+          {{ price_change_24h | signint  }}
+          <v-icon color="red" v-if="price_change_24h < 0">mdi-trending-down</v-icon>
+          <v-icon color="green" v-else-if="price_change_24h > 0">mdi-trending-up</v-icon>
+          <v-icon color="gray" v-else-if="price_change_24h == 0">mdi-trending-neutral</v-icon>
+        </div>
+        <div class="mt-2 white--text" :class="[price_change_percentage_24h>=0 ? 'green--text' : 'red--text']">
+          {{ price_change_percentage_24h | signint  }}%
+        </div>
+      </v-row>
+      <v-row class="d-flex flex-row justify-space-between pl-md-4 pr-md-2 mt-2 mt-md-0">
+        <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
+        <v-btn-toggle
+            v-model="time"
+            style="border: 1px solid #444767;border-radius:0;background-color:transparent;color:#000;padding:4px;"
+            mandatory
+            right
+            :class="[$vuetify.breakpoint.smAndDown ? 'mx-auto' : '' ]"
+        >
+          <v-btn :value="time" style="background: transparent;">
+            <v-icon>mdi-share-variant-outline</v-icon>
+          </v-btn>
+          <v-btn value="1" style="background: transparent;" >24S</v-btn>
+          <v-btn value="7" style="background: transparent;" >7G</v-btn>
+          <v-btn value="30" style="background: transparent;" >1A</v-btn>
+          <v-btn value="90" style="background: transparent;" >3A</v-btn>
+          <v-btn value="365" style="background: transparent;" >1Y</v-btn>
+          <v-btn value="1095" style="background: transparent;" >3Y</v-btn>
+        </v-btn-toggle>
+      </v-row>
+    </v-row>
+
+
+    <div id="chart" style="border: 1px solid #444767;" class="mt-2">
       <apexchart ref="realtimeChart" class="ma-0 pa-0" type="area" height="350" :options="chartOptions"
                  :series="series"></apexchart>
     </div>
@@ -79,6 +91,7 @@
             overlay: true,
             state: 0,
             coinImage: '',
+            symbol: '',
             high: '',
             low: '',
             current_price: '',
@@ -96,12 +109,24 @@
                     height: 350,
                     zoom: {
                         type: 'x',
-                        enabled: false,
+                        enabled: true,
                         autoScaleYaxis: true
                     },
-                    toolbar: {
-                        autoSelected: 'zoom'
+                  toolbar: {
+                    show: true,
+                    offsetX: 0,
+                    offsetY: 0,
+                    tools: {
+                      download: false,
+                      selection: true,
+                      zoom: true,
+                      zoomin: true,
+                      zoomout: true,
+                      pan: false,
+                      reset: true,
                     },
+                    autoSelected: 'zoom'
+                  },
                   locales: [{
                     name: 'en',
                     options: {
@@ -225,7 +250,7 @@
                             categories: tempDates
                           }
                         }*/
-                        this.overlay = false;
+                        //this.overlay = false;
                     })
 
             }
@@ -261,7 +286,9 @@
             this.interval = setInterval(() => {
                 axios.get(`${this.$store.state.api}/coin/${this.$route.params.coin}`)
                     .then(response => {
+                      console.log(response.data)
                         this.coinImage = response.data[0].image;
+                        this.symbol = response.data[0].symbol;
                         this.high = response.data[0].high_24h;
                         this.low = response.data[0].low_24h;
                         this.current_price = response.data[0].current_price;
@@ -298,7 +325,7 @@
         },
         watch: {
             time(newVal, oldVal) {
-              this.overlay = true;
+              //this.overlay = true;
                 console.log(newVal, oldVal);
                 this.getGraphData();
             },

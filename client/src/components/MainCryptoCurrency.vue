@@ -31,10 +31,14 @@
           </v-avatar>
       </template>
       <template v-slot:item.name="{ item }">
-            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{
-                item.name
-              }}
+            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;`"
+            v-if="$vuetify.breakpoint.smAndDown">
+              {{ item.name | shorten }}
             </router-link>
+        <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;`"
+                     v-else>
+          {{ item.name }}
+        </router-link>
       </template>
       <template v-slot:item.shortName="{ item }">
         <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{
@@ -43,10 +47,10 @@
         </router-link>
       </template>
       <template v-slot:item.price="{ item }">
-        <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`" class="text-right">{{ item.price.toFixed(4) }}</h3>
+        <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`" class="text-right">{{ item.price | binayracveondalik }}</h3>
       </template>
       <template v-slot:item.priceTL="{ item }">
-        <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`" class="text-right">{{ (item.price * dolar).toFixed(4) }}</h3>
+        <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`" class="text-right">{{ (item.price * dolar) | binayracveondalik }}</h3>
       </template>
       <template v-slot:item.pricechange24h="{ item }">
       <span
@@ -178,9 +182,10 @@ export default {
     let app = this;
     app.isHomepage = app.$route.path == '/';
     if(this.$vuetify.breakpoint.smAndDown){
+      this.headers.splice(0,1); // bitcoin logoları mobil
       this.headers.splice(1,1);
-      this.headers.splice(3,3);
-      this.headers.splice(4,1);
+      this.headers.splice(2,3);
+      this.headers.splice(3,1);
     }
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("coins", fetchedData => {

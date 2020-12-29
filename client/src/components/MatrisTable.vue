@@ -42,7 +42,16 @@
   </tr>
 </tbody>
 </table>
+
     <v-list v-else class="mobile-list">
+      <v-alert
+          color="#2A3B4D"
+          dark
+          icon="mdi-information-variant"
+          dense
+      >
+        Parite dönüşümü için kurun üzerine tıklayın.
+      </v-alert>
       <v-list-item-group
           v-model="currentCurrency"
           active-class="border"

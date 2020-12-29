@@ -29,6 +29,16 @@ Vue.filter('currencyformat', function(value) {
     }
 })
 
+Vue.filter('binayracveondalik', function(value) {
+    let temp = parseFloat(value);
+    try{
+        value = new Intl.NumberFormat('en-US', ).format(temp);
+        return value;
+    }catch(e){
+        return value;
+    }
+})
+
 Vue.filter('signint', function(value) {
     try{
         if (value >= 0) return "+" + value.toFixed(2);
@@ -48,6 +58,9 @@ Vue.filter('signintt', function(value) {
 })
 
 Vue.filter('shorten', function(value) {
+    if(value == "SUUDİ ARABİSTAN RİYALİ"){
+        return "S.A. RİYALİ"
+    }
     if(value.length > 15){
         let tempArray = value.split(" ");
         let tempString = '';
@@ -107,7 +120,7 @@ Vue.filter('tosymbol', function(value) {
             return currencies[i]["symbol"];
         }
     }
-    return "UNDEF";
+    return "";
 })
 
 
