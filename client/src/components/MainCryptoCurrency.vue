@@ -31,41 +31,41 @@
           </v-avatar>
       </template>
       <template v-slot:item.name="{ item }">
-            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3">{{
+            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{
                 item.name
               }}
             </router-link>
       </template>
       <template v-slot:item.shortName="{ item }">
-        <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3">{{
+        <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{
             item.shortName | uppercase
           }}
         </router-link>
       </template>
       <template v-slot:item.price="{ item }">
-        <h3 style="font-weight:400;font-size:12px;" class="text-right">{{ item.price.toFixed(4) }}</h3>
+        <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`" class="text-right">{{ item.price.toFixed(4) }}</h3>
       </template>
       <template v-slot:item.priceTL="{ item }">
-        <h3 style="font-weight:400;font-size:12px;" class="text-right">{{ (item.price * dolar).toFixed(4) }}</h3>
+        <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`" class="text-right">{{ (item.price * dolar).toFixed(4) }}</h3>
       </template>
       <template v-slot:item.pricechange24h="{ item }">
       <span
           :class="[item.pricechange24h>=0 ? 'green--text' : 'red--text']"
-          style="font-size:12px;">{{ item.pricechange24h | signint }}</span>
+          :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.pricechange24h | signint }}</span>
       </template>
       <template v-slot:item.pricechange7d="{ item }">
       <span
           :class="[item.pricechange7d>=0 ? 'green--text' : 'red--text']"
-          style="font-size:12px;">{{ item.pricechange7d | signint }}</span>
+          :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.pricechange7d | signint }}</span>
       </template>
       <template v-slot:item.time="{ item }">
-        <span style="font-size:12px;">{{ item.time | onlyTime }}</span>
+        <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.time | onlyTime }}</span>
       </template>
       <template v-slot:item.market_cap="{ item }">
-        <span style="font-size:12px;">{{ item.market_cap | currencyformat }}</span>
+        <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.market_cap | currencyformat }}</span>
       </template>
       <template v-slot:item.volume="{ item }">
-        <span style="font-size:12px;">{{ item.volume | currencyformat }}</span>
+        <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.volume | currencyformat }}</span>
       </template>
 
     </v-data-table>

@@ -10,6 +10,7 @@ export default new Vuex.Store({
     addr: "http://localhost:4000",
     api:"http://localhost:4000",
     port: "4000",
+    tdFontSize: "13px",
     token: localStorage.getItem('jwt') || '',
     status: '',
     commentDrawer: false,

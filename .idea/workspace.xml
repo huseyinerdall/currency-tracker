@@ -19,13 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="pazar">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="salı">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +131,7 @@
       <workItem from="1609087402963" duration="11844000" />
       <workItem from="1609158631003" duration="3924000" />
       <workItem from="1609173199163" duration="6978000" />
-      <workItem from="1609225729798" duration="1448000" />
+      <workItem from="1609225729798" duration="2773000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -174,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609098688673</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="salı">
+      <created>1609227308400</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1609227308400</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,7 +206,8 @@
     <MESSAGE value="Test" />
     <MESSAGE value="persembe" />
     <MESSAGE value="pazar" />
-    <option name="LAST_COMMIT_MESSAGE" value="pazar" />
+    <MESSAGE value="salı" />
+    <option name="LAST_COMMIT_MESSAGE" value="salı" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607011242964">
@@ -237,18 +246,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607011688606" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1609098754459">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1609227263716">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1609098754459" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1609227263716" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609166550394">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1609166550394" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609098331950">
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609227266593">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1609098331950" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1609227266593" />
     <state x="340" y="0" width="895" height="728" key="find.popup" timestamp="1609051296721">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -12,20 +12,26 @@
         dense
     >
       <template v-slot:item.type="{ item }">
-        <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="white--text body-1 text-uppercase" style="font-size:12px !important;cursor:pointer;">{{ item.type | shorten }}</router-link>
+        <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="white--text body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`">{{ item.type | shorten }}</router-link>
       </template>
       <template v-slot:item.Fark="{ item }">
-        <span :class="[(parseFloat(item['Satış']) - parseFloat(item.close))>=0 ? 'green--text' : 'red--text']">
+        <span :class="[(parseFloat(item['Satış']) - parseFloat(item.close))>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
           {{ parseFloat(item["Satış"]) - parseFloat(item.close) | signint }}
         </span>
       </template>
       <template v-slot:item.Yuzde="{ item }">
-        <span :class="[((parseFloat(item['Satış']) - parseFloat(item.close))/parseFloat(item.close))>=0 ? 'green--text' : 'red--text']">
+        <span :class="[((parseFloat(item['Satış']) - parseFloat(item.close))/parseFloat(item.close))>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
           {{ ((parseFloat(item["Satış"]) - parseFloat(item.close))/parseFloat(item.close)) | signint }}%
         </span>
       </template>
+      <template v-slot:item.Alış="{ item }">
+        <span class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.Alış }}</span>
+      </template>
+      <template v-slot:item.Satış="{ item }">
+        <span class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.Satış }}</span>
+      </template>
       <template v-slot:item.time="{ item }">
-        <span>{{ item.time | onlyTime }}</span>
+        <span class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.time | onlyTime }}</span>
       </template>
     </v-data-table>
     <v-overlay

@@ -252,12 +252,16 @@ table {
 tr {
   text-align: center;
   border-bottom: 1pt solid #5e6593;
-  font-size: 12px !important;
+  font-size: 13px !important;
   height:32px;
 }
 
 td {
   padding: 2px;
+  font-weight: 400;
+  letter-spacing: 0.03125em !important;
+  line-height: 1.5rem;
+  font-family: "Roboto", sans-serif !important;
 }
 
 th {

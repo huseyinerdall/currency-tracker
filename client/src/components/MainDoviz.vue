@@ -12,22 +12,22 @@
         dense
     >
       <template v-slot:item.type="{ item }">
-        <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="white--text body-1" style="font-size:12px !important;cursor:pointer;">
+        <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="white--text body-1" :style="`font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`">
           {{ item.type == "SUUDİ ARABİSTAN RİYALİ" ? 'S.A. RİYALİ' : item.type }}
         </router-link>
       </template>
       <template v-slot:item.Fark="{ item }">
-        <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']">
+        <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
           {{ item["Satış"] - item.yesterday | signint }}
         </span>
       </template>
       <template v-slot:item.Yuzde="{ item }">
-        <span :class="[((item['Satış'] - item.close)/item.close)>=0 ? 'green--text' : 'red--text']">
+        <span :class="[((item['Satış'] - item.close)/item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
           {{ ((item["Satış"] - item.yesterday)/item.yesterday) | signint }}%
         </span>
       </template>
-      <template v-slot:item.time="{ item }">
-        <span>{{ item.time | onlyTime }}</span>
+      <template v-slot:item.time="{ item }" >
+        <span class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.time | onlyTime }}</span>
       </template>
     </v-data-table>
     <v-overlay

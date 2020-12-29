@@ -28,6 +28,7 @@
           v-model="value"
           multiple
           style="width: 200px"
+          class="ma-0"
           dark
           prepend-icon="mdi-plus-circle-outline"
       >
