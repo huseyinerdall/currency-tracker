@@ -9,6 +9,8 @@ export default new Vuex.Store({
     domainName: "para.guru",
     addr: "http://localhost:4000",
     api:"http://localhost:4000",
+    //addr: "https://para.guru",
+    //api: "https://para.guru/api",
     port: "4000",
     tdFontSize: "13px",
     token: localStorage.getItem('jwt') || '',

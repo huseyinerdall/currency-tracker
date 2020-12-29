@@ -1,14 +1,14 @@
 let THE_BEGINNING_OF_EVERYTHING = true;
 const HOST = "localhost";
-var express = require('express');
+let express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const axios = require('axios');
-var fs = require('fs');
+let fs = require('fs');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-var moment = require('moment');
+let moment = require('moment');
 const path = require('path');
 
 
@@ -38,6 +38,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server, {
     cors: {
         origin: [`http://${HOST}:8080`,"*"],
+        //origin: [`http://${HOST}:8080`,"https://para.guru","https://www.para.guru"],
         methods: ["GET", "POST"]
     }
 });
