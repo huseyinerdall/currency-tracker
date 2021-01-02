@@ -16,11 +16,13 @@ export default new Vuex.Store({
     token: localStorage.getItem('jwt') || '',
     status: '',
     commentDrawer: false,
+    isLight: (localStorage.getItem('light')=="true"),
   },
   getters: {
     isAuthenticated: state => !!state.token,
     authStatus: state => state.status,
     commentDrawer: state => state.commentDrawer,
+    isLight: state => state.isLight,
   },
   mutations: {
     ["AUTH_REQUEST"]: (state) => {
@@ -35,7 +37,17 @@ export default new Vuex.Store({
     },
     commentDrawer(state) {
       state.commentDrawer = !state.commentDrawer;
-    }
+    },
+    isLight(state) {
+      if(state.isLight){
+        localStorage.setItem('light',false);
+        state.isLight = false;
+      }else{
+        state.isLight = true;
+        localStorage.setItem('light',true);
+      }
+
+    },
   },
   actions: {
     ["AUTH_REQUEST"]: ({commit, dispatch}, user) => {

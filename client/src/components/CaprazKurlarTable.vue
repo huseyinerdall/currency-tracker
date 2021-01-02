@@ -1,12 +1,13 @@
 <template>
   <div>
-    <table style="table-layout:fixed;" class="mt-1">
+    <table style="table-layout:fixed;" class="mt-1"
+    :style="$store.state.isLight ? 'background-color:rgba(255,255,255,0.3);color:rgba(0,0,0,0.83) !important;' : 'background-color:rgba(0,0,0,0.3);color:rgba(255,255,255,0.83) !important;'">
       <thead class="amber--text accent-3">
         <tr style="font-size:14px !important;">
           <th>Çapraz Kurlar</th><th>Parite</th><th>Fark</th><th>Yüzde</th><th>Saat</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="data[0]">
         <tr>
           <td>{{ symbols[0] }}</td>
           <td>{{ data[3]["today"]/data[0]["today"] | tofixedfour }}</td>
@@ -229,8 +230,6 @@ export default {
     //let app = this;
     axios.get(`${this.$store.state.api}/pariteler`)
         .then(response => {
-          let fetchedData = response.data;
-          console.log(fetchedData)
           this.data = response.data;
         })
   },
@@ -242,15 +241,13 @@ export default {
 <style scoped>
 table {
   width: 100% !important;
-  background-color: rgba(0, 0, 0, .3);
-  color: #fff !important;
   border:1px solid #5e6593;
   border-collapse: collapse;
-
 }
 
 tr {
-  text-align: center;
+  text-align: start;
+  padding-left: 8px;
   border-bottom: 1pt solid #5e6593;
   font-size: 13px !important;
   height:32px;
@@ -258,6 +255,7 @@ tr {
 
 td {
   padding: 2px;
+  padding-left: 10px;
   font-weight: 400;
   letter-spacing: 0.03125em !important;
   line-height: 1.5rem;
@@ -266,6 +264,8 @@ td {
 
 th {
   padding: 4px;
+  text-align: start;
+  padding-left: 10px;
 }
 @media screen and (max-width: 768px){
   table tr td:nth-child(3),

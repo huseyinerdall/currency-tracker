@@ -12,7 +12,7 @@ import GoldsPage from "../views/GoldsPage.vue";
 import CurrenciesPage from "../views/CurrenciesPage.vue";
 import Profile from "../views/Profile.vue";
 import CaprazKurlar from "../views/CaprazKurlar.vue";
-
+import qs from 'qs';
 // Admin Side
 import Dashboard from "../views/admin/Dashboard.vue";
 
@@ -27,7 +27,7 @@ const routes = [{
         }
     },
     {
-        path: "/kripto-para",
+        path: "/kripto-paralar",
         name: "CryptoCurrencyPage",
         component: CryptoCurrencyPage,
         meta: {
@@ -91,7 +91,7 @@ const routes = [{
         }
     },
     {
-        path: "/coins/:coin",
+        path: "/kripto-paralar/:coin",
         name: "Coins",
         component: Coins,
         meta: {
@@ -99,8 +99,16 @@ const routes = [{
         }
     },
     {
-        path: "/golds/:gold",
+        path: "/altin-fiyatlari/:gold",
         name: "Golds",
+        component: Golds,
+        meta: {
+            requiresAuth: false
+        }
+    },
+    {
+        path: "/doviz-kurlari/:gold",
+        name: "Currencies",
         component: Golds,
         meta: {
             requiresAuth: false
@@ -128,6 +136,13 @@ const routes = [{
 const router = new VueRouter({
     mode: "history",
     base: process.env.BASE_URL,
+    parseQuery(query) {
+        return qs.parse(query);
+    },
+    stringifyQuery  : query => {
+        let result = qs.stringify(query, { format: 'RFC1738' })
+        return result ? ('?' + result) : ''
+    },
     routes
 });
 

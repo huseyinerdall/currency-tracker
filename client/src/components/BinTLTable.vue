@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-list style="border: 1px solid #5e6593;" class="mt-1 pt-0" dense>
+    <v-list style="border: 1px solid #5e6593;" class="mt-1 pt-0" dense
+    :dark="!$store.state.isLight">
       <v-subheader style="border-bottom: 1px solid #5e6593;" class="mobile-tr" :style="$route.path != '/capraz-kurlar' ? 'height:56px !important;' : ''">
         <v-row class="justify-space-between pl-2 pr-2">
           <h3 class="amber--text">1000 TL NE OLDU?</h3>
@@ -17,7 +18,7 @@
 
           <v-row>
             <v-col cols="2" class="">
-              <div class="white--text" style="font-size:14px;margin-top:-2px;">{{ bintltable[value.type] }}</div>
+              <div :class="$store.state.isLight ? 'black--text' : 'white--text'" style="font-size:14px;margin-top:-2px;">{{ bintltable[value.type] }}</div>
             </v-col>
             <v-col cols="10" style="height: 10px;" class="pt-2">
 
@@ -84,8 +85,7 @@ export default {
         time: this.time,
       })
           .then(response => {
-            let fetchedData = response.data;
-            console.log(fetchedData)
+            //let fetchedData = response.data;
             this.data = response.data;
           })
     }
@@ -101,8 +101,8 @@ export default {
 
 
 <style scoped>
-.v-list.v-sheet.theme--light{
-  background-color: rgba(0,0,0,.3) !important;
+.theme--dark.v-list{
+  background-color: rgba(0,0,0,0.3) !important;
 }
 .theme--light.v-btn{
   color: #fff !important;

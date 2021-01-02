@@ -172,6 +172,9 @@ app.get('/gold/:goldName', (req, res) => {
     let element = req.params.goldName;
     axios.get('https://finans.truncgil.com/today.json')
         .then(async response => {
+            let sepetalis = ((parseFloat(response.data["ABD DOLARI"]["Alış"]) + parseFloat(response.data["EURO"]["Alış"])) / 2).toFixed(4);
+            let sepetsatis = ((parseFloat(response.data["ABD DOLARI"]["Satış"]) + parseFloat(response.data["EURO"]["Satış"])) / 2).toFixed(4);
+            response.data["SEPET KUR"] = {"Alış":sepetalis,"Satış":sepetsatis};
             response.data[element]["time"] = response.data["Güncelleme Tarihi"];
             if (element.indexOf("Altın") > 0 || element == '22 Ayar Bilezik' || element == 'Gümüş') {
                 response.data[element]["type"] = element;
@@ -685,7 +688,11 @@ db.sequelize.sync().then(() => {
 
         axios.get('https://finans.truncgil.com/today.json')
             .then(async response => {
+                let sepetalis = ((parseFloat(response.data["ABD DOLARI"]["Alış"]) + parseFloat(response.data["EURO"]["Alış"])) / 2).toFixed(4);
+                let sepetsatis = ((parseFloat(response.data["ABD DOLARI"]["Satış"]) + parseFloat(response.data["EURO"]["Satış"])) / 2).toFixed(4);
+                response.data["SEPET KUR"] = {"Alış":sepetalis,"Satış":sepetsatis,"Tür": 'Döviz'};
                 let updatetime = response.data["Güncelleme Tarihi"];
+
                 for (const element in response.data) {
                     if (element.indexOf("Altın") > 0 || element == '22 Ayar Bilezik' || element == 'Gümüş') {
                         response.data[element]["type"] = element;

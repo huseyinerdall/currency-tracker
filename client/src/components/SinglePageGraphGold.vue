@@ -9,14 +9,13 @@
           >
         </v-avatar>
       </div>
-      <div class="flex-column d-flex text--white ml-2" style="width: 200px;">
+      <div class="flex-column d-flex ml-2" style="width: 200px;">
         <div>
-          <h3 style="color:#fff;">{{ $route.params.gold | shorten }} - {{ $route.params.gold | tosymbol }}</h3>
+          <h3 :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{ $route.params.gold | shorten }} {{ type == 'Altın' ? '' : '-' }} {{ $route.params.gold | tosymbol }}</h3>
         </div>
         <div class="d-flex flex-row justify-space-between">
           <v-select
               v-if="type!='Altın'"
-              dark
               hide-details
               :items="['SERBEST PİYASA','MERKEZ BANKASI']"
               label=""
@@ -25,26 +24,30 @@
               dense
               style="width:134px !important;"
               class="light-select"
+              :light="$store.state.isLight"
+              :dark="!$store.state.isLight"
+              :color="$store.state.isLight ? '#fff' : '#000'"
+
           ></v-select>
-          <span style="font-size:12px;color:#fff;padding-top:9px;">{{updatetime | onlyTime}}</span>
+          <span style="font-size:12px;padding-top:9px;" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{updatetime | onlyTime}}</span>
         </div>
       </div>
     </v-row>
     <v-row class="pl-4 pr-4">
       <v-row class="pl-4 pr-4 justify-space-between" style="font-size: 18px;">
-        <div class="white--text mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
+        <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[state > 0 ? 'price-up' : 'price-down']">
           {{ alis || "--.----"}} {{ $route.params.gold == "Ons Altın" ? '$' : 'TL' }}
         </div>
-        <div class="white--text mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
+        <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[state > 0 ? 'price-up' : 'price-down']">
           {{ satis || "--.----"}} {{ $route.params.gold == "Ons Altın" ? '$' : 'TL' }}
         </div>
-        <div class="mt-2 white--text" :class="[1>=0 ? 'green--text' : 'red--text']">
+        <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[parseFloat(satis) - parseFloat(close)>=0 ? 'green--text' : 'red--text']">
           {{ parseFloat(satis) - parseFloat(close) | signint  }}
           <v-icon color="red" v-if="parseFloat(satis) - parseFloat(close) < 0">mdi-trending-down</v-icon>
           <v-icon color="green" v-else-if="parseFloat(satis) - parseFloat(close) > 0">mdi-trending-up</v-icon>
           <v-icon color="gray" v-else-if="parseFloat(satis) - parseFloat(close) == 0">mdi-trending-neutral</v-icon>
         </div>
-        <div class="mt-2 white--text" :class="[1>=0 ? 'green--text' : 'red--text']">
+        <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[parseFloat(satis) - parseFloat(close)>=0 ? 'green--text' : 'red--text']">
           {{ ((parseFloat(satis) - parseFloat(close))/parseFloat(close))*100 | signint  }}%
         </div>
       </v-row>
@@ -79,9 +82,9 @@
     <v-overlay
         :opacity="1"
         :value="overlay"
-        color="rgb(29, 36, 96)"
+        :color="$store.state.isLight ? 'rgba(255,255,255,0.83)' : 'rgb(29, 36, 96)'"
     >
-      <v-progress-circular indeterminate size="64">
+      <v-progress-circular indeterminate size="64" :color="!$store.state.isLight ? 'rgba(255,255,255,0.83)' : 'rgb(29, 36, 96)'">
       </v-progress-circular>
     </v-overlay>
   </v-container>
@@ -98,6 +101,7 @@ export default {
     secenek:'SERBEST PİYASA',
     flag: '',
     interval: 0,
+    dolar: 0,
     time: 1,
     state:0,
     high: '',
@@ -174,24 +178,24 @@ export default {
       yaxis: {
         labels: {
           style: {
-            colors: "#fff",
+            colors: app.$store.state.isLight ? '#000' : '#fff',
           }
         },
         title: {
           text: 'Fiyat(TL)',
           style: {
-            color: '#ffffff',
+            color: app.$store.state.isLight ? '#000' : '#fff',
             fontSize: 14,
             fontWeight: 600
           }
         },
         axisTicks: {
           show:false,
-          color: '#ffffff',
+          color: app.$store.state.isLight ? '#000' : '#fff',
           width:0,
         },
         axisBorder: {
-          color: '#ffffff'
+          color: app.$store.state.isLight ? '#000' : '#fff',
         }
       },
       xaxis: {
@@ -200,7 +204,7 @@ export default {
         labels: {
 
           style: {
-            colors: "#fff",
+            colors: app.$store.state.isLight ? '#000' : '#ffffff',
           },
           datetimeFormatter: {
             year: 'yyyy',
@@ -210,10 +214,10 @@ export default {
           }
         },
         axisTicks: {
-          color: '#ffffff'
+          color: app.$store.state.isLight ? '#000' : '#ffffff',
         },
         axisBorder: {
-          color: '#ffffff'
+          color: app.$store.state.isLight ? '#000' : '#ffffff',
         }
       },
       tooltip: {
@@ -419,11 +423,7 @@ export default {
   flex:none;
 }
 .light-select .v-select__selection{
-  color:#fff !important;
   font-size: 11px !important;
-}
-.light-select.theme--dark.v-text-field > .v-input__control > .v-input__slot:before{
-  border-color: transparent;
 }
 .light-select.v-text-field.v-input--dense:not(.v-text-field--enclosed):not(.v-text-field--full-width) .v-input__append-inner .v-input__icon > .v-icon{
   margin-top: 0 !important;

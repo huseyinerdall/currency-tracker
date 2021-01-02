@@ -1,4 +1,5 @@
 import Vue from "vue";
+import VueMeta from 'vue-meta'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -7,6 +8,10 @@ import axios from 'axios'
 import VueAxios from 'vue-axios';
 import VueApexCharts from 'vue-apexcharts';
 import currencies from './assets/currencies';
+Vue.use(VueMeta, {
+    // optional pluginOptions
+    refreshOnceOnNavigation: true
+})
 Vue.use(VueApexCharts);
 
 Vue.component('apexchart', VueApexCharts);
@@ -29,10 +34,21 @@ Vue.filter('currencyformat', function(value) {
     }
 })
 
+Vue.filter('currencyformattr', function(value) {
+    let temp = parseFloat(value);
+    try{
+        value = new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(temp);
+        return value;
+    }catch(e){
+        console.log(e)
+        return value;
+    }
+})
+
 Vue.filter('binayracveondalik', function(value) {
     let temp = parseFloat(value);
     try{
-        value = new Intl.NumberFormat('en-US', ).format(temp);
+        value = new Intl.NumberFormat('tr-TR' ).format(temp);
         return value;
     }catch(e){
         return value;
@@ -41,10 +57,10 @@ Vue.filter('binayracveondalik', function(value) {
 
 Vue.filter('signint', function(value) {
     try{
-        if (value >= 0) return "+" + value.toFixed(2);
-        return value.toFixed(2);
+        if (value >= 0) return "+" + value.toFixed(4);
+        return value.toFixed(4);
     }catch(e){
-        return "+0.00";
+        return "+0.0000";
     }
 })
 

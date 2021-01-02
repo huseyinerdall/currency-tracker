@@ -11,29 +11,29 @@
       </div>
       <div class="flex-column d-flex text--white ml-2" style="width: 200px;">
         <div>
-          <h3 style="color:#fff;">{{ $route.params.coin }} - {{ symbol | uppercase }}</h3>
+          <h3 :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{ $route.params.coin }} - {{ symbol | uppercase }}</h3>
         </div>
         <div class="d-flex flex-row justify-space-between">
-          <span style="font-size:12px;color:#fff;padding-top:9px;">{{last_updated | onlyTime}}</span>
+          <span style="font-size:12px;padding-top:9px;" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{last_updated | onlyTime}}</span>
         </div>
       </div>
     </v-row>
 
     <v-row class="pl-4 pr-4">
       <v-row class="pl-4 pr-4 justify-space-between" style="font-size: 18px;">
-        <div class="white--text mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
+        <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[state > 0 ? 'price-up' : 'price-down']">
           {{ current_price || "--.----"}} $
         </div>
-        <div class="white--text mt-2" :class="[state > 0 ? 'price-up' : 'price-down']">
-          {{ current_price || "--.----"}} $
+        <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[state > 0 ? 'price-up' : 'price-down']">
+          {{ (current_price * dolar) || 0 |currencyformattr}}
         </div>
-        <div class="mt-2 white--text" :class="[price_change_24h>=0 ? 'green--text' : 'red--text']">
+        <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[price_change_24h>=0 ? 'green--text' : 'red--text']">
           {{ price_change_24h | signint  }}
           <v-icon color="red" v-if="price_change_24h < 0">mdi-trending-down</v-icon>
           <v-icon color="green" v-else-if="price_change_24h > 0">mdi-trending-up</v-icon>
           <v-icon color="gray" v-else-if="price_change_24h == 0">mdi-trending-neutral</v-icon>
         </div>
-        <div class="mt-2 white--text" :class="[price_change_percentage_24h>=0 ? 'green--text' : 'red--text']">
+        <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[price_change_percentage_24h>=0 ? 'green--text' : 'red--text']">
           {{ price_change_percentage_24h | signint  }}%
         </div>
       </v-row>
@@ -68,9 +68,9 @@
     <v-overlay
         :opacity="1"
         :value="overlay"
-        color="rgb(29, 36, 96)"
+        :color="$store.state.isLight ? 'rgba(255,255,255,0.83)' : 'rgb(29, 36, 96)'"
     >
-      <v-progress-circular indeterminate size="64">
+      <v-progress-circular indeterminate size="64" :color="!$store.state.isLight ? 'rgba(255,255,255,0.83)' : 'rgb(29, 36, 96)'">
       </v-progress-circular>
     </v-overlay>
 
@@ -88,6 +88,7 @@
             interval: 0,
             timeRange: 1,
             time: 1,
+            dolar:0,
             overlay: true,
             state: 0,
             coinImage: '',
@@ -162,24 +163,24 @@
                 yaxis: {
                     labels: {
                         style: {
-                            colors: "#fff",
+                            colors: app.$store.state.isLight ? '#000' : '#ffffff',
                         }
                     },
                     title: {
                         text: 'Fiyat($)',
                         style: {
-                            color: '#ffffff',
+                            color: app.$store.state.isLight ? '#000' : '#ffffff',
                             fontSize: 14,
                             fontWeight: 600
                         }
                     },
                     axisTicks: {
                       show:false,
-                        color: '#ffffff',
+                        color: app.$store.state.isLight ? '#000' : '#ffffff',
                       width:0,
                     },
                     axisBorder: {
-                        color: '#ffffff'
+                        color: app.$store.state.isLight ? '#000' : '#ffffff',
                     }
                 },
                 xaxis: {
@@ -188,7 +189,7 @@
                     labels: {
 
                         style: {
-                            colors: "#fff",
+                            colors: app.$store.state.isLight ? '#000' : '#ffffff',
                         },
                         datetimeFormatter: {
                           year: 'yyyy',
@@ -198,10 +199,10 @@
                         }
                     },
                     axisTicks: {
-                        color: '#ffffff'
+                        color: app.$store.state.isLight ? '#000' : '#ffffff',
                     },
                     axisBorder: {
-                        color: '#ffffff'
+                        color: app.$store.state.isLight ? '#000' : '#ffffff',
                     }
                 },
                 tooltip: {
@@ -283,6 +284,7 @@
               ]
             }
             let app = this;
+
             this.interval = setInterval(() => {
                 axios.get(`${this.$store.state.api}/coin/${this.$route.params.coin}`)
                     .then(response => {
@@ -321,7 +323,10 @@
 
                     temp = fetchedData[fetchedData.length - 1]["Fiyat"];
                 }
-            })
+            });
+          socket.on("dolar", fetchedData => {
+            app.dolar = fetchedData;
+          });
         },
         watch: {
             time(newVal, oldVal) {

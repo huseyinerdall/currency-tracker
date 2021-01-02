@@ -20,7 +20,7 @@ import MainDoviz from "@/components/MainDoviz.vue";
 import BinTLTable from "@/components/BinTLTable.vue";
 
 export default {
-  name: "GoldsPage",
+  name: "CurrenciesPage",
   components: {
     MainDoviz,
     BinTLTable,

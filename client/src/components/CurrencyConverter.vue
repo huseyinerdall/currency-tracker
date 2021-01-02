@@ -1,17 +1,18 @@
 <template>
-  <v-card style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.3);color:#fff;" class="mb-6 pa-0">
+  <v-card style="border: 1px solid #444767;border-radius:0;color:#fff;" class="mb-6 pa-0"
+          :style="$store.state.isLight ? 'background-color:rgba(255,255,255,.3);' : 'background-color:rgba(0,0,0,.3);'">
     <v-row>
       <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
       <v-col cols="6" lg="2" class="pb-0 pt-0">
         <v-text-field
-            dark
             v-model="amount"
             :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
             style="padding: 0 16px !important;"
             class="centered-input ml-6"
-            color="white"
+            :dark="!$store.state.isLight"
             @change="convert"
             @input="convert"
+            :color="$store.state.isLight ? 'black' : 'white'"
         ></v-text-field>
       </v-col>
       <v-col cols="5" lg="1" class="pb-0 pt-0">
@@ -20,10 +21,10 @@
             item-text="symbol"
             v-model="source"
             item-value="name"
-            color="white"
+            :color="$store.state.isLight ? 'black' : 'white'"
             @change="convert"
             style="padding: 0 !important;"
-            dark
+            :dark="!$store.state.isLight"
         ></v-select>
       </v-col>
       <v-col cols="12" lg="1" class="text-center pb-0 pt-0 ma-0">
@@ -34,11 +35,11 @@
       <v-col cols="6" lg="2" class="pb-0 pt-0">
         <v-text-field
             v-model="result"
-            color="white"
+            :color="$store.state.isLight ? 'black' : 'white'"
             class="ml-6 centered-input"
             :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
             style="padding: 0 16px !important;"
-            dark
+            :dark="!$store.state.isLight"
             readonly
         ></v-text-field>
       </v-col>
@@ -49,9 +50,9 @@
             item-value="name"
             v-model="target"
             @change="convert"
-            color="white"
+            :color="$store.state.isLight ? 'black' : 'white'"
             style="padding: 0 !important;"
-            dark
+            :dark="!$store.state.isLight"
         ></v-select>
       </v-col>
       <v-spacer></v-spacer>
