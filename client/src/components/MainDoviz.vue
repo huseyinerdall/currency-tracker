@@ -88,7 +88,9 @@ export default {
       temp = app.data[3];
       app.data[3] = app.data[2];
       app.data[2] = temp;
+      temp = app.data[2];
       app.data[2] = app.data[19];
+      app.data[19] = temp;
 
       if(app.$route.path == '/'){
         app.data.pop();
