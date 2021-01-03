@@ -288,7 +288,6 @@
             this.interval = setInterval(() => {
                 axios.get(`${this.$store.state.api}/coin/${this.$route.params.coin}`)
                     .then(response => {
-                      console.log(response.data)
                         this.coinImage = response.data[0].image;
                         this.symbol = response.data[0].symbol;
                         this.high = response.data[0].high_24h;

@@ -64,12 +64,12 @@ export default {
     return {
       goldloaded: true,
       headers: [
-        { text: 'Altın Kurları',align: 'start', sortable: false,value: 'type',class: 'amber--text accent-3 font-weight-light body-1',width:"160px"},
-        { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
-        { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
-        { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
-        { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
-        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'amber--text accent-3 font-weight-light body-1', },
+        { text: 'Altın Kurları',align: 'start', sortable: false,value: 'type',class: 'amber--text accent-3 body-1',width:"160px"},
+        { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
+        { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
+        { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
+        { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
+        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
       ],
       data: [],
       overlay: true,

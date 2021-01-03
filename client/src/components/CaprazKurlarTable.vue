@@ -2,9 +2,13 @@
   <div>
     <table style="table-layout:fixed;" class="mt-1"
     :style="$store.state.isLight ? 'background-color:rgba(255,255,255,0.3);color:rgba(0,0,0,0.83) !important;' : 'background-color:rgba(0,0,0,0.3);color:rgba(255,255,255,0.83) !important;'">
-      <thead class="amber--text accent-3">
-        <tr style="font-size:14px !important;">
-          <th>Çapraz Kurlar</th><th>Parite</th><th>Fark</th><th>Yüzde</th><th>Saat</th>
+      <thead>
+        <tr>
+          <th class="amber--text accent-3 body-1" style="width: 160px !important;">Çapraz Kurlar</th>
+          <th class="amber--text accent-3 body-1">Parite</th>
+          <th class="amber--text accent-3 body-1">Fark</th>
+          <th class="amber--text accent-3 body-1">Yüzde</th>
+          <th class="amber--text accent-3 body-1">Saat</th>
         </tr>
       </thead>
       <tbody v-if="data[0]">

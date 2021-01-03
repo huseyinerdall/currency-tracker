@@ -37,7 +37,7 @@ const app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server, {
     cors: {
-        origin: [`http://${HOST}:8080`,"*"],
+        origin: [`http://${HOST}:8081`,"*"],
         //origin: [`http://${HOST}:8080`,"https://para.guru","https://www.para.guru"],
         methods: ["GET", "POST"]
     }

@@ -60,10 +60,10 @@
             </router-link>
           </td>
           <td :class="{'black--text':$store.state.isLight}">
-            <h3 class="text-right" :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`">{{ item.price | binayracveondalik }}</h3>
+            <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`">{{ item.price | binayracveondalik }}</h3>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black--text':$store.state.isLight}">
-            <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`" class="text-right">
+            <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`">
               {{ (item.price * dolar) | binayracveondalik }}</h3>
           </td>
 
@@ -75,7 +75,7 @@
           <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black--text':$store.state.isLight}">
             <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.volume | currencyformat }}</span>
           </td>
-          <td class="text-right">
+          <td>
             <span
                 :class="[item.pricechange24h>=0 ? 'green--text' : 'red--text']"
                 :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.pricechange24h | signint }}</span>
@@ -146,49 +146,49 @@ export default {
         text: 'Fiyat(USD)',
         value: 'price',
         sortable: false,
-        align: 'right',
+        align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Fiyat(TL)',
         value: 'priceTL',
         sortable: false,
-        align: 'right',
+        align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Değeri',
         value: 'market_cap',
         sortable: false,
-        align: 'right',
+        align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Piyasa Hacmi',
         value: 'volume',
         sortable: false,
-        align: 'right',
+        align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Fark (24S)',
         value: 'pricechange24h',
         sortable: false,
-        align: 'right',
+        align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Fark (7G)',
         value: 'pricechange7d',
         sortable: false,
-        align: 'right',
+        align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Saat',
         value: 'time',
         sortable: false,
-        align: 'right',
+        align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
       },],
@@ -227,6 +227,9 @@ export default {
   background: rgba(0, 0, 0, .1) !important;
   background-attachment: fixed;
 }
+.theme--dark.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper){
+  background: rgba(0, 0, 0, .3) !important;
+}
 
 .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
   background: rgba(0, 0, 0, .3) !important;
@@ -245,9 +248,9 @@ h3 {
 }
 </style>
 <style>
-.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+/*.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
   background: transparent !important;
-}
+}*/
 
 .theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th {
   border-bottom: thin solid #444767 !important;
