@@ -25,7 +25,7 @@
           {{ current_price || "--.----"}} $
         </div>
         <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[state > 0 ? 'price-up' : 'price-down']">
-          {{ (current_price * dolar) || 0 |currencyformattr}}
+          {{ ((current_price * dolar) || 0) | currencyformattr}}
         </div>
         <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[price_change_24h>=0 ? 'green--text' : 'red--text']">
           {{ price_change_24h | signint  }}

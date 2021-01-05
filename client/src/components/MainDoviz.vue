@@ -25,12 +25,12 @@
           <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Satış"]}}</td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ item["Satış"] - item.close | signint }}
+              {{ parseFloat(item["Satış"]) - parseFloat(item.close) | signint }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[((item['Satış'] - item.close)/item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ ((item["Satış"] - item.close)/item.close) | signint }}%
+              {{ ((parseFloat(item["Satış"]) - parseFloat(item.close))/parse(item.close))*100 | signint }}%
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">

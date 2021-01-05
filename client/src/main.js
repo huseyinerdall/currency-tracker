@@ -11,14 +11,14 @@ import currencies from './assets/currencies';
 Vue.use(VueMeta, {
     // optional pluginOptions
     refreshOnceOnNavigation: true
-})
+});
 Vue.use(VueApexCharts);
 
 Vue.component('apexchart', VueApexCharts);
 Vue.config.productionTip = false;
 
 //axios.defaults.baseConfig = "http://localhost:4000/";
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
 
 //for server
 Vue.prototype.$addr = 'http://localhost'
@@ -35,13 +35,14 @@ Vue.filter('currencyformat', function(value) {
 })
 
 Vue.filter('currencyformattr', function(value) {
-    let temp = parseFloat(value);
+    let value1 = value;
+    let temp = parseFloat(value1);
     try{
         value = new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(temp);
-        return value;
+        return value1;
     }catch(e){
         console.log(e)
-        return value;
+        return value1;
     }
 })
 
@@ -139,7 +140,7 @@ Vue.filter('tosymbol', function(value) {
     return "";
 })
 
-
+/* eslint-disable no-new */
 new Vue({
     router,
     store,

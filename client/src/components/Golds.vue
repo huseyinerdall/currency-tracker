@@ -33,7 +33,7 @@
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[((parseFloat(item['Satış']) - parseFloat(item.close))/parseFloat(item.close))>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ ((parseFloat(item["Satış"]) - parseFloat(item.close))/parseFloat(item.close)) | signint }}%
+              {{ (((parseFloat(item["Satış"]) - parseFloat(item.close))/parseFloat(item.close))*100) | signint }}%
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
@@ -86,15 +86,7 @@ export default {
     socket.on("golds", fetchedData => {
       app.data = fetchedData;
       app.overlay = false;
-    })
-    /*this.interval = setInterval(() => {
-      let app = this;
-      axios.get("http://localhost:4000/golds")
-          .then((res)=>{
-            app.data = res.data;
-            app.goldloaded = true;
-          })
-    },1000)*/
+    });
   },
   methods: {
   },

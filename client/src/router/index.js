@@ -14,7 +14,6 @@ import Profile from "../views/Profile.vue";
 import CaprazKurlar from "../views/CaprazKurlar.vue";
 import qs from 'qs';
 // Admin Side
-import Dashboard from "../views/admin/Dashboard.vue";
 
 Vue.use(VueRouter);
 
@@ -120,15 +119,6 @@ const routes = [{
         component: Wallet,
         meta: {
             requiresAuth: true
-        }
-    },
-    {
-        path: '/admin',
-        name: 'admin',
-        component: Dashboard,
-        meta: {
-            requiresAuth: true,
-            is_admin: true
         }
     },
 ];

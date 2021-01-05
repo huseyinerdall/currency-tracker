@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const axios = require('axios');
 let fs = require('fs');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 let moment = require('moment');
 const path = require('path');
@@ -28,49 +28,30 @@ const SECRET_KEY = 'SI6ImM1Z';
 
 //static long data
 const coins = require('./static/coins.json');
-
+const descriptions = require('./static/descriptions.json');
 const goldXmlBodyStr = fs.readFileSync('./static/altinkaynakGold.xml', 'utf8');
-
 const currencyXmlBodyStr = fs.readFileSync('./static/altinkaynakCurrency.xml', 'utf8');
 const truncgil = 'https://finans.truncgil.com/today.json';
+
 const app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server, {
-    cors: {
-        origin: [`http://${HOST}:8081`,"*"],
-        //origin: [`http://${HOST}:8080`,"https://para.guru","https://www.para.guru"],
-        methods: ["GET", "POST"]
-    }
-});
+const admin = require('./admin.js');
 
-/*  PASSPORT SETUP  */
 
-const passport = require('passport');
-var userProfile;
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.set('view engine', 'ejs');
-
-app.get('/success', (req, res) => res.send(userProfile));
-app.get('/error', (req, res) => res.send("error logging in"));
-
-passport.serializeUser(function(user, cb) {
-    cb(null, user);
-});
-
-passport.deserializeUser(function(obj, cb) {
-    cb(null, obj);
-});
-
-/*  END OF PASSPORT SETUP  */
 
 app.use(morgan('tiny'));
 app.use(cors({ credentials: true }));
+app.use('/admin',admin);
 app.use(bodyParser.json());
 app.use(express.static('public')) // static dosyaları serve etmek için
 
+var server = require('http').createServer(app);
+var io = require('socket.io')(server, {
+    cors: {
+        origin: [`http://${HOST}:8080`,`http://${HOST}:8081`,"*"],
+        //origin: ["https://para.guru","https://www.para.guru"],
+        methods: ["GET", "POST"]
+    }
+});
 
 var config = {
     headers: {
@@ -108,7 +89,6 @@ app.get('/tcmb', (req, res) => {
 app.post('/tcmbone', (req, res) => {
     let temp = {};
     let one = req.body.one;
-    console.log(one)
     axios.get('https://www.tcmb.gov.tr/kurlar/today.xml')
         .then(response => {
             xml = response.data.toString();
@@ -262,7 +242,6 @@ app.get('/coin/:coinName', (req, res) => {
         .catch(err => console.error("Kripto para datası alınamıyor !!!"));
 })
 
-
 app.get('/coins', (req, res) => {
     let factRes = [];
     let temp = {};
@@ -345,6 +324,11 @@ app.post('/getgoldaccordingtotimerange', async(req, res) => {
     res.json(data);
 })
 
+app.post('/golddescriptions', async(req, res) => {
+    let gold = req.body.goldName;
+    let data = goldDescriptions[gold] || '';
+    res.send(data);
+})
 
 const BINTLTABLE_LIST = ["ABDDOLARI", "EURO", "INGILIZSTERLINI", "KANADADOLARI", "SUUDIARABISTANRIYALI", "BTC","JAPONYENI"];
 app.post('/bintltable', async(req, res) => {
@@ -705,9 +689,9 @@ db.sequelize.sync().then(() => {
                                 .create({ Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"] })
                             C[indis] = response.data[element]["Alış"];
                         }
-                        let date = new Date().toLocaleDateString("ISO");
-                        let prevTime = "03:00";
-                        let nextTime = "06:00";
+                        let date = new Date().toISOString().substring(0,10);
+                        let prevTime = "01:19";
+                        let nextTime = "01:21";
                         a = await db[indis].findOne({
                             where: {
                                 createdAt: {
@@ -733,9 +717,9 @@ db.sequelize.sync().then(() => {
                                 .create({ Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"] })
                             C[indis] = response.data[element]["Alış"];
                         }
-                        let date = new Date().toLocaleDateString("ISO");
-                        let prevTime = "03:00";
-                        let nextTime = "06:00";
+                        let date = new Date().toISOString().substring(0,10);
+                        let prevTime = "01:20";
+                        let nextTime = "01:22";
                         a = await db[indis].findOne({
                             where: {
                                 createdAt: {
