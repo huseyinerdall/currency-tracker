@@ -657,12 +657,12 @@ db.sequelize.sync().then(() => {
                     factRes.push(temp);
 
                     // aşagıdaki koşul sadece api çıktısı aynı sırada sonuçlanırsa düzgün calışır
-                    if (response.data[i]["current_price"] != M[response.data[i]["symbol"]] && db[response.data[i]["symbol"].toUpperCase()]) {
+                    if (response.data[i]["last_updated"] != M[response.data[i]["symbol"]] && db[response.data[i]["symbol"].toUpperCase()]) {
                         if(response.data[i]["symbol"].toUpperCase() == "1INCH"){response.data[i]["symbol"] = "ONEINCH"}
                         if(response.data[i]["symbol"].toUpperCase() == "YVAULT-LP-YCURVE"){response.data[i]["symbol"] = "YVAULTLPYCURVE"}
                         db[response.data[i]["symbol"].toUpperCase()].create({ Fiyat: response.data[i]["current_price"] })
                             //db[response.data[i]["symbol"]].destroy({ truncate : true, cascade: false })
-                        M[response.data[i]["symbol"]] = response.data[i]["current_price"];
+                        M[response.data[i]["symbol"]] = response.data[i]["last_updated"];
                     }
 
                 }

@@ -30,12 +30,7 @@ export default {
             this.description = response.data;
           })
     }else if(this.$route.params.gold){
-      axios.post(`${this.$store.state.api}/golddescriptions`, {
-        coinName: this.$route.params.coin,
-      })
-          .then((response) => {
-            this.description = response.data;
-          })
+      console.log(this.$route.params.gold);
     }
   },
 };

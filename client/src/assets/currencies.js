@@ -1,4 +1,4 @@
-let IP = "https://para.guru/api/"
+let IP = "http://localhost:4000/"
 module.exports = [
   {
     "name": "ABD DOLARI",

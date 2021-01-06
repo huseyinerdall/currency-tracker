@@ -28,7 +28,7 @@
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[(parseFloat(item['Satış']) - parseFloat(item.close))>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ parseFloat(item["Satış"]) - parseFloat(item.close) | signint }}
+              {{ (parseFloat(item["Satış"]) - parseFloat(item.close)) | signint }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
