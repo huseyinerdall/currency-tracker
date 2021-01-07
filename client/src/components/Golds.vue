@@ -6,7 +6,7 @@
         hide-default-footer
         :loading="!goldloaded"
         disable-pagination
-        style="border: 1px solid #444767;border-radius:0;"
+        style="border: 1px solid #ddd;border-radius:0;"
         :style="[ $store.state.isLight ? 'color:#rgba(0,0,0,0.87); background-color:rgba(255,255,255,.3) !important;' : 'color:#ffffff;background-color:rgba(0,0,0,.3) !important;']"
         mobile-breakpoint="0"
         class="mt-1"
@@ -17,7 +17,7 @@
     >
       <template v-slot:item="{ item }">
         <tr>
-          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
+          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;border-color:#ddd !important;' : 'color:#ffffff !important;']">
             <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`">{{ item.type | shorten }}</router-link>
           </td>
           <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
@@ -97,10 +97,16 @@ export default {
 .v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper){
   background: rgba(0, 0, 0, .3) !important;
 }
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row){
+  border-bottom-color: #ddd !important;
+}
+.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th{
+  border-bottom-color: #ddd !important;
+}
 h3{
   cursor: pointer;
 }
 .v-data-table__wrapper thead{
-  border-bottom: 1px solid #5e6593 !important;
+  border-bottom: 1px solid #ddd !important;
 }
 </style>

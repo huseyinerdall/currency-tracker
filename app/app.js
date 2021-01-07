@@ -616,7 +616,8 @@ app.post('/login', (req, res) => {
 
 
 const NONCHANGE_TIME = 60 * 1/6;
-const MAINLOOPINTERVAL = 2000;
+const MAINLOOPINTERVAL = 10000;
+
 
 db.sequelize.sync().then(() => {
 
@@ -626,8 +627,6 @@ db.sequelize.sync().then(() => {
     });
 
 
-    let tempDolar = 0;
-    let tempBitcoin = 0;
     let M = {}; // coin değişimini tespit için
     let C = {}; // döviz değişimini tespit için
     /*let CCounter = 0;

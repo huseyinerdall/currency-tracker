@@ -1,5 +1,5 @@
 <template>
-  <v-card style="border: 1px solid #444767;border-radius:0;color:#fff;" class="mb-6 pa-0"
+  <v-card style="border: 1px solid #ddd;border-radius:0;color:#fff;" class="mb-6 pa-0"
           :style="$store.state.isLight ? 'background-color:rgba(255,255,255,.3);' : 'background-color:rgba(0,0,0,.3);'">
     <v-row>
       <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>

@@ -13,7 +13,7 @@
           label-for="pwd"
           label="password"
         >
-          <b-form-input v-model="pwd"></b-form-input>
+          <b-form-input v-model="pwd" type="password"></b-form-input>
         </b-form-group>
         <b-btn block @click="login">Giriş</b-btn>
     </b-card>
@@ -22,6 +22,7 @@
 
 <script>
 export default {
+
   data() {
     return {
       username:'',

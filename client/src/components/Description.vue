@@ -1,11 +1,12 @@
 <template>
 
   <v-card
-      style="border: 1px solid #444767;border-radius:0;background-color:rgba(0,0,0,.1);"
+      style="border: 1px solid #ddd;border-radius:0;background-color:transparent;"
       :style="$store.state.isLight ? 'color:rgba(0,0,0,0.87);' : 'color:#fff;'">
     <v-card-title v-if="$route.params.coin">{{$route.params.coin}} Hakkında</v-card-title>
     <v-card-title v-else-if="$route.params.gold">{{$route.params.gold}} Hakkında</v-card-title>
     <v-card-text :style="$store.state.isLight ? 'color:rgba(0,0,0,0.87);' : 'color:#fff;'" v-html="description">
+      {{description}}
     </v-card-text>
   </v-card>
 </template>

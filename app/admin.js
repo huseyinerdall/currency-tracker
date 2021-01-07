@@ -12,13 +12,13 @@ app.get('/', function(req, res){
 });
 
 app.get('/cryptocoindescriptions', (req, res) => {
-    let data = require('./static/descriptions.json');
+    let data = fs.readFileSync("./static/descriptions.json");
     res.send(data);
 })
 
 app.post('/cryptocoindescriptions', async(req, res) => {
     let coin = req.body.coinName;
-    let descriptions = require('./static/descriptions.json');
+    let descriptions = JSON.parse(fs.readFileSync("./static/descriptions.json"));
     let data = descriptions[coin];
     res.send(data);
 })

@@ -245,14 +245,14 @@ export default {
 <style scoped>
 table {
   width: 100% !important;
-  border:1px solid #5e6593;
+  border:1px solid #ddd;
   border-collapse: collapse;
 }
 
 tr {
   text-align: start;
   padding-left: 8px;
-  border-bottom: 1pt solid #5e6593;
+  border-bottom: 1pt solid #ddd;
   font-size: 13px !important;
   height:32px;
 }
@@ -278,5 +278,8 @@ th {
   table tr th:nth-child(4){
     display:none;
   }
+}
+tr:hover{
+  background-color: rgba(0,0,0,0.3);
 }
 </style>

@@ -162,13 +162,13 @@ table {
   width: 100% !important;
   background-color: rgba(0, 0, 0, .3);
   color: #fff !important;
-  border: 1px solid #5e6593;
+  border: 1px solid #ddd;
   border-collapse: collapse;
 }
 
 tr {
   text-align: right;
-  border-bottom: 1pt solid #5e6593;
+  border-bottom: 1pt solid #ddd;
 }
 
 td {

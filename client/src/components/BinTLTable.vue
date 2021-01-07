@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-list style="border: 1px solid #5e6593;" class="mt-1 pt-0" dense
+    <v-list style="border: 1px solid #ddd;" class="mt-1 pt-0" dense
     :dark="!$store.state.isLight">
-      <v-subheader style="border-bottom: 1px solid #5e6593;" class="mobile-tr" :style="$route.path != '/capraz-kurlar' ? 'height:56px !important;' : ''">
+      <v-subheader style="border-bottom: 1px solid #ddd;" class="mobile-tr" :style="$route.path != '/capraz-kurlar' ? 'height:56px !important;' : ''">
         <v-row class="justify-space-between pl-2 pr-2">
           <h3 class="amber--text">1000 TL NE OLDU?</h3>
           <div class="d-flex flex-row">

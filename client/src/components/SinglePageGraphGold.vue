@@ -55,7 +55,7 @@
         <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
         <v-btn-toggle
             v-model="time"
-            style="border: 1px solid #444767;border-radius:0;background-color:transparent;color:#000;padding:4px;"
+            style="border: 1px solid #ddd;border-radius:0;background-color:transparent;color:#000;padding:4px;"
             mandatory
             right
             :class="[$vuetify.breakpoint.smAndDown ? 'mx-auto' : '' ]"
@@ -74,7 +74,7 @@
     </v-row>
 
 
-    <div id="chart" style="border: 1px solid #444767;" class="mt-2">
+    <div id="chart" style="border: 1px solid #ddd;" class="mt-2">
       <apexchart ref="realtimeChart" class="ma-0 pa-0" type="area" height="350" :options="chartOptions"
                  :series="series"></apexchart>
     </div>

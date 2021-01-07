@@ -6,7 +6,7 @@
         hide-default-footer
         :loading="!goldloaded"
         disable-pagination
-        style="border: 1px solid #444767;border-radius:0;"
+        style="border: 1px solid #ddd;border-radius:0;"
         :style="[ $store.state.isLight ? 'color:#rgba(0,0,0,0.87); background-color:rgba(255,255,255,.3);' : 'color:#ffffff;background-color:rgba(0,0,0,.3);']"
         mobile-breakpoint="0"
         class="mt-1"
@@ -16,7 +16,7 @@
     >
       <template v-slot:item="{ item }">
         <tr>
-          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
+          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;border-color:#ddd !important;' : 'color:#ffffff !important;']">
             <router-link :to="{ name: 'Currencies', params: { gold: item.type }}" tag="span" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`">
               {{ item.type == "SUUDİ ARABİSTAN RİYALİ" ? 'S.A. RİYALİ' : item.type }}
             </router-link>
@@ -117,4 +117,13 @@ h3{
 .v-data-table__wrapper thead{
   border-bottom: 1px solid #5e6593 !important;
 }
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row){
+  border-bottom-color: #ddd !important;
+}
+</style>
+<style>
+.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th{
+  border-bottom-color: #ddd !important;
+}
+
 </style>

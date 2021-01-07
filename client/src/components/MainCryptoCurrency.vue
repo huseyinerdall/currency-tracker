@@ -20,7 +20,7 @@
         :items-per-page="itemPerPage"
         :page.sync="page"
         @page-count="pageCount = $event"
-        style="border: 1px solid #444767;border-radius:0;"
+        style="border: 1px solid #ddd;border-radius:0;"
         :style="[ $store.state.isLight ? 'color:#rgba(0,0,0,0.87); background-color:rgba(255,255,255,.3);' : 'color:#ffffff;background-color:rgba(0,0,0,.3);']"
         class="mt-2"
         mobile-breakpoint="0"
@@ -224,7 +224,7 @@ export default {
 
 <style scoped>
 .v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
-  background: rgba(0, 0, 0, .1) !important;
+  background: rgba(0, 0, 0, .3) !important;
   background-attachment: fixed;
 }
 .theme--dark.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper){
@@ -246,11 +246,16 @@ h3 {
 .v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
   font-size: 14px !important;
 }
+
 </style>
 <style>
 /*.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
   background: transparent !important;
 }*/
+.theme--dark.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper),
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper){
+  background: rgba(0,0,0,0.3) !important;
+}
 
 .theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th {
   border-bottom: thin solid #444767 !important;
@@ -291,7 +296,9 @@ h3 {
   -webkit-animation: 1.5s alternate price-down;
   animation: 1.5s alternate price-down;
 }
-
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row){
+  border-bottom-color: #ddd !important;
+}
 </style>
 <style>
 .theme--dark.v-data-table{

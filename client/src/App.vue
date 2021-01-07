@@ -316,6 +316,6 @@ body, * {
 }
 .acik{
   border-bottom: 1px solid #0059b2;
-  background-color:#ffffff !important;
+  background-color:#F9F9F9 !important;
 }
 </style>
