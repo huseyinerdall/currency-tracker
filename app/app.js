@@ -633,10 +633,13 @@ db.sequelize.sync().then(() => {
     let CCloseWritable = true;
     let GCounter = 0;
     let GCloseWritable = true;*/
+    let factRes = [];
+    let golds = [];
+    let currencies = [];
     setInterval(() => {
-        let factRes = [];
-        let golds = [];
-        let currencies = [];
+        factRes = [];
+        golds = [];
+        currencies = [];
         let temp = {};
 
         axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h,7d`)
@@ -665,7 +668,7 @@ db.sequelize.sync().then(() => {
                     }
 
                 }
-                io.emit('coins', factRes);
+
             })
             .catch(err => console.error(err));
 
@@ -735,12 +738,18 @@ db.sequelize.sync().then(() => {
 
                     }
                 }
-                io.emit('golds', golds);
-                io.emit('currencies', currencies);
+
             })
             .catch(err => console.error(err));
 
     }, MAINLOOPINTERVAL)
+
+    setInterval(() => {
+        if(factRes.length != 0){io.emit('coins', factRes);}
+        if(golds.length != 0){io.emit('golds', golds);}
+        if(currencies.length != 0){io.emit('currencies', currencies);}
+
+    },1200);
 
     let dolar = 0;
 

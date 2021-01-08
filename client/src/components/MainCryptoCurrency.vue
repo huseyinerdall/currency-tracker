@@ -215,6 +215,7 @@ export default {
     socket.on("dolar", fetchedData => {
       app.dolar = fetchedData;
     });
+
   },
   mounted() {
   },

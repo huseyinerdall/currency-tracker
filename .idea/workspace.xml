@@ -19,27 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="salı">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="perşembe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/admin/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/admin/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/pages/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/pages/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/pages/Seo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/pages/Seo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/descriptions.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/descriptions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Description.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Description.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +72,7 @@
       <recentPaths value="$PROJECT_DIR$/admin" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.admin">
+  <component name="RunManager" selected="npm.serve">
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -182,7 +166,9 @@
       <workItem from="1609864496719" duration="10248000" />
       <workItem from="1609926128840" duration="7951000" />
       <workItem from="1609958031922" duration="1154000" />
-      <workItem from="1610007318968" duration="6850000" />
+      <workItem from="1610007318968" duration="8016000" />
+      <workItem from="1610019283796" duration="995000" />
+      <workItem from="1610089370760" duration="3918000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -296,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609875661039</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="perşembe">
+      <created>1610014804726</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1610014804726</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +315,8 @@
     <MESSAGE value="cumartesi" />
     <MESSAGE value="pazar" />
     <MESSAGE value="salı" />
-    <option name="LAST_COMMIT_MESSAGE" value="salı" />
+    <MESSAGE value="perşembe" />
+    <option name="LAST_COMMIT_MESSAGE" value="perşembe" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609692675273">
@@ -341,30 +335,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="480" y="69" key="Github.UntrackedFilesDialog/0.0.1366.728@0.0.1366.728" timestamp="1607012077071" />
-    <state width="1345" height="237" key="GridCell.Tab.0.bottom" timestamp="1610011873702">
+    <state width="1345" height="237" key="GridCell.Tab.0.bottom" timestamp="1610089724024">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="237" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610011873702" />
-    <state width="1345" height="237" key="GridCell.Tab.0.center" timestamp="1610011873702">
+    <state width="1345" height="237" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610089724024" />
+    <state width="1345" height="237" key="GridCell.Tab.0.center" timestamp="1610089724023">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="237" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1610011873702" />
-    <state width="1345" height="237" key="GridCell.Tab.0.left" timestamp="1610011873702">
+    <state width="1345" height="237" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1610089724023" />
+    <state width="1345" height="237" key="GridCell.Tab.0.left" timestamp="1610089724023">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="237" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1610011873702" />
-    <state width="1345" height="237" key="GridCell.Tab.0.right" timestamp="1610011873702">
+    <state width="1345" height="237" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1610089724023" />
+    <state width="1345" height="237" key="GridCell.Tab.0.right" timestamp="1610089724024">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="237" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610011873702" />
+    <state width="1345" height="237" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610089724024" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1607011688606">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607011688606" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1609875673509">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1610014816471">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1609875673509" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1610014816471" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609166550394">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
