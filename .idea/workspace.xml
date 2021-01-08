@@ -21,9 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="perşembe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/descriptions.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/descriptions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +166,7 @@
       <workItem from="1609958031922" duration="1154000" />
       <workItem from="1610007318968" duration="8016000" />
       <workItem from="1610019283796" duration="995000" />
-      <workItem from="1610089370760" duration="3918000" />
+      <workItem from="1610089370760" duration="4822000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -289,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610014804726</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="perşembe">
+      <created>1610099689162</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1610099689163</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,18 +360,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607011688606" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1610014816471">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1610099694398">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1610014816471" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1610099694397" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609166550394">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1609166550394" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610014239714">
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610099652316">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1610014239714" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1610099652316" />
     <state x="257" y="0" width="895" height="728" key="find.popup" timestamp="1609692856563">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

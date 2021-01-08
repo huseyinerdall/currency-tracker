@@ -115,7 +115,7 @@
               alt="para.guru Logo"
               class="shrink mr-2"
               contain
-              src="./assets/logo.png"
+              src="./assets/logo.webp"
               transition="scale-transition"
               width="40"
           />
@@ -162,7 +162,7 @@
                     alt="para.guru Logo"
                     class="shrink mr-2"
                     contain
-                    src="./assets/logo.png"
+                    src="./assets/logo.webp"
                     transition="scale-transition"
                     width="40"
                 />
@@ -287,7 +287,7 @@ body, * {
 }
 
 .v-main {
-  background-image: url('assets/back.fw.png') !important;
+  background-image: url('assets/back.fw.webp') !important;
   background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
