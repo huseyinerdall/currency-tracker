@@ -178,7 +178,7 @@
             <v-list-item-group dark>
               <v-list-item to="/doviz" @click="dialog=false">
                 <v-list-item-icon>
-                  <v-icon>mdi-wallet-outline</v-icon>
+                  <v-icon>mdi-home-currency-usd</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>
@@ -191,7 +191,7 @@
               <v-divider color="#0059b2"></v-divider>
               <v-list-item to="/altin-fiyatlari" @click="dialog=false">
                 <v-list-item-icon>
-                  <v-icon>mdi-home</v-icon>
+                  <v-icon>mdi-gold</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>
@@ -204,7 +204,7 @@
               <v-divider color="#0059b2"></v-divider>
               <v-list-item to="/kripto-paralar" @click="dialog=false">
                 <v-list-item-icon>
-                  <v-icon>mdi-account-arrow-right-outline</v-icon>
+                  <v-icon>mdi-bitcoin</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>
@@ -217,7 +217,7 @@
               <v-divider color="#0059b2"></v-divider>
               <v-list-item to="/capraz-kurlar" @click="dialog=false">
                 <v-list-item-icon>
-                  <v-icon>mdi-account-multiple-plus-outline</v-icon>
+                  <v-icon>mdi-currency-sign</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>

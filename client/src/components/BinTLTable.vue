@@ -6,7 +6,7 @@
         <v-row class="justify-space-between pl-2 pr-2">
           <h3 class="amber--text">1000 TL NE OLDU?</h3>
           <div class="d-flex flex-row">
-            <v-btn x-small color="#71402c" style="border-radius: 0;" @click="time = 2">Dün</v-btn>
+            <v-btn v-if="new Date().getDay() != 0 || new Date().getDay() != 1" x-small color="#71402c" style="border-radius: 0;" @click="time = 2">Dün</v-btn>
             <v-btn x-small color="#720e60" style="border-radius: 0;" @click="time = 7">Geçen Hafta</v-btn>
             <v-btn x-small color="#0b4e82" style="border-radius: 0;" @click="time = 30">Geçen Ay</v-btn>
             <v-btn x-small color="#0b4e82" style="border-radius: 0;" @click="time = 360">Geçen Yıl</v-btn>

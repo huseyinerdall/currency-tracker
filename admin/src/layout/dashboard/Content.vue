@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" :style="$route.path != '/login' ? 'padding: 78px 30px 30px 280px;' : 'padding: 78px 30px 30px 50px;'">
     <fade-transition :duration="100" mode="out-in">
       <!-- your content here -->
       <router-view></router-view>

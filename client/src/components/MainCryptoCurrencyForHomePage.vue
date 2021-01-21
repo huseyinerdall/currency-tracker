@@ -66,15 +66,23 @@
             <h3 :style="`font-size: ${$store.state.tdFontSize} !important;font-weight:400;`">
               {{ (item.price * dolar) | binayracveondalik }}</h3>
           </td>
-
-          <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black--text':$store.state.isLight}">
+          <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black&#45;&#45;text':$store.state.isLight}">
+            <v-sparkline
+                :labels="labels"
+                :value="item.sparkline"
+                :color="item.pricechange24h>=0 ? 'green' : 'red'"
+                line-width="4"
+                padding="1"
+            ></v-sparkline>
+          </td>
+<!--          <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black&#45;&#45;text':$store.state.isLight}">
             <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{
                 item.market_cap | currencyformat
               }}</span>
           </td>
-          <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black--text':$store.state.isLight}">
+          <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black&#45;&#45;text':$store.state.isLight}">
             <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.volume | currencyformat }}</span>
-          </td>
+          </td>-->
           <td>
             <span
                 :class="[item.pricechange24h>=0 ? 'green--text' : 'red--text']"
@@ -115,6 +123,11 @@
 import io from "socket.io-client";
 
 export default {
+  props: {
+    coin: {
+      type:String
+    }
+  },
   data() {
     return {
       coinloaded: true,
@@ -156,7 +169,17 @@ export default {
         align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
-      }, {
+      },
+        {
+          text: 'Grafik',
+          value: 'sparkline',
+          sortable: false,
+          align: 'start',
+          class: 'amber--text accent-3 body-1',
+          filterable: false,
+        },
+
+        /*{
         text: 'Değeri',
         value: 'market_cap',
         sortable: false,
@@ -170,7 +193,7 @@ export default {
         align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
-      }, {
+      },*/ {
         text: 'Fark (24S)',
         value: 'pricechange24h',
         sortable: false,
@@ -208,7 +231,7 @@ export default {
       this.headers.splice(3, 1);
     }
     var socket = io.connect(`${this.$store.state.addr}`);
-    socket.on("coins", fetchedData => {
+    socket.on("coins50", fetchedData => {
       app.data = fetchedData;
       app.overlay = false;
     })

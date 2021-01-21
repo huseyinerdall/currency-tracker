@@ -11,14 +11,13 @@
         mobile-breakpoint="0"
         class="mt-1"
         dense
-        sort-by="type"
         :dark="!$store.state.isLight"
         :light="$store.state.isLight"
     >
       <template v-slot:item="{ item }">
         <tr>
           <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;border-color:#ddd !important;' : 'color:#ffffff !important;']">
-            <router-link :to="{ name: 'Golds', params: { gold: item.type }}" tag="span" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`">{{ item.type | shorten }}</router-link>
+            <router-link :to="{ name: 'Golds', params: { gold: item.type.toLocaleLowerCase('tr-TR').split(' ').join('-') }}" tag="span" class="body-1 text-uppercase" :style="`font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`">{{ item.type | shorten }}</router-link>
           </td>
           <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
             <span class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.Alış }}</span>

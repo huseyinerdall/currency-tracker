@@ -17,12 +17,12 @@
       <template v-slot:item="{ item }">
         <tr>
           <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;border-color:#ddd !important;' : 'color:#ffffff !important;']">
-            <router-link :to="{ name: 'Currencies', params: { gold: item.type }}" tag="span" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`">
+            <router-link :to="{ name: 'Currencies', params: { gold: item.type.toLocaleLowerCase('tr-TR').split(' ').join('-') }}" tag="span" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`">
               {{ item.type == "SUUDİ ARABİSTAN RİYALİ" ? 'S.A. RİYALİ' : item.type }}
             </router-link>
           </td>
-          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Alış"]}}</td>
-          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Satış"]}}</td>
+          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Alış"] | turkishCurrencyformat}}</td>
+          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Satış"] | turkishCurrencyformat}}</td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
               {{ parseFloat(item["Satış"]) - parseFloat(item.close) | signint }}

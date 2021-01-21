@@ -11570,16 +11570,6 @@
     "name": "Fline"
   },
   {
-    "id": "flits",
-    "symbol": "fls",
-    "name": "Flits"
-  },
-  {
-    "id": "flit-token",
-    "symbol": "flt",
-    "name": "Flit Token"
-  },
-  {
     "id": "flixxo",
     "symbol": "flixx",
     "name": "Flixxo"

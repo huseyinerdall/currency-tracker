@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-container>
-      <MainCryptoCurrency />
+      <MainCryptoCurrency :coin="coin" />
     </v-container>
   </div>
 </template>
@@ -12,6 +12,11 @@ import MainCryptoCurrency from "@/components/MainCryptoCurrency.vue";
 
 export default {
   name: "Home",
+  props: {
+    coin: {
+      type:String
+    }
+  },
   components: {
     MainCryptoCurrency,
   }

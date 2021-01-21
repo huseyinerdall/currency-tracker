@@ -7,10 +7,17 @@
             <b-form-select v-model="selected" :options="options"
                            style="background:#27293d;color:#fff;"
             ></b-form-select>
-            <label class="mt-4">Yaz</label>
-            <b-input v-model="yeni"></b-input>
+            <label class="mt-4">Seo Title</label>
+            <b-form-input v-model="seotitle"
+                           style="background:#27293d;color:#fff;"
+            ></b-form-input>
+            <label class="mt-4">Seo Description</label>
+            <b-form-input v-model="seodescription"
+                          style="background:#27293d;color:#fff;"
+            ></b-form-input>
+            <label class="mt-4">Paragraph of Coin</label>
             <vue-editor
-              class="mt-4"
+              class="mt-0"
               placeholder="Kripto para açıklaması"
               :value="description"
               v-model="description"
@@ -36,7 +43,8 @@ export default {
       options: [],
       description: "",
       data: "",
-      yeni: "",
+      seotitle: "",
+      seodescription : ""
     };
   },
   created() {
@@ -50,15 +58,16 @@ export default {
   },
   watch: {
     selected(){
-      this.yeni = "";
       this.description = this.data[this.selected];
     }
   },
   methods: {
     addNew: function() {
       axios.post(`http://localhost:4000/admin/addnewdescription`,{
-        yeni: this.yeni || this.selected,
+        yeni: this.selected,
         description: this.description,
+        seotitle: this.seotitle,
+        seodescription: this.seodescription
       })
         .then((response) => {
           if(response.data == "OK"){

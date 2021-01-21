@@ -3,8 +3,8 @@
   <v-card
       style="border: 1px solid #ddd;border-radius:0;background-color:transparent;"
       :style="$store.state.isLight ? 'color:rgba(0,0,0,0.87);' : 'color:#fff;'">
-    <v-card-title v-if="$route.params.coin">{{$route.params.coin}} Hakkında</v-card-title>
-    <v-card-title v-else-if="$route.params.gold">{{$route.params.gold}} Hakkında</v-card-title>
+    <v-card-title v-if="$route.params.coin">{{coin}}</v-card-title>
+    <v-card-title v-else-if="$route.params.gold">{{gold}}</v-card-title>
     <v-card-text :style="$store.state.isLight ? 'color:rgba(0,0,0,0.87);' : 'color:#fff;'" v-html="description">
       {{description}}
     </v-card-text>
@@ -13,21 +13,36 @@
 
 <script>
 import axios from "axios";
+//import currencies from "@/assets/currencies";
+import coins from "@/assets/coins.json";
 export default {
   name: "Description",
+  props: {
+    coin: {
+      type:String
+    },
+    gold: {
+      type:String
+    }
+  },
   data: () => ({
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab dicta distinctio dolorem esse nisi quasi suscipit! Cupiditate ipsam, similique. Aspernatur culpa debitis eveniet facere fugit, hic impedit neque porro velit.\n' +
-        '      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consectetur debitis dolore dolores dolorum eius labore laudantium minus neque nihil quo quod reiciendis, saepe. Aut iure laboriosam magnam sapiente vel?',
+    description: '',
 
   }),
   created() {
-    console.log(this.$route.params.coin)
+    let sys = "";
+    for (let i = 0; i < coins.length; i++) {
+      if(coins[i]["name"] == this.coin){
+        sys = coins[i]["symbol"];
+        break;
+      }
+    }
     if(this.$route.params.coin){
+      console.log(sys)
       axios.post(`${this.$store.state.admin}/cryptocoindescriptions`, {
-        coinName: this.$route.params.coin,
+        coinName: sys.toUpperCase(),
       })
           .then((response) => {
-            console.log(response.data)
             this.description = response.data;
           })
     }else if(this.$route.params.gold){

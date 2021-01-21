@@ -12,9 +12,13 @@ import GoldsPage from "../views/GoldsPage.vue";
 import CurrenciesPage from "../views/CurrenciesPage.vue";
 import Profile from "../views/Profile.vue";
 import CaprazKurlar from "../views/CaprazKurlar.vue";
-import qs from 'qs';
 // Admin Side
-
+function toCapitalize(str){
+    str = str.split('-')
+        .map(w => w[0].toLocaleUpperCase('tr-TR') + w.substr(1).toLocaleLowerCase('tr-TR'))
+        .join(' ');
+    return str;
+}
 Vue.use(VueRouter);
 
 const routes = [{
@@ -95,7 +99,10 @@ const routes = [{
         component: Coins,
         meta: {
             requiresAuth: false
-        }
+        },
+        props(route) { // <-- props as a Function
+            return { coin: toCapitalize(route.params.coin).split('-').join(' ') };
+        },
     },
     {
         path: "/altin-fiyatlari/:gold",
@@ -103,7 +110,10 @@ const routes = [{
         component: Golds,
         meta: {
             requiresAuth: false
-        }
+        },
+        props(route) { // <-- props as a Function
+            return { gold: toCapitalize(route.params.gold).split('-').join(' ') };
+        },
     },
     {
         path: "/doviz-kurlari/:gold",
@@ -111,7 +121,10 @@ const routes = [{
         component: Golds,
         meta: {
             requiresAuth: false
-        }
+        },
+        props(route) { // <-- props as a Function
+            return { gold: route.params.gold.toLocaleUpperCase('tr-TR').split('-').join(' ') };
+        },
     },
     {
         path: "/wallet",
@@ -126,13 +139,6 @@ const routes = [{
 const router = new VueRouter({
     mode: "history",
     base: process.env.BASE_URL,
-    parseQuery(query) {
-        return qs.parse(query);
-    },
-    stringifyQuery  : query => {
-        let result = qs.stringify(query, { format: 'RFC1738' })
-        return result ? ('?' + result) : ''
-    },
     routes
 });
 

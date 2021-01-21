@@ -1,17 +1,19 @@
 <template>
   <v-container class="mt-8 pa-0">
+
     <v-row class="flex-row pl-4 pr-4">
       <div>
         <v-avatar size="56" class="mb-2">
           <img
               :src="flag || $store.state.api+'/gold.png'"
-              :alt="$route.params.gold"
+              :alt="gold"
           >
         </v-avatar>
       </div>
+
       <div class="flex-column d-flex ml-2" style="width: 200px;">
         <div>
-          <h3 :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{ $route.params.gold | shorten }} {{ type == 'Altın' ? '' : '-' }} {{ $route.params.gold | tosymbol }}</h3>
+          <h3 :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{ gold | shorten }} {{ type == 'Altın' ? '' : '-' }} {{ gold | tosymbol }}</h3>
         </div>
         <div class="d-flex flex-row justify-space-between">
           <v-select
@@ -36,10 +38,10 @@
     <v-row class="pl-4 pr-4">
       <v-row class="pl-4 pr-4 justify-space-between" style="font-size: 18px;">
         <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[state > 0 ? 'price-up' : 'price-down']">
-          {{ alis || "--.----"}} {{ $route.params.gold == "Ons Altın" ? '$' : 'TL' }}
+          {{ (alis || 0) | binayracveondalik }} {{ gold == "Ons Altın" ? '$' : 'TL' }}
         </div>
         <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[state > 0 ? 'price-up' : 'price-down']">
-          {{ satis || "--.----"}} {{ $route.params.gold == "Ons Altın" ? '$' : 'TL' }}
+          {{ (satis || 0) | binayracveondalik }} {{ gold == "Ons Altın" ? '$' : 'TL' }}
         </div>
         <div class="mt-2" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'" :class="[parseFloat(satis) - parseFloat(close)>=0 ? 'green--text' : 'red--text']">
           {{ parseFloat(satis) - parseFloat(close) | signint  }}
@@ -75,7 +77,7 @@
 
 
     <div id="chart" style="border: 1px solid #ddd;" class="mt-2">
-      <apexchart ref="realtimeChart" class="ma-0 pa-0" type="area" height="350" :options="chartOptions"
+      <apexchart class="ma-0 pa-0" type="area" height="350" :options="chartOptions"
                  :series="series"></apexchart>
     </div>
 
@@ -97,6 +99,11 @@ import io from "socket.io-client";
 import currencies from '../assets/currencies.js';
 export default {
   name: "SinglePageGraphGold",
+  props: {
+    gold: {
+      type: String
+    },
+  },
   data: (app)=>({
     secenek:'SERBEST PİYASA',
     flag: '',
@@ -115,13 +122,12 @@ export default {
     type: '',
     updatetime: '',
     series: [{
-      name: app.$route.params.gold,
-      data: []
+      name: app.gold,
     }],
     chartOptions: {
       chart: {
         type: 'area',
-        stacked: false,
+        //stacked: false,
         height: 350,
         zoom: {
           type: 'x',
@@ -224,7 +230,7 @@ export default {
         shared: false,
         y: {
           formatter: function(val) {
-            let simge = app.$route.params.gold == "Ons Altın" ? " $" : " TL";
+            let simge = app.gold == "Ons Altın" ? " $" : " TL";
             return val + simge;
           }
         },
@@ -240,11 +246,10 @@ export default {
   }),
   created() {
     for (let i = 0; i < currencies.length; i++){
-      if(currencies[i]["name"]==this.$route.params.gold){
+      if(currencies[i]["name"]==this.gold){
         this.flag = currencies[i]["image"];
       }
     }
-
     if(this.$vuetify.breakpoint.smAndDown){
       this.chartOptions.responsive = [
         {
@@ -273,7 +278,7 @@ export default {
     }
     let app = this;
     this.interval = setInterval(() =>{
-      axios.get(`${this.$store.state.api}/gold/${this.$route.params.gold}`)
+      axios.get(`${this.$store.state.api}/gold/${this.gold}`)
           .then(response=>{
             this.alis = response.data["Alış"];
             this.satis = response.data["Satış"];
@@ -285,24 +290,19 @@ export default {
 
     let temp;
     var socket = io.connect(`${this.$store.state.addr}`);
-    socket.on(app.$route.params.gold, fetchedData => {
+    socket.on(app.gold, fetchedData => {
       if (fetchedData[fetchedData.length - 1]["Satis"] != temp || !temp) {
 
         //app.graphData = fetchedData
-        //let tempDates = [];
-        let time;
         let tempValues = [];
         for (let i = 0; i < fetchedData.length; i++) {
-          time = new Date(fetchedData[i]["createdAt"]).getTime();;
-          //tempDates.push(time.toLocaleString('tr'));
-          tempValues.push([time,fetchedData[i]["Satis"]]);
+          tempValues.push([fetchedData[i]["createdAt"],fetchedData[i]["Satis"]]);
         }
         if(app.time == 1){
           app.series = [{
             data: tempValues
           }]
         }
-
         temp = fetchedData[fetchedData.length - 1]["Satis"];
       }
     })
@@ -311,30 +311,26 @@ export default {
   methods: {
     getGraphData: function() {
       axios.post(`${this.$store.state.api}/getgoldaccordingtotimerange`, {
-        goldName: this.$route.params.gold,
+        goldName: this.gold,
         time: this.time,
       })
           .then(response => {
             let fetchedData = response.data;
             //let tempDates = [];
-            let time;
             let tempValues = [];
             for (let i = 0; i < fetchedData.length; i++) {
-              time = new Date(fetchedData[i]["createdAt"]).getTime();
-              //tempDates.push(time.toLocaleString('tr'));
-              tempValues.push([time,fetchedData[i]["Satis"]])
+              tempValues.push([fetchedData[i]["createdAt"],fetchedData[i]["Satis"]])
             }
             this.series = [{
               data: tempValues
             }]
-            //this.overlay = false;
+            this.overlay = false;
           })
     }
   },
   watch: {
-    time(newVal, oldVal) {
+    time() {
       //this.overlay = true;
-      console.log(newVal, oldVal);
       this.getGraphData();
     },
     current_price(newValue, oldValue) {
@@ -349,7 +345,7 @@ export default {
       if(newVal == "MERKEZ BANKASI"){
         clearInterval(this.interval);
         axios.post(`${this.$store.state.api}/tcmbone`, {
-          one: this.$route.params.gold
+          one: this.gold
         })
             .then(response => {
               this.alis = response.data.buy;
@@ -357,7 +353,7 @@ export default {
             })
       }else{
         this.interval = setInterval(() =>{
-          axios.get(`${this.$store.state.api}/gold/${this.$route.params.gold}`)
+          axios.get(`${this.$store.state.api}/gold/${this.gold}`)
               .then(response=>{
                 this.alis = response.data["Alış"];
                 this.satis = response.data["Satış"];

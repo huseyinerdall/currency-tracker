@@ -1,5 +1,5 @@
 import Vue from "vue";
-import VueMeta from 'vue-meta'
+import VueMeta from 'vue-meta';
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -7,22 +7,24 @@ import vuetify from "./plugins/vuetify";
 import axios from 'axios'
 import VueAxios from 'vue-axios';
 import VueApexCharts from 'vue-apexcharts';
+
 import currencies from './assets/currencies';
 Vue.use(VueMeta, {
     // optional pluginOptions
     refreshOnceOnNavigation: true
 });
 Vue.use(VueApexCharts);
-
 Vue.component('apexchart', VueApexCharts);
 Vue.config.productionTip = false;
-
 //axios.defaults.baseConfig = "http://localhost:4000/";
 Vue.use(VueAxios, axios);
-
 //for server
 Vue.prototype.$addr = 'http://localhost'
 Vue.prototype.$port = '4000'
+
+Vue.filter('turkishCurrencyformat', function (num) {
+    return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 4 }).format(num);
+});
 
 Vue.filter('currencyformat', function(value) {
     let temp = +value;
@@ -33,6 +35,14 @@ Vue.filter('currencyformat', function(value) {
         return value;
     }
 })
+
+Vue.filter('tokebabcase', function (str) {
+    str = str.toLowerCase();
+    let strArr = str.split(' ');
+    let kebabCaseStr = '';
+    kebabCaseStr = strArr.join('-');
+    return kebabCaseStr;
+});
 
 Vue.filter('currencyformattr', function(value) {
     let value1 = value;
@@ -49,7 +59,7 @@ Vue.filter('currencyformattr', function(value) {
 Vue.filter('binayracveondalik', function(value) {
     let temp = parseFloat(value);
     try{
-        value = new Intl.NumberFormat('tr-TR' ).format(temp);
+        value = new Intl.NumberFormat('tr-TR',{ minimumFractionDigits: 4 } ).format(temp);
         return value;
     }catch(e){
         return value;

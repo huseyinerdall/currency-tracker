@@ -13,6 +13,7 @@ app.get('/', function(req, res){
 
 app.get('/cryptocoindescriptions', (req, res) => {
     let data = fs.readFileSync("./static/descriptions.json");
+    data = JSON.parse(data);
     res.send(data);
 })
 
@@ -22,21 +23,35 @@ app.post('/cryptocoindescriptions', async(req, res) => {
     let data = descriptions[coin];
     res.send(data);
 })
+app.post('/getseodata', (req, res) => {
+    let coin = req.body.coin.toUpperCase();
+    console.log(req.body)
+    let seos = JSON.parse(fs.readFileSync("./static/seo.json"));
+    let data = seos[coin];
+    res.json(data);
+})
 
 app.post('/addnewdescription', (req, res) => {
     try {
         let des = req.body.description;
         let yeni = req.body.yeni;
-        console.log(des)
+        let seotitle = req.body.seotitle;
+        let seodescription = req.body.seodescription;
         let allData = JSON.parse(fs.readFileSync("./static/descriptions.json"));
+        let allSeoData = JSON.parse(fs.readFileSync("./static/seo.json"));
         allData[yeni] = des;
-        console.log(allData[yeni] == des)
+        allSeoData[yeni] = {
+            title: seotitle,
+            description: seodescription
+        }
         fs.writeFileSync("./static/descriptions.json",JSON.stringify(allData),(err) => {
+            res.send("NO");
+        });
+        fs.writeFileSync("./static/seo.json",JSON.stringify(allSeoData),(err) => {
             res.send("NO");
         });
         res.send("OK");
     }catch (e) {
-        console.log(e)
         res.send("NO");
     }
 })

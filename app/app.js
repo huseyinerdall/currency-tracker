@@ -281,44 +281,54 @@ app.post('/getcoinaccordingtotimerange', async(req, res) => {
     let coinSymbol = utils.search(coinName, coins)["symbol"];
     let data;
 
-    let BEGIN = moment().subtract(time, 'd').toString() || DEFAULT;
+    let BEGIN = moment().subtract(time, 'd').toDate() || DEFAULT;
     const NOW = new Date();
-    data = await db[coinSymbol.toUpperCase()].findAll({
-        where: {
-            createdAt: {
-                [Op.between]: [BEGIN, NOW],
+    //select distinct on ("createdAt"::date) * from AAVEs; -> sql
+    if(time == 1){
+        data = await db[coinSymbol.toUpperCase()].findAll({
+            where: {
+                createdAt: {
+                    [Op.between]: [BEGIN, NOW],
+                },
             },
-        }
-    });
+            order: [
+                ['id', 'asc'],
+            ],
+        });
+    }else{
+        data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${coinSymbol.toUpperCase()}s" where "createdAt" between '${BEGIN.toLocaleString()}' and '${NOW.toLocaleString()}'`,null,{
+            raw: true
+        });
+        data = data.slice(0,1)[0];
+    }
     io.emit(req.params["coinName"], data);
     res.json(data);
 })
 
 app.post('/getgoldaccordingtotimerange', async(req, res) => {
     let time = req.body.time || 1;
-    console.log(time,"---",req.body.goldName);
     //let coinID = utils.search(req.params["coinName"], coins)["id"];
     let goldName = req.body.goldName;
     let data;
 
-    let BEGIN = moment().subtract(time, 'd').toString() || DEFAULT;
-    const NOW = moment();
-    try{
+    let BEGIN = moment().subtract(time, 'd').toDate() || DEFAULT;
+    const NOW = moment().toDate();
+    if (time == 1){
         data = await db["Gold" + utils.turkishToEnglish(goldName)].findAll({
             where: {
                 createdAt: {
                     [Op.between]: [BEGIN, NOW],
                 }
-            }
+            },
+            order: [
+                ['id', 'asc'],
+            ],
         });
-    }catch (e){
-        data = await db[utils.turkishToEnglish(goldName)].findAll({
-            where: {
-                createdAt: {
-                    [Op.between]: [BEGIN, NOW],
-                }
-            }
+    }else{
+        data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${"Gold" + utils.turkishToEnglish(goldName)}s" where "createdAt" between '${BEGIN.toLocaleString()}' and '${NOW.toLocaleString()}'`,null,{
+            raw: true
         });
+        data = data.slice(0,1)[0];
     }
     io.emit(req.params["goldName"], data);
     res.json(data);
@@ -634,15 +644,18 @@ db.sequelize.sync().then(() => {
     let GCounter = 0;
     let GCloseWritable = true;*/
     let factRes = [];
+    let factRes50 = [];
     let golds = [];
     let currencies = [];
     setInterval(() => {
+        factRes50 = [];
         factRes = [];
         golds = [];
         currencies = [];
+
         let temp = {};
 
-        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h,7d`)
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h,7d`)
             .then((response) => {
                 for (let i = 0; i < response.data.length; i++) {
                     temp = {};
@@ -656,7 +669,11 @@ db.sequelize.sync().then(() => {
                     temp["pricechange7d"] = response.data[i]["price_change_percentage_7d_in_currency"] || 0;
                     temp["time"] = response.data[i]["last_updated"];
                     temp["image"] = response.data[i]["image"];
+                    temp["sparkline"] = response.data[i]["sparkline_in_7d"]["price"].slice(0,20);
                     factRes.push(temp);
+                    if(i<50){
+                        factRes50.push(temp);
+                    }
 
                     // aşagıdaki koşul sadece api çıktısı aynı sırada sonuçlanırsa düzgün calışır
                     if (response.data[i]["last_updated"] != M[response.data[i]["symbol"]] && db[response.data[i]["symbol"].toUpperCase()]) {
@@ -745,11 +762,12 @@ db.sequelize.sync().then(() => {
     }, MAINLOOPINTERVAL)
 
     setInterval(() => {
-        if(factRes.length != 0){io.emit('coins', factRes);}
+        if(factRes.length == 250){io.emit('coins', factRes);}
+        if(factRes50.length == 50){io.emit('coins50', factRes50);}
         if(golds.length != 0){io.emit('golds', golds);}
         if(currencies.length != 0){io.emit('currencies', currencies);}
 
-    },1200);
+    },500);
 
     let dolar = 0;
 
