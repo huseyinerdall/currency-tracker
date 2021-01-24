@@ -69,7 +69,7 @@ export default {
         { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
       ],
       data: [],
-      overlay: true,
+      overlay: false,
     }
   },
   created() {
@@ -81,24 +81,26 @@ export default {
     let app = this;
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
-      app.data = fetchedData;
-      let temp = app.data[3];
-      app.data[3] = app.data[1];
-      app.data[1] = temp;
-      temp = app.data[3];
-      app.data[3] = app.data[2];
-      app.data[2] = temp;
-      temp = app.data[2];
-      app.data[2] = app.data[19];
-      app.data[19] = temp;
+      if (fetchedData[0]){
+        app.data = fetchedData;
+        let temp = app.data[3];
+        app.data[3] = app.data[1];
+        app.data[1] = temp;
+        temp = app.data[3];
+        app.data[3] = app.data[2];
+        app.data[2] = temp;
+        temp = app.data[2];
+        app.data[2] = app.data[19];
+        app.data[19] = temp;
 
-      if(app.$route.path == '/'){
-        app.data.pop();
-        app.data.pop();
-        app.data.pop();
-        app.data.pop();
+        if(app.$route.path == '/'){
+          app.data.pop();
+          app.data.pop();
+          app.data.pop();
+          app.data.pop();
+        }
       }
-      app.overlay = false;
+      //app.overlay = false;
     })
 
   },

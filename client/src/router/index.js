@@ -100,9 +100,9 @@ const routes = [{
         meta: {
             requiresAuth: false
         },
-        props(route) { // <-- props as a Function
+        /*props(route) { // <-- props as a Function
             return { coin: toCapitalize(route.params.coin).split('-').join(' ') };
-        },
+        },*/
     },
     {
         path: "/altin-fiyatlari/:gold",

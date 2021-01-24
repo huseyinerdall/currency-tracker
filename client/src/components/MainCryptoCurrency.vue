@@ -41,19 +41,19 @@
             </v-avatar>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black--text':$store.state.isLight}">
-            <router-link :to="{ name: 'Coins', params: { coin: item.name.toLowerCase().split(' ').join('-') }}" tag="h3" class="body-1 text-uppercase"
+            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase"
                          :style="`font-size: ${$store.state.tdFontSize} !important;`"
                          v-if="$vuetify.breakpoint.smAndDown">
               {{ item.name | shorten }}
             </router-link>
-            <router-link :to="{ name: 'Coins', params: { coin: item.name.toLowerCase().split(' ').join('-') }}" tag="h3" class="body-1 text-uppercase"
+            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase"
                          :style="`font-size: ${$store.state.tdFontSize} !important;`"
                          v-else>
               {{ item.name }}
             </router-link>
           </td>
           <td :class="{'black--text':$store.state.isLight}">
-            <router-link :to="{ name: 'Coins', params: { coin: item.name.toLowerCase().split(' ').join('-') }}" tag="h3" class="body-1 text-uppercase"
+            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase"
                          :style="`font-size: ${$store.state.tdFontSize} !important;`">{{
                 item.shortName | uppercase
               }}

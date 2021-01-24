@@ -1,16 +1,5 @@
 <template>
   <div>
-    <v-text-field
-        v-if="!isHomepage"
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Kripto para ara"
-        single-line
-        hide-details
-        :light="$store.state.isLight"
-        :dark="!$store.state.isLight"
-        :color="$store.state.isLight ? '#fff' : '#000'"
-    ></v-text-field>
     <v-data-table
         :headers="headers"
         :items="data"
@@ -41,19 +30,19 @@
             </v-avatar>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black--text':$store.state.isLight}">
-            <router-link :to="{ name: 'Coins', params: { coin: item.name.toLowerCase().split(' ').join('-') }}" tag="h3" class="body-1 text-uppercase"
+            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase"
                          :style="`font-size: ${$store.state.tdFontSize} !important;`"
                          v-if="$vuetify.breakpoint.smAndDown">
               {{ item.name | shorten }}
             </router-link>
-            <router-link :to="{ name: 'Coins', params: { coin: item.name.toLowerCase().split(' ').join('-') }}" tag="h3" class="body-1 text-uppercase"
+            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase"
                          :style="`font-size: ${$store.state.tdFontSize} !important;`"
                          v-else>
               {{ item.name }}
             </router-link>
           </td>
           <td :class="{'black--text':$store.state.isLight}">
-            <router-link :to="{ name: 'Coins', params: { coin: item.name.toLowerCase().split(' ').join('-') }}" tag="h3" class="body-1 text-uppercase"
+            <router-link :to="{ name: 'Coins', params: { coin: item.name }}" tag="h3" class="body-1 text-uppercase"
                          :style="`font-size: ${$store.state.tdFontSize} !important;`">{{
                 item.shortName | uppercase
               }}
@@ -68,11 +57,11 @@
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black&#45;&#45;text':$store.state.isLight}">
             <v-sparkline
-                :labels="labels"
+                style="height: 30px"
                 :value="item.sparkline"
                 :color="item.pricechange24h>=0 ? 'green' : 'red'"
-                line-width="4"
-                padding="1"
+                line-width="2"
+                padding="6"
             ></v-sparkline>
           </td>
 <!--          <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black&#45;&#45;text':$store.state.isLight}">
@@ -171,7 +160,7 @@ export default {
         filterable: false,
       },
         {
-          text: 'Grafik',
+          text: '24S',
           value: 'sparkline',
           sortable: false,
           align: 'start',
@@ -194,14 +183,14 @@ export default {
         class: 'amber--text accent-3 body-1',
         filterable: false,
       },*/ {
-        text: 'Fark (24S)',
+        text: '24S',
         value: 'pricechange24h',
         sortable: false,
         align: 'start',
         class: 'amber--text accent-3 body-1',
         filterable: false,
       }, {
-        text: 'Fark (7G)',
+        text: '7G',
         value: 'pricechange7d',
         sortable: false,
         align: 'start',
@@ -230,17 +219,20 @@ export default {
       this.headers.splice(2, 3);
       this.headers.splice(3, 1);
     }
+    if(localStorage.getItem('coins')){
+      app.data = JSON.parse(localStorage.getItem('coins'));
+      this.overlay = false;
+    }
     var socket = io.connect(`${this.$store.state.addr}`);
-    socket.on("coins50", fetchedData => {
+    socket.on("coins30", fetchedData => {
       app.data = fetchedData;
-      app.overlay = false;
+      this.overlay = false;
+      localStorage.setItem("coins",JSON.stringify(fetchedData));
     })
     socket.on("dolar", fetchedData => {
       app.dolar = fetchedData;
     });
 
-  },
-  mounted() {
   },
   methods: {},
 }

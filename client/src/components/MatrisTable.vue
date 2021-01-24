@@ -21,8 +21,8 @@
         </th>
         <td v-for="currencyCol in value" :class="[(data[currencyCol]) / (data[currencyRow]) == 1 ? 'bir' : '']"
             :key="currencyCol">
-          <p>{{ (data[currencyCol]) / (data[currencyRow]) | tofixedfour }}</p>
-          <p style="font-size: 12px;">{{ (data[currencyRow]) / (data[currencyCol]) | tofixedfour }}</p>
+          <p>{{ (data[currencyCol]) / (data[currencyRow]) | turkishCurrencyformat }}</p>
+          <p style="font-size: 12px;">{{ (data[currencyRow]) / (data[currencyCol]) | turkishCurrencyformat }}</p>
         </td>
       </tr>
       <tr>
@@ -85,7 +85,7 @@
               <div style="color:#fff;padding-top:3px;">1 {{ item.symbol }}</div>
               <v-icon class="ml-1 mr-1" color="#fff">mdi-arrow-right</v-icon>
               <div style="color:#fff;padding-top:3px;">
-                {{ (data[item.name]) / (data[items[currentCurrency]["name"]]) | tofixedfour }}
+                {{ (data[item.name]) / (data[items[currentCurrency]["name"]]) | turkishCurrencyformat }}
                 {{ items[currentCurrency]["symbol"] }}
               </div>
             </div>

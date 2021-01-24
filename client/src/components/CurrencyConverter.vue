@@ -81,7 +81,8 @@
         },
         methods: {
             convert() {
-                this.amount = this.amount || 1;
+                this.amount = this.amount.toString().replace(",",".");
+              this.amount = this.amount || "1";
                 if (!(this.amount && this.source && this.target)) return;
                 axios.post(`${this.$store.state.api}/converter`, {
                         source: this.source,
@@ -90,7 +91,7 @@
                     })
                     .then(response => {
                         this.resulted = true;
-                        this.result = response.data.result;
+                        this.result = new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 4 }).format(response.data.result);
                     })
             }
         }

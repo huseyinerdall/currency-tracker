@@ -71,7 +71,7 @@ export default {
         { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
       ],
       data: [],
-      overlay: true,
+      overlay: false,
     }
   },
   created() {
@@ -84,7 +84,7 @@ export default {
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("golds", fetchedData => {
       app.data = fetchedData;
-      app.overlay = false;
+      //app.overlay = false;
     });
   },
   methods: {

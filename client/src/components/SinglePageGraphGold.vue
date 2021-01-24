@@ -113,7 +113,7 @@ export default {
     state:0,
     high: '',
     low: '',
-    overlay: false,
+    overlay: true,
     current_price: '',
     last_updated: '',
     alis: '',
@@ -292,8 +292,6 @@ export default {
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on(app.gold, fetchedData => {
       if (fetchedData[fetchedData.length - 1]["Satis"] != temp || !temp) {
-
-        //app.graphData = fetchedData
         let tempValues = [];
         for (let i = 0; i < fetchedData.length; i++) {
           tempValues.push([fetchedData[i]["createdAt"],fetchedData[i]["Satis"]]);

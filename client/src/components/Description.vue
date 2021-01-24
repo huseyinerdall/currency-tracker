@@ -3,7 +3,7 @@
   <v-card
       style="border: 1px solid #ddd;border-radius:0;background-color:transparent;"
       :style="$store.state.isLight ? 'color:rgba(0,0,0,0.87);' : 'color:#fff;'">
-    <v-card-title v-if="$route.params.coin">{{coin}}</v-card-title>
+    <v-card-title v-if="$route.params.coin">{{$route.params.coin | uppercase }}</v-card-title>
     <v-card-title v-else-if="$route.params.gold">{{gold}}</v-card-title>
     <v-card-text :style="$store.state.isLight ? 'color:rgba(0,0,0,0.87);' : 'color:#fff;'" v-html="description">
       {{description}}
@@ -32,15 +32,14 @@ export default {
   created() {
     let sys = "";
     for (let i = 0; i < coins.length; i++) {
-      if(coins[i]["name"] == this.coin){
-        sys = coins[i]["symbol"];
+      if(coins[i]["name"] == this.$route.params.coin){
+        sys = coins[i]["symbol"].toUpperCase();
         break;
       }
     }
     if(this.$route.params.coin){
-      console.log(sys)
       axios.post(`${this.$store.state.admin}/cryptocoindescriptions`, {
-        coinName: sys.toUpperCase(),
+        coinName: sys,
       })
           .then((response) => {
             this.description = response.data;

@@ -48,7 +48,7 @@ export default {
     };
   },
   created() {
-    axios.get(`http://localhost:4000/admin/cryptocoindescriptions`)
+    axios.get(`${this.$store.state.admin}/cryptocoindescriptions`)
       .then((response) => {
         this.data = response.data;
         for (const responseElement in response.data) {
@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     addNew: function() {
-      axios.post(`http://localhost:4000/admin/addnewdescription`,{
+      axios.post(`${this.$store.state.admin}/addnewdescription`,{
         yeni: this.selected,
         description: this.description,
         seotitle: this.seotitle,

@@ -17,7 +17,7 @@ app.get('/cryptocoindescriptions', (req, res) => {
     res.send(data);
 })
 
-app.post('/cryptocoindescriptions', async(req, res) => {
+app.post('/cryptocoindescriptions', (req, res) => {
     let coin = req.body.coinName;
     let descriptions = JSON.parse(fs.readFileSync("./static/descriptions.json"));
     let data = descriptions[coin];

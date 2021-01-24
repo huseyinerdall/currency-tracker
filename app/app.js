@@ -313,23 +313,45 @@ app.post('/getgoldaccordingtotimerange', async(req, res) => {
 
     let BEGIN = moment().subtract(time, 'd').toDate() || DEFAULT;
     const NOW = moment().toDate();
-    if (time == 1){
-        data = await db["Gold" + utils.turkishToEnglish(goldName)].findAll({
-            where: {
-                createdAt: {
-                    [Op.between]: [BEGIN, NOW],
-                }
-            },
-            order: [
-                ['id', 'asc'],
-            ],
-        });
-    }else{
-        data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${"Gold" + utils.turkishToEnglish(goldName)}s" where "createdAt" between '${BEGIN.toLocaleString()}' and '${NOW.toLocaleString()}'`,null,{
-            raw: true
-        });
-        data = data.slice(0,1)[0];
+
+    try{
+        if (time == 1){
+            data = await db["Gold" + utils.turkishToEnglish(goldName)].findAll({
+                where: {
+                    createdAt: {
+                        [Op.between]: [BEGIN, NOW],
+                    }
+                },
+                order: [
+                    ['id', 'asc'],
+                ],
+            });
+        }else{
+            data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${"Gold" + utils.turkishToEnglish(goldName)}s" where "createdAt" between '${BEGIN.toLocaleString()}' and '${NOW.toLocaleString()}'`,null,{
+                raw: true
+            });
+            data = data.slice(0,1)[0];
+        }
+    }catch (e){
+        if (time == 1){
+            data = await db[utils.turkishToEnglish(goldName)].findAll({
+                where: {
+                    createdAt: {
+                        [Op.between]: [BEGIN, NOW],
+                    }
+                },
+                order: [
+                    ['id', 'asc'],
+                ],
+            });
+        }else{
+            data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${utils.turkishToEnglish(goldName)}s" where "createdAt" between '${BEGIN.toLocaleString()}' and '${NOW.toLocaleString()}'`,null,{
+                raw: true
+            });
+            data = data.slice(0,1)[0];
+        }
     }
+
     io.emit(req.params["goldName"], data);
     res.json(data);
 })
@@ -644,11 +666,11 @@ db.sequelize.sync().then(() => {
     let GCounter = 0;
     let GCloseWritable = true;*/
     let factRes = [];
-    let factRes50 = [];
+    let factRes30 = [];
     let golds = [];
     let currencies = [];
     setInterval(() => {
-        factRes50 = [];
+        factRes30 = [];
         factRes = [];
         golds = [];
         currencies = [];
@@ -671,8 +693,8 @@ db.sequelize.sync().then(() => {
                     temp["image"] = response.data[i]["image"];
                     temp["sparkline"] = response.data[i]["sparkline_in_7d"]["price"].slice(0,20);
                     factRes.push(temp);
-                    if(i<50){
-                        factRes50.push(temp);
+                    if(i<30){
+                        factRes30.push(temp);
                     }
 
                     // aşagıdaki koşul sadece api çıktısı aynı sırada sonuçlanırsa düzgün calışır
@@ -763,10 +785,9 @@ db.sequelize.sync().then(() => {
 
     setInterval(() => {
         if(factRes.length == 250){io.emit('coins', factRes);}
-        if(factRes50.length == 50){io.emit('coins50', factRes50);}
+        if(factRes30.length == 30){io.emit('coins30', factRes30);}
         if(golds.length != 0){io.emit('golds', golds);}
         if(currencies.length != 0){io.emit('currencies', currencies);}
-
     },500);
 
     let dolar = 0;
@@ -778,7 +799,7 @@ db.sequelize.sync().then(() => {
             })
             .catch(err => console.log("Döviz datası alınamıyor!"));
         io.emit('dolar',dolar);
-    },5000);
+    },100);
 })
 
 setTimeout(() => { THE_BEGINNING_OF_EVERYTHING = false; },20000);

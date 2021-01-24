@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
+import store from "./store";
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -26,5 +26,6 @@ Vue.use(RouterPrefetch);
 new Vue({
   router,
   i18n,
+  store,
   render: h => h(App)
 }).$mount("#app");

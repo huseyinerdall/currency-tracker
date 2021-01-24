@@ -14,7 +14,7 @@
       <tbody v-if="data[0]">
         <tr>
           <td>{{ symbols[0] }}</td>
-          <td>{{ data[3]["today"]/data[0]["today"] | tofixedfour }}</td>
+          <td>{{ data[3]["today"]/data[0]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[3]['today']/data[0]['today'] - data[3]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[0]">
             {{ (data[3]["today"]/data[0]["today"]) - (data[3]["yesterday"]/data[0]["yesterday"]) | signintt }}
@@ -26,7 +26,7 @@
         </tr>
         <tr>
           <td>{{ symbols[1] }}</td>
-          <td>{{ data[0]["today"]/data[3]["today"] | tofixedfour }}</td>
+          <td>{{ data[0]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[0]['today']/data[3]['today'] - data[0]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[1]">
             {{ (data[0]["today"]/data[3]["today"]) - (data[0]["yesterday"]/data[3]["yesterday"]) | signintt }}
@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <td>{{ symbols[2] }}</td>
-          <td>{{ data[4]["today"]/data[0]["today"] | tofixedfour }}</td>
+          <td>{{ data[4]["today"]/data[0]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[4]['today']/data[0]['today'] - data[4]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[2]">
             {{ (data[4]["today"]/data[0]["today"]) - (data[4]["yesterday"]/data[0]["yesterday"]) | signintt }}
@@ -50,7 +50,7 @@
         </tr>
         <tr>
           <td>{{ symbols[3] }}</td>
-          <td>{{ data[0]["today"]/data[4]["today"] | tofixedfour }}</td>
+          <td>{{ data[0]["today"]/data[4]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[0]['today']/data[4]['today'] - data[0]['yesterday']/data[4]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[3]">
             {{ (data[0]["today"]/data[4]["today"]) - (data[0]["yesterday"]/data[4]["yesterday"]) | signintt }}
@@ -62,7 +62,7 @@
         </tr>
         <tr>
           <td>{{ symbols[4] }}</td>
-          <td>{{ data[7]["today"]/data[0]["today"] | tofixedfour }}</td>
+          <td>{{ data[7]["today"]/data[0]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[7]['today']/data[0]['today'] - data[7]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[4]">
             {{ (data[7]["today"]/data[0]["today"]) - (data[7]["yesterday"]/data[0]["yesterday"]) | signintt }}
@@ -74,7 +74,7 @@
         </tr>
         <tr>
           <td>{{ symbols[5] }}</td>
-          <td>{{ data[0]["today"]/data[7]["today"] | tofixedfour }}</td>
+          <td>{{ data[0]["today"]/data[7]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[0]['today']/data[7]['today'] - data[0]['yesterday']/data[7]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[5]">
             {{ (data[0]["today"]/data[7]["today"]) - (data[0]["yesterday"]/data[7]["yesterday"]) | signintt }}
@@ -86,7 +86,7 @@
         </tr>
         <tr>
           <td>{{ symbols[6] }}</td>
-          <td>{{ data[11]["today"]/data[0]["today"] | tofixedfour }}</td>
+          <td>{{ data[11]["today"]/data[0]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[7]['today']/data[0]['today'] - data[7]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[6]">
             {{ (data[11]["today"]/data[0]["today"]) - (data[11]["yesterday"]/data[0]["yesterday"]) | signintt }}
@@ -98,7 +98,7 @@
         </tr>
         <tr>
           <td>{{ symbols[7] }}</td>
-          <td>{{ data[0]["today"]/data[11]["today"] | tofixedfour }}</td>
+          <td>{{ data[0]["today"]/data[11]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[0]['today']/data[7]['today'] - data[0]['yesterday']/data[7]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[7]">
             {{ (data[0]["today"]/data[11]["today"]) - (data[0]["yesterday"]/data[11]["yesterday"]) | signintt }}
@@ -111,7 +111,7 @@
 
         <tr>
           <td>{{ symbols[8] }}</td>
-          <td>{{ data[3]["today"]/data[4]["today"] | tofixedfour }}</td>
+          <td>{{ data[3]["today"]/data[4]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[3]['today']/data[4]['today'] - data[3]['yesterday']/data[4]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[8]">
             {{ (data[3]["today"]/data[4]["today"]) - (data[3]["yesterday"]/data[4]["yesterday"]) | signintt }}
@@ -124,7 +124,7 @@
 
         <tr>
           <td>{{ symbols[9] }}</td>
-          <td>{{ data[4]["today"]/data[3]["today"] | tofixedfour }}</td>
+          <td>{{ data[4]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[4]['today']/data[3]['today'] - data[4]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[7]">
             {{ (data[4]["today"]/data[3]["today"]) - (data[4]["yesterday"]/data[3]["yesterday"]) | signintt }}
@@ -136,7 +136,7 @@
         </tr>
         <tr>
           <td>{{ symbols[10] }}</td>
-          <td>{{ data[7]["today"]/data[3]["today"] | tofixedfour }}</td>
+          <td>{{ data[7]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[7]['today']/data[3]['today'] - data[7]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[7]">
             {{ (data[7]["today"]/data[3]["today"]) - (data[7]["yesterday"]/data[3]["yesterday"]) | signintt }}
@@ -148,7 +148,7 @@
         </tr>
         <tr>
           <td>{{ symbols[11] }}</td>
-          <td>{{ data[3]["today"]/data[7]["today"] | tofixedfour }}</td>
+          <td>{{ data[3]["today"]/data[7]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[3]['today']/data[7]['today'] - data[3]['yesterday']/data[7]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[8]">
             {{ (data[3]["today"]/data[7]["today"]) - (data[3]["yesterday"]/data[7]["yesterday"]) | signintt }}
@@ -160,7 +160,7 @@
         </tr>
         <tr>
           <td>{{ symbols[12] }}</td>
-          <td>{{ data[11]["today"]/data[3]["today"] | tofixedfour }}</td>
+          <td>{{ data[11]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[11]['today']/data[3]['today'] - data[11]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[12]">
             {{ (data[11]["today"]/data[3]["today"]) - (data[11]["yesterday"]/data[3]["yesterday"]) | signintt }}
@@ -172,7 +172,7 @@
         </tr>
         <tr>
           <td>{{ symbols[13] }}</td>
-          <td>{{ data[3]["today"]/data[11]["today"] | tofixedfour }}</td>
+          <td>{{ data[3]["today"]/data[11]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[3]['today']/data[11]['today'] - data[3]['yesterday']/data[11]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[13]">
             {{ (data[3]["today"]/data[11]["today"]) - (data[3]["yesterday"]/data[11]["yesterday"]) | signintt }}
@@ -184,7 +184,7 @@
         </tr>
         <tr>
           <td>{{ symbols[14] }}</td>
-          <td>{{ data[16]["today"]/data[3]["today"] | tofixedfour }}</td>
+          <td>{{ data[16]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[11]['today']/data[3]['today'] - data[11]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[14]">
             {{ (data[16]["today"]/data[3]["today"]) - (data[16]["yesterday"]/data[3]["yesterday"]) | signintt }}
@@ -196,7 +196,7 @@
         </tr>
         <tr>
           <td>{{ symbols[15] }}</td>
-          <td>{{ data[3]["today"]/data[16]["today"] | tofixedfour }}</td>
+          <td>{{ data[3]["today"]/data[16]["today"] | turkishCurrencyformat }}</td>
           <td :class="[(data[3]['today']/data[11]['today'] - data[3]['yesterday']/data[11]['yesterday'])>=0 ? 'green--text' : 'red--text']"
               :key="symbols[15]">
             {{ (data[3]["today"]/data[16]["today"]) - (data[3]["yesterday"]/data[16]["yesterday"]) | signintt }}

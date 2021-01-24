@@ -4,6 +4,7 @@ import routes from "./routes";
 // configure router
 const router = new VueRouter({
   mode: "history",
+  base: "/administrator/",
   routes, // short for routes: routes
   linkExactActiveClass: "active",
   scrollBehavior: (to) => {

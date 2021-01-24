@@ -5,13 +5,13 @@
         <v-avatar size="56" class="mb-2">
           <img
               :src="coinImage"
-              :alt="coin"
+              :alt="$route.params.coin"
           >
         </v-avatar>
       </div>
       <div class="flex-column d-flex text--white ml-2" style="width: 200px;">
         <div>
-          <h3 :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{ coin }} - {{ symbol | uppercase }}</h3>
+          <h3 :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{ $route.params.coin }} - {{ symbol | uppercase }}</h3>
         </div>
         <div class="d-flex flex-row justify-space-between">
           <span style="font-size:12px;padding-top:9px;" :style="$store.state.isLight ? 'color:#000;':'color:#fff;'">{{last_updated | onlyTime}}</span>
@@ -107,7 +107,7 @@ export default {
     timeRange: 1,
     time: 1,
     dolar:0,
-    overlay: false,
+    overlay: true,
     state: 0,
     coinImage: '',
     symbol: '',
@@ -118,7 +118,7 @@ export default {
     price_change_24h: '',
     price_change_percentage_24h: '',
     series: [{
-      name: app.coin,
+      name: app.$route.params.coin,
       data: []
     }],
     chartOptions: {
@@ -241,14 +241,9 @@ export default {
     },
   }),
   methods: {
-    sleep: function(ms) {
-      return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-      });
-    },
     getGraphData: function() {
       axios.post(`${this.$store.state.api}/getcoinaccordingtotimerange`, {
-        coinName: this.coin,
+        coinName: this.$route.params.coin,
         time: this.time,
       })
           .then(response => {
@@ -268,7 +263,6 @@ export default {
                 categories: tempDates
               }
             }*/
-            this.overlay = false;
           })
 
     }
@@ -276,8 +270,8 @@ export default {
   created() {
     let sys = "";
     for (let i = 0; i < coins.length; i++) {
-      if(coins[i]["id"] == location.pathname.split('/')[2]){
-        sys = coins[i]["symbol"];
+      if(coins[i]["name"] == this.$route.params.coin){
+        sys = coins[i]["symbol"].toUpperCase();
         break;
       }
     }
@@ -287,7 +281,7 @@ export default {
         .then(response => {
             this.seodescription = response.data.description;
             this.seotitle = response.data.title;
-            console.log(this.$meta().refresh());
+            this.$meta().refresh();
         })
     if(this.$vuetify.breakpoint.smAndDown){
       this.chartOptions.responsive = [
@@ -318,7 +312,7 @@ export default {
     let app = this;
 
     this.interval = setInterval(() => {
-      axios.get(`${this.$store.state.api}/coin/${this.coin}`)
+      axios.get(`${this.$store.state.api}/coin/${this.$route.params.coin}`)
           .then(response => {
             this.coinImage = response.data[0].image;
             this.symbol = response.data[0].symbol;
@@ -335,7 +329,7 @@ export default {
 
     let temp;
     var socket = io.connect(`${this.$store.state.addr}`);
-    socket.on(app.coin, fetchedData => {
+    socket.on(app.$route.params.coin, fetchedData => {
       if (fetchedData[fetchedData.length - 1]["Fiyat"] != temp || !temp) {
         let tempValues = [];
         for (let i = 0; i < fetchedData.length; i++) {
@@ -346,6 +340,7 @@ export default {
     });
     socket.on("dolar", fetchedData => {
       app.dolar = fetchedData;
+      this.overlay = false;
     });
     this.getGraphData();
   },
