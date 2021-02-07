@@ -33,7 +33,7 @@ export default {
     login(){
       if(this.username && this.pwd){
         if(this.username == 'admin' && this.pwd == 'Qazxsw21.'){
-          localStorage.setItem('user',1);
+          localStorage.setItem('admin',1);
           this.$router.push({name:'dashboard'});
         }else{
           alert("Kullanıcı adı ya da parola yanlış!");

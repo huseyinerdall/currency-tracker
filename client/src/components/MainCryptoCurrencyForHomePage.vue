@@ -110,6 +110,7 @@
 //import axios from "axios";
 //import coins from '../assets/coins.json';
 import io from "socket.io-client";
+import axios from "axios";
 
 export default {
   props: {
@@ -130,33 +131,33 @@ export default {
         align: 'start',
         sortable: false,
         value: 'image',
-        class: 'amber--text accent-3 body-1',
+        class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Kurlar',
         align: 'start',
         sortable: false,
         value: 'name',
-        class: 'amber--text accent-3 body-1',
+        class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
       }, {
         text: 'Sembol',
         align: 'start',
         sortable: false,
         value: 'shortName',
-        class: 'amber--text accent-3 body-1',
+        class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
       }, {
         text: 'Fiyat(USD)',
         value: 'price',
         sortable: false,
         align: 'start',
-        class: 'amber--text accent-3 body-1',
+        class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Fiyat(TL)',
         value: 'priceTL',
         sortable: false,
         align: 'start',
-        class: 'amber--text accent-3 body-1',
+        class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
         filterable: false,
       },
         {
@@ -164,46 +165,30 @@ export default {
           value: 'sparkline',
           sortable: false,
           align: 'start',
-          class: 'amber--text accent-3 body-1',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
           filterable: false,
-        },
-
-        /*{
-        text: 'Değeri',
-        value: 'market_cap',
-        sortable: false,
-        align: 'start',
-        class: 'amber--text accent-3 body-1',
-        filterable: false,
-      }, {
-        text: 'Piyasa Hacmi',
-        value: 'volume',
-        sortable: false,
-        align: 'start',
-        class: 'amber--text accent-3 body-1',
-        filterable: false,
-      },*/ {
-        text: '24S',
+        },{
+        text: '24S(%)',
         value: 'pricechange24h',
         sortable: false,
         align: 'start',
-        class: 'amber--text accent-3 body-1',
+        class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
         filterable: false,
       }, {
-        text: '7G',
+        text: '7G(%)',
         value: 'pricechange7d',
         sortable: false,
         align: 'start',
-        class: 'amber--text accent-3 body-1',
+        class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
         filterable: false,
       }, {
         text: 'Saat',
         value: 'time',
         sortable: false,
         align: 'start',
-        class: 'amber--text accent-3 body-1',
+        class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
         filterable: false,
-      },],
+      }],
       data: [],
       dolar: 1,
       search: '',
@@ -229,12 +214,152 @@ export default {
       this.overlay = false;
       localStorage.setItem("coins",JSON.stringify(fetchedData));
     })
-    socket.on("dolar", fetchedData => {
-      app.dolar = fetchedData;
-    });
+    axios.get('https://finans.truncgil.com/today.json')
+        .then(response =>{
+          app.dolar = response.data["ABD DOLARI"]["Satış"];
+        })
+        .catch(err => console.log(err));
 
   },
   methods: {},
+  computed: {
+    isLight () {
+      return this.$store.state.isLight;
+    }
+  },
+  watch: {
+    isLight (newValue){
+      if(newValue){
+        this.headers = [{
+          text: '',
+          align: 'start',
+          sortable: false,
+          value: 'image',
+          class: 'pinkk body-1',
+          filterable: false,
+        }, {
+          text: 'Kurlar',
+          align: 'start',
+          sortable: false,
+          value: 'name',
+          class: 'pinkk body-1',
+        }, {
+          text: 'Sembol',
+          align: 'start',
+          sortable: false,
+          value: 'shortName',
+          class: 'pinkk body-1',
+        }, {
+          text: 'Fiyat(USD)',
+          value: 'price',
+          sortable: false,
+          align: 'start',
+          class: 'pinkk body-1',
+          filterable: false,
+        }, {
+          text: 'Fiyat(TL)',
+          value: 'priceTL',
+          sortable: false,
+          align: 'start',
+          class: 'pinkk body-1',
+          filterable: false,
+        },
+          {
+            text: '24S',
+            value: 'sparkline',
+            sortable: false,
+            align: 'start',
+            class: 'pinkk body-1',
+            filterable: false,
+          },{
+            text: '24S(%)',
+            value: 'pricechange24h',
+            sortable: false,
+            align: 'start',
+            class: 'pinkk body-1',
+            filterable: false,
+          }, {
+            text: '7G(%)',
+            value: 'pricechange7d',
+            sortable: false,
+            align: 'start',
+            class: 'pinkk body-1',
+            filterable: false,
+          }, {
+            text: 'Saat',
+            value: 'time',
+            sortable: false,
+            align: 'start',
+            class: 'pinkk body-1',
+            filterable: false,
+          }]
+      }else{
+        this.headers = [{
+          text: '',
+          align: 'start',
+          sortable: false,
+          value: 'image',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+          filterable: false,
+        }, {
+          text: 'Kurlar',
+          align: 'start',
+          sortable: false,
+          value: 'name',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        }, {
+          text: 'Sembol',
+          align: 'start',
+          sortable: false,
+          value: 'shortName',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        }, {
+          text: 'Fiyat(USD)',
+          value: 'price',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+          filterable: false,
+        }, {
+          text: 'Fiyat(TL)',
+          value: 'priceTL',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+          filterable: false,
+        },
+          {
+            text: '24S',
+            value: 'sparkline',
+            sortable: false,
+            align: 'start',
+            class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+            filterable: false,
+          },{
+            text: '24S(%)',
+            value: 'pricechange24h',
+            sortable: false,
+            align: 'start',
+            class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+            filterable: false,
+          }, {
+            text: '7G(%)',
+            value: 'pricechange7d',
+            sortable: false,
+            align: 'start',
+            class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+            filterable: false,
+          }, {
+            text: 'Saat',
+            value: 'time',
+            sortable: false,
+            align: 'start',
+            class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+            filterable: false,
+          }]
+      }
+    }
+  }
 }
 </script>
 
@@ -273,9 +398,6 @@ h3 {
   background: rgba(0,0,0,0.3) !important;
 }
 
-.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th {
-  border-bottom: thin solid #444767 !important;
-}
 
 .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
   border-bottom: thin solid #444767 !important;
@@ -320,5 +442,8 @@ h3 {
 .theme--dark.v-data-table{
   background-color: rgba(0,0,0,.2) !important;
   color: #FFFFFF;
+}
+.pinkk{
+  color:#ff3366 !important;
 }
 </style>

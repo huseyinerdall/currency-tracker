@@ -11,6 +11,10 @@
             <b-form-input v-model="seotitle"
                            style="background:#27293d;color:#fff;"
             ></b-form-input>
+            <label class="mt-4">Seo Keywords</label>
+            <b-form-input v-model="seokeywords"
+                          style="background:#27293d;color:#fff;"
+            ></b-form-input>
             <label class="mt-4">Seo Description</label>
             <b-form-input v-model="seodescription"
                           style="background:#27293d;color:#fff;"
@@ -44,7 +48,8 @@ export default {
       description: "",
       data: "",
       seotitle: "",
-      seodescription : ""
+      seodescription : "",
+      seokeywords: ""
     };
   },
   created() {
@@ -67,7 +72,8 @@ export default {
         yeni: this.selected,
         description: this.description,
         seotitle: this.seotitle,
-        seodescription: this.seodescription
+        seodescription: this.seodescription,
+        keywords: this.seokeywords
       })
         .then((response) => {
           if(response.data == "OK"){

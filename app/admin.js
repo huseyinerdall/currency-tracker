@@ -16,6 +16,11 @@ app.get('/cryptocoindescriptions', (req, res) => {
     data = JSON.parse(data);
     res.send(data);
 })
+app.get('/cryptoseodata', (req, res) => {
+    let data = fs.readFileSync("./static/seo.json");
+    data = JSON.parse(data);
+    res.send(data);
+})
 
 app.post('/cryptocoindescriptions', (req, res) => {
     let coin = req.body.coinName;
@@ -37,12 +42,14 @@ app.post('/addnewdescription', (req, res) => {
         let yeni = req.body.yeni;
         let seotitle = req.body.seotitle;
         let seodescription = req.body.seodescription;
+        let seokeywords = req.body.keywords;
         let allData = JSON.parse(fs.readFileSync("./static/descriptions.json"));
         let allSeoData = JSON.parse(fs.readFileSync("./static/seo.json"));
         allData[yeni] = des;
         allSeoData[yeni] = {
             title: seotitle,
-            description: seodescription
+            description: seodescription,
+            keywords: seokeywords
         }
         fs.writeFileSync("./static/descriptions.json",JSON.stringify(allData),(err) => {
             res.send("NO");

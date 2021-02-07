@@ -4,11 +4,11 @@
     :style="$store.state.isLight ? 'background-color:rgba(255,255,255,0.3);color:rgba(0,0,0,0.83) !important;' : 'background-color:rgba(0,0,0,0.3);color:rgba(255,255,255,0.83) !important;'">
       <thead>
         <tr>
-          <th class="amber--text accent-3 body-1" style="width: 160px !important;">Çapraz Kurlar</th>
-          <th class="amber--text accent-3 body-1">Parite</th>
-          <th class="amber--text accent-3 body-1">Fark</th>
-          <th class="amber--text accent-3 body-1">Yüzde</th>
-          <th class="amber--text accent-3 body-1">Saat</th>
+          <th :class="$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1'" style="width: 160px !important;">Çapraz Kurlar</th>
+          <th :class="$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1'">Parite</th>
+          <th :class="$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1'">Fark</th>
+          <th :class="$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1'">Yüzde</th>
+          <th :class="$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1'">Saat</th>
         </tr>
       </thead>
       <tbody v-if="data[0]">
@@ -281,5 +281,8 @@ th {
 }
 tr:hover{
   background-color: rgba(0,0,0,0.3);
+}
+.pinkk{
+  color:#ff3366 !important;
 }
 </style>

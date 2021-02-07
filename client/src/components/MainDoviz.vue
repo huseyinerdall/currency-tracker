@@ -25,12 +25,12 @@
           <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Satış"] | turkishCurrencyformat}}</td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ parseFloat(item["Satış"]) - parseFloat(item.close) | signint }}
+              {{ parseFloat(item["Satış"]) - parseFloat(item.close) | signint }}%
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[((item['Satış'] - item.close)/item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ ((parseFloat(item["Satış"]) - parseFloat(item.close))/parseFloat(item.close))*100 | signint }}%
+              {{ ((parseFloat(item["Satış"]) - parseFloat(item.close))/parseFloat(item.close))*100 | signint }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
@@ -61,28 +61,49 @@ export default {
     return {
       goldloaded: true,
       headers: [
-        { text: 'Döviz Kurları',align: 'start', sortable: false,value: 'type',class: 'amber--text accent-3 body-1',width:"160px"},
-        { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
-        { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
-        { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
-        { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
-        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
+        { text: 'Döviz Kurları',align: 'start', sortable: false,value: 'type',class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',width:"160px"},
+        { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
+        { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
+        { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
+        { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
+        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
       ],
       data: [],
       overlay: false,
     }
   },
   created() {
+    let app = this;
     if(this.$vuetify.breakpoint.smAndDown){
       this.headers.pop();
       this.headers.pop();
       this.headers.pop();
     }
-    let app = this;
+    if(localStorage.getItem('currencies')){
+      app.data = JSON.parse(localStorage.getItem('currencies'));
+      let temp = app.data[3];
+      app.data[3] = app.data[1];
+      app.data[1] = temp;
+      temp = app.data[3];
+      app.data[3] = app.data[2];
+      app.data[2] = temp;
+      temp = app.data[2];
+      app.data[2] = app.data[19];
+      app.data[19] = temp;
+      if(app.$route.path == '/'){
+        app.data.pop();
+        app.data.pop();
+        app.data.pop();
+        app.data.pop();
+      }
+      this.overlay = false;
+    }
+
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
       if (fetchedData[0]){
         app.data = fetchedData;
+        localStorage.setItem("currencies",JSON.stringify(fetchedData));
         let temp = app.data[3];
         app.data[3] = app.data[1];
         app.data[1] = temp;
@@ -104,8 +125,62 @@ export default {
     })
 
   },
-  methods: {
+  computed: {
+    isLight () {
+      return this.$store.state.isLight;
+    }
   },
+  watch: {
+    isLight() {
+      this.headers = [
+        {
+          text: 'Döviz Kurları',
+          align: 'start',
+          sortable: false,
+          value: 'type',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+          width: "160px"
+        },
+        {
+          text: 'Alış',
+          value: 'Alış',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+        {
+          text: 'Satış',
+          value: 'Satış',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+        {
+          text: 'Yüzde',
+          value: 'Yuzde',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+        {
+          text: 'Fark',
+          value: 'Fark',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+        {
+          text: 'Saat',
+          value: 'time',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+      ]
+    }
+  },
+  methods: {
+  }
 }
 </script>
 
@@ -122,10 +197,7 @@ h3{
 .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row){
   border-bottom-color: #ddd !important;
 }
-</style>
-<style>
-.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th{
-  border-bottom-color: #ddd !important;
+.pinkk{
+  color:#ff3366 !important;
 }
-
 </style>

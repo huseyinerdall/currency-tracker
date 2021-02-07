@@ -12,6 +12,7 @@ import GoldsPage from "../views/GoldsPage.vue";
 import CurrenciesPage from "../views/CurrenciesPage.vue";
 import Profile from "../views/Profile.vue";
 import CaprazKurlar from "../views/CaprazKurlar.vue";
+import PageNotFound from "../views/PageNotFound.vue";
 // Admin Side
 function toCapitalize(str){
     str = str.split('-')
@@ -134,6 +135,7 @@ const routes = [{
             requiresAuth: true
         }
     },
+    { path: "*", component: PageNotFound }
 ];
 
 const router = new VueRouter({

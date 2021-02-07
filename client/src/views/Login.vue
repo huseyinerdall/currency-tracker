@@ -37,19 +37,7 @@
 
             </v-col>
             <v-col cols="4">
-              <v-btn
-                  style="background:#de5246;"
-                  class="white--text"
-                  small
-              >
-                Google
-                <v-icon
-                    right
-                    dark
-                >
-                  mdi-google
-                </v-icon>
-              </v-btn>
+              <GoogleLogin :params="params" :logoutButton=true>Logout</GoogleLogin>
             </v-col>
             <v-col cols="4">
               <v-btn
@@ -73,18 +61,16 @@
     </v-container>
   </div>
 </template>
-
 <script>
     import axios from "axios";
-
     export default {
         name: "Login",
-        components: {},
         data() {
             return {
                 email: '',
                 password: '',
                 show1: false,
+                client_id: "948525970652-fuuplq2bgdd7q24kvetlet4il9b66p1g.apps.googleusercontent.com"
             }
         },
         methods: {
@@ -126,5 +112,4 @@
     };
 </script>
 <style scoped>
-
 </style>

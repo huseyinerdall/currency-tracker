@@ -27,12 +27,12 @@
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[(parseFloat(item['Satış']) - parseFloat(item.close))>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ (parseFloat(item["Satış"]) - parseFloat(item.close)) | signint }}
+              {{ (parseFloat(item["Satış"]) - parseFloat(item.close)) | signint }}%
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[((parseFloat(item['Satış']) - parseFloat(item.close))/parseFloat(item.close))>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ (((parseFloat(item["Satış"]) - parseFloat(item.close))/parseFloat(item.close))*100) | signint }}%
+              {{ (((parseFloat(item["Satış"]) - parseFloat(item.close))/parseFloat(item.close))*100) | signint }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
@@ -59,33 +59,93 @@
 import io from "socket.io-client";
 
 export default {
-  data () {
+  data (app) {
     return {
       goldloaded: true,
       headers: [
-        { text: 'Altın Kurları',align: 'start', sortable: false,value: 'type',class: 'amber--text accent-3 body-1',width:"160px"},
-        { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
-        { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
-        { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
-        { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
-        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: 'amber--text accent-3 body-1', },
+        { text: 'Altın Kurları',align: 'start', sortable: false,value: 'type',class: app.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',width:"160px"},
+        { text: 'Alış', value: 'Alış',sortable: false,align: 'start',class: app.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
+        { text: 'Satış', value: 'Satış',sortable: false,align: 'start',class: app.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
+        { text: 'Yüzde', value: 'Yuzde',sortable: false,align: 'start',class: app.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
+        { text: 'Fark', value: 'Fark',sortable: false,align: 'start',class: app.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
+        { text: 'Saat', value: 'time',sortable: false,align: 'start',class: app.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1', },
       ],
       data: [],
       overlay: false,
     }
   },
   created() {
+    let app = this;
     if(this.$vuetify.breakpoint.smAndDown){
       this.headers.pop();
       this.headers.pop();
       this.headers.pop();
     }
-    let app = this;
+    if(localStorage.getItem('golds')){
+      app.data = JSON.parse(localStorage.getItem('golds'));
+      this.overlay = false;
+    }
+
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("golds", fetchedData => {
       app.data = fetchedData;
+      localStorage.setItem("golds",JSON.stringify(fetchedData));
       //app.overlay = false;
     });
+  },
+  computed: {
+    isLight () {
+      return this.$store.state.isLight;
+    }
+  },
+  watch: {
+    isLight() {
+      this.headers = [
+        {
+          text: 'Döviz Kurları',
+          align: 'start',
+          sortable: false,
+          value: 'type',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+          width: "160px"
+        },
+        {
+          text: 'Alış',
+          value: 'Alış',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+        {
+          text: 'Satış',
+          value: 'Satış',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+        {
+          text: 'Yüzde',
+          value: 'Yuzde',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+        {
+          text: 'Fark',
+          value: 'Fark',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+        {
+          text: 'Saat',
+          value: 'time',
+          sortable: false,
+          align: 'start',
+          class: this.$store.state.isLight ? 'pinkk body-1' : 'amber--text accent-3 body-1',
+        },
+      ]
+    }
   },
   methods: {
   },
@@ -97,9 +157,6 @@ export default {
   background: rgba(0, 0, 0, .3) !important;
 }
 .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row), .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row){
-  border-bottom-color: #ddd !important;
-}
-.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr:last-child > th{
   border-bottom-color: #ddd !important;
 }
 h3{

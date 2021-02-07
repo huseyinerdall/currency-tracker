@@ -28,7 +28,7 @@
         ></v-select>
       </v-col>
       <v-col cols="12" lg="1" class="text-center pb-0 pt-0 ma-0">
-        <v-icon size="40" color="#ffbf00" class="mt-1" :class="$vuetify.breakpoint.smAndDown ? 'mdi-rotate-90' : ''">
+        <v-icon size="40" :color="$store.state.isLight ? '#ff3366' : '#ffbf00'" class="mt-1" :class="$vuetify.breakpoint.smAndDown ? 'mdi-rotate-90' : ''">
           mdi-arrow-right
         </v-icon>
       </v-col>

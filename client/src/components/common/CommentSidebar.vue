@@ -46,7 +46,7 @@
                 <div v-for="comment in data" :key="comment.id" class="message received" >
                   <div class="user-info d-flex mb-2">
                     <v-avatar v-if="comment.profileImage" size="36">
-                      <img :src="'http://'+$store.state.addr+':'+$store.state.port+'/uploads/'+comment.profileImage" alt="">
+                      <img :src="$store.state.api+'/uploads/'+comment.profileImage" alt="">
                     </v-avatar>
                     <v-avatar v-else color="indigo" size="36" class="white--text">{{comment.fullName | nameAvatar}}</v-avatar>
                     <h4 class="ml-4" style="line-height:36px;">{{comment.fullName}}</h4>
@@ -56,7 +56,7 @@
                     <div>
                       {{comment.dislike | length}}
                       <span style="cursor: pointer;" @click="dislike(comment.id)">
-                        <v-icon color="gray">mdi-thumb-down</v-icon>
+                        <v-icon :color="comment.dislike.indexOf(userInfo['id']) > -1 ? 'red' : ''">mdi-thumb-down</v-icon>
                       </span>
                     </div>
                     <div>
@@ -283,12 +283,22 @@
             let app = this;
             let userInfo = JSON.parse(localStorage.getItem('user'));
             var socket = io.connect(`${this.$store.state.addr}`);
-            socket.on(app.$route.params.coin+"-comments", fetchedData => {
-              app.data = fetchedData;
-              if(JSON.parse(fetchedData.like).indexOf(userInfo.id)>-1){
-                app.liked = true;
-              }
-            })
+            if(app.$route.params.gold){
+              socket.on(app.$route.params.gold+"-comments", fetchedData => {
+                app.data = fetchedData;
+                if(JSON.parse(fetchedData.like).indexOf(userInfo.id)>-1){
+                  app.liked = true;
+                }
+              })
+            }
+            else{
+              socket.on(app.$route.params.coin+"-comments", fetchedData => {
+                app.data = fetchedData;
+                if(JSON.parse(fetchedData.like).indexOf(userInfo.id)>-1){
+                  app.liked = true;
+                }
+              })
+            }
             this.getComments();
             if(localStorage.getItem('user')){
               this.isAuthenticated = true;

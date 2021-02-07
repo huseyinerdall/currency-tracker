@@ -6,10 +6,12 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const axios = require('axios');
 let fs = require('fs');
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 let moment = require('moment');
 const path = require('path');
+
+const passport = require('passport');
 
 
 var parseString = require('xml2js').parseString;
@@ -36,6 +38,37 @@ const truncgil = 'https://finans.truncgil.com/today.json';
 const app = express();
 const admin = require('./admin.js');
 
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new GoogleStrategy({
+        clientID: "948525970652-fuuplq2bgdd7q24kvetlet4il9b66p1g.apps.googleusercontent.com",
+        clientSecret: "_D28pNM80mE9qOiiUO8Ff7qX",
+        callbackURL: "http://localhost:4000/google/callback"
+    },
+    function(accessToken, refreshToken, profile, cb) {
+        console.log(profile);
+        db.User.findOrCreate({
+            fullName: profile.displayName,
+            email: profile.emails[0].value,
+            profileImage: profile.photos[0].value,
+        }, function (err) {
+            console.log(err);
+            return cb(err);
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+));
+app.get('/google',
+    passport.authenticate('google', { scope: ['profile','email'] }));
+
+app.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    });
 
 
 app.use(morgan('tiny'));
@@ -279,6 +312,7 @@ app.post('/getcoinaccordingtotimerange', async(req, res) => {
     //let coinID = utils.search(req.params["coinName"], coins)["id"];
     let coinName = req.body.coinName;
     let coinSymbol = utils.search(coinName, coins)["symbol"];
+
     let data;
 
     let BEGIN = moment().subtract(time, 'd').toDate() || DEFAULT;
@@ -296,7 +330,7 @@ app.post('/getcoinaccordingtotimerange', async(req, res) => {
             ],
         });
     }else{
-        data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${coinSymbol.toUpperCase()}s" where "createdAt" between '${BEGIN.toLocaleString()}' and '${NOW.toLocaleString()}'`,null,{
+        data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${coinSymbol.toUpperCase()}s" where "createdAt" between '${BEGIN.toISOString()}' and '${NOW.toISOString()}'`,null,{
             raw: true
         });
         data = data.slice(0,1)[0];
@@ -327,7 +361,7 @@ app.post('/getgoldaccordingtotimerange', async(req, res) => {
                 ],
             });
         }else{
-            data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${"Gold" + utils.turkishToEnglish(goldName)}s" where "createdAt" between '${BEGIN.toLocaleString()}' and '${NOW.toLocaleString()}'`,null,{
+            data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${"Gold" + utils.turkishToEnglish(goldName)}s" where "createdAt" between '${BEGIN.toISOString()}' and '${NOW.toISOString()}'`,null,{
                 raw: true
             });
             data = data.slice(0,1)[0];
@@ -345,7 +379,7 @@ app.post('/getgoldaccordingtotimerange', async(req, res) => {
                 ],
             });
         }else{
-            data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${utils.turkishToEnglish(goldName)}s" where "createdAt" between '${BEGIN.toLocaleString()}' and '${NOW.toLocaleString()}'`,null,{
+            data = await db.sequelize.query(`select distinct on ("createdAt"::date) * from "${utils.turkishToEnglish(goldName)}s" where "createdAt" between '${BEGIN.toISOString()}' and '${NOW.toISOString()}'`,null,{
                 raw: true
             });
             data = data.slice(0,1)[0];
@@ -480,6 +514,7 @@ app.post('/sendcomment', async(req, res) => {
                     subject: subject
                 }
             });
+            console.log(subject+"-comments")
             io.emit(subject+"-comments",data);
         })
 
@@ -563,6 +598,11 @@ app.post('/converter', (req, res) => {
                 s = +response.data[source]["Satış"];
                 result = (a * s);
             }
+            if (source == "TÜRK LİRASI" && target != "TÜRK LİRASI") {
+                s = +response.data[target]["Satış"];
+                console.log("geldi")
+                result = (a * s);
+            }
             if (target == "TÜRK LİRASI" && source == "TÜRK LİRASI") {
                 result = a;
             }
@@ -574,7 +614,7 @@ app.post('/converter', (req, res) => {
 
             res.json({ "result": result.toFixed(4) });
         })
-        .catch((err) => console.log("Bekleyin!"))
+        .catch((err) => console.log(err))
 })
 
 app.post('/register', (req, res) => {
@@ -648,7 +688,7 @@ app.post('/login', (req, res) => {
 
 
 const NONCHANGE_TIME = 60 * 1/6;
-const MAINLOOPINTERVAL = 10000;
+const MAINLOOPINTERVAL = 100000;
 
 
 db.sequelize.sync().then(() => {
@@ -661,10 +701,6 @@ db.sequelize.sync().then(() => {
 
     let M = {}; // coin değişimini tespit için
     let C = {}; // döviz değişimini tespit için
-    /*let CCounter = 0;
-    let CCloseWritable = true;
-    let GCounter = 0;
-    let GCloseWritable = true;*/
     let factRes = [];
     let factRes30 = [];
     let golds = [];
@@ -790,16 +826,7 @@ db.sequelize.sync().then(() => {
         if(currencies.length != 0){io.emit('currencies', currencies);}
     },500);
 
-    let dolar = 0;
 
-    setInterval(() => {
-        axios.get('https://finans.truncgil.com/today.json')
-            .then(response =>{
-                dolar = response.data["ABD DOLARI"]["Satış"];
-            })
-            .catch(err => console.log("Döviz datası alınamıyor!"));
-        io.emit('dolar',dolar);
-    },100);
 })
 
 setTimeout(() => { THE_BEGINNING_OF_EVERYTHING = false; },20000);

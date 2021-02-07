@@ -4,11 +4,12 @@
            :style="$store.state.isLight ? 'background-color:rgba(255,255,255,0.3) !important;color:rgba(0,0,0,0.83) !important;' : 'background-color:rgba(0,0,0,0.3) !important;color:rgba(255,255,255,0.83) !important;'"
            v-if="$vuetify.breakpoint.mdAndUp">
       <thead>
-      <tr style="width:32px;">
+      <tr style="height:32px;">
         <th style="border-left: 0 !important;width:160px;">
 
         </th>
-        <th v-for="currency in value" :key="currency" style="font-size:14px;" class="amber--text accent-3">
+        <th v-for="currency in value" :key="currency" style="font-size:14px;"
+            :class="$store.state.isLight ? 'pinkk' : 'amber--text accent-3'">
           {{ currency | shorten }}
         </th>
       </tr>
@@ -16,7 +17,7 @@
       <tbody>
       <tr v-for="currencyRow in value" :key="currencyRow">
         <th style="border-left: 0 !important;font-size:14px;">
-          <span class="amber--text accent-3 text-right">1 {{ currencyRow | shorten }}</span>
+          <span :class="$store.state.isLight ? 'pinkk text-right' : 'amber--text accent-3 text-right'">1 {{ currencyRow | shorten }}</span>
           <p style="font-size: 12px;">Ters Parite</p>
         </th>
         <td v-for="currencyCol in value" :class="[(data[currencyCol]) / (data[currencyRow]) == 1 ? 'bir' : '']"
@@ -212,5 +213,8 @@ p {
 
 .v-text-field > .v-input__control > .v-input__slot:before, .v-text-field > .v-input__control > .v-input__slot:after {
   width: 0 !important;
+}
+.pinkk{
+  color:#ff3366 !important;
 }
 </style>

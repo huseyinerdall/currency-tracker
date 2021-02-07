@@ -176,9 +176,7 @@ export default {
         type: 'gradient',
         gradient: {
           shadeIntensity: 1,
-          inverseColors: false,
-          opacityFrom: 0.5,
-          opacityTo: 0,
+          inverseColors: false
         },
       },
       yaxis: {
@@ -277,16 +275,27 @@ export default {
       ]
     }
     let app = this;
-    this.interval = setInterval(() =>{
-      axios.get(`${this.$store.state.api}/gold/${this.gold}`)
-          .then(response=>{
-            this.alis = response.data["Alış"];
-            this.satis = response.data["Satış"];
-            this.close = response.data["close"];
-            this.updatetime = response.data["time"];
-            this.type = response.data["Tür"]
-          })
-    },1000);
+    axios.get(`${this.$store.state.api}/gold/${this.gold}`)
+        .then(response=>{
+          this.close = response.data["close"];
+        })
+    axios.get('https://finans.truncgil.com/today.json')
+        .then(async response => {
+          let sepetalis = ((parseFloat(response.data["ABD DOLARI"]["Alış"]) + parseFloat(response.data["EURO"]["Alış"])) / 2).toFixed(4);
+          let sepetsatis = ((parseFloat(response.data["ABD DOLARI"]["Satış"]) + parseFloat(response.data["EURO"]["Satış"])) / 2).toFixed(4);
+          response.data["SEPET KUR"] = {"Alış":sepetalis,"Satış":sepetsatis};
+          response.data[this.gold]["time"] = response.data["Güncelleme Tarihi"];
+          if (this.gold.indexOf("Altın") > 0 || this.gold == '22 Ayar Bilezik' || this.gold == 'Gümüş') {
+            response.data[this.gold]["type"] = this.gold;
+          } else if (this.gold.indexOf("Güncelleme") < 0 && this.gold.indexOf("ÇEKME") < 0) {
+            response.data[this.gold]["type"] = this.gold;
+          }
+          this.alis = response.data[this.gold]["Alış"];
+          this.satis = response.data[this.gold]["Satış"];
+          this.updatetime = response.data[this.gold]["time"];
+          this.type = response.data[this.gold]["Tür"]
+        })
+        .catch(err => console.log(err));
 
     let temp;
     var socket = io.connect(`${this.$store.state.addr}`);

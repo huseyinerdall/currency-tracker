@@ -81,6 +81,7 @@
 import axios from 'axios';
 import io from "socket.io-client";
 import coins from "@/assets/coins.json";
+import functions from "@/functions";
 
 
 export default {
@@ -96,13 +97,15 @@ export default {
     return {
       title: this.seotitle,
       meta: [
-        { vmid: 'description', name: 'description', content: this.seodescription }
+        { vmid: 'description', name: 'description', content: this.seodescription },
+        { vmid: 'keywords', name: 'keywords', content: this.keywords }
       ]
     }
   },
   data: (app) => ({
     seodescription: "",
     seotitle: "",
+    keywords: "",
     interval: 0,
     timeRange: 1,
     time: 1,
@@ -174,8 +177,6 @@ export default {
         gradient: {
           shadeIntensity: 1,
           inverseColors: false,
-          opacityFrom: 0.5,
-          opacityTo: 0,
         },
       },
       yaxis: {
@@ -250,7 +251,6 @@ export default {
             let fetchedData = response.data;
             //let tempDates = [];
             //let time;
-            console.log(fetchedData)
             let tempValues = [];
             for (let i = 0; i < fetchedData.length; i++) {
               tempValues.push([fetchedData[i]["createdAt"],fetchedData[i]["Fiyat"]])
@@ -279,8 +279,10 @@ export default {
       coin: sys,
     })
         .then(response => {
+          console.log(response.data)
             this.seodescription = response.data.description;
             this.seotitle = response.data.title;
+            this.keywords = response.data.keywords;
             this.$meta().refresh();
         })
     if(this.$vuetify.breakpoint.smAndDown){
@@ -312,18 +314,21 @@ export default {
     let app = this;
 
     this.interval = setInterval(() => {
-      axios.get(`${this.$store.state.api}/coin/${this.$route.params.coin}`)
-          .then(response => {
-            this.coinImage = response.data[0].image;
-            this.symbol = response.data[0].symbol;
-            this.high = response.data[0].high_24h;
-            this.low = response.data[0].low_24h;
-            this.current_price = response.data[0].current_price;
-            this.last_updated = response.data[0].last_updated;
-            this.price_change_24h = response.data[0].price_change_24h;
-            this.price_change_percentage_24h = response.data[0].price_change_percentage_24h;
-            this.overlay = false;
+      let coinID = functions.search(this.$route.params.coin, coins)["id"];
+      //let coinSymbol = functions.search(this.$route.params.coin, coins)["symbol"];
+      axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinID}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d`)
+          .then((response) => {
+            app.coinImage = response.data[0].image;
+            app.symbol = response.data[0].symbol;
+            app.high = response.data[0].high_24h;
+            app.low = response.data[0].low_24h;
+            app.current_price = response.data[0].current_price;
+            app.last_updated = response.data[0].last_updated;
+            app.price_change_24h = response.data[0].price_change_24h;
+            app.price_change_percentage_24h = response.data[0].price_change_percentage_24h;
+            app.overlay = false;
           })
+          .catch(err => console.error(err));
     }, 1000);
 
 
@@ -338,10 +343,12 @@ export default {
         }
       }
     });
-    socket.on("dolar", fetchedData => {
-      app.dolar = fetchedData;
-      this.overlay = false;
-    });
+    axios.get('https://finans.truncgil.com/today.json')
+        .then(response =>{
+          app.dolar = response.data["ABD DOLARI"]["Satış"];
+        })
+        .catch(err => console.log(err));
+
     this.getGraphData();
   },
   watch: {
