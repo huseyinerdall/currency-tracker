@@ -214,6 +214,12 @@ export default {
       this.overlay = false;
       localStorage.setItem("coins",JSON.stringify(fetchedData));
     })
+    var socket250 = io.connect(`${this.$store.state.addr}`);
+    socket250.on("coins", fetchedData => {
+      app.data = fetchedData;
+      localStorage.setItem("coins250",JSON.stringify(fetchedData));
+      app.overlay = false;
+    })
     axios.get('https://finans.truncgil.com/today.json')
         .then(response =>{
           app.dolar = response.data["ABD DOLARI"]["Satış"];

@@ -90,6 +90,28 @@
         </v-menu>
         <v-spacer></v-spacer>
         <v-btn
+            class="mt-6 mr-2 pl-1"
+            tile
+            color="rgb(248, 73, 96)"
+            @click="$store.commit('buyselldialog')"
+        >
+          <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
+            mdi-arrow-down
+          </v-icon>
+          Sat
+        </v-btn>
+        <v-btn
+            class="mt-6 mr-6 pl-1"
+            tile
+            color="rgb(2, 192, 118)"
+            @click="$store.commit('buyselldialog')"
+        >
+          <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
+            mdi-arrow-up
+          </v-icon>
+          Al
+        </v-btn>
+        <v-btn
             class="mt-6 mr-6"
             fab
             dark
@@ -244,18 +266,21 @@
     <v-app v-else>
       <router-view/>
     </v-app>
+    <BuyAndSellModal/>
   </main>
 </template>
 
 <script>
 //import VueJwtDecode from "vue-jwt-decode";
 import Footer from "./components/common/Footer";
+import BuyAndSellModal from "./components/BuyAndSellModal";
 
 export default {
   name: "App",
 
   components: {
-    Footer
+    Footer,
+    BuyAndSellModal
   },
 
   data: () => ({

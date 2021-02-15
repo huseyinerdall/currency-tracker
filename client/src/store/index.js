@@ -18,12 +18,14 @@ export default new Vuex.Store({
     token: localStorage.getItem('jwt') || '',
     status: '',
     commentDrawer: false,
+    buyselldialog: false,
     isLight: (localStorage.getItem('light')=="true"),
   },
   getters: {
     isAuthenticated: state => !!state.token,
     authStatus: state => state.status,
     commentDrawer: state => state.commentDrawer,
+    buyselldialog: state => state.buyselldialog,
     isLight: state => state.isLight,
   },
   mutations: {
@@ -39,6 +41,10 @@ export default new Vuex.Store({
     },
     commentDrawer(state) {
       state.commentDrawer = !state.commentDrawer;
+    },
+    buyselldialog(state) {
+      console.log(state.buyselldialog)
+      state.buyselldialog = !state.buyselldialog;
     },
     isLight(state) {
       if(state.isLight){
