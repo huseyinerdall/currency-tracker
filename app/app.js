@@ -396,7 +396,7 @@ app.post('/golddescriptions', async(req, res) => {
     res.send(data);
 })
 
-const BINTLTABLE_LIST = ["ABDDOLARI", "EURO", "INGILIZSTERLINI", "KANADADOLARI", "SUUDIARABISTANRIYALI","JAPONYENI","GoldGramAltin","BTC","DOGE","ETH","XRP","USDT"];
+const BINTLTABLE_LIST = ["ABDDOLARI", "EURO", "INGILIZSTERLINI", "KANADADOLARI", "SUUDIARABISTANRIYALI","JAPONYENI","GoldGramAltin","GoldOnsAltin","GoldGumus","BTC","DOGE","ETH","XRP","USDT"];
 app.post('/bintltable', async(req, res) => {
     let time = req.body.time || 1;
     console.log(time)
@@ -415,6 +415,8 @@ app.post('/bintltable', async(req, res) => {
             BINTL["JAPONYENI"] = +(response.data["JAPON YENİ"]["Satış"]);
             BINTL["SUUDIARABISTANRIYALI"] = +(response.data["SUUDİ ARABİSTAN RİYALİ"]["Satış"]);
             BINTL["GoldGramAltin"] = parseFloat(response.data["Gram Altın"]["Satış"].replace(',', '.'));
+            BINTL["GoldOnsAltin"] = parseFloat(response.data["Ons Altın"]["Satış"].replace(',', '.'));
+            BINTL["GoldGumus"] = parseFloat(response.data["Gümüş"]["Satış"].replace(',', '.'));
             axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,ripple,dogecoin,tether&order=id_asc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d")
                 .then(async response => {
                     BINTL["BTC"] = +(response.data[0]["current_price"]);

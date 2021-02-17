@@ -10,7 +10,11 @@
         </th>
         <th v-for="currency in value" :key="currency" style="font-size:14px;"
             :class="$store.state.isLight ? 'pinkk' : 'amber--text accent-3'">
-          {{ currency | shorten }}
+          <div style="display: flex;flex-direction: row;justify-content: end;align-items:center;">
+            <v-spacer></v-spacer>
+            <v-img max-width="30" max-height="30" class="mr-2" :src="images[currency]"></v-img>
+            <span>{{ currency | shorten }}</span>
+          </div>
         </th>
       </tr>
       </thead>
@@ -108,6 +112,7 @@
 
 <script>
 import currencies from '../assets/currencies.js';
+import images from '../assets/images.js';
 import io from "socket.io-client";
 
 export default {
@@ -115,9 +120,10 @@ export default {
   data: () => ({
     items: currencies,
     overlay: false,//true
-    value: ["EURO", "ABD DOLARI", "TÜRK LİRASI"],
+    value: ["EURO", "ABD DOLARI", "TÜRK LİRASI","İNGİLİZ STERLİNİ","KANADA DOLARI","SUUDİ ARABİSTAN RİYALİ","JAPON YENİ"],
     data: {},
     currentCurrency: 1,
+    images: images
   }),
   methods: {
     click: function () {
@@ -142,7 +148,7 @@ export default {
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
       if (ONE == 1) {
-        app.value = ["EURO", "ABD DOLARI", "TÜRK LİRASI"];
+        app.value = ["EURO", "ABD DOLARI", "TÜRK LİRASI","İNGİLİZ STERLİNİ","KANADA DOLARI","SUUDİ ARABİSTAN RİYALİ","JAPON YENİ"];
         ONE = 2;
         app.currentCurrency = 0;
       }
