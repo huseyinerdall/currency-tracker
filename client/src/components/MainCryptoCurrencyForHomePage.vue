@@ -216,7 +216,6 @@ export default {
     })
     var socket250 = io.connect(`${this.$store.state.addr}`);
     socket250.on("coins", fetchedData => {
-      app.data = fetchedData;
       localStorage.setItem("coins250",JSON.stringify(fetchedData));
       app.overlay = false;
     })

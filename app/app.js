@@ -396,7 +396,7 @@ app.post('/golddescriptions', async(req, res) => {
     res.send(data);
 })
 
-const BINTLTABLE_LIST = ["ABDDOLARI", "EURO", "INGILIZSTERLINI", "KANADADOLARI", "SUUDIARABISTANRIYALI", "BTC","JAPONYENI"];
+const BINTLTABLE_LIST = ["ABDDOLARI", "EURO", "INGILIZSTERLINI", "KANADADOLARI", "SUUDIARABISTANRIYALI","JAPONYENI","GoldGramAltin","BTC","DOGE","ETH","XRP","USDT"];
 app.post('/bintltable', async(req, res) => {
     let time = req.body.time || 1;
     console.log(time)
@@ -404,7 +404,6 @@ app.post('/bintltable', async(req, res) => {
     let BINTL = {};
     let BEGIN = moment().subtract(time, 'd').toDate() || DEFAULT;
     const NOW = moment().toDate();
-    console.log(BEGIN,NOW)
     let data = [];
 
     axios.get('https://finans.truncgil.com/today.json')
@@ -415,14 +414,18 @@ app.post('/bintltable', async(req, res) => {
             BINTL["KANADADOLARI"] = +(response.data["KANADA DOLARI"]["Satış"]);
             BINTL["JAPONYENI"] = +(response.data["JAPON YENİ"]["Satış"]);
             BINTL["SUUDIARABISTANRIYALI"] = +(response.data["SUUDİ ARABİSTAN RİYALİ"]["Satış"]);
-
-            axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d")
+            BINTL["GoldGramAltin"] = parseFloat(response.data["Gram Altın"]["Satış"].replace(',', '.'));
+            axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,ripple,dogecoin,tether&order=id_asc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d")
                 .then(async response => {
-                    BINTL["BTC"] = +(response.data[0]["current_price"]*BINTL["ABDDOLARI"]);
+                    BINTL["BTC"] = +(response.data[0]["current_price"]);
+                    BINTL["ETH"] = +(response.data[2]["current_price"]);
+                    BINTL["XRP"] = +(response.data[3]["current_price"]);
+                    BINTL["DOGE"] = +(response.data[1]["current_price"]);
+                    BINTL["USDT"] = +(response.data[4]["current_price"]);
 
                     for (let i = 0; i < BINTLTABLE_LIST.length; i++) {
                         temp = {};
-                        if(BINTLTABLE_LIST[i] != "BTC"){
+                        if(!(BINTLTABLE_LIST[i].length == 3 || BINTLTABLE_LIST[i] == "DOGE" || BINTLTABLE_LIST[i] == "USDT")){
                             a = await db[BINTLTABLE_LIST[i]].findOne({
                                 where: {
                                     createdAt: {
@@ -431,7 +434,7 @@ app.post('/bintltable', async(req, res) => {
                                 }
                             })
                             temp["type"] = BINTLTABLE_LIST[i];
-                            temp["value"] = (BINTL[BINTLTABLE_LIST[i]] - a["dataValues"]["Satis"]) * (1000/BINTL[BINTLTABLE_LIST[i]]);
+                            temp["value"] = (BINTL[BINTLTABLE_LIST[i]] - parseFloat(a["dataValues"]["Satis"].replace(',', '.'))) * (1000/BINTL[BINTLTABLE_LIST[i]]);
                         }else{
                             a = await db[BINTLTABLE_LIST[i]].findOne({
                                 where: {
@@ -440,8 +443,10 @@ app.post('/bintltable', async(req, res) => {
                                     }
                                 }
                             })
+
                             temp["type"] = BINTLTABLE_LIST[i];
-                            temp["value"] = (BINTL[BINTLTABLE_LIST[i]] - a["dataValues"]["Fiyat"]) * (1000/(BINTL[BINTLTABLE_LIST[i]] * BINTL["ABDDOLARI"]));
+                            temp["value"] = (+BINTL[BINTLTABLE_LIST[i]] - a["dataValues"]["Fiyat"]) * (1000/(BINTL[BINTLTABLE_LIST[i]] * BINTL["ABDDOLARI"]));
+
                         }
                         data.push(temp);
                     }
@@ -477,7 +482,8 @@ app.get('/pariteler', async(req, res) => {
                                 [Op.gte]: moment().subtract(2, 'days').toDate()
                             }
                         }
-                    }).catch((err)=>console.log("GEç"))
+                    }).catch((err)=>console.log(err))
+                    console.log(a)
                     temp["yesterday"] = a["dataValues"]["Satis"];
                     data.push(temp);
                     console.log(temp)

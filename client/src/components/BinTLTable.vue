@@ -13,7 +13,7 @@
           </div>
         </v-row>
       </v-subheader>
-      <v-list-item v-for="value in data" :key="value.type">
+      <v-list-item v-for="value in data" :key="value.type" style="padding: 0 0 0 10px !important;">
         <v-list-item-content>
 
           <v-row>
@@ -24,22 +24,22 @@
 
               <v-progress-linear
                   v-if="value.value>0"
-                  color="#2ecc71"
+                  color="rgb(2, 192, 118)"
                   height="16"
                   :value="(1000+value.value)/20"
               >
                 <template v-slot:default="{}">
-                  <strong>{{1000+value.value | tofixedfour}} TL</strong>
+                  <strong style="font-size: 11px;">{{(1000+value.value) | tofixedfour}} TL</strong>
                 </template>
               </v-progress-linear>
               <v-progress-linear
                   v-else
-                  color="error"
+                  color="rgb(248, 73, 96)"
                   height="16"
                   :value="(1000+value.value)/20"
               >
                 <template v-slot:default="{}">
-                  <strong>{{ (1000+value.value) | tofixedfour}} TL</strong>
+                  <strong style="font-size: 11px;">{{ (1000+value.value) | tofixedfour}} TL</strong>
                 </template>
               </v-progress-linear>
             </v-col>
@@ -67,8 +67,13 @@ export default {
       "INGILIZSTERLINI":"GBP",
       "KANADADOLARI":"CAD",
       "SUUDIARABISTANRIYALI":"SAR",
+      "JAPONYENI":"JPY",
+      "GoldGramAltin":"GRAM ALTIN",
       "BTC":"BTC",
-      "JAPONYENI":"JPY"
+      "ETH":"ETH",
+      "XRP":"XRP",
+      "DOGE":"DOGE",
+      "USDT":"USDT"
     }
   }),
   created() {
