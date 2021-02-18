@@ -30,7 +30,6 @@ app.post('/cryptocoindescriptions', (req, res) => {
 })
 app.post('/getseodata', (req, res) => {
     let coin = req.body.coin.toUpperCase();
-    console.log(req.body)
     let seos = JSON.parse(fs.readFileSync("./static/seo.json"));
     let data = seos[coin];
     res.json(data);

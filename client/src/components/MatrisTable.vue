@@ -145,8 +145,20 @@ export default {
     let app = this;
     app.data["TÜRK LİRASI"] = 1;
     let ONE = 1;
+    if(localStorage.getItem('currencies')){
+      if (ONE == 1) {
+        app.value = ["EURO", "ABD DOLARI", "TÜRK LİRASI","İNGİLİZ STERLİNİ","KANADA DOLARI","SUUDİ ARABİSTAN RİYALİ","JAPON YENİ"];
+        ONE = 2;
+        app.currentCurrency = 0;
+      }
+      for (const currency of JSON.parse(localStorage.getItem('currencies'))) {
+        app.data[currency["type"]] = currency["Satış"];
+      }
+      app.overlay = false;
+    }
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
+      localStorage.setItem("currencies",JSON.stringify(fetchedData));
       if (ONE == 1) {
         app.value = ["EURO", "ABD DOLARI", "TÜRK LİRASI","İNGİLİZ STERLİNİ","KANADA DOLARI","SUUDİ ARABİSTAN RİYALİ","JAPON YENİ"];
         ONE = 2;

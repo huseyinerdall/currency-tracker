@@ -46,7 +46,8 @@ export default {
       isLight:true,
       options: [],
       description: "",
-      data: "",
+      data: null,
+      seodata: null,
       seotitle: "",
       seodescription : "",
       seokeywords: ""
@@ -60,10 +61,19 @@ export default {
           this.options.push({value:responseElement,text:responseElement});
         }
       })
+    axios.get(`${this.$store.state.admin}/cryptoseodata`)
+      .then((response) => {
+        console.log(response.data)
+        this.seodata = response.data;
+      })
   },
   watch: {
     selected(){
       this.description = this.data[this.selected];
+      console.log(this.seodata)
+      this.seotitle = this.seodata[this.selected]["title"];
+      this.seokeywords = this.seodata[this.selected]["keywords"];
+      this.seodescription = this.seodata[this.selected]["description"];
     }
   },
   methods: {

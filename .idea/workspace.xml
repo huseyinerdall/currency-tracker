@@ -20,10 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="çarşamba">
-      <change afterPath="$PROJECT_DIR$/client/src/assets/images.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/pages/Seo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/pages/Seo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/seo.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/seo.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +78,7 @@
       <recentPaths value="$PROJECT_DIR$/admin" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.serve">
+  <component name="RunManager" selected="npm.admin">
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -213,6 +213,8 @@
       <workItem from="1613498695008" duration="6641000" />
       <workItem from="1613545330831" duration="2037000" />
       <workItem from="1613562575526" duration="4753000" />
+      <workItem from="1613583644724" duration="615000" />
+      <workItem from="1613673789328" duration="1722000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -432,22 +434,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="480" y="69" key="Github.UntrackedFilesDialog/0.0.1366.728@0.0.1366.728" timestamp="1607012077071" />
-    <state width="1345" height="147" key="GridCell.Tab.0.bottom" timestamp="1613563995471">
+    <state width="1345" height="147" key="GridCell.Tab.0.bottom" timestamp="1613675213454">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613563995471" />
-    <state width="1345" height="147" key="GridCell.Tab.0.center" timestamp="1613563995470">
+    <state width="1345" height="147" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613675213454" />
+    <state width="1345" height="147" key="GridCell.Tab.0.center" timestamp="1613675213454">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613563995470" />
-    <state width="1345" height="147" key="GridCell.Tab.0.left" timestamp="1613563995469">
+    <state width="1345" height="147" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613675213454" />
+    <state width="1345" height="147" key="GridCell.Tab.0.left" timestamp="1613675213454">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613563995469" />
-    <state width="1345" height="147" key="GridCell.Tab.0.right" timestamp="1613563995470">
+    <state width="1345" height="147" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613675213454" />
+    <state width="1345" height="147" key="GridCell.Tab.0.right" timestamp="1613675213454">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613563995470" />
+    <state width="1345" height="147" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613675213454" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1607011688606">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
