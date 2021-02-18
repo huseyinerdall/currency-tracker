@@ -2,17 +2,14 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 Vue.use(Vuex);
-
+console.log(process.env)
 export default new Vuex.Store({
   state: {
     appName: "Para.Guru",
     domainName: "para.guru",
-    addr: "http://localhost:4000",
-    api:"http://localhost:4000",
-    admin:"http://localhost:4000/admin",
-    //addr: "https://para.guru",
-    //api: "https://para.guru/api",
-    //admin: "https://para.guru/admin",
+    addr: process.env.VUE_APP_CLIENT_URL,
+    api: process.env.VUE_APP_API_URL,
+    admin: process.env.VUE_APP_ADMIN_URL,
     port: "4000",
     tdFontSize: "13px",
     token: localStorage.getItem('jwt') || '',

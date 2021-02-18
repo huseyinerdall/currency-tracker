@@ -1,4 +1,4 @@
-let IP = "http://localhost:4000/"
+let IP = process.env.VUE_APP_API_URL+"/";
 module.exports = [
   {
     "name": "ABD DOLARI",

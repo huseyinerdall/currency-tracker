@@ -19,12 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="çarşamba">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="perşembe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/pages/Seo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/pages/Seo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/seo.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/seo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/currencies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +79,7 @@
       <recentPaths value="$PROJECT_DIR$/admin" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.admin">
+  <component name="RunManager" selected="npm.serve">
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -214,7 +215,7 @@
       <workItem from="1613545330831" duration="2037000" />
       <workItem from="1613562575526" duration="4753000" />
       <workItem from="1613583644724" duration="615000" />
-      <workItem from="1613673789328" duration="1722000" />
+      <workItem from="1613673789328" duration="3544000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -384,7 +385,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613547341263</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="perşembe">
+      <created>1613675685389</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1613675685389</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,16 +420,20 @@
     <MESSAGE value="pazar" />
     <MESSAGE value="salı" />
     <MESSAGE value="cuma" />
-    <MESSAGE value="perşembe" />
     <MESSAGE value="pazartesi" />
     <MESSAGE value="çarşamba" />
-    <option name="LAST_COMMIT_MESSAGE" value="çarşamba" />
+    <MESSAGE value="perşembe" />
+    <option name="LAST_COMMIT_MESSAGE" value="perşembe" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609692675273">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1609692675273" />
+    <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1613675933754">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1613675933754" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1611563024474">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -434,22 +446,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="480" y="69" key="Github.UntrackedFilesDialog/0.0.1366.728@0.0.1366.728" timestamp="1607012077071" />
-    <state width="1345" height="147" key="GridCell.Tab.0.bottom" timestamp="1613675213454">
+    <state width="1345" height="147" key="GridCell.Tab.0.bottom" timestamp="1613677200511">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613675213454" />
-    <state width="1345" height="147" key="GridCell.Tab.0.center" timestamp="1613675213454">
+    <state width="1345" height="147" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613677200511" />
+    <state width="1345" height="147" key="GridCell.Tab.0.center" timestamp="1613677200511">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613675213454" />
-    <state width="1345" height="147" key="GridCell.Tab.0.left" timestamp="1613675213454">
+    <state width="1345" height="147" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613677200511" />
+    <state width="1345" height="147" key="GridCell.Tab.0.left" timestamp="1613677200511">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613675213454" />
-    <state width="1345" height="147" key="GridCell.Tab.0.right" timestamp="1613675213454">
+    <state width="1345" height="147" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613677200511" />
+    <state width="1345" height="147" key="GridCell.Tab.0.right" timestamp="1613677200511">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613675213454" />
+    <state width="1345" height="147" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613677200511" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1607011688606">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
