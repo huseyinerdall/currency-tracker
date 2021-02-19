@@ -35,6 +35,13 @@ app.post('/getseodata', (req, res) => {
     res.json(data);
 })
 
+app.post('/getgoldseodata', (req, res) => {
+    let coin = req.body.gold
+    let seos = JSON.parse(fs.readFileSync("./static/goldSeo.json"));
+    let data = seos[coin];
+    res.json(data);
+})
+
 app.post('/addnewdescription', (req, res) => {
     try {
         let des = req.body.description;

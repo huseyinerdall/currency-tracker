@@ -104,7 +104,20 @@ export default {
       type: String
     },
   },
+  metaInfo () {
+
+    return {
+      title: this.seotitle,
+      meta: [
+        { vmid: 'description', name: 'description', content: this.seodescription },
+        { vmid: 'keywords', name: 'keywords', content: this.keywords }
+      ]
+    }
+  },
   data: (app)=>({
+    seodescription: "",
+    seotitle: "",
+    keywords: "",
     secenek:'SERBEST PİYASA',
     flag: '',
     interval: 0,
@@ -275,6 +288,17 @@ export default {
       ]
     }
     let app = this;
+    console.log(this.gold)
+    axios.post(`${this.$store.state.admin}/getgoldseodata`, {
+      gold: this.gold
+    })
+        .then(response => {
+          this.seodescription = response.data.description;
+          this.seotitle = response.data.title;
+          this.keywords = response.data.keywords;
+          this.$meta().refresh();
+        })
+
     axios.get(`${this.$store.state.api}/gold/${this.gold}`)
         .then(response=>{
           this.close = response.data["close"];
@@ -312,7 +336,7 @@ export default {
         }
         temp = fetchedData[fetchedData.length - 1]["Satis"];
       }
-    })
+    });
     this.getGraphData();
   },
   methods: {

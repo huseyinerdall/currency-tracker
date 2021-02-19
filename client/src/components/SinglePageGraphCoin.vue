@@ -279,7 +279,6 @@ export default {
       coin: sys,
     })
         .then(response => {
-          console.log(response.data)
             this.seodescription = response.data.description;
             this.seotitle = response.data.title;
             this.keywords = response.data.keywords;
