@@ -18,21 +18,21 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 
-  if (localStorage.getItem('user') != null) {
+  if (localStorage.getItem('admin') != null) {
       if (to.matched.some(record => record.name == 'login')) {
           next({ name: 'dashboard' })
       }
   }
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('user') == null) {
+    if (localStorage.getItem('admin') == null) {
       next({
         path: '/login',
         params: { nextUrl: to.fullPath }
       })
     } else {
 
-      let user = JSON.parse(localStorage.getItem('user'));
+      let user = JSON.parse(localStorage.getItem('admin'));
       if (to.matched.some(record => record.meta.is_admin)) {
         next();
       } else {

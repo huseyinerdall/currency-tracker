@@ -45,6 +45,15 @@ export default {
       type:String
     }
   },
+  metaInfo () {
+    return {
+      title: "Para.guru | Altın, Döviz ve Kripto Para Fiyatları",
+      meta: [
+        { vmid: 'description', name: 'description', content: "Altın, döviz ve kripto para canlı fiyatları. Canlı fiyatlar üzerinden alım satım oyunu oynayan herkesi bir araya getiren bir sosyal ağdır." },
+        { vmid: 'keywords', name: 'keywords', content: "Altın fiyatları, döviz fiyatları, kripto para fiyatları, altın ne kadar, döviz ne kadar, kripto para ne kadar, altın al sat, döviz al sat, kripto para al sat" }
+      ]
+    }
+  },
   components: {
     MainCryptoCurrencyForHomePage,
     Golds,

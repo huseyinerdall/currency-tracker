@@ -21,6 +21,15 @@ import BinTLTable from "@/components/BinTLTable.vue";
 
 export default {
   name: "CurrenciesPage",
+  metaInfo () {
+    return {
+      title: "Para.Guru | Döviz Fiyatları. Dolar Ne Kadar? Euro Fiyatı",
+      meta: [
+        { vmid: 'description', name: 'description', content: "Dolar, Euro, Sterlin ve diğer dövizlerin canlı fiyatlarını takip edebilirsiniz." },
+        { vmid: 'keywords', name: 'keywords', content: "Döviz fiyatları, döviz ne kadar, döviz canlı alış fiyatı, döviz canlı satış fiyatı, dolar ne kadar, euro ne kadar, dolar al sat, euro al sat, sterlin al sat, kapalı çarşı döviz fiyatları, serbest piyasa döviz fiyatları" }
+      ]
+    }
+  },
   components: {
     MainDoviz,
     BinTLTable,

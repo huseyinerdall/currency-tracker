@@ -77,13 +77,10 @@
                 <v-row style="margin-top: 20px;">
                   <v-col cols="3" class="pb-0 pt-0">
                     <v-text-field
-                        v-model="amount"
                         :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
                         style="padding: 0 16px !important;font-size: 12px;"
                         class="centered-input ml-6"
                         :dark="!$store.state.isLight"
-                        @change="calculate"
-                        @input="calculate"
                         :color="$store.state.isLight ? 'black' : 'white'"
                         placeholder="Miktarı Giriniz"
                     ></v-text-field>
@@ -108,7 +105,6 @@
                   </v-col>
                   <v-col cols="3" class="pb-0 pt-0">
                     <v-text-field
-                        v-model="sum"
                         :color="$store.state.isLight ? 'black' : 'white'"
                         class="ml-6 centered-input"
                         :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
@@ -159,7 +155,6 @@
                         <div>Fiyata Göre</div>
                         <div class="d-flex flex-row">
                           <v-text-field
-                              v-model="sum"
                               :color="$store.state.isLight ? 'black' : 'white'"
                               class="ml-6 centered-input"
                               :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
@@ -189,7 +184,6 @@
                         <div>Tarihe Göre</div>
                         <div class="d-flex flex-row">
                           <v-text-field
-                              v-model="sum"
                               :color="$store.state.isLight ? 'black' : 'white'"
                               class="ml-6 centered-input"
                               :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
