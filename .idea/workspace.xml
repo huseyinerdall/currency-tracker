@@ -19,14 +19,24 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="perşembe">
-      <change afterPath="$PROJECT_DIR$/app/static/goldSeo.json" afterDir="false" />
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="pazar">
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/varliklar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/varliklar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/varliklar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/.env" beforeDir="false" afterPath="$PROJECT_DIR$/admin/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/uploads/tempfilename.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserWallet.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,15 +69,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src\pages" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\components" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\public\img" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\models" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src\pages" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -80,7 +91,7 @@
       <recentPaths value="$PROJECT_DIR$/admin" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.admin">
+  <component name="RunManager" selected="npm.serve">
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -219,7 +230,19 @@
       <workItem from="1613673789328" duration="5179000" />
       <workItem from="1613709283837" duration="1092000" />
       <workItem from="1613710449903" duration="307000" />
-      <workItem from="1613734196971" duration="8701000" />
+      <workItem from="1613734196971" duration="9398000" />
+      <workItem from="1613803739150" duration="4389000" />
+      <workItem from="1613888169498" duration="4382000" />
+      <workItem from="1613908806544" duration="3842000" />
+      <workItem from="1613977754335" duration="109000" />
+      <workItem from="1614015024328" duration="1782000" />
+      <workItem from="1614150762391" duration="2204000" />
+      <workItem from="1614184382709" duration="1776000" />
+      <workItem from="1614192205977" duration="817000" />
+      <workItem from="1614368223977" duration="487000" />
+      <workItem from="1614410210477" duration="11884000" />
+      <workItem from="1614447116571" duration="2889000" />
+      <workItem from="1614493947591" duration="8856000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -424,7 +447,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613678908528</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="cuma">
+      <created>1613746705412</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1613746705412</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,13 +479,13 @@
     <MESSAGE value="Test" />
     <MESSAGE value="persembe" />
     <MESSAGE value="cumartesi" />
-    <MESSAGE value="pazar" />
     <MESSAGE value="salı" />
-    <MESSAGE value="cuma" />
     <MESSAGE value="pazartesi" />
     <MESSAGE value="çarşamba" />
     <MESSAGE value="perşembe" />
-    <option name="LAST_COMMIT_MESSAGE" value="perşembe" />
+    <MESSAGE value="cuma" />
+    <MESSAGE value="pazar" />
+    <option name="LAST_COMMIT_MESSAGE" value="pazar" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609692675273">
@@ -478,30 +508,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="480" y="69" key="Github.UntrackedFilesDialog/0.0.1366.728@0.0.1366.728" timestamp="1607012077071" />
-    <state width="1345" height="147" key="GridCell.Tab.0.bottom" timestamp="1613744730100">
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom" timestamp="1614516229039">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613744730100" />
-    <state width="1345" height="147" key="GridCell.Tab.0.center" timestamp="1613744730100">
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614516229039" />
+    <state width="1345" height="180" key="GridCell.Tab.0.center" timestamp="1614516229039">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613744730100" />
-    <state width="1345" height="147" key="GridCell.Tab.0.left" timestamp="1613744730100">
+    <state width="1345" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614516229039" />
+    <state width="1345" height="180" key="GridCell.Tab.0.left" timestamp="1614516229039">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613744730100" />
-    <state width="1345" height="147" key="GridCell.Tab.0.right" timestamp="1613744730100">
+    <state width="1345" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614516229039" />
+    <state width="1345" height="180" key="GridCell.Tab.0.right" timestamp="1614516229039">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="147" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613744730100" />
+    <state width="1345" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614516229039" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1607011688606">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607011688606" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1613678928394">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1613746747760">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1613678928394" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1613746747760" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609166550394">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

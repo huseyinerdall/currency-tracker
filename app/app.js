@@ -1,75 +1,27 @@
 let THE_BEGINNING_OF_EVERYTHING = true;
-const HOST = "localhost";
 let express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const axios = require('axios');
 let fs = require('fs');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 let moment = require('moment');
 const path = require('path');
 
-const passport = require('passport');
-
-
 var parseString = require('xml2js').parseString;
 var utils = require('./utils');
-var upload = require('./utils/upload');
-
-const UPLOAD_FOLDER = path.join(__dirname,"public/uploads/");
-console.log("UPLOAD FOLDER\t"+UPLOAD_FOLDER)
 
 const db = require("./models");
-
 const Op = db.Sequelize.Op;
-
-
-const SECRET_KEY = 'SI6ImM1Z';
 
 //static long data
 const coins = require('./static/coins.json');
 const descriptions = require('./static/descriptions.json');
-const goldXmlBodyStr = fs.readFileSync('./static/altinkaynakGold.xml', 'utf8');
 const currencyXmlBodyStr = fs.readFileSync('./static/altinkaynakCurrency.xml', 'utf8');
 const truncgil = 'https://finans.truncgil.com/today.json';
 
 const app = express();
 const admin = require('./admin.js');
-
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new GoogleStrategy({
-        clientID: "948525970652-fuuplq2bgdd7q24kvetlet4il9b66p1g.apps.googleusercontent.com",
-        clientSecret: "_D28pNM80mE9qOiiUO8Ff7qX",
-        callbackURL: "http://localhost:4000/google/callback"
-    },
-    function(accessToken, refreshToken, profile, cb) {
-        console.log(profile);
-        db.User.findOrCreate({
-            fullName: profile.displayName,
-            email: profile.emails[0].value,
-            profileImage: profile.photos[0].value,
-        }, function (err) {
-            console.log(err);
-            return cb(err);
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-));
-app.get('/google',
-    passport.authenticate('google', { scope: ['profile','email'] }));
-
-app.get('/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
-    });
-
 
 app.use(morgan('tiny'));
 app.use(cors({ credentials: true }));
@@ -80,21 +32,13 @@ app.use(express.static('public')) // static dosyaları serve etmek için
 var server = require('http').createServer(app);
 var io = require('socket.io')(server, {
     cors: {
-        origin: [`http://${HOST}:8080`,`http://${HOST}:8081`,"*"],
+        origin: [`http://localhost:8080`,`http://localhost:8081`,"*"],
         //origin: ["https://para.guru","https://www.para.guru"],
         methods: ["GET", "POST"]
     }
 });
 
-var config = {
-    headers: {
-        'Host': 'data.altinkaynak.com',
-        'Content-Type': 'application/soap+xml; charset=utf-8',
-        //'Content-Length': 100,
-    }
-};
-
-let closes = {}; // Kapanış verilerinin store edildiği global
+require('./user')(app,io);
 
 app.get('/tcmb', (req, res) => {
     let factRes = [];
@@ -140,31 +84,6 @@ app.post('/tcmbone', (req, res) => {
             });
         }).catch(err => console.log("TCMB veri alınamadı"));
 })
-
-/*app.get('/golds', (req, res) => {
-    let factRes = [];
-    let temp = {};
-    axios.post('http://data.altinkaynak.com/DataService.asmx', goldXmlBodyStr, config)
-        .then(response => {
-            xml = response.data.toString();
-            parseString(xml, function (err, result) {
-
-                parseString(result['soap:Envelope']['soap:Body'][0]['GetGoldResponse'][0]['GetGoldResult'][0], function (err, result) {
-                    result = result["Kurlar"]["Kur"];
-                    for (let i = 0; i < result.length; i++) {
-                        temp = {};
-                        temp["type"] = result[i]["Aciklama"][0]
-                        temp["sell"] = result[i]["Alis"]
-                        temp["buy"] = result[i]["Satis"]
-                        temp["updated"] = result[i]["GuncellenmeZamani"]
-                        factRes.push(temp);
-                    }
-                    res.json(factRes);
-                })
-
-            });
-        }).catch(err => console.log(err));
-})*/
 
 app.get('/golds', (req, res) => {
     let golds = [];
@@ -498,100 +417,6 @@ app.get('/pariteler', async(req, res) => {
         .catch(err => console.log(err));
 })
 
-
-app.post('/sendcomment', async(req, res) => {
-    let fullName = req.body.fullName;
-    let comment = req.body.message;
-    let subject = req.body.subject;
-    let profileImage = req.body.profileImage;
-    db["Comments"].create({
-            fullName: fullName,
-            comment: comment,
-            subject: subject,
-            profileImage: profileImage
-        })
-        .then( async()=>{
-            let data;
-            let BEGIN = moment().subtract(7, 'd').toString() || DEFAULT;
-            const NOW = new Date();
-            data = await db["Comments"].findAll({
-                where: {
-                    createdAt: {
-                        [Op.between]: [BEGIN, NOW],
-                    },
-                    subject: subject
-                }
-            });
-            console.log(subject+"-comments")
-            io.emit(subject+"-comments",data);
-        })
-
-
-    /*res.json({
-        fullName: fullName,
-        comment: comment,
-        subject: subject,
-        profileImage: profileImage,
-        createdAt: new Date(),
-    });*/
-})
-
-app.post('/getcomments', async(req, res) => {
-    let subject = req.body.subject;
-    let data;
-    let BEGIN = moment().subtract(1, 'd').toString() || DEFAULT;
-    const NOW = new Date();
-    data = await db["Comments"].findAll({
-        where: {
-            createdAt: {
-                [Op.between]: [BEGIN, NOW],
-            },
-            subject: subject
-        }
-    });
-    //io.emit(subject+"-comments", data);
-    res.json(data);
-})
-
-app.post('/likecomment', async(req, res) => {
-    let id = req.body.commentId;
-    let userId = req.body.userId;
-    console.log(id)
-    db["Comments"].findOne({
-        where: {
-            id: id
-        }
-    })
-        .then(async(record) => {
-            let temp = JSON.parse(record.like);
-            if(temp.indexOf(userId)<0){
-                temp.push(userId);
-            }
-            record.like = JSON.stringify(temp);
-            await record.save();
-            res.json({"result" : "OK"});
-        })
-})
-
-app.post('/dislikecomment', async(req, res) => {
-    let id = req.body.commentId;
-    let userId = req.body.userId;
-    console.log(id)
-    db["Comments"].findOne({
-        where: {
-            id: id
-        }
-    })
-        .then(async(record) => {
-            let temp = JSON.parse(record.like);
-            if(temp.indexOf(userId)<0){
-                temp.push(userId);
-            }
-            record.like = JSON.stringify(temp);
-            await record.save();
-        })
-})
-
 app.post('/converter', (req, res) => {
     let source = req.body.source;
     let target = req.body.target;
@@ -624,79 +449,7 @@ app.post('/converter', (req, res) => {
         })
         .catch((err) => console.log(err))
 })
-
-app.post('/register', (req, res) => {
-    console.log(req.body)
-    db.User.findOne({
-            where: {
-                email: req.body.email
-            }
-        })
-        .then(user => {
-            if (user) {
-                res.send("Bu email adresi çoktan kullanılmış.");
-            } else {
-                let filename = '';
-                fs.readdirSync(UPLOAD_FOLDER).forEach(file => {
-                    if(file.includes("tempfilename")){
-                        let ext = path.extname(file);
-                        fs.rename(`${UPLOAD_FOLDER}tempfilename${ext}`, `${UPLOAD_FOLDER}${req.body.profileImage}${ext}`, function(err) {
-                            if ( err ) console.log('ERROR: ' + err);
-                        });
-                        filename = `${req.body.profileImage}${ext}`;
-                    }
-                });
-                req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
-                req.body.profileImage = filename;
-                db.User.create(req.body)
-                console.log("Kullanıcı kaydedildi!!!");
-                res.send("OK");
-            }
-        })
-        .catch(err => res.send(err.message))
-})
-
-app.post('/avatar', upload.single('file'), (req, res) => {
-
-    if (!req.file) {
-        console.log("No file received");
-        return res.send({
-            success: false
-        });
-    } else {
-        console.log("Dosya yüklendi");
-        return res.send({
-            success: true
-        })
-    }
-});
-
-app.post('/login', (req, res) => {
-    console.log(req.body)
-    if (!req.body.email || !req.body.passwd) {
-        res.send("Alanlar boş bırakılamaz!")
-    }
-    db.User.findOne({
-            where: {
-                email: req.body.email
-            }
-        })
-        .then(user => {
-            if(!user){res.send("ERROR");return;}
-            let passwordIsValid = bcrypt.compareSync(req.body.passwd, user.dataValues.passwd)
-            if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
-            let token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: 86400 });
-            console.log(token)
-            res.status(200).send({ auth: true, token: token, user: user });
-        })
-        .catch(err => {
-            res.send("ERROR")
-        })
-})
-
-
-const NONCHANGE_TIME = 60 * 1/6;
-const MAINLOOPINTERVAL = 100000;
+const MAINLOOPINTERVAL = 1000;
 
 
 db.sequelize.sync().then(() => {
@@ -720,13 +473,14 @@ db.sequelize.sync().then(() => {
         currencies = [];
 
         let temp = {};
-
-        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h,7d`)
+        let symbols = {};
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=gecko_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h,7d`)
             .then((response) => {
                 for (let i = 0; i < response.data.length; i++) {
                     temp = {};
                     temp["name"] = response.data[i]["name"];
                     temp["shortName"] = response.data[i]["symbol"];
+                    symbols[response.data[i]["name"]] = 0;
                     temp["price"] = response.data[i]["current_price"];
                     temp["change"] = response.data[i]["price_change_24h"];
                     temp["market_cap"] = response.data[i]["market_cap"];
@@ -751,6 +505,10 @@ db.sequelize.sync().then(() => {
                     }
 
                 }
+
+                fs.writeFileSync('varliklar.json',JSON.stringify(symbols), function (err) {
+                    if (err) return console.log(err);
+                });
 
             })
             .catch(err => console.error(err));

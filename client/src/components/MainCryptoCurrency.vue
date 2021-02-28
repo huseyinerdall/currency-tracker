@@ -69,11 +69,11 @@
 
           <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black--text':$store.state.isLight}">
             <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{
-                item.market_cap | currencyformat
+                item.market_cap | binayracveondalik
               }}</span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :class="{'black--text':$store.state.isLight}">
-            <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.volume | currencyformat }}</span>
+            <span :style="`font-size: ${$store.state.tdFontSize} !important;`">{{ item.volume | binayracveondalik }}</span>
           </td>
           <td>
             <span

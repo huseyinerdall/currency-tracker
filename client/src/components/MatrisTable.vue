@@ -26,8 +26,8 @@
         </th>
         <td v-for="currencyCol in value" :class="[(data[currencyCol]) / (data[currencyRow]) == 1 ? 'bir' : '']"
             :key="currencyCol">
-          <p>{{ (data[currencyCol]) / (data[currencyRow]) | turkishCurrencyformat }}</p>
-          <p style="font-size: 12px;">{{ (data[currencyRow]) / (data[currencyCol]) | turkishCurrencyformat }}</p>
+          <p>{{ (data[currencyRow]) / (data[currencyCol]) | turkishCurrencyformat }}</p>
+          <p style="font-size: 12px;">{{ (data[currencyCol]) / (data[currencyRow]) | turkishCurrencyformat }}</p>
         </td>
       </tr>
       <tr>

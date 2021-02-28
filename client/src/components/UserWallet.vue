@@ -1,6 +1,6 @@
 <template>
   <v-card
-      style="border-radius: 0;"
+      style="border-radius: 0;background:transparent;"
       class="mt-8"
   >
     <v-toolbar
@@ -13,93 +13,36 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-wallet-plus</v-icon>
+        <v-icon size="24">mdi-wallet-plus</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-refresh</v-icon>
+        <v-icon size="24">mdi-refresh</v-icon>
       </v-btn>
     </v-toolbar>
-
-    <v-list
-        subheader
-        two-line
-    >
-
-      <v-list-item
-          v-for="wallet in wallet"
-          :key="wallet.title"
-      >
-        <v-list-item-avatar class="d-none d-md-flex">
-          <v-icon
-              class="grey lighten-1"
-              dark
-          >
-            mdi-folder
-          </v-icon>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-row>
-            <v-col cols="4" sm="4">
-              <v-text-field
-                  label="Miktar"
-                  value="10.00"
-                  prefix="$"
-              ></v-text-field>
-            </v-col>
-            <v-col
-                class="d-flex"
-                cols="5"
-                sm="4"
-            >
-              <v-select
-                  :items="items"
-                  item-text="name"
-                  label="Birim"
-                  color="black"
-              ></v-select>
-            </v-col>
-            <v-spacer></v-spacer>
-            <v-col
-                cols="3"
-                sm="3"
-            >
-              <v-text-field
-                  value="0.0"
-                  label="TL"
-                  readonly
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </v-list-item-content>
-
-        <v-list-item-action>
-          <v-btn icon>
-            <v-icon color="grey lighten-1">mdi-credit-card-remove</v-icon>
-          </v-btn>
-        </v-list-item-action>
-      </v-list-item>
-
-      <v-divider inset></v-divider>
-
-      <v-list-item>
-        <v-list-item-content>
-          <v-row>
-            <v-spacer></v-spacer>
-            <v-col cols="5" sm="5" class="font-weight-bold">
-              Toplam değer : {{toplam}} ₺
-            </v-col>
-            <v-spacer></v-spacer>
-            <v-col cols="4" sm="4" class="font-weight-bold" :class="[kazanc>=0 ? 'green--text' : 'red--text']">
-              Kar / Zarar : {{kazanc | signint}} ₺
-            </v-col>
-            <v-spacer></v-spacer>
-          </v-row>
-        </v-list-item-content>
-      </v-list-item>
-
-    </v-list>
+    <v-simple-table dense style="background-color:transparent;">
+      <template v-slot:default>
+        <thead>
+        <tr>
+          <th class="text-left">
+            Name
+          </th>
+          <th class="text-left">
+            Calories
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr
+            v-for="item in desserts"
+            :key="item.name"
+        >
+          <td>{{ item.name }}</td>
+          <td>{{ item.calories }}</td>
+        </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
   </v-card>
 </template>
 <script>
@@ -107,12 +50,48 @@
 
     export default {
         data: () => ({
-            wallet: [{
-                color: 'blue',
-                icon: 'mdi-clipboard-text',
-                subtitle: 'Jan 20, 2014',
-                title: 'Vacation itinerary',
-            }, ],
+          desserts: [
+            {
+              name: 'Frozen Yogurt',
+              calories: 159,
+            },
+            {
+              name: 'Ice cream sandwich',
+              calories: 237,
+            },
+            {
+              name: 'Eclair',
+              calories: 262,
+            },
+            {
+              name: 'Cupcake',
+              calories: 305,
+            },
+            {
+              name: 'Gingerbread',
+              calories: 356,
+            },
+            {
+              name: 'Jelly bean',
+              calories: 375,
+            },
+            {
+              name: 'Lollipop',
+              calories: 392,
+            },
+            {
+              name: 'Honeycomb',
+              calories: 408,
+            },
+            {
+              name: 'Donut',
+              calories: 452,
+            },
+            {
+              name: 'KitKat',
+              calories: 518,
+            },
+          ],
             items: currencies,
             toplam: 123.456,
             kazanc: -100.232

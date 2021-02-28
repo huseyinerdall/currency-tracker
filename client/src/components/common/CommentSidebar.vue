@@ -25,7 +25,7 @@
           <div class="chat-container">
             <div class="conversation">
               <div class="conversation-container">
-                <div style="height: 40px;">
+                <div style="height: 40px;background: #fff;">
                   <v-btn
                       class="mx-2"
                       fab
@@ -43,30 +43,35 @@
                   </v-btn>
                 </div>
                 <h3 v-if="data.length == 0" class="text-center text--white" style="color: #fff !important;">İlk yorumu siz yapın.</h3>
-                <div v-for="comment in data" :key="comment.id" class="message received" >
-                  <div class="user-info d-flex mb-2">
-                    <v-avatar v-if="comment.profileImage" size="36">
+                <div v-for="comment in data" :key="comment.id" class="message-cont" style="background: #fff;">
+                  <div class="user-info d-flex pa-2 pb-0">
+                    <v-avatar v-if="comment.profileImage" size="32" tile>
                       <img :src="$store.state.api+'/uploads/'+comment.profileImage" alt="">
                     </v-avatar>
-                    <v-avatar v-else color="indigo" size="36" class="white--text">{{comment.fullName | nameAvatar}}</v-avatar>
-                    <h4 class="ml-4" style="line-height:36px;">{{comment.fullName}}</h4>
+                    <v-avatar v-else color="indigo" size="32" class="white--text">{{comment.fullName | nameAvatar}}</v-avatar>
+                    <h4 class="ml-4" style="color: #2196f3;transition: color .35s ease;font-size:12px;line-height: 32px;">{{comment.fullName}}</h4>
                   </div>
-                  {{comment.comment}}
-                  <div class="d-flex flex-row text--lighten-2 mt-2 justify-space-around" style="width: 200px;">
-                    <div>
-                      {{comment.dislike | length}}
-                      <span style="cursor: pointer;" @click="dislike(comment.id)">
-                        <v-icon :color="comment.dislike.indexOf(userInfo['id']) > -1 ? 'red' : ''">mdi-thumb-down</v-icon>
-                      </span>
-                    </div>
-                    <div>
-                      {{comment.like | length}}
-                      <span style="cursor: pointer;" @click="like(comment.id)">
-                        <v-icon :color="comment.like.indexOf(userInfo['id']) > -1 ? 'red' : ''">mdi-thumb-up</v-icon>
-                      </span>
-                    </div>
+                  <div style="font-size: 12px;font-family: Trebuchet MS,roboto,ubuntu,sans-serif;" class="pa-2">
+                    {{comment.comment}}
                   </div>
-                  <span class="metadata"><span class="time">{{comment.createdAt | onlyTime}}</span></span>
+                  <div class="d-flex flex-row text--lighten-2 justify-space-between">
+                    <div style="width: 80px;" class="d-flex flex-row justify-space-around">
+                      <div style="font-size: 12px;">
+                        {{comment.dislike | length}}
+                        <span style="cursor: pointer;" @click="dislike(comment.id)">
+                        <v-icon :color="comment.dislike.indexOf(userInfo['id']) > -1 ? 'red' : ''" size="16">mdi-thumb-down</v-icon>
+                      </span>
+                      </div>
+                      <div style="font-size: 12px;">
+                        {{comment.like | length}}
+                        <span style="cursor: pointer;" @click="like(comment.id)">
+                        <v-icon :color="comment.like.indexOf(userInfo['id']) > -1 ? 'red' : ''" size="16">mdi-thumb-up</v-icon>
+                      </span>
+                      </div>
+                    </div>
+                    <div class="time mr-2">{{comment.createdAt | onlyTime}}</div>
+                  </div>
+                  <v-divider></v-divider>
                 </div>
 
               </div>
@@ -86,7 +91,7 @@
               class="input-msg disabled" name="input" placeholder="Yorumunuzu yazın..." autocomplete="off" autofocus />
           <button class="send" @click.prevent="sendComment">
             <div class="circle">
-              <v-icon>mdi-send</v-icon>
+              <v-icon color="white">mdi-send</v-icon>
             </div>
           </button>
         </form>
@@ -104,8 +109,6 @@
         width="500"
     >
       <v-card>
-
-
             <v-card flat>
               <v-card-text>
                 <v-text-field
@@ -206,6 +209,11 @@
                         subject: this.$route.params.coin || this.$route.params.gold,
                         profileImage: profileImage,
                     })
+              this.message = '';
+              setTimeout(() =>{
+                var objDiv = document.getElementsByClassName("conversation-container")[0];
+                objDiv.scrollTop = objDiv.scrollHeight;
+              },100)
                     /*.then(response => {
                         console.log(response)
                         this.message = '';
@@ -218,6 +226,7 @@
                     })
                     .then(response => {
                         this.data = response.data;
+                      console.log(this.data)
                     })
             },
             dislike: function(id) {
@@ -235,11 +244,6 @@
                 commentId: id,
                 userId: userId
               })
-              /*.then((res) => {
-                if(res.data.result == "OK"){
-
-                }
-              })*/
             },
             reply: function() {
               alert("replay")
@@ -283,6 +287,7 @@
             let app = this;
             let userInfo = JSON.parse(localStorage.getItem('user'));
             var socket = io.connect(`${this.$store.state.addr}`);
+
             if(app.$route.params.gold){
               socket.on(app.$route.params.gold+"-comments", fetchedData => {
                 app.data = fetchedData;
@@ -305,6 +310,12 @@
             }
 
         },
+      watch: {
+          drawer(){
+            var objDiv = document.getElementsByClassName("conversation-container")[0];
+            objDiv.scrollTop = objDiv.scrollHeight;
+          }
+      },
         mounted() {}
     }
 </script>
@@ -360,8 +371,8 @@
         height: 100%;
         box-shadow: inset 0 10px 10px -10px #000000;
         overflow-x: hidden;
-        padding: 0 16px;
         margin-bottom: 5px;
+      background: #eee;
     }
     
     .conversation .conversation-container:after {
@@ -399,7 +410,7 @@
         bottom: -4px;
     }
     
-    .metadata .time {
+    .time {
         color: rgba(0, 0, 0, .45);
         font-size: 11px;
         display: inline-block;
@@ -591,5 +602,8 @@
     .login-please{
       line-height: 48px;
       margin: 0 auto;
+    }
+    .message-cont:hover{
+      background: #dadde0;
     }
 </style>

@@ -79,15 +79,13 @@ export default {
     }
   }),
   created() {
-    //let app = this;
-    /*var socket = io.connect(`${this.$store.state.addr}`);
-    socket.on("bintl", fetchedData => {
-      app.data = fetchedData
-    })*/
     this.getData();
   },
   methods: {
     getData() {
+      if(new Date().getDay() != 0 && new Date().getDay() != 1){
+        this.time = 7;
+      }
       axios.post(`${this.$store.state.api}/bintltable`, {
         time: this.time,
       })
@@ -98,8 +96,7 @@ export default {
     }
   },
   watch: {
-    time(newVal, oldVal) {
-      console.log(newVal, oldVal);
+    time() {
       this.getData();
     },
   }
