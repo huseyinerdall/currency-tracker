@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="pazar">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/.env" beforeDir="false" afterPath="$PROJECT_DIR$/admin/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/varliklar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/varliklar.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -230,7 +229,7 @@
       <workItem from="1614368223977" duration="487000" />
       <workItem from="1614410210477" duration="11884000" />
       <workItem from="1614447116571" duration="2889000" />
-      <workItem from="1614493947591" duration="9155000" />
+      <workItem from="1614493947591" duration="10059000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -449,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614518059165</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="pazar">
+      <created>1614518402605</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1614518402605</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,10 +529,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607011688606" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1613746747760">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1614518450357">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1613746747760" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1614518450357" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609166550394">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -535,10 +541,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1612716548658" />
-    <state x="257" y="0" width="895" height="728" key="find.popup" timestamp="1611480264409">
+    <state x="89" y="0" width="895" height="728" key="find.popup" timestamp="1614519206079">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="257" y="0" width="895" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1611480264409" />
+    <state x="89" y="0" width="895" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1614519206079" />
     <state x="188" y="28" width="672" height="677" key="run.anything.popup" timestamp="1609692614363">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

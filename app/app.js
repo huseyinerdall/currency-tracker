@@ -480,7 +480,6 @@ db.sequelize.sync().then(() => {
                     temp = {};
                     temp["name"] = response.data[i]["name"];
                     temp["shortName"] = response.data[i]["symbol"];
-                    symbols[response.data[i]["name"]] = 0;
                     temp["price"] = response.data[i]["current_price"];
                     temp["change"] = response.data[i]["price_change_24h"];
                     temp["market_cap"] = response.data[i]["market_cap"];
@@ -505,10 +504,6 @@ db.sequelize.sync().then(() => {
                     }
 
                 }
-
-                fs.writeFileSync('varliklar.json',JSON.stringify(symbols), function (err) {
-                    if (err) return console.log(err);
-                });
 
             })
             .catch(err => console.error(err));
