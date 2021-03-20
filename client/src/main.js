@@ -7,17 +7,20 @@ import vuetify from "./plugins/vuetify";
 import axios from 'axios'
 import VueAxios from 'vue-axios';
 import VueApexCharts from 'vue-apexcharts';
-
+import DatetimePicker from 'vuetify-datetime-picker';
 import currencies from './assets/currencies';
+import Toasted from 'vue-toasted';
 Vue.use(VueMeta, {
     // optional pluginOptions
     refreshOnceOnNavigation: true
 });
 Vue.use(VueApexCharts);
+Vue.use(DatetimePicker);
 Vue.component('apexchart', VueApexCharts);
 Vue.config.productionTip = false;
 //axios.defaults.baseConfig = "http://localhost:4000/";
 Vue.use(VueAxios, axios);
+Vue.use(Toasted);
 //for server
 Vue.prototype.$addr = 'http://localhost'
 Vue.prototype.$port = '4000'

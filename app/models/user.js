@@ -1,5 +1,5 @@
 'use strict';
-const zerowallet = require('../static/varliklar.js');
+const initialwallet = require('../static/varliklar.js');
 const {
     Model
 } = require('sequelize');
@@ -19,8 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         email: DataTypes.STRING,
         passwd: DataTypes.STRING,
         profileImage: DataTypes.STRING,
-        wallet: { type: DataTypes.STRING, defaultValue: zerowallet },
-        spot: { type: DataTypes.STRING, defaultValue: "0" },
+        wallet: { type: DataTypes.JSON, defaultValue: initialwallet },
     }, {
         sequelize,
         modelName: 'User',

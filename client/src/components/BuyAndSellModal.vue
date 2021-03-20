@@ -8,7 +8,6 @@
     >
       <v-container style="border: 1px solid #ddd;border-radius:0;position:relative;"
                    :style="$store.state.isLight ? 'background-color:#f9f9f9;' : 'background-color:rgba(11,14,63,0.8);'"
-
       >
         <div class="pa-4">
           <v-btn
@@ -77,12 +76,16 @@
                 <v-row style="margin-top: 20px;">
                   <v-col cols="3" class="pb-0 pt-0">
                     <v-text-field
+                        v-model="orderNowAmount"
+                        type="number"
+                        min="1"
                         :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
                         style="padding: 0 16px !important;font-size: 12px;"
                         class="centered-input ml-6"
                         :dark="!$store.state.isLight"
                         :color="$store.state.isLight ? 'black' : 'white'"
                         placeholder="Miktarı Giriniz"
+                        @input="calculateSum"
                     ></v-text-field>
 
                   </v-col>
@@ -94,8 +97,9 @@
                         :dark="!$store.state.isLight"
                         :color="$store.state.isLight ? 'black' : 'white'"
                         placeholder="0,00"
-                        v-model="currentUnit.price"
+                        v-model="currentUnitTLPrice"
                         readonly
+                        @input="calculateSum"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="1" class="text-center pb-0 pt-0 ma-0">
@@ -112,7 +116,13 @@
                         :dark="!$store.state.isLight"
                         readonly
                         placeholder="Toplam"
+                        v-model="calculatedSum"
                     ></v-text-field>
+                  </v-col>
+                  <v-col class="pa-0 ma-0">
+                    <v-btn icon style="background: transparent;">
+                      <v-icon color="white">mdi-plus-box-outline</v-icon>
+                    </v-btn>
                   </v-col>
                 </v-row>
                 <div class="d-flex flex-row justify-content-end alsat" style="margin-top: 87px;">
@@ -122,6 +132,8 @@
                         class="mt-6 pl-1"
                         tile
                         color="rgb(248, 73, 96)"
+                        @click="sellOrderNow"
+                        :disabled="!emirLoaded"
                     >
                       <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
                         mdi-arrow-down
@@ -132,6 +144,8 @@
                         class="mt-6 pl-1 ml-4"
                         tile
                         color="rgb(2, 192, 118)"
+                        @click="buyOrderNow"
+                        :disabled="!emirLoaded"
                     >
                       <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
                         mdi-arrow-up
@@ -147,14 +161,18 @@
                            :style="$store.state.isLight ? 'background-color:#f9f9f9;' : 'background-color:rgba(0,0,0,0.1);'"
                            style="border-radius: 0;height:240px;">
                 <v-radio-group v-model="chosen">
-                  <v-radio value="fiyatagore" color="#ff3366">
+                  <v-radio value="price" color="#ff3366">
                     <template v-slot:label>
                       <div :class="$store.state.isLight ? '' : 'white--text'"
                            style="width: 100%;align-items: center;justify-content: space-between;"
+                           :style="chosen == 'price' ? '' : 'opacity:0.3;pointer-events: none;'"
                       class="d-flex flex-row">
                         <div>Fiyata Göre</div>
                         <div class="d-flex flex-row">
                           <v-text-field
+                              type="number"
+                              min="1"
+                              v-model="amountByPrice"
                               :color="$store.state.isLight ? 'black' : 'white'"
                               class="ml-6 centered-input"
                               :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
@@ -163,77 +181,54 @@
                               placeholder="Miktarı Giriniz"
                           ></v-text-field>
                           <v-text-field
-                              v-model="sum"
+                              v-model="price"
                               :color="$store.state.isLight ? 'black' : 'white'"
                               class="ml-6 centered-input"
                               :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
                               style="padding: 0 16px !important;font-size:12px !important;"
                               :dark="!$store.state.isLight"
-                              readonly
                               placeholder="Fiyat Limitini Giriniz"
                           ></v-text-field>
                         </div>
                       </div>
                     </template>
                   </v-radio>
-                  <v-radio value="tarihegore" color="#ff3366">
+                  <v-radio value="time" color="#ff3366">
                     <template v-slot:label>
                       <div :class="$store.state.isLight ? '' : 'white--text'"
                            style="width: 100%;align-items: center;justify-content: space-between;"
+                           :style="chosen == 'time' ? '' : 'opacity:0.3;pointer-events: none;'"
                            class="d-flex flex-row">
                         <div>Tarihe Göre</div>
                         <div class="d-flex flex-row">
                           <v-text-field
+                              type="number"
+                              min="1"
+                              v-model="amountByTime"
                               :color="$store.state.isLight ? 'black' : 'white'"
-                              class="ml-6 centered-input"
+                              class="ml-6 mr-6 centered-input"
                               :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
                               style="padding: 0 16px !important;font-size:12px !important;"
                               :dark="!$store.state.isLight"
                               placeholder="Miktarı Giriniz"
                           ></v-text-field>
-                          <v-menu
-                              ref="menu"
-                              v-model="menu"
-                              :close-on-content-click="false"
-                              :return-value.sync="date"
-                              transition="scale-transition"
-                              offset-y
-                              min-width="auto"
+                          <v-datetime-picker
+                              v-model="time"
+                              :date-picker-props="dateProps"
+                              :time-picker-props="timeProps"
+                              :text-field-props="inputProps"
+                              clearText="TEMİZLE"
+                              okText="TAMAM"
+                              date-format="yyyy-MM-dd"
+                              time-format="HH:mm"
                           >
-                            <template v-slot:activator="{ on, attrs }">
-                              <v-text-field
-                                  v-model="date"
-                                  readonly
-                                  v-bind="attrs"
-                                  v-on="on"
-                                  class="ml-6"
-                                  style="padding: 0 16px !important;font-size:12px !important;"
-                                  :dark="!$store.state.isLight"
-                              ></v-text-field>
+                            <template slot="dateIcon">
+                              <v-icon>mdi-calendar-month</v-icon>
                             </template>
-                            <v-date-picker
-                                v-model="date"
-                                no-title
-                                scrollable
-                                locale="tr"
-                            >
-                              <v-spacer></v-spacer>
-                              <v-btn
-                                  text
-                                  color="primary"
-                                  @click="menu = false"
-                              >
-                                İptal
-                              </v-btn>
-                              <v-btn
-                                  text
-                                  color="primary"
-                                  @click="$refs.menu.save(date)"
-                              >
-                                OK
-                              </v-btn>
-                            </v-date-picker>
-                          </v-menu>
+                            <template slot="timeIcon">
+                              <v-icon>mdi-clock-time-ten-outline</v-icon>
+                            </template>
+                          </v-datetime-picker>
                         </div>
                       </div>
                     </template>
@@ -246,6 +241,8 @@
                         class="mt-6 pl-1"
                         tile
                         color="rgb(248, 73, 96)"
+                        @click="setSellOrder"
+                        :disabled="!emirLoaded"
                     >
                       <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
                         mdi-arrow-down
@@ -256,6 +253,8 @@
                         class="mt-6 pl-1 ml-4 text--white"
                         tile
                         color="rgb(2, 192, 118)"
+                        @click="setBuyOrder"
+                        :disabled="!emirLoaded"
                     >
                       <v-icon left color="white" style="background-color: rgba(0,0,0,.1);height: 38px;">
                         mdi-arrow-up
@@ -271,38 +270,89 @@
         </div>
       </v-container>
     </v-dialog>
+
   </v-container>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import axios from "axios";
+import io from "socket.io-client";
+//import varlikList from '../assets/varlikList';
 export default {
   name: "BuyAndSellModal",
-  data: () => ({
+  data: (app) => ({
     tab: null,
     image: '',
     items: [
       'Hemen Al', 'Ödeme Emri'
     ],
-    chosen: 'fiyatagore',
+    chosen: 'price',
     data: [],
     allUnits: [],
     images: [],
-    currentUnit: 'Bitcoin',
-    date: new Date().toISOString().substr(0, 10),
+    currentUnit: 'ABD DOLARI',
+    currentUnitTLPrice: 1,
+    time: new Date(),
+    price:0,
+    amountByPrice: 0,
+    amountByTime: 0,
     menu: false,
     dolar: 1,
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    dateProps: {
+      headerColor: '#1d2460',
+      locale:'tr'
+    },
+    timeProps: {
+      headerColor: '#1d2460',
+      useSeconds: false,
+      ampmInTitle: false,
+      locale:'tr',
+      format: "24hr"
+    },
+    inputProps: {
+      style:"padding: 0 16px !important;font-size:12px !important;",
+      dark: !app.$store.state.isLight,
+    },
+    orderNowAmount: 0,
+    calculatedSum: 0,
+    emirLoaded: true,
   }),
   created() {
+    let options = {
+      type : 'success',
+      icon : 'check',
+      fullWidth: true,
+      position:  'top-center',
+      duration: 30000,
+      containerClass:'green accent-3 text-center',
+      className: 'text-center'
+    };
     let app = this;
     if(localStorage.getItem('coins250')){
-      this.data = JSON.parse(localStorage.getItem('coins250'));
+
+      this.data = JSON.parse(localStorage.getItem('coins250'))
+                  //.concat(JSON.parse(localStorage.getItem('currencies')))
+                  //.concat(JSON.parse(localStorage.getItem('golds')))
       this.allUnits = this.data.map((arr)=>{
         return (arr["name"]+"-"+arr["shortName"].toUpperCase());
       })
     }
+
+
+    var socket = io.connect(`${this.$store.state.addr}`);
+    socket.on("buy", fetchedData => {
+      if(fetchedData.userId == JSON.parse(localStorage.getItem('user')).id){
+        this.$toasted.show(`${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,options);
+      }
+    })
+
+    socket.on("sell", fetchedData => {
+      if(fetchedData.userId == JSON.parse(localStorage.getItem('user')).id){
+        this.$toasted.show(`${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,options);
+      }
+    })
+
     axios.get('https://finans.truncgil.com/today.json')
         .then(response =>{
           app.dolar = response.data["ABD DOLARI"]["Satış"];
@@ -312,9 +362,89 @@ export default {
   },
   methods: {
     chooseUnit(){
-      console.log(this.currentUnit);
       this.image = this.currentUnit.image;
+      this.currentUnitTLPrice = this.currentUnit.price*this.dolar;
+      this.calculateSum();
     },
+    calculateSum(){
+      this.calculatedSum = (this.orderNowAmount * parseFloat(this.currentUnitTLPrice)).toFixed(2);
+    },
+    setBuyOrder(){
+      //userId,orderType,parameter,wealth,amount,major
+      this.emirLoaded = false;
+      axios.post(`${this.$store.state.api}/setbuyorder`, {
+        userId: JSON.parse(localStorage.getItem('user')).id,
+        orderType: this.chosen,
+        parameter: this.chosen == 'price' ? this.price : this.time,
+        wealth: this.currentUnit["name"],
+        amount: this.chosen == 'price' ? this.amountByPrice : this.amountByTime,
+        major: "TÜRK LİRASI"
+      })
+          .then((response) => {
+            this.emirLoaded = true;
+            console.log(response.data)
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    },
+    setSellOrder(){
+      //userId,orderType,parameter,wealth,amount,major
+      this.emirLoaded = false;
+      axios.post(`${this.$store.state.api}/setsellorder`, {
+        userId: JSON.parse(localStorage.getItem('user')).id,
+        orderType: this.chosen,
+        parameter: this.chosen == 'price' ? this.price : this.time,
+        wealth: this.currentUnit["name"],
+        amount: this.chosen == 'price' ? this.amountByPrice : this.amountByTime,
+        major: "TÜRK LİRASI"
+      })
+          .then((response) => {
+            this.emirLoaded = true;
+            console.log(response.data)
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    },
+    buyOrderNow(){
+      //userId,orderType,parameter,wealth,amount,major
+      this.emirLoaded = false;
+      axios.post(`${this.$store.state.api}/setbuyorder`, {
+        userId: JSON.parse(localStorage.getItem('user')).id,
+        orderType: 'price',
+        parameter: this.currentUnitTLPrice,
+        wealth: this.currentUnit["name"],
+        amount: this.orderNowAmount,
+        major: "TÜRK LİRASI"
+      })
+          .then((response) => {
+            this.emirLoaded = true;
+            console.log(response.data)
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    },
+    sellOrderNow(){
+      //userId,orderType,parameter,wealth,amount,major
+      this.emirLoaded = false;
+      axios.post(`${this.$store.state.api}/setsellorder`, {
+        userId: JSON.parse(localStorage.getItem('user')).id,
+        orderType: 'price',
+        parameter: this.currentUnitTLPrice,
+        wealth: this.currentUnit["name"],
+        amount: this.orderNowAmount,
+        major: "TÜRK LİRASI"
+      })
+          .then((response) => {
+            this.emirLoaded = true;
+            console.log(response.data);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    }
   },
   computed: mapState({
     buyselldialog: state => state.buyselldialog,
@@ -341,5 +471,11 @@ v-text-field__slot input,
 }
 .alsat .v-btn__content{
   color:#fff !important;
+}
+.theme--light.v-data-table{
+  background: rgba(0,0,0,.3);
+}
+.v-time-picker-title{
+  justify-content: center !important;
 }
 </style>

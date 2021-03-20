@@ -72,6 +72,20 @@
 
           <v-list>
             <v-list-item
+                dense
+                :light="$store.state.isLight"
+                @click="$store.commit('userwalletdialog')"
+            >
+              <v-list-item-title>Cüzdan</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+                dense
+                :light="$store.state.isLight"
+                @click="$store.commit('userorderdialog')"
+            >
+              <v-list-item-title>Emirlerim</v-list-item-title>
+            </v-list-item>
+            <v-list-item
                 link
                 href="/profil"
                 dense
@@ -267,6 +281,8 @@
       <router-view/>
     </v-app>
     <BuyAndSellModal/>
+    <UserWalletModal/>
+    <UserOrders/>
   </main>
 </template>
 
@@ -274,13 +290,17 @@
 //import VueJwtDecode from "vue-jwt-decode";
 import Footer from "./components/common/Footer";
 import BuyAndSellModal from "./components/BuyAndSellModal";
+import UserWalletModal from "./components/UserWalletModal";
+import UserOrders from "./components/UserOrders";
 
 export default {
   name: "App",
 
   components: {
     Footer,
-    BuyAndSellModal
+    BuyAndSellModal,
+    UserWalletModal,
+    UserOrders
   },
 
   data: () => ({
@@ -298,9 +318,6 @@ export default {
     }
   },
   created() {
-    //let token = localStorage.getItem("jwt")
-    //let decoded = VueJwtDecode.decode(token);
-    //console.log(decoded)
     setInterval(this.updateTime,1000);
     this.isAuthenticated = localStorage.getItem('user') != undefined;
   }
@@ -308,9 +325,6 @@ export default {
 </script>
 
 <style media="screen">
-body, * {
-}
-
 .v-main {
   background-image: url('assets/back.fw.webp') !important;
   background-attachment: fixed;

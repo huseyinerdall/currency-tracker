@@ -8,8 +8,8 @@ let fs = require('fs');
 let moment = require('moment');
 const path = require('path');
 
-var parseString = require('xml2js').parseString;
-var utils = require('./utils');
+let parseString = require('xml2js').parseString;
+let utils = require('./utils');
 
 const db = require("./models");
 const Op = db.Sequelize.Op;
@@ -17,6 +17,7 @@ const Op = db.Sequelize.Op;
 //static long data
 const coins = require('./static/coins.json');
 const descriptions = require('./static/descriptions.json');
+const BINTLTABLE_LIST = ["ABDDOLARI", "EURO", "INGILIZSTERLINI", "KANADADOLARI", "SUUDIARABISTANRIYALI","JAPONYENI","GoldGramAltin","GoldOnsAltin","GoldGumus","BTC","DOGE","ETH","XRP","USDT"];
 const currencyXmlBodyStr = fs.readFileSync('./static/altinkaynakCurrency.xml', 'utf8');
 const truncgil = 'https://finans.truncgil.com/today.json';
 
@@ -39,6 +40,7 @@ var io = require('socket.io')(server, {
 });
 
 require('./user')(app,io);
+let Trader = require('./trader');
 
 app.get('/tcmb', (req, res) => {
     let factRes = [];
@@ -150,7 +152,6 @@ app.get('/gold/:goldName', (req, res) => {
             res.json(response.data[element]);
         })
         .catch(err => console.log(err));
-
 })
 
 app.get('/currencies', (req, res) => {
@@ -315,7 +316,6 @@ app.post('/golddescriptions', async(req, res) => {
     res.send(data);
 })
 
-const BINTLTABLE_LIST = ["ABDDOLARI", "EURO", "INGILIZSTERLINI", "KANADADOLARI", "SUUDIARABISTANRIYALI","JAPONYENI","GoldGramAltin","GoldOnsAltin","GoldGumus","BTC","DOGE","ETH","XRP","USDT"];
 app.post('/bintltable', async(req, res) => {
     let time = req.body.time || 1;
     console.log(time)
@@ -377,7 +377,6 @@ app.post('/bintltable', async(req, res) => {
         })
         .catch(err => console.log(err));
 })
-
 
 app.get('/pariteler', async(req, res) => {
     let temp;
@@ -449,8 +448,47 @@ app.post('/converter', (req, res) => {
         })
         .catch((err) => console.log(err))
 })
-const MAINLOOPINTERVAL = 1000;
 
+app.post('/setbuyorder', (req, res) => {
+    let userId = req.body.userId;
+    let orderType = req.body.orderType;
+    let parameter = req.body.parameter;
+    let wealth = req.body.wealth;
+    let amount = req.body.amount;
+    let major = req.body.major || "TÜRK LİRASI";
+    let result = Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major);
+    res.send(result);
+})
+
+app.post('/setsellorder', (req, res) => {
+    let userId = req.body.userId;
+    let orderType = req.body.orderType;
+    let parameter = req.body.parameter;
+    let wealth = req.body.wealth;
+    let amount = req.body.amount;
+    let major = req.body.major || "TÜRK LİRASI";
+    let result = Trader.setSellOrder(userId,orderType,parameter,wealth,amount,major);
+    res.send(result);
+})
+
+app.post('/deleteorder', (req, res) => {
+    let source = req.body.source;
+    Trader.deleteOrder();
+})
+
+app.post('/getopenorder', async(req, res) => {
+    let userId = req.body.userId;
+    let response = await Trader.getOpenOrdersByUser(userId);
+    res.json(response);
+})
+
+app.post('/getclosedorder', async(req, res) => {
+    let userId = req.body.userId;
+    let response = await Trader.getClosedOrdersByUser(userId);
+    res.json(response);
+})
+
+const MAINLOOPINTERVAL = 10000;
 
 db.sequelize.sync().then(() => {
 
@@ -466,15 +504,16 @@ db.sequelize.sync().then(() => {
     let factRes30 = [];
     let golds = [];
     let currencies = [];
+    let allPrices = {};
+    let dolar = 1;
+    allPrices["TÜRK LİRASI"] = 1;
     setInterval(() => {
         factRes30 = [];
         factRes = [];
         golds = [];
         currencies = [];
-
         let temp = {};
-        let symbols = {};
-        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=gecko_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h,7d`)
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=markey_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h,7d`)
             .then((response) => {
                 for (let i = 0; i < response.data.length; i++) {
                     temp = {};
@@ -489,6 +528,7 @@ db.sequelize.sync().then(() => {
                     temp["time"] = response.data[i]["last_updated"];
                     temp["image"] = response.data[i]["image"];
                     temp["sparkline"] = response.data[i]["sparkline_in_7d"]["price"].slice(0,20);
+                    allPrices[response.data[i]["name"]] = -response.data[i]["current_price"];
                     factRes.push(temp);
                     if(i<30){
                         factRes30.push(temp);
@@ -510,6 +550,7 @@ db.sequelize.sync().then(() => {
 
         axios.get('https://finans.truncgil.com/today.json')
             .then(async response => {
+                dolar = parseFloat(response.data["ABD DOLARI"]["Satış"])
                 let sepetalis = ((parseFloat(response.data["ABD DOLARI"]["Alış"]) + parseFloat(response.data["EURO"]["Alış"])) / 2).toFixed(4);
                 let sepetsatis = ((parseFloat(response.data["ABD DOLARI"]["Satış"]) + parseFloat(response.data["EURO"]["Satış"])) / 2).toFixed(4);
                 response.data["SEPET KUR"] = {"Alış":sepetalis,"Satış":sepetsatis,"Tür": 'Döviz'};
@@ -544,6 +585,7 @@ db.sequelize.sync().then(() => {
                         }
 
                         golds.push(response.data[element]);
+                        allPrices[element] = parseFloat(response.data[element]["Satış"]);
                     } else if (element.indexOf("Güncelleme") < 0 && element.indexOf("ÇEKME") < 0) {
                         response.data[element]["type"] = element;
                         response.data[element]["time"] = updatetime;
@@ -571,22 +613,136 @@ db.sequelize.sync().then(() => {
                             response.data[element]["close"] = response.data[element]["Satış"]
                         }
                         currencies.push(response.data[element]);
-
+                        allPrices[element] = parseFloat(response.data[element]["Satış"]);
                     }
                 }
 
             })
             .catch(err => console.error(err));
-
+        // al sat yapılacak yer
+        // bburada açık emirlerin hepsi alınacak ve gerekli condition sağlanıyorsa işlem gerçekleştirilecek
     }, MAINLOOPINTERVAL)
 
     setInterval(() => {
         if(factRes.length == 250){io.emit('coins', factRes);}
         if(factRes30.length == 30){io.emit('coins30', factRes30);}
-        if(golds.length != 0){io.emit('golds', golds);}
-        if(currencies.length != 0){io.emit('currencies', currencies);}
-    },500);
+        if(golds.length == 16){io.emit('golds', golds);}
+        if(currencies.length == 20){io.emit('currencies', currencies);}
+        io.emit('allprices', allPrices);
+    },1000);
 
+    let prevOrderNumber = 0;
+    setInterval(() => {
+
+       let openOrders = Trader.getAllOpenOrders()
+           .then((openOrders)=>{
+               if(prevOrderNumber !== openOrders.length){
+                   console.log(`Bekleyen ${openOrders.length} emir var...`);
+                   prevOrderNumber = openOrders.length;
+               }
+
+
+               for (let i = 0; i < openOrders.length; i++) {
+
+                    if(openOrders[i]["dataValues"]["OrderType"] === 'price'){
+                        if(openOrders[i]["dataValues"]["buyOrSell"] == 'buy' &&
+                            (parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")) >=
+                            parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
+                                ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
+                                : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]))){
+
+
+
+                            Trader.buy(
+                                openOrders[i]["dataValues"]["UserId"],
+                                openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                openOrders[i]["dataValues"]["Parameter"],
+                                openOrders[i]["dataValues"]["Amount"],
+                                "TÜRK LİRASI",
+                                openOrders[i]["dataValues"]["id"]
+                            )
+
+                            io.emit('buy', {
+                                userId: openOrders[i]["dataValues"]["UserId"],
+                                CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                Amount: openOrders[i]["dataValues"]["Amount"]
+                            });
+                            openOrders.splice(i,1);
+                        }
+                        else if(openOrders[i]["dataValues"]["buyOrSell"] == 'sell' &&
+                            (parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")) <=
+                                parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
+                                    ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
+                                    : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]))){
+                            Trader.sell(
+                                openOrders[i]["dataValues"]["UserId"],
+                                openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                openOrders[i]["dataValues"]["Parameter"],
+                                openOrders[i]["dataValues"]["Amount"],
+                                "TÜRK LİRASI",
+                                openOrders[i]["dataValues"]["id"]
+                            )
+
+                            io.emit('sell', {
+                                userId: openOrders[i]["dataValues"]["UserId"],
+                                CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                Amount: openOrders[i]["dataValues"]["Amount"]
+                            });
+                            openOrders.splice(i,1);
+                        }
+                    }else if(openOrders[i].dataValues.OrderType == 'time'){
+
+                        if(openOrders[i]["dataValues"]["buyOrSell"] == 'buy' &&
+                            new Date(openOrders[i]["dataValues"]["Parameter"]) >= new Date()){
+
+                            let priceNow = parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
+                                ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
+                                : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]])
+
+                            Trader.buy(
+                                openOrders[i]["dataValues"]["UserId"],
+                                openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                priceNow,
+                                openOrders[i]["dataValues"]["Amount"],
+                                "TÜRK LİRASI",
+                                openOrders[i]["dataValues"]["id"]
+                            )
+
+                            io.emit('buy', {
+                                userId: openOrders[i]["dataValues"]["UserId"],
+                                CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                Amount: openOrders[i]["dataValues"]["Amount"]
+                            });
+                            openOrders.splice(i,1);
+                        }
+
+                        else if(openOrders[i]["dataValues"]["buyOrSell"] == 'sell' &&
+                            new Date(openOrders[i]["dataValues"]["Parameter"]) <= new Date()){
+
+                            let priceNow = parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
+                                ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
+                                : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]])
+
+                            Trader.sell(
+                                openOrders[i]["dataValues"]["UserId"],
+                                openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                priceNow,
+                                openOrders[i]["dataValues"]["Amount"],
+                                "TÜRK LİRASI",
+                                openOrders[i]["dataValues"]["id"]
+                            )
+
+                            io.emit('sell', {
+                                userId: openOrders[i]["dataValues"]["UserId"],
+                                CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                Amount: openOrders[i]["dataValues"]["Amount"]
+                            });
+                            openOrders.splice(i,1);
+                        }
+                    }
+               }
+           })
+    },3000);
 
 })
 

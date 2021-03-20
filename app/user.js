@@ -33,7 +33,7 @@ module.exports = function(app,io){
                     });
                     req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
                     req.body.profileImage = filename;
-                    db.User.create(req.body)
+                    db.User.create(req.body);
                     console.log("Kullanıcı kaydedildi!!!");
                     res.send("OK");
                 }
@@ -71,7 +71,6 @@ module.exports = function(app,io){
                 let passwordIsValid = bcrypt.compareSync(req.body.passwd, user.dataValues.passwd)
                 if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
                 let token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: 86400 });
-                console.log(token)
                 res.status(200).send({ auth: true, token: token, user: user });
             })
             .catch(err => {
@@ -177,5 +176,31 @@ module.exports = function(app,io){
                 record.dislike = JSON.stringify(temp);
                 await record.save();
             })
+    })
+
+    app.post('/getuserwallet', async(req, res) => {
+        let userId = req.body.id;
+        console.log(userId)
+        data = await db.User.findOne({
+            where: {
+                id: userId
+            }
+        });
+        res.json(data.dataValues.wallet);
+    })
+
+    app.post('/setuserwallet', async(req, res) => {
+        let userId = req.body.userId;
+        let wallet = req.body.wallet;
+
+        res.json("OK");
+    })
+
+    app.post('/buyandsell', async(req, res) => {
+        let alinacak = req.body.alinacak;
+        let satilacak = req.body.satilacak;
+        let miktar = req.body.miktar;
+
+        res.json("OK");
     })
 }

@@ -108,7 +108,7 @@
         v-model="dialog"
         width="500"
     >
-      <v-card>
+      <v-card style="border-radius: 0;">
             <v-card flat>
               <v-card-text>
                 <v-text-field

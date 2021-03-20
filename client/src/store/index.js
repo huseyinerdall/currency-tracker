@@ -16,6 +16,8 @@ export default new Vuex.Store({
     status: '',
     commentDrawer: false,
     buyselldialog: false,
+    userwalletdialog: false,
+    userorderdialog: false,
     isLight: (localStorage.getItem('light')=="true"),
   },
   getters: {
@@ -23,6 +25,8 @@ export default new Vuex.Store({
     authStatus: state => state.status,
     commentDrawer: state => state.commentDrawer,
     buyselldialog: state => state.buyselldialog,
+    userwalletdialog: state => state.userwalletdialog,
+    userorderdialog: state => state.userorderdialog,
     isLight: state => state.isLight,
   },
   mutations: {
@@ -40,8 +44,13 @@ export default new Vuex.Store({
       state.commentDrawer = !state.commentDrawer;
     },
     buyselldialog(state) {
-      console.log(state.buyselldialog)
       state.buyselldialog = !state.buyselldialog;
+    },
+    userwalletdialog(state) {
+      state.userwalletdialog = !state.userwalletdialog;
+    },
+    userorderdialog(state) {
+      state.userorderdialog = !state.userorderdialog;
     },
     isLight(state) {
       if(state.isLight){
