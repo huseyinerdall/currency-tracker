@@ -89,6 +89,7 @@
                           return;
                         }else{
                           localStorage.setItem('user', JSON.stringify(response.data.user))
+                          localStorage.setItem('wallet', JSON.stringify(JSON.parse(localStorage.getItem('user')).wallet))
                           localStorage.setItem('jwt', response.data.token)
                         }
 
@@ -105,7 +106,7 @@
                         }
                     })
                     .catch(err => {
-                        console.log(err.response);
+                        console.log(err);
                     })
             }
         }

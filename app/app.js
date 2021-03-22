@@ -10,7 +10,7 @@ const path = require('path');
 
 let parseString = require('xml2js').parseString;
 let utils = require('./utils');
-
+let allPrices = {};
 const db = require("./models");
 const Op = db.Sequelize.Op;
 
@@ -449,6 +449,61 @@ app.post('/converter', (req, res) => {
         .catch((err) => console.log(err))
 })
 
+app.post('/buynow', (req, res) => {
+    let userId = req.body.userId;
+    let orderType = req.body.orderType;
+    let parameter = req.body.parameter;
+    let wealth = req.body.wealth;
+    let amount = req.body.amount;
+    let major = req.body.major || "TÜRK LİRASI";
+    Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major,1)
+        .then((orderId)=>{
+            Trader.buy(
+                userId,
+                wealth,
+                parameter,
+                amount,
+                "TÜRK LİRASI",
+                orderId
+            )
+        })
+
+    io.emit('buy', {
+        userId: userId,
+        CoinOrCurrency: wealth,
+        Amount: amount
+    });
+    res.sendStatus(200);
+})
+
+app.post('/sellnow', (req, res) => {
+    let userId = req.body.userId;
+    let orderType = req.body.orderType;
+    let parameter = req.body.parameter;
+    let wealth = req.body.wealth;
+    let amount = req.body.amount;
+    let major = req.body.major || "TÜRK LİRASI";
+    Trader.setSellOrder(userId,orderType,parameter,wealth,amount,major,1)
+        .then((orderId)=>{
+            Trader.sell(
+                userId,
+                wealth,
+                parameter,
+                amount,
+                "TÜRK LİRASI",
+                orderId
+            )
+        })
+
+    io.emit('sell', {
+        userId: userId,
+        CoinOrCurrency: wealth,
+        Amount: amount
+    });
+    res.sendStatus(200);
+});
+
+
 app.post('/setbuyorder', (req, res) => {
     let userId = req.body.userId;
     let orderType = req.body.orderType;
@@ -504,7 +559,6 @@ db.sequelize.sync().then(() => {
     let factRes30 = [];
     let golds = [];
     let currencies = [];
-    let allPrices = {};
     let dolar = 1;
     allPrices["TÜRK LİRASI"] = 1;
     setInterval(() => {
@@ -546,7 +600,7 @@ db.sequelize.sync().then(() => {
                 }
 
             })
-            .catch(err => console.error(err));
+            .catch(err => 1+1);
 
         axios.get('https://finans.truncgil.com/today.json')
             .then(async response => {
@@ -618,7 +672,7 @@ db.sequelize.sync().then(() => {
                 }
 
             })
-            .catch(err => console.error(err));
+            .catch(err => 1+1);
         // al sat yapılacak yer
         // bburada açık emirlerin hepsi alınacak ve gerekli condition sağlanıyorsa işlem gerçekleştirilecek
     }, MAINLOOPINTERVAL)

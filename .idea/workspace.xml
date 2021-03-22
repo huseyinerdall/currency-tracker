@@ -20,28 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="pazar">
-      <change afterPath="$PROJECT_DIR$/app/models/order.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/tradeMessages.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/varlikList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/UserOrders.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/UserWalletModal.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/new.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/seooo.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/temp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/.env" beforeDir="false" afterPath="$PROJECT_DIR$/admin/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schedule.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/varliklar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/varliklar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/varliklar.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/descriptions.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/descriptions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/seo.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/seo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/Logout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Logout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,6 +263,9 @@
       <workItem from="1616001737469" duration="1786000" />
       <workItem from="1616080975901" duration="4157000" />
       <workItem from="1616172054073" duration="4712000" />
+      <workItem from="1616220339832" duration="12590000" />
+      <workItem from="1616394365596" duration="14005000" />
+      <workItem from="1616430551349" duration="1250000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -505,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614519277788</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="pazar">
+      <created>1616220753548</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1616220753548</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,26 +551,26 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615364646802" />
-    <state width="1345" height="145" key="GridCell.Tab.0.bottom" timestamp="1616178732279">
+    <state width="1345" height="131" key="GridCell.Tab.0.bottom" timestamp="1616248558592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="145" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616178732279" />
-    <state width="1345" height="145" key="GridCell.Tab.0.center" timestamp="1616178732279">
+    <state width="1345" height="131" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616248558592" />
+    <state width="1345" height="131" key="GridCell.Tab.0.center" timestamp="1616248558592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="145" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616178732279" />
-    <state width="1345" height="145" key="GridCell.Tab.0.left" timestamp="1616178732279">
+    <state width="1345" height="131" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616248558592" />
+    <state width="1345" height="131" key="GridCell.Tab.0.left" timestamp="1616248558592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="145" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616178732279" />
-    <state width="1345" height="145" key="GridCell.Tab.0.right" timestamp="1616178732279">
+    <state width="1345" height="131" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616248558592" />
+    <state width="1345" height="131" key="GridCell.Tab.0.right" timestamp="1616248558592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="145" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616178732279" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1614519281395">
+    <state width="1345" height="131" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616248558592" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1616220801745">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1614519281395" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1616220801745" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609166550394">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

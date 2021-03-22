@@ -25,6 +25,7 @@
                     :src="currentUnit.image"
                 >
               </v-avatar>
+              <!-- Al sat seçenekleri -->
               <v-combobox
                   :color="$store.state.isLight ? 'black' : 'white'"
                   :dark="!$store.state.isLight"
@@ -39,7 +40,10 @@
             </v-row>
             <v-row>
               <v-col class="d-flex flex-row justify-space-between">
-                <div>
+                <div v-if="currentUnit.isMajor" class="float-left">
+                  <span :class="$store.state.isLight ? '' : 'white--text'" class="ml-8">₺ {{ (currentUnit.price) |binayracveondalik}}</span>
+                </div>
+                <div v-else>
                   <span :class="$store.state.isLight ? '' : 'white--text'">$ {{currentUnit.price}}</span>
                   <span :class="$store.state.isLight ? '' : 'white--text'" class="ml-8">₺ {{ (currentUnit.price*dolar) |binayracveondalik}}</span>
                 </div>
@@ -91,6 +95,20 @@
                   </v-col>
                   <v-col cols="3" class="pb-0 pt-0">
                     <v-text-field
+                        v-if="currentUnit.isMajor"
+                        :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
+                        style="padding: 0 16px !important;font-size: 12px;"
+                        class="centered-input ml-6"
+                        :dark="!$store.state.isLight"
+                        :color="$store.state.isLight ? 'black' : 'white'"
+                        placeholder="0,00"
+                        v-model="currentUnit.price"
+                        readonly
+                        @input="calculateSum"
+                    >
+                    </v-text-field>
+                    <v-text-field
+                        v-else
                         :style="'width:'+$vuetify.breakpoint.smAndDown ? 'auto' : '80px'"
                         style="padding: 0 16px !important;font-size: 12px;"
                         class="centered-input ml-6"
@@ -278,7 +296,26 @@
 import { mapState } from 'vuex';
 import axios from "axios";
 import io from "socket.io-client";
-//import varlikList from '../assets/varlikList';
+import images from '../assets/images.js';
+import "../../node_modules/material-icons/iconfont/material-icons.scss";
+let options = {
+  type : 'success',
+  icon : 'check',
+  fullWidth: true,
+  position:  'top-center',
+  duration: 1600,
+  containerClass:'green accent-3 text-center',
+  className: 'text-center'
+};
+let alertoptions = {
+  type : 'error',
+  icon : 'error',
+  fullWidth: true,
+  position:  'top-center',
+  duration: 1600,
+  containerClass:'red accent-3 text-center',
+  className: 'text-center'
+};
 export default {
   name: "BuyAndSellModal",
   data: (app) => ({
@@ -298,10 +335,12 @@ export default {
     amountByPrice: 0,
     amountByTime: 0,
     menu: false,
+    priceNow: 20,
     dolar: 1,
     dateProps: {
       headerColor: '#1d2460',
-      locale:'tr'
+      locale:'tr',
+      min:new Date().toISOString().slice(0,10)
     },
     timeProps: {
       headerColor: '#1d2460',
@@ -319,26 +358,20 @@ export default {
     emirLoaded: true,
   }),
   created() {
-    let options = {
-      type : 'success',
-      icon : 'check',
-      fullWidth: true,
-      position:  'top-center',
-      duration: 30000,
-      containerClass:'green accent-3 text-center',
-      className: 'text-center'
-    };
     let app = this;
-    if(localStorage.getItem('coins250')){
 
-      this.data = JSON.parse(localStorage.getItem('coins250'))
-                  //.concat(JSON.parse(localStorage.getItem('currencies')))
-                  //.concat(JSON.parse(localStorage.getItem('golds')))
+    if(localStorage.getItem('coins250')){
+      this.data = JSON.parse(localStorage.getItem('coins250'));
+      let tempList = JSON.parse(localStorage.getItem('currencies'))
+          .concat(JSON.parse(localStorage.getItem('golds')));
+
+      for (let i = 0; i < tempList.length; i++) {
+        this.data.push({"name":tempList[i]["type"],"shortName":"",price:parseFloat(tempList[i]["Satış"].replace(",",".")),"image":(images[tempList[i]["type"]]||this.$store.state.api+'/gold.png'),isMajor:true})
+      }
       this.allUnits = this.data.map((arr)=>{
         return (arr["name"]+"-"+arr["shortName"].toUpperCase());
       })
     }
-
 
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("buy", fetchedData => {
@@ -356,20 +389,35 @@ export default {
     axios.get('https://finans.truncgil.com/today.json')
         .then(response =>{
           app.dolar = response.data["ABD DOLARI"]["Satış"];
+          this.currentUnit.price = this.currentUnit.price*1;
         })
         .catch(err => console.log(err));
     this.currentUnit = this.data[0];
+    this.chooseUnit();
   },
   methods: {
     chooseUnit(){
       this.image = this.currentUnit.image;
-      this.currentUnitTLPrice = this.currentUnit.price*this.dolar;
+      this.currentUnitTLPrice = (this.currentUnit.price*this.dolar).toFixed(2);
       this.calculateSum();
     },
     calculateSum(){
       this.calculatedSum = (this.orderNowAmount * parseFloat(this.currentUnitTLPrice)).toFixed(2);
     },
     setBuyOrder(){
+      if(this.chosen == 'time' && this.time<new Date()){
+        this.$toasted.show(`Geçmişe emir veremezsiniz.`,alertoptions);
+        return;
+      }
+      if((this.chosen == 'price' ? this.amountByPrice : this.amountByTime)<0.1){
+        this.$toasted.show(`Miktar 0,1'den küçük olamaz.`,alertoptions);
+        return;
+      }
+      let tl = JSON.parse(localStorage.getItem('user')).wallet["TÜRK LİRASI"];
+      if(!tl>this.calculateSum){
+        this.$toasted.warn(`Yeterli TÜRK LİRASI yok.`,options);
+        return;
+      }
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
       axios.post(`${this.$store.state.api}/setbuyorder`, {
@@ -389,6 +437,14 @@ export default {
           })
     },
     setSellOrder(){
+      if(this.chosen == 'time' && this.time<new Date()){
+        this.$toasted.show(`Geçmişe emir veremezsiniz.`,alertoptions);
+        return;
+      }
+      if((this.chosen == 'price' ? this.amountByPrice : this.amountByTime)<0.1){
+        this.$toasted.show(`Miktar 0,1'den küçük olamaz.`,alertoptions);
+        return;
+      }
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
       axios.post(`${this.$store.state.api}/setsellorder`, {
@@ -408,18 +464,29 @@ export default {
           })
     },
     buyOrderNow(){
+      let tl = parseFloat(JSON.parse(localStorage.getItem('wallet'))["TÜRK LİRASI"]["amount"]);
+      if(!(tl>this.orderNowAmount * parseFloat(this.currentUnitTLPrice))){
+        this.$toasted.show(`Yeterli TÜRK LİRASI yok.`,alertoptions);
+        return;
+      }
+      if(this.orderNowAmount<0.1){
+        this.$toasted.show(`Miktar 0,1'den küçük olamaz.`,alertoptions);
+        return;
+      }
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
-      axios.post(`${this.$store.state.api}/setbuyorder`, {
+      this.$toasted.show(`Alım emriniz alındı.`,options);
+      axios.post(`${this.$store.state.api}/buynow`, {
         userId: JSON.parse(localStorage.getItem('user')).id,
-        orderType: 'price',
-        parameter: this.currentUnitTLPrice,
+        orderType: 'time',
+        parameter: this.currentUnit.isMajor ? this.currentUnit.price : this.currentUnit.price * this.dolar,
         wealth: this.currentUnit["name"],
         amount: this.orderNowAmount,
         major: "TÜRK LİRASI"
       })
           .then((response) => {
             this.emirLoaded = true;
+            this.getUserWallet();
             console.log(response.data)
           })
           .catch(err => {
@@ -427,9 +494,19 @@ export default {
           })
     },
     sellOrderNow(){
+      if(this.orderNowAmount<0.1){
+        this.$toasted.show(`Miktar 0,1'den küçük olamaz.`,alertoptions);
+        return;
+      }
+      let wealth = parseFloat(JSON.parse(localStorage.getItem('wallet'))[this.currentUnit["name"]]["amount"]);
+      if(!(wealth>this.orderNowAmount)){
+        this.$toasted.show(`Yeterli ${this.currentUnit["name"]} yok.`,alertoptions);
+        return;
+      }
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
-      axios.post(`${this.$store.state.api}/setsellorder`, {
+      this.$toasted.show(`Satım emriniz alındı.`,options);
+      axios.post(`${this.$store.state.api}/sellnow`, {
         userId: JSON.parse(localStorage.getItem('user')).id,
         orderType: 'price',
         parameter: this.currentUnitTLPrice,
@@ -439,7 +516,19 @@ export default {
       })
           .then((response) => {
             this.emirLoaded = true;
+            this.getUserWallet();
             console.log(response.data);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    },
+    getUserWallet: function(){
+      axios.post(`${this.$store.state.api}/getuserwallet`, {
+        id: JSON.parse(localStorage.getItem('user')).id
+      })
+          .then((response) => {
+            localStorage.setItem('wallet',JSON.stringify(response.data));
           })
           .catch(err => {
             console.log(err);

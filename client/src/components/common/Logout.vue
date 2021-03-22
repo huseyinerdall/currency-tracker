@@ -12,7 +12,7 @@ export default {
     logout: function () {
       localStorage.removeItem("jwt");
       localStorage.removeItem("user");
-      this.$router.push("/");
+      this.$router.go(0);
     }
   },
   created() {

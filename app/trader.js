@@ -20,8 +20,7 @@ class Trade{
             .then(async(user) =>{
                 let tradePurpose = amount * wealthPrice;
                 temp = await user.dataValues.wallet;
-                console.log(temp["TÜRK LİRASI"]["amount"])
-                temp["TÜRK LİRASI"].amount = parseFloat(user.dataValues.wallet["TÜRK LİRASI"]["amount"]) - parseFloat(tradePurpose);
+                temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);
                 temp[wealth].amount = amount;
                 user.wallet = temp;
                 db.User.update({
@@ -66,7 +65,7 @@ class Trade{
             .then(async(user) =>{
                 let tradePurpose = amount * wealthPrice;
                 temp = user.dataValues.wallet;
-                temp[major].amount = parseFloat(user.dataValues.wallet[major].amount) + parseFloat(tradePurpose);
+                temp["TÜRK LİRASI"].amount = parseFloat(user.dataValues.wallet["TÜRK LİRASI"].amount) + parseFloat(tradePurpose);
                 temp[wealth].amount = temp[wealth].amount - amount;
                 user.wallet = temp;
                 db.User.update({
@@ -98,25 +97,27 @@ class Trade{
         parameter,
         wealth,
         amount,
-        major = "TÜRK LİRASI"
+        major = "TÜRK LİRASI",
+        closed=0
     ){
-        db.Order.create({
-            UserId: userId,
-            buyOrSell: 'buy',
-            OrderType: orderType, // "time" or "price"
-            Parameter: parameter, // time or price
-            CoinOrCurrency: wealth,
-            MajorCurrency: major,
-            Amount: amount,
-            Closed: 0
+        return new Promise((resolve, reject)=>{
+            db.Order.create({
+                UserId: userId,
+                buyOrSell: 'buy',
+                OrderType: orderType, // "time" or "price"
+                Parameter: parameter, // time or price
+                CoinOrCurrency: wealth,
+                MajorCurrency: major,
+                Amount: amount,
+                Closed: closed
+            })
+                .then((data)=>{
+                    resolve(data.dataValues.id);
+                })
+                .catch((err)=>{
+                    reject(err);
+                })
         })
-            .then(()=>{
-                return 1;
-            })
-            .catch((err)=>{
-                console.log(err);
-                return 0;
-            })
     }
 
     setSellOrder(
@@ -125,25 +126,27 @@ class Trade{
         parameter,
         wealth,
         amount,
-        major = "TÜRK LİRASI"
+        major = "TÜRK LİRASI",
+        closed=0
     ){
-        db.Order.create({
-            UserId: userId,
-            buyOrSell: 'sell',
-            OrderType: orderType, // "time" or "price"
-            Parameter: parameter, // time or price
-            CoinOrCurrency: wealth,
-            MajorCurrency: major,
-            Amount: amount,
-            Closed: 0
+        return new Promise((resolve, reject)=>{
+            db.Order.create({
+                UserId: userId,
+                buyOrSell: 'sell',
+                OrderType: orderType, // "time" or "price"
+                Parameter: parameter, // time or price
+                CoinOrCurrency: wealth,
+                MajorCurrency: major,
+                Amount: amount,
+                Closed: closed
+            })
+                .then((data)=>{
+                    resolve(data.dataValues.id);
+                })
+                .catch((err)=>{
+                    reject(err);
+                })
         })
-            .then(()=>{
-                return 1;
-            })
-            .catch((err)=>{
-                console.log(err);
-                return 0;
-            })
     }
 
     getAllOpenOrders(){
