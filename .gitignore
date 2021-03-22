@@ -118,4 +118,4 @@ dist
 .idea
 
 descriptions.json
-seo.json
+#seo.json
