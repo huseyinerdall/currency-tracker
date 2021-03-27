@@ -8,8 +8,79 @@ const Op = db.Sequelize.Op;
 const SECRET_KEY = 'SI6ImM1Z';
 var upload = require('./utils/upload');
 const UPLOAD_FOLDER = path.join(__dirname,"public/uploads/");
+const passport = require('passport');
+const url = require('url');
+//require('./passport-setup');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 module.exports = function(app,io){
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+
+
+    passport.serializeUser(function(user, done) {
+        console.log(user)
+        done(null, JSON.parse(user));
+    });
+
+    passport.deserializeUser(function(id, done) {
+        console.log(user)
+        done(err, user);
+    });
+
+    passport.use(new GoogleStrategy({
+            clientID: '948525970652-sq52jdauqbtlif0mfn49lv3avnpe0p3c.apps.googleusercontent.com',
+            clientSecret: '0AhdzEP80KJBS9oVDAsBFK3Q',
+            callbackURL: "http://localhost:4000/google/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            console.log(profile,done)
+            db.User.findOne({
+                where: {
+                    email: profile.emails[0]['value']
+                }
+            })
+                .then(user => {
+                    if (user) {
+                        console.log(user)
+                        done({ auth: true, user: user })
+
+                        //res.status(200).send({ auth: true, user: user });
+                    } else {
+                        db.User.create({
+                            fullName: profile['displayName'],
+                            email: profile.emails[0]['value'],
+                            passwd: 1,
+                            profileImage: profile.photos[0]['value'],
+                        });
+                        console.log("Kullanıcı kaydedildi!!!");
+                        //res.send("OK");
+                        done("OK");
+                    }
+                })
+                .catch(err => console.log(err.message))
+        }
+    ));
+
+
+    app.get('/google',
+        passport.authenticate('google', { scope: ['profile','email'] }));
+
+
+    app.get('/google/callback',passport.authenticate('google', { failureRedirect: '/failed' }),
+        function(req, res) {
+            // Successful authentication, redirect home.
+            res.redirect(url.format({
+                pathname:"http://localhost:8080/",
+                query: req.user.id
+            }));
+        });
+
+    app.get('/failed', (req,res)=>{
+        console.log("HATAAAAAAAAA");
+        res.send('NO');
+    });
 
     app.post('/register', (req, res) => {
         db.User.findOne({
@@ -38,7 +109,10 @@ module.exports = function(app,io){
                     res.send("OK");
                 }
             })
-            .catch(err => res.send(err.message))
+            .catch(err => {
+                console.log(err)
+                res.send(err)
+            })
     })
 
     app.post('/avatar', upload.single('file'), (req, res) => {
@@ -91,26 +165,14 @@ module.exports = function(app,io){
             subject: subject,
             profileImage: profileImage
         })
-            .then( async()=>{
-                let data;
-                let BEGIN = moment().subtract(7, 'd').toString() || DEFAULT;
-                const NOW = new Date();
-                db["Comments"].findAll({
-                    where: {
-                        createdAt: {
-                            [Op.between]: [BEGIN, NOW],
-                        },
-                        subject: subject
-                    }
-                })
-                    .then(data => {
-                        console.log(subject+"-comments")
-                        io.emit(subject+"-comments",data);
-                        console.log(subject+"-comments")
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
+            .then( ()=>{
+                io.emit(subject+"-comments",{
+                    fullName: fullName,
+                    comment: comment,
+                    subject: subject,
+                    profileImage: profileImage,
+                    createdAt: new Date(),
+                });
             })
 
         res.json({

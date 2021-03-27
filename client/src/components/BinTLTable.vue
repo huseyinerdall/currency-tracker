@@ -83,14 +83,12 @@ export default {
   },
   methods: {
     getData() {
-      if(new Date().getDay() != 0 && new Date().getDay() != 1){
-        this.time = 7;
-      }
       axios.post(`${this.$store.state.api}/bintltable`, {
         time: this.time,
       })
           .then(response => {
             //let fetchedData = response.data;
+            console.log(response.data)
             this.data = response.data;
           })
     }
