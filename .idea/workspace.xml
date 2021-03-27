@@ -19,9 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="pazar">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="salı">
+      <change afterPath="$PROJECT_DIR$/app/passport-setup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/seo.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/seo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +263,11 @@
       <workItem from="1616220339832" duration="12590000" />
       <workItem from="1616394365596" duration="14005000" />
       <workItem from="1616430551349" duration="4133000" />
-      <workItem from="1616480737476" duration="3299000" />
+      <workItem from="1616480737476" duration="5942000" />
+      <workItem from="1616570840242" duration="2926000" />
+      <workItem from="1616609954982" duration="3094000" />
+      <workItem from="1616740787354" duration="1449000" />
+      <workItem from="1616777300645" duration="9925000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -510,7 +521,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616439440474</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="salı">
+      <created>1616487611055</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1616487611055</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -535,13 +553,13 @@
     <MESSAGE value="Test" />
     <MESSAGE value="persembe" />
     <MESSAGE value="cumartesi" />
-    <MESSAGE value="salı" />
     <MESSAGE value="pazartesi" />
     <MESSAGE value="çarşamba" />
     <MESSAGE value="perşembe" />
     <MESSAGE value="cuma" />
     <MESSAGE value="pazar" />
-    <option name="LAST_COMMIT_MESSAGE" value="pazar" />
+    <MESSAGE value="salı" />
+    <option name="LAST_COMMIT_MESSAGE" value="salı" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609692675273">
@@ -556,26 +574,26 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615364646802" />
-    <state width="1345" height="131" key="GridCell.Tab.0.bottom" timestamp="1616248558592">
+    <state width="1345" height="152" key="GridCell.Tab.0.bottom" timestamp="1616790430733">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="131" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616248558592" />
-    <state width="1345" height="131" key="GridCell.Tab.0.center" timestamp="1616248558592">
+    <state width="1345" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616790430733" />
+    <state width="1345" height="152" key="GridCell.Tab.0.center" timestamp="1616790430733">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="131" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616248558592" />
-    <state width="1345" height="131" key="GridCell.Tab.0.left" timestamp="1616248558592">
+    <state width="1345" height="152" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616790430733" />
+    <state width="1345" height="152" key="GridCell.Tab.0.left" timestamp="1616790430733">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="131" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616248558592" />
-    <state width="1345" height="131" key="GridCell.Tab.0.right" timestamp="1616248558592">
+    <state width="1345" height="152" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616790430733" />
+    <state width="1345" height="152" key="GridCell.Tab.0.right" timestamp="1616790430733">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="131" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616248558592" />
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1616440558236">
+    <state width="1345" height="152" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616790430733" />
+    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1616487640191">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1616440558236" />
+    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1616487640191" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1616486510813">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

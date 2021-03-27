@@ -464,7 +464,7 @@ export default {
           })
     },
     buyOrderNow(){
-      let tl = parseFloat(JSON.parse(localStorage.getItem('wallet'))["TÜRK LİRASI"]["amount"]);
+      let tl = parseFloat(JSON.parse(JSON.parse(localStorage.getItem('wallet'))["TÜRK LİRASI"]["amount"]));
       if(!(tl>this.orderNowAmount * parseFloat(this.currentUnitTLPrice))){
         this.$toasted.show(`Yeterli TÜRK LİRASI yok.`,alertoptions);
         return;
