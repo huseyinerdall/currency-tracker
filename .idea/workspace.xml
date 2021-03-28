@@ -20,14 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="salı">
-      <change afterPath="$PROJECT_DIR$/app/passport-setup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/Logout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Logout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -268,6 +264,7 @@
       <workItem from="1616609954982" duration="3094000" />
       <workItem from="1616740787354" duration="1449000" />
       <workItem from="1616777300645" duration="9925000" />
+      <workItem from="1616945029258" duration="3558000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -574,22 +571,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615364646802" />
-    <state width="1345" height="152" key="GridCell.Tab.0.bottom" timestamp="1616790430733">
+    <state width="1345" height="152" key="GridCell.Tab.0.bottom" timestamp="1616956323099">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616790430733" />
-    <state width="1345" height="152" key="GridCell.Tab.0.center" timestamp="1616790430733">
+    <state width="1345" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1616956323099" />
+    <state width="1345" height="152" key="GridCell.Tab.0.center" timestamp="1616956323094">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616790430733" />
-    <state width="1345" height="152" key="GridCell.Tab.0.left" timestamp="1616790430733">
+    <state width="1345" height="152" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1616956323094" />
+    <state width="1345" height="152" key="GridCell.Tab.0.left" timestamp="1616956323093">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616790430733" />
-    <state width="1345" height="152" key="GridCell.Tab.0.right" timestamp="1616790430733">
+    <state width="1345" height="152" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1616956323093" />
+    <state width="1345" height="152" key="GridCell.Tab.0.right" timestamp="1616956323097">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616790430733" />
+    <state width="1345" height="152" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1616956323097" />
     <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1616487640191">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

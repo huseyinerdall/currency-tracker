@@ -12,6 +12,7 @@ export default {
     logout: function () {
       localStorage.removeItem("jwt");
       localStorage.removeItem("user");
+      this.$store.commit('login',false);
       this.$router.go(0);
     }
   },

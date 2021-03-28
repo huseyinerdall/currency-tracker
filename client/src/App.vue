@@ -53,7 +53,7 @@
         <v-menu
             offset-y
             style="margin-top: 30px;"
-            v-if="isAuthenticated"
+            v-if="$store.state.login"
         >
           <template v-slot:activator="{ attrs, on }">
             <v-btn

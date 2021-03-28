@@ -19,6 +19,7 @@ export default new Vuex.Store({
     userwalletdialog: false,
     userorderdialog: false,
     isLight: (localStorage.getItem('light')=="true"),
+    login: false,
   },
   getters: {
     isAuthenticated: state => !!state.token,
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     userwalletdialog: state => state.userwalletdialog,
     userorderdialog: state => state.userorderdialog,
     isLight: state => state.isLight,
+    login: state => state.login,
   },
   mutations: {
     ["AUTH_REQUEST"]: (state) => {
@@ -51,6 +53,9 @@ export default new Vuex.Store({
     },
     userorderdialog(state) {
       state.userorderdialog = !state.userorderdialog;
+    },
+    login(state,loading) {
+      state.login = loading;
     },
     isLight(state) {
       if(state.isLight){

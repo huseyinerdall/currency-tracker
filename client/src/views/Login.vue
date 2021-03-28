@@ -19,12 +19,12 @@
               v-model="password"
           ></v-text-field>
           <v-row>
-            <v-col cols="4">
+            <v-col cols="3">
               <v-btn
                   color="blue-grey"
                   class="white--text"
                   @click="login"
-                  small
+                  tile
               >
                 GİRİŞ
                 <v-icon
@@ -36,15 +36,30 @@
               </v-btn>
 
             </v-col>
-            <v-col cols="4">
-              <GoogleLogin :params="params" :onSuccess="onSuccess">Google</GoogleLogin>
+            <v-col cols="5">
+              <GoogleLogin :params="params" :onSuccess="onSuccess">
+                <v-btn
+                    color="red darken-1"
+                    class="white--text"
+                    tile
+                >
+                  Google ile
+                  <v-icon
+                      right
+                      dark
+                  >
+                    mdi-google
+                  </v-icon>
+                </v-btn>
+              </GoogleLogin>
             </v-col>
             <v-col cols="4">
               <v-btn
                   color="blue-grey"
+                  style="text-decoration: none;"
                   class="white--text"
                   href="/register"
-                  small
+                  tile
               >
                 KAYDOL
                 <v-icon
@@ -59,6 +74,14 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-overlay
+        :opacity="1"
+        :value="overlay"
+        :color="$store.state.isLight ? 'rgba(255,255,255,0.83)' : 'rgb(29, 36, 96)'"
+    >
+      <v-progress-circular indeterminate size="64" :color="!$store.state.isLight ? 'rgba(255,255,255,0.83)' : 'rgb(29, 36, 96)'">
+      </v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 <script>
@@ -69,6 +92,7 @@ export default {
   data() {
     return {
       email: '',
+      overlay: false,
       password: '',
       show1: false,
       params: {
@@ -87,6 +111,7 @@ export default {
   },
   methods: {
     googlelogin() {
+      this.overlay = true;
       axios.get(`${this.$store.state.api}/google`)
       .then((response)=>{
         console.log(response.data);
@@ -94,7 +119,7 @@ export default {
     },
     onSuccess(googleUser) {
       // This only gets the user information: id, name, imageUrl and email
-      console.log(googleUser.getBasicProfile());
+      this.overlay = true;
       let temp = googleUser.getBasicProfile();
       axios.post(`${this.$store.state.api}/register`, {
         fullName: temp["Se"],
@@ -102,8 +127,7 @@ export default {
         passwd: "1",
         profileImage: temp["VI"],
       })
-          .then(res => {
-            console.log(res.data)
+          .then(() => {
 
             axios.post(`${this.$store.state.api}/login`, {
               email: temp["zt"],
@@ -116,7 +140,9 @@ export default {
                   } else {
                     localStorage.setItem('user', JSON.stringify(response.data.user))
                     localStorage.setItem('wallet', JSON.stringify(JSON.parse(localStorage.getItem('user')).wallet))
-                    localStorage.setItem('jwt', response.data.token)
+                    localStorage.setItem('jwt', response.data.token);
+                    this.overlay = false;
+                    this.$store.commit('login',true);
                   }
 
 
@@ -153,7 +179,8 @@ export default {
             } else {
               localStorage.setItem('user', JSON.stringify(response.data.user))
               localStorage.setItem('wallet', JSON.stringify(JSON.parse(localStorage.getItem('user')).wallet))
-              localStorage.setItem('jwt', response.data.token)
+              localStorage.setItem('jwt', response.data.token);
+              this.$store.commit('login',true);
             }
 
 
