@@ -106,6 +106,7 @@ app.get('/golds', (req, res) => {
 
 app.get('/gold/:goldName', (req, res) => {
     let element = apiT[req.params.goldName];
+    console.log(element,api[element])
     axios.get('https://finans.truncgil.com/today.json')
         .then(async response => {
             let sepetalis = ((parseFloat(response.data["USD"]["Alış"]) + parseFloat(response.data["EUR"]["Alış"])) / 2).toFixed(4);
@@ -422,10 +423,9 @@ app.get('/pariteler', async(req, res) => {
 
 app.post('/converter', (req, res) => {
     console.log(req.body.source)
-    let source = req.body.source;
-    let target = req.body.target;
+    let source = api[req.body.source];
+    let target = api[req.body.target];
     let amount = req.body.amount;
-    console.log(source,target)
     console.log(target)
     axios.get(truncgil)
         .then((response) => {
@@ -434,19 +434,19 @@ app.post('/converter', (req, res) => {
             let a = +amount;
             let result;
             if (target == "TÜRK LİRASI" && source != "TÜRK LİRASI") {
-                s = +(response.data[apiT[source]]["Satış"].replace(",","."));
+                s = +response.data[source]["Satış"];
                 result = (a * s);
             }
             if (source == "TÜRK LİRASI" && target != "TÜRK LİRASI") {
-                s = +(response.data[apiT[target]]["Satış"].replace(",","."));
+                s = +response.data[target]["Satış"];
                 result = (a * s);
             }
             if (target == "TÜRK LİRASI" && source == "TÜRK LİRASI") {
                 result = a;
             }
             if(target != "TÜRK LİRASI" && source != "TÜRK LİRASI"){
-                let t = +(response.data[apiT[target]]["Satış"].replace(",","."));
-                s = +(response.data[apiT[source]]["Satış"].replace(",","."));
+                let t = +response.data[target]["Satış"];
+                s = +response.data[source]["Satış"];
                 result = a * (s / t).toFixed(4);
             }
 

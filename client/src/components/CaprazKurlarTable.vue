@@ -14,195 +14,195 @@
       <tbody v-if="data[0]">
         <tr>
           <td>{{ symbols[0] }}</td>
-          <td>{{ data[3]["today"]/data[0]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[3]['today']/data[0]['today'] - data[3]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ (data[3]["today"].replace(',','.').replace(',','.'))/(data[0]["today"].replace(',','.').replace(',','.')) | turkishCurrencyformat }}</td>
+          <td :class="[(data[3]['today'].replace(',','.')/data[0]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[0]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[0]">
-            {{ (data[3]["today"]/data[0]["today"]) - (data[3]["yesterday"]/data[0]["yesterday"]) | signintt }}
+            {{ (data[3]["today"].replace(',','.')/data[0]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[0]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[3]['today']/data[0]['today'] - data[3]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[3]["today"]/data[0]["today"]) - (data[3]["yesterday"]/data[0]["yesterday"]))/data[0]["today"]*100 | signintt }}%
+          <td :class="[(data[3]['today'].replace(',','.')/data[0]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[0]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[3]["today"].replace(',','.')/data[0]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[0]["yesterday"].replace(',','.')))/data[0]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[1] }}</td>
-          <td>{{ data[0]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[0]['today']/data[3]['today'] - data[0]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[0]["today"].replace(',','.')/data[3]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[0]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[1]">
-            {{ (data[0]["today"]/data[3]["today"]) - (data[0]["yesterday"]/data[3]["yesterday"]) | signintt }}
+            {{ (data[0]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[0]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[0]['today']/data[3]['today'] - data[0]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[0]["today"]/data[3]["today"]) - (data[0]["yesterday"]/data[3]["yesterday"]))/data[3]["today"]*100 | signintt }}%
+          <td :class="[(data[0]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[0]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[0]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')))/data[3]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[2] }}</td>
-          <td>{{ data[4]["today"]/data[0]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[4]['today']/data[0]['today'] - data[4]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[4]["today"].replace(',','.')/data[0]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[4]['today'].replace(',','.')/data[0]['today'].replace(',','.') - data[4]['yesterday'].replace(',','.')/data[0]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[2]">
-            {{ (data[4]["today"]/data[0]["today"]) - (data[4]["yesterday"]/data[0]["yesterday"]) | signintt }}
+            {{ (data[4]["today"].replace(',','.')/data[0]["today"].replace(',','.')) - (data[4]["yesterday"].replace(',','.')/data[0]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[4]['today']/data[0]['today'] - data[4]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[4]["today"]/data[0]["today"]) - (data[4]["yesterday"]/data[0]["yesterday"]))/data[0]["today"]*100 | signintt }}%
+          <td :class="[(data[4]['today'].replace(',','.')/data[0]['today'].replace(',','.') - data[4]['yesterday'].replace(',','.')/data[0]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[4]["today"].replace(',','.')/data[0]["today"].replace(',','.')) - (data[4]["yesterday"].replace(',','.')/data[0]["yesterday"].replace(',','.')))/data[0]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[3] }}</td>
-          <td>{{ data[0]["today"]/data[4]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[0]['today']/data[4]['today'] - data[0]['yesterday']/data[4]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[0]["today"].replace(',','.')/data[4]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[0]['today'].replace(',','.')/data[4]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[4]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[3]">
-            {{ (data[0]["today"]/data[4]["today"]) - (data[0]["yesterday"]/data[4]["yesterday"]) | signintt }}
+            {{ (data[0]["today"].replace(',','.')/data[4]["today"].replace(',','.')) - (data[0]["yesterday"].replace(',','.')/data[4]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[0]['today']/data[4]['today'] - data[0]['yesterday']/data[4]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[0]["today"]/data[4]["today"]) - (data[0]["yesterday"]/data[4]["yesterday"]))/data[4]["today"]*100 | signintt }}%
+          <td :class="[(data[0]['today'].replace(',','.')/data[4]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[4]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[0]["today"].replace(',','.')/data[4]["today"].replace(',','.')) - (data[0]["yesterday"].replace(',','.')/data[4]["yesterday"].replace(',','.')))/data[4]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[4] }}</td>
-          <td>{{ data[7]["today"]/data[0]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[7]['today']/data[0]['today'] - data[7]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[7]["today"].replace(',','.')/data[0]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[7]['today'].replace(',','.')/data[0]['today'].replace(',','.') - data[7]['yesterday'].replace(',','.')/data[0]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[4]">
-            {{ (data[7]["today"]/data[0]["today"]) - (data[7]["yesterday"]/data[0]["yesterday"]) | signintt }}
+            {{ (data[7]["today"].replace(',','.')/data[0]["today"].replace(',','.')) - (data[7]["yesterday"].replace(',','.')/data[0]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[3]['today']/data[0]['today'] - data[3]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[7]["today"]/data[0]["today"]) - (data[7]["yesterday"]/data[0]["yesterday"]))/data[0]["today"]*100 | signintt }}%
+          <td :class="[(data[3]['today'].replace(',','.')/data[0]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[0]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[7]["today"].replace(',','.')/data[0]["today"].replace(',','.')) - (data[7]["yesterday"].replace(',','.')/data[0]["yesterday"].replace(',','.')))/data[0]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[5] }}</td>
-          <td>{{ data[0]["today"]/data[7]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[0]['today']/data[7]['today'] - data[0]['yesterday']/data[7]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[0]["today"].replace(',','.')/data[7]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[0]['today'].replace(',','.')/data[7]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[7]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[5]">
-            {{ (data[0]["today"]/data[7]["today"]) - (data[0]["yesterday"]/data[7]["yesterday"]) | signintt }}
+            {{ (data[0]["today"].replace(',','.')/data[7]["today"].replace(',','.')) - (data[0]["yesterday"].replace(',','.')/data[7]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[0]['today']/data[3]['today'] - data[0]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[0]["today"]/data[7]["today"]) - (data[0]["yesterday"]/data[7]["yesterday"]))/data[7]["today"]*100 | signintt }}%
+          <td :class="[(data[0]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[0]["today"].replace(',','.')/data[7]["today"].replace(',','.')) - (data[0]["yesterday"].replace(',','.')/data[7]["yesterday"].replace(',','.')))/data[7]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[6] }}</td>
-          <td>{{ data[11]["today"]/data[0]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[7]['today']/data[0]['today'] - data[7]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[11]["today"].replace(',','.')/data[0]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[7]['today'].replace(',','.')/data[0]['today'].replace(',','.') - data[7]['yesterday'].replace(',','.')/data[0]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[6]">
-            {{ (data[11]["today"]/data[0]["today"]) - (data[11]["yesterday"]/data[0]["yesterday"]) | signintt }}
+            {{ (data[11]["today"].replace(',','.')/data[0]["today"].replace(',','.')) - (data[11]["yesterday"].replace(',','.')/data[0]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[11]['today']/data[0]['today'] - data[11]['yesterday']/data[0]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[11]["today"]/data[0]["today"]) - (data[11]["yesterday"]/data[0]["yesterday"]))/data[0]["today"]*100 | signintt }}%
+          <td :class="[(data[11]['today'].replace(',','.')/data[0]['today'].replace(',','.') - data[11]['yesterday'].replace(',','.')/data[0]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[11]["today"].replace(',','.')/data[0]["today"].replace(',','.')) - (data[11]["yesterday"].replace(',','.')/data[0]["yesterday"].replace(',','.')))/data[0]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[7] }}</td>
-          <td>{{ data[0]["today"]/data[11]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[0]['today']/data[7]['today'] - data[0]['yesterday']/data[7]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[0]["today"].replace(',','.')/data[11]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[0]['today'].replace(',','.')/data[7]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[7]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[7]">
-            {{ (data[0]["today"]/data[11]["today"]) - (data[0]["yesterday"]/data[11]["yesterday"]) | signintt }}
+            {{ (data[0]["today"].replace(',','.')/data[11]["today"].replace(',','.')) - (data[0]["yesterday"].replace(',','.')/data[11]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[0]['today']/data[3]['today'] - data[0]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[0]["today"]/data[11]["today"]) - (data[0]["yesterday"]/data[11]["yesterday"]))/data[11]["today"]*100 | signintt }}%
+          <td :class="[(data[0]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[0]["today"].replace(',','.')/data[11]["today"].replace(',','.')) - (data[0]["yesterday"].replace(',','.')/data[11]["yesterday"].replace(',','.')))/data[11]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
 
         <tr>
           <td>{{ symbols[8] }}</td>
-          <td>{{ data[3]["today"]/data[4]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[3]['today']/data[4]['today'] - data[3]['yesterday']/data[4]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[3]["today"].replace(',','.')/data[4]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[3]['today'].replace(',','.')/data[4]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[4]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[8]">
-            {{ (data[3]["today"]/data[4]["today"]) - (data[3]["yesterday"]/data[4]["yesterday"]) | signintt }}
+            {{ (data[3]["today"].replace(',','.')/data[4]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[4]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[0]['today']/data[3]['today'] - data[0]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[3]["today"]/data[4]["today"]) - (data[3]["yesterday"]/data[4]["yesterday"]))/data[4]["today"]*100 | signintt }}%
+          <td :class="[(data[0]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[3]["today"].replace(',','.')/data[4]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[4]["yesterday"].replace(',','.')))/data[4]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
 
         <tr>
           <td>{{ symbols[9] }}</td>
-          <td>{{ data[4]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[4]['today']/data[3]['today'] - data[4]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[4]["today"].replace(',','.')/data[3]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[4]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[4]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[7]">
-            {{ (data[4]["today"]/data[3]["today"]) - (data[4]["yesterday"]/data[3]["yesterday"]) | signintt }}
+            {{ (data[4]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[4]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[4]['today']/data[3]['today'] - data[4]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[4]["today"]/data[3]["today"]) - (data[4]["yesterday"]/data[3]["yesterday"]))/data[3]["today"]*100 | signintt }}%
+          <td :class="[(data[4]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[4]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[4]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[4]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')))/data[3]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[10] }}</td>
-          <td>{{ data[7]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[7]['today']/data[3]['today'] - data[7]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[7]["today"].replace(',','.')/data[3]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[7]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[7]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[7]">
-            {{ (data[7]["today"]/data[3]["today"]) - (data[7]["yesterday"]/data[3]["yesterday"]) | signintt }}
+            {{ (data[7]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[7]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[7]['today']/data[3]['today'] - data[7]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[7]["today"]/data[3]["today"]) - (data[7]["yesterday"]/data[3]["yesterday"]))/data[3]["today"]*100 | signintt }}%
+          <td :class="[(data[7]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[7]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[7]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[7]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')))/data[3]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[11] }}</td>
-          <td>{{ data[3]["today"]/data[7]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[3]['today']/data[7]['today'] - data[3]['yesterday']/data[7]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[3]["today"].replace(',','.')/data[7]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[3]['today'].replace(',','.')/data[7]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[7]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[8]">
-            {{ (data[3]["today"]/data[7]["today"]) - (data[3]["yesterday"]/data[7]["yesterday"]) | signintt }}
+            {{ (data[3]["today"].replace(',','.')/data[7]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[7]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[0]['today']/data[3]['today'] - data[0]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[3]["today"]/data[7]["today"]) - (data[3]["yesterday"]/data[7]["yesterday"]))/data[7]["today"]*100 | signintt }}%
+          <td :class="[(data[0]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[0]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[3]["today"].replace(',','.')/data[7]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[7]["yesterday"].replace(',','.')))/data[7]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[12] }}</td>
-          <td>{{ data[11]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[11]['today']/data[3]['today'] - data[11]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[11]["today"].replace(',','.')/data[3]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[11]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[11]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[12]">
-            {{ (data[11]["today"]/data[3]["today"]) - (data[11]["yesterday"]/data[3]["yesterday"]) | signintt }}
+            {{ (data[11]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[11]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[11]['today']/data[3]['today'] - data[11]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[11]["today"]/data[3]["today"]) - (data[11]["yesterday"]/data[3]["yesterday"]))/data[3]["today"]*100 | signintt }}%
+          <td :class="[(data[11]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[11]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[11]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[11]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')))/data[3]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[13] }}</td>
-          <td>{{ data[3]["today"]/data[11]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[3]['today']/data[11]['today'] - data[3]['yesterday']/data[11]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[3]["today"].replace(',','.')/data[11]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[3]['today'].replace(',','.')/data[11]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[11]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[13]">
-            {{ (data[3]["today"]/data[11]["today"]) - (data[3]["yesterday"]/data[11]["yesterday"]) | signintt }}
+            {{ (data[3]["today"].replace(',','.')/data[11]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[11]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[3]['today']/data[11]['today'] - data[3]['yesterday']/data[11]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[3]["today"]/data[11]["today"]) - (data[3]["yesterday"]/data[11]["yesterday"]))/data[11]["today"]*100 | signintt }}%
+          <td :class="[(data[3]['today'].replace(',','.')/data[11]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[11]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[3]["today"].replace(',','.')/data[11]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[11]["yesterday"].replace(',','.')))/data[11]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[14] }}</td>
-          <td>{{ data[16]["today"]/data[3]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[11]['today']/data[3]['today'] - data[11]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[16]["today"].replace(',','.')/data[3]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[11]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[11]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[14]">
-            {{ (data[16]["today"]/data[3]["today"]) - (data[16]["yesterday"]/data[3]["yesterday"]) | signintt }}
+            {{ (data[16]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[16]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[16]['today']/data[3]['today'] - data[16]['yesterday']/data[3]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[16]["today"]/data[3]["today"]) - (data[16]["yesterday"]/data[3]["yesterday"]))/data[3]["today"]*100 | signintt }}%
+          <td :class="[(data[16]['today'].replace(',','.')/data[3]['today'].replace(',','.') - data[16]['yesterday'].replace(',','.')/data[3]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[16]["today"].replace(',','.')/data[3]["today"].replace(',','.')) - (data[16]["yesterday"].replace(',','.')/data[3]["yesterday"].replace(',','.')))/data[3]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
         <tr>
           <td>{{ symbols[15] }}</td>
-          <td>{{ data[3]["today"]/data[16]["today"] | turkishCurrencyformat }}</td>
-          <td :class="[(data[3]['today']/data[11]['today'] - data[3]['yesterday']/data[11]['yesterday'])>=0 ? 'green--text' : 'red--text']"
+          <td>{{ data[3]["today"].replace(',','.')/data[16]["today"].replace(',','.') | turkishCurrencyformat }}</td>
+          <td :class="[(data[3]['today'].replace(',','.')/data[11]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[11]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']"
               :key="symbols[15]">
-            {{ (data[3]["today"]/data[16]["today"]) - (data[3]["yesterday"]/data[16]["yesterday"]) | signintt }}
+            {{ (data[3]["today"].replace(',','.')/data[16]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[16]["yesterday"].replace(',','.')) | signintt }}
           </td>
-          <td :class="[(data[3]['today']/data[16]['today'] - data[3]['yesterday']/data[16]['yesterday'])>=0 ? 'green--text' : 'red--text']">
-            {{ ((data[3]["today"]/data[16]["today"]) - (data[3]["yesterday"]/data[16]["yesterday"]))/data[16]["today"]*100 | signintt }}%
+          <td :class="[(data[3]['today'].replace(',','.')/data[16]['today'].replace(',','.') - data[3]['yesterday'].replace(',','.')/data[16]['yesterday'].replace(',','.'))>=0 ? 'green--text' : 'red--text']">
+            {{ ((data[3]["today"].replace(',','.')/data[16]["today"].replace(',','.')) - (data[3]["yesterday"].replace(',','.')/data[16]["yesterday"].replace(',','.')))/data[16]["today"].replace(',','.')*100 | signintt }}%
           </td>
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
@@ -234,6 +234,7 @@ export default {
     //let app = this;
     axios.get(`${this.$store.state.api}/pariteler`)
         .then(response => {
+          console.log(response.data)
           this.data = response.data;
         })
   },

@@ -101,6 +101,7 @@ export default {
 
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
+      console.log(fetchedData)
       if (fetchedData[0]){
         app.data = fetchedData;
         localStorage.setItem("currencies",JSON.stringify(fetchedData));

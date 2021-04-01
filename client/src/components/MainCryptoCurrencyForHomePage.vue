@@ -221,7 +221,7 @@ export default {
     })
     axios.get('https://finans.truncgil.com/today.json')
         .then(response =>{
-          app.dolar = response.data["ABD DOLARI"]["Satış"];
+          app.dolar = response.data["USD"]["Satış"].replace(",",".");
         })
         .catch(err => console.log(err));
 

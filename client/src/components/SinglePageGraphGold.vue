@@ -97,6 +97,8 @@ import axios from 'axios';
 import io from "socket.io-client";
 //import dump from '../assets/dump.js'
 import currencies from '../assets/currencies.js';
+//import api from '../assets/api.js';
+import apiT from '../assets/apiTers.js';
 export default {
   name: "SinglePageGraphGold",
   props: {
@@ -305,19 +307,20 @@ export default {
         })
     axios.get('https://finans.truncgil.com/today.json')
         .then(async response => {
-          let sepetalis = ((parseFloat(response.data["ABD DOLARI"]["Alış"]) + parseFloat(response.data["EURO"]["Alış"])) / 2).toFixed(4);
-          let sepetsatis = ((parseFloat(response.data["ABD DOLARI"]["Satış"]) + parseFloat(response.data["EURO"]["Satış"])) / 2).toFixed(4);
+          let gold = apiT[this.gold];
+          let sepetalis = ((parseFloat(response.data["USD"]["Alış"]) + parseFloat(response.data["EUR"]["Alış"])) / 2).toFixed(4);
+          let sepetsatis = ((parseFloat(response.data["USD"]["Satış"]) + parseFloat(response.data["EUR"]["Satış"])) / 2).toFixed(4);
           response.data["SEPET KUR"] = {"Alış":sepetalis,"Satış":sepetsatis};
-          response.data[this.gold]["time"] = response.data["Güncelleme Tarihi"];
-          if (this.gold.indexOf("Altın") > 0 || this.gold == '22 Ayar Bilezik' || this.gold == 'Gümüş') {
-            response.data[this.gold]["type"] = this.gold;
-          } else if (this.gold.indexOf("Güncelleme") < 0 && this.gold.indexOf("ÇEKME") < 0) {
-            response.data[this.gold]["type"] = this.gold;
+          //response.data[gold]["time"] = response.data["Update_Date"];
+          if (gold.indexOf("Altın") > 0 || gold == '22 Ayar Bilezik' || gold == 'Gümüş') {
+            response.data[gold]["type"] = this.gold;
+          } else if (gold.indexOf("Update") < 0 && this.gold.indexOf("ÇEKME") < 0) {
+            response.data[gold]["type"] = this.gold;
           }
-          this.alis = response.data[this.gold]["Alış"];
-          this.satis = response.data[this.gold]["Satış"];
-          this.updatetime = response.data[this.gold]["time"];
-          this.type = response.data[this.gold]["Tür"]
+          this.alis = response.data[gold]["Alış"];
+          this.satis = response.data[gold]["Satış"];
+          this.updatetime = response.data["Update_Date"];
+          this.type = response.data[gold]["Tür"]
         })
         .catch(err => console.log(err));
 

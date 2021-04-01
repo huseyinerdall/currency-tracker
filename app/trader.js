@@ -64,7 +64,7 @@ class Trade{
         })
             .then(async(user) =>{
                 let tradePurpose = amount * wealthPrice;
-                temp = user.dataValues.wallet;
+                temp = await user.dataValues.wallet;
                 temp["TÜRK LİRASI"].amount = parseFloat(user.dataValues.wallet["TÜRK LİRASI"].amount) + parseFloat(tradePurpose);
                 temp[wealth].amount = temp[wealth].amount - amount;
                 user.wallet = temp;

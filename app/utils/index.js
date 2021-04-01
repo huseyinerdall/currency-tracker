@@ -45,4 +45,8 @@ function turkishToEnglish(str) {
 }
 
 
+function removeDashes(str) {
+    return str.replaceAll('-','');
+}
+
 module.exports = { search, turkishToEnglish };
