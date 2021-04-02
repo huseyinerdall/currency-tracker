@@ -21,16 +21,16 @@
               {{ item.type == "SUUDİ ARABİSTAN RİYALİ" ? 'S.A. RİYALİ' : item.type }}
             </router-link>
           </td>
-          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Alış"] | turkishCurrencyformat}}</td>
-          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Satış"] | turkishCurrencyformat}}</td>
+          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Alış"].replace(',','.') | turkishCurrencyformat}}</td>
+          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Satış"].replace(',','.') | turkishCurrencyformat}}</td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
-            <span :class="[(item['Satış'] - item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ parseFloat(item["Satış"]) - parseFloat(item.close) | signint }}%
+            <span :class="[(item['Satış'].replace(',','.') - item.close.replace(',','.'))>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
+              {{ parseFloat(item["Satış"].replace(',','.')) - parseFloat(item.close.replace(',','.')) | signint }}%
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[((item['Satış'] - item.close)/item.close)>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
-              {{ ((parseFloat(item["Satış"]) - parseFloat(item.close))/parseFloat(item.close))*100 | signint }}
+              {{ ((parseFloat(item["Satış"].replace(',','.')) - parseFloat(item.close.replace(',','.')))/parseFloat(item.close.replace(',','.')))*100 | signint }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown" :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
@@ -77,7 +77,6 @@ export default {
     if(this.$vuetify.breakpoint.smAndDown){
       this.headers.pop();
       this.headers.pop();
-      this.headers.pop();
     }
     if(localStorage.getItem('currencies')){
       app.data = JSON.parse(localStorage.getItem('currencies'));
@@ -93,15 +92,12 @@ export default {
       if(app.$route.path == '/'){
         app.data.pop();
         app.data.pop();
-        app.data.pop();
-        app.data.pop();
       }
       this.overlay = false;
     }
 
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
-      console.log(fetchedData)
       if (fetchedData[0]){
         app.data = fetchedData;
         localStorage.setItem("currencies",JSON.stringify(fetchedData));
@@ -112,8 +108,8 @@ export default {
         app.data[3] = app.data[2];
         app.data[2] = temp;
         temp = app.data[2];
-        app.data[2] = app.data[19];
-        app.data[19] = temp;
+        app.data[2] = app.data[18];
+        app.data[18] = temp;
 
         if(app.$route.path == '/'){
           app.data.pop();

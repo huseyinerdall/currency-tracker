@@ -134,7 +134,6 @@ app.get('/gold/:goldName', (req, res) => {
             } else if (element.indexOf("Update") < 0 && element.indexOf("ÇEKME") < 0) {
                 response.data[element]["type"] = api[element];
                 indis = utils.turkishToEnglish(api[element])
-                console.log(indis,"*********")
                 let date = new Date().toLocaleDateString("ISO");
                 let prevTime = "03:00";
                 let nextTime = "06:00";
@@ -331,12 +330,12 @@ app.post('/bintltable', async(req, res) => {
 
     axios.get('https://finans.truncgil.com/today.json')
         .then(response =>{
-            BINTL["ABDDOLARI"] = +(response.data["USD"]["Satış"]);
-            BINTL["EURO"] = +(response.data["EUR"]["Satış"]);
-            BINTL["INGILIZSTERLINI"] = +(response.data["GBP"]["Satış"]);
-            BINTL["KANADADOLARI"] = +(response.data["CAD"]["Satış"]);
-            BINTL["JAPONYENI"] = +(response.data["JPY"]["Satış"]);
-            BINTL["SUUDIARABISTANRIYALI"] = +(response.data["SAR"]["Satış"]);
+            BINTL["ABDDOLARI"] = +(response.data["USD"]["Satış"].replace(',', '.'));
+            BINTL["EURO"] = +(response.data["EUR"]["Satış"].replace(',', '.'));
+            BINTL["INGILIZSTERLINI"] = +(response.data["GBP"]["Satış"].replace(',', '.'));
+            BINTL["KANADADOLARI"] = +(response.data["CAD"]["Satış"].replace(',', '.'));
+            BINTL["JAPONYENI"] = +(response.data["JPY"]["Satış"].replace(',', '.'));
+            BINTL["SUUDIARABISTANRIYALI"] = +(response.data["SAR"]["Satış"].replace(',', '.'));
             BINTL["GoldGramAltin"] = parseFloat(response.data["gram-altin"]["Satış"].replace(',', '.'));
             BINTL["GoldOnsAltin"] = parseFloat(response.data["ons"]["Satış"].replace(',', '.'));
             BINTL["GoldGumus"] = parseFloat(response.data["gumus"]["Satış"].replace(',', '.'));
@@ -611,11 +610,10 @@ db.sequelize.sync().then(() => {
         axios.get('https://finans.truncgil.com/today.json')
             .then(async response => {
                 dolar = parseFloat(response.data["USD"]["Satış"])
-                let sepetalis = ((parseFloat(response.data["USD"]["Alış"]) + parseFloat(response.data["EUR"]["Alış"])) / 2).toFixed(4);
-                let sepetsatis = ((parseFloat(response.data["USD"]["Satış"]) + parseFloat(response.data["EUR"]["Satış"])) / 2).toFixed(4);
-                response.data["SEPET KUR"] = {"Alış":sepetalis,"Satış":sepetsatis,"Tür": 'Döviz'};
+                let sepetalis = ((parseFloat(response.data["USD"]["Alış"].replace(',','.')) + parseFloat(response.data["EUR"]["Alış"].replace(',','.'))) / 2).toFixed(4);
+                let sepetsatis = ((parseFloat(response.data["USD"]["Satış"].replace(',','.')) + parseFloat(response.data["EUR"]["Satış"].replace(',','.'))) / 2).toFixed(4);
                 let updatetime = response.data["Update_Date"];
-
+                response.data["SEPET KUR"] = {"Alış":sepetalis,"Satış":sepetsatis,"Tür": 'Döviz',"type":"SEPET KUR","time":updatetime};
 
                 for (const element in response.data) {
                     if (api[element] == "" || !api[element]) {
@@ -656,6 +654,8 @@ db.sequelize.sync().then(() => {
                     } else if (api[element].indexOf("Update_Date") < 0 && api[element].indexOf("ÇEKME") < 0) {
                         response.data[element]["type"] = api[element];
                         response.data[element]["time"] = updatetime;
+                        response.data[element]["Alış"] = response.data[element]["Alış"].replace(',','.');
+                        response.data[element]["Satış"] = response.data[element]["Satış"].replace(',','.');
                         indis = utils.turkishToEnglish(api[element])
                         //db[indis].destroy({ truncate : true, cascade: false })
                         if (db[indis] && response.data[element]["Alış"] != C[indis] ||
@@ -693,7 +693,7 @@ db.sequelize.sync().then(() => {
         if(factRes.length == 250){io.emit('coins', factRes);}
         if(factRes30.length == 30){io.emit('coins30', factRes30);}
         if(golds.length == 16){io.emit('golds', golds);}
-        if(currencies.length == 20){io.emit('currencies', currencies);}
+        if(currencies.length == 19){io.emit('currencies', currencies);}
         io.emit('allprices', allPrices);
     },1000);
 

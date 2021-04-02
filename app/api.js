@@ -65,6 +65,7 @@ module.exports =
         "UYU": "",
         "GEL": "",
         "TND": "",
+        "SEPET KUR": "SEPET KUR",
         "BGN": "BULGAR LEVASI",
         "ons": "Ons Altın",
         "gram-altin": "Gram Altın",
