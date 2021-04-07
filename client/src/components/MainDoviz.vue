@@ -22,7 +22,23 @@
             </router-link>
           </td>
           <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Alış"].replace(',','.') | turkishCurrencyformat}}</td>
-          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">{{item["Satış"].replace(',','.') | turkishCurrencyformat}}</td>
+          <td :style="[$store.state.isLight ? 'color:rgba(0,0,0,0.87) !important;' : 'color:#ffffff !important;']">
+            {{item["Satış"].replace(',','.') | turkishCurrencyformat}}
+            <v-icon
+                v-if="$vuetify.breakpoint.smAndDown && (item['Satış'].replace(',','.') - item.close.replace(',','.'))>=0"
+                class="float-right"
+                size="20"
+                color="green">
+              mdi-arrow-up-bold
+            </v-icon>
+            <v-icon
+                v-else-if="$vuetify.breakpoint.smAndDown && (item['Satış'].replace(',','.') - item.close.replace(',','.'))<0"
+                class="float-right"
+                size="20"
+                color="red">
+              mdi-arrow-down-bold
+            </v-icon>
+          </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span :class="[(item['Satış'].replace(',','.') - item.close.replace(',','.'))>=0 ? 'green--text' : 'red--text']" class="body-1" :style="`font-size: ${$store.state.tdFontSize} !important;`">
               {{ parseFloat(item["Satış"].replace(',','.')) - parseFloat(item.close.replace(',','.')) | signint }}%
@@ -75,6 +91,7 @@ export default {
   created() {
     let app = this;
     if(this.$vuetify.breakpoint.smAndDown){
+      this.headers.pop();
       this.headers.pop();
       this.headers.pop();
     }

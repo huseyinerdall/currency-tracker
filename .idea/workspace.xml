@@ -21,9 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="persembe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/apiTers.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/apiTers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +31,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1l8XycQLb9n0xFGVGY9Riyy7KQ8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -268,7 +267,10 @@
       <workItem from="1617209419629" duration="4297000" />
       <workItem from="1617252329909" duration="12416000" />
       <workItem from="1617285934788" duration="3629000" />
-      <workItem from="1617385477636" duration="3624000" />
+      <workItem from="1617385477636" duration="5103000" />
+      <workItem from="1617436948892" duration="1596000" />
+      <workItem from="1617733417322" duration="2797000" />
+      <workItem from="1617771663303" duration="591000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -543,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617266992015</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="persembe">
+      <created>1617391473869</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1617391473869</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,34 +598,34 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615364646802" />
-    <state width="1345" height="152" key="GridCell.Tab.0.bottom" timestamp="1617386576983">
+    <state width="1345" height="152" key="GridCell.Tab.0.bottom" timestamp="1617734581288">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1617386576983" />
-    <state width="1345" height="152" key="GridCell.Tab.0.center" timestamp="1617386576983">
+    <state width="1345" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1617734581288" />
+    <state width="1345" height="152" key="GridCell.Tab.0.center" timestamp="1617734581288">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1617386576983" />
-    <state width="1345" height="152" key="GridCell.Tab.0.left" timestamp="1617386576983">
+    <state width="1345" height="152" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1617734581288" />
+    <state width="1345" height="152" key="GridCell.Tab.0.left" timestamp="1617734581287">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1617386576983" />
-    <state width="1345" height="152" key="GridCell.Tab.0.right" timestamp="1617386576983">
+    <state width="1345" height="152" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1617734581287" />
+    <state width="1345" height="152" key="GridCell.Tab.0.right" timestamp="1617734581288">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1617386576983" />
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1617266996413">
+    <state width="1345" height="152" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1617734581288" />
+    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1617391656588">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1617266996413" />
+    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1617391656588" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1616486510813">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1616486510813" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1612716548658">
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617734198214">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1612716548658" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1617734198214" />
     <state x="128" y="0" width="895" height="728" key="find.popup" timestamp="1614886151129">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
