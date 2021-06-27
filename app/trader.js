@@ -18,10 +18,12 @@ class Trade{
             }
         })
             .then(async(user) =>{
-                let tradePurpose = amount * wealthPrice;
+                let tradePurpose = +amount * parseFloat(wealthPrice.toString().replace(',','.'));
                 temp = await user.dataValues.wallet;
                 temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);
                 temp[wealth].amount = amount;
+                console.log(parseFloat(temp[wealth].cost),parseFloat(tradePurpose))
+                temp[wealth].cost = parseFloat(tradePurpose) + (parseFloat(temp[wealth].cost)||0);
                 user.wallet = temp;
                 db.User.update({
                     wallet: temp
@@ -67,6 +69,7 @@ class Trade{
                 temp = await user.dataValues.wallet;
                 temp["TÜRK LİRASI"].amount = parseFloat(user.dataValues.wallet["TÜRK LİRASI"].amount) + parseFloat(tradePurpose);
                 temp[wealth].amount = temp[wealth].amount - amount;
+                //temp[wealth].cost = 0;
                 user.wallet = temp;
                 db.User.update({
                     wallet: temp
@@ -166,6 +169,25 @@ class Trade{
         });
     }
 
+    getOrdersByUser(
+        userId
+    ){
+        return new Promise((resolve, reject)=>{
+
+            db.Order.findAll({
+                where: {
+                    UserId: userId
+                }
+            })
+                .then((data)=>{
+                    resolve(data);
+                })
+                .catch((err)=>{
+                    reject(err);
+                })
+        })
+    }
+
     getOpenOrdersByUser(
         userId,
         wealth = null
@@ -243,18 +265,16 @@ class Trade{
     async deleteOrder(
         orderId
     ){
-        let order = await db.Order.findOne({
-            where: {
-                id: orderId
-            }
+        db.Order.update({
+            Closed: -1
+        }, {
+            where: { id: orderId },
+            returning: true,
+            plain: true
         })
-        order.destroy()
-            .then(()=>{return 1;})
-            .catch((err)=>{
-                console.log(err);
-                return 0;
-            })
+            .then(()=>{
+                console.log("Order Occured!!!")})
+            .catch(()=>{return 0;})
     }
 }
-//new Trade().buy(1,"Polkadot",40.96,10)
 module.exports = new Trade();

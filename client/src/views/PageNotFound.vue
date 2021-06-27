@@ -4,8 +4,12 @@
       <v-row>
         <div class="mainbox d-flex flex-row">
           <div class="err">4</div>
-          <v-icon size="170" color="white" style="position: absolute;top:15%;left:39%;">mdi-spin
-             mdi-progress-question</v-icon>
+          <v-icon
+            size="170"
+            color="white"
+            style="position: absolute;top:15%;left:39%;"
+            >mdi-spin mdi-progress-question</v-icon
+          >
           <div class="err2">4</div>
         </div>
       </v-row>
@@ -33,7 +37,7 @@ export default {
 .err {
   color: #ffffff;
   font-size: 11rem;
-  position:absolute;
+  position: absolute;
   left: 20%;
   top: 8%;
 }
@@ -49,7 +53,7 @@ export default {
 .err2 {
   color: #ffffff;
   font-size: 11rem;
-  position:absolute;
+  position: absolute;
   left: 68%;
   top: 8%;
 }
@@ -57,7 +61,7 @@ export default {
 .msg {
   text-align: center;
   font-size: 1.6rem;
-  position:absolute;
+  position: absolute;
   left: 16%;
   top: 45%;
   width: 75%;

@@ -1,5 +1,6 @@
 'use strict';
 const initialwallet = require('../static/varliklar.js');
+const initialbalancelist = require('../static/defaultbalancelist.js');
 const {
     Model
 } = require('sequelize');
@@ -20,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
         passwd: DataTypes.STRING,
         profileImage: DataTypes.STRING,
         wallet: { type: DataTypes.JSON, defaultValue: initialwallet },
+        active: { type: DataTypes.STRING, defaultValue: 0 },
+        balanceNow: DataTypes.FLOAT,
+        balanceList: { type: DataTypes.JSON, defaultValue: initialbalancelist },
     }, {
         sequelize,
         modelName: 'User',

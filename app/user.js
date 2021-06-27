@@ -104,6 +104,9 @@ module.exports = function(app,io){
                     });
                     req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
                     req.body.profileImage = filename;
+                    req.body.active = 1;
+                    req.body.balanceNow = 100000;
+                    req.body.balanceList = [0,0,0,0,0,req.body.balanceNow];
                     db.User.create(req.body);
                     console.log("Kullanıcı kaydedildi!!!");
                     res.send("OK");
@@ -243,12 +246,14 @@ module.exports = function(app,io){
     app.post('/getuserwallet', async(req, res) => {
         let userId = req.body.id;
         console.log(userId)
-        data = await db.User.findOne({
+        db.User.findOne({
             where: {
                 id: userId
             }
-        });
-        res.json(data.dataValues.wallet);
+        })
+            .then((data)=>{
+                res.json(data.dataValues.wallet);
+            })
     })
 
     app.post('/setuserwallet', async(req, res) => {
@@ -264,5 +269,18 @@ module.exports = function(app,io){
         let miktar = req.body.miktar;
 
         res.json("OK");
+    })
+
+
+    app.post('/getuserbalancelist', async(req, res) => {
+        let userId = req.body.id;
+        db.User.findOne({
+            where: {
+                id: userId
+            }
+        })
+            .then((data)=>{
+                res.json(data.dataValues.balanceList);
+            })
     })
 }

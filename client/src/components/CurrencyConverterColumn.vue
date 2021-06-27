@@ -5,27 +5,23 @@
     </v-card-title>
     <v-row>
       <v-col sm="12" lg="12" class="pb-0 mb-0">
-        <v-text-field
-            label="Miktar"
-            solo
-            dark
-        ></v-text-field>
+        <v-text-field label="Miktar" solo dark></v-text-field>
       </v-col>
       <v-col class="pt-0" sm="10" lg="12">
         <v-autocomplete
-            v-model="model1"
-            :items="items"
-            :loading="isLoading"
-            :search-input.sync="search"
-            chips
-            clearable
-            hide-details
-            hide-selected
-            item-text="name"
-            item-value="symbol"
-            label="Para Birimi Ara"
-            solo
-            dark
+          v-model="model1"
+          :items="items"
+          :loading="isLoading"
+          :search-input.sync="search"
+          chips
+          clearable
+          hide-details
+          hide-selected
+          item-text="name"
+          item-value="symbol"
+          label="Para Birimi Ara"
+          solo
+          dark
         >
           <template v-slot:no-data>
             <v-list-item>
@@ -37,12 +33,12 @@
           </template>
           <template v-slot:selection="{ attr, on, item, selected }">
             <v-chip
-                v-bind="attr"
-                :input-value="selected"
-                color="blue-grey"
-                class="white--text"
-                label
-                v-on="on"
+              v-bind="attr"
+              :input-value="selected"
+              color="blue-grey"
+              class="white--text"
+              label
+              v-on="on"
             >
               <v-icon left>
                 mdi-cash-multiple
@@ -52,14 +48,11 @@
           </template>
           <template v-slot:item="{ item }">
             <v-list-item-avatar
-                color="indigo"
-                class="headline font-weight-light white--text"
+              color="indigo"
+              class="headline font-weight-light white--text"
             >
               <!--{{ item.name.charAt(0) }}-->
-              <img
-                  :src="item.image"
-                  :alt="item.image"
-              >
+              <img :src="item.image" :alt="item.image" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="item.name"></v-list-item-title>
@@ -73,19 +66,19 @@
       </v-col>
       <v-col sm="10" lg="12">
         <v-autocomplete
-            v-model="model2"
-            :items="items"
-            :loading="isLoading"
-            :search-input.sync="search"
-            chips
-            clearable
-            hide-details
-            hide-selected
-            item-text="name"
-            item-value="symbol"
-            label="Para Birimi Ara"
-            solo
-            dark
+          v-model="model2"
+          :items="items"
+          :loading="isLoading"
+          :search-input.sync="search"
+          chips
+          clearable
+          hide-details
+          hide-selected
+          item-text="name"
+          item-value="symbol"
+          label="Para Birimi Ara"
+          solo
+          dark
         >
           <template v-slot:no-data>
             <v-list-item>
@@ -97,12 +90,12 @@
           </template>
           <template v-slot:selection="{ attr, on, item, selected }">
             <v-chip
-                v-bind="attr"
-                :input-value="selected"
-                color="blue-grey"
-                class="white--text"
-                label
-                v-on="on"
+              v-bind="attr"
+              :input-value="selected"
+              color="blue-grey"
+              class="white--text"
+              label
+              v-on="on"
             >
               <v-icon left>
                 mdi-cash-multiple
@@ -112,14 +105,11 @@
           </template>
           <template v-slot:item="{ item }">
             <v-list-item-avatar
-                color="indigo"
-                class="headline font-weight-light white--text"
+              color="indigo"
+              class="headline font-weight-light white--text"
             >
               <!--{{ item.name.charAt(0) }}-->
-              <img
-                  :src="item.image"
-                  :alt="item.image"
-              >
+              <img :src="item.image" :alt="item.image" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="item.name"></v-list-item-title>
@@ -142,7 +132,7 @@
 </template>
 
 <script>
-import currencies from '../assets/currencies.js';
+import currencies from "../assets/currencies.js";
 export default {
   name: "CurrencyConverter",
   data: () => ({
@@ -151,8 +141,8 @@ export default {
     model1: null,
     model2: null,
     search: null,
-    tab: null,
-  }),
+    tab: null
+  })
 };
 </script>
 

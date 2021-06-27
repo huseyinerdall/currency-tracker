@@ -1,18 +1,16 @@
 <template>
-  <v-container>
-  </v-container>
+  <v-container> </v-container>
 </template>
 
 <script>
 export default {
   name: "Logout",
-  data: () => ({
-  }),
+  data: () => ({}),
   methods: {
-    logout: function () {
+    logout: function() {
       localStorage.removeItem("jwt");
       localStorage.removeItem("user");
-      this.$store.commit('login',false);
+      this.$store.commit("login", false);
       this.$router.go(0);
     }
   },

@@ -20,9 +20,82 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="persembe">
+      <change afterPath="$PROJECT_DIR$/app/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/adem-elmas.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/hs-jsj.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/jjkjk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/selami-oztürk.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/sitemap.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/defaultbalancelist.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/shortname-convert.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/user.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/assets/allimages.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/assets/shortname-convert.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/new.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/new.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/varliklar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/varliklar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/apiTers.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/apiTers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/currencies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/dump.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/dump.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/varlikList.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/varlikList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Calculator.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Calculator.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverterAdvenced.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverterAdvenced.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverterColumn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverterColumn.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Description.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Description.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/EmtiaTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/EmtiaTable.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/HelloWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/IzlemeSecenek.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/IzlemeSecenek.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrencyForHomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrencyForHomePage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TCMBCurrencyTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TCMBCurrencyTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TodaySummary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TodaySummary.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserOrders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserOrders.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserWallet.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserWalletModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserWalletModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Footer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/Logout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Logout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/event-bus.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/event-bus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/full-currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/full-currencies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/functions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CaprazKurlar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CaprazKurlar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Coins.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Coins.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Golds.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/PageNotFound.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/PageNotFound.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Wallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Wallet.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/admin/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/admin/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/vue.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +119,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/static" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -56,16 +129,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src\pages" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\components" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\public\img" />
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\models" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src\pages" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -110,8 +183,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="npm.serve" />
       <item itemvalue="npm.admin" />
+      <item itemvalue="npm.serve" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -270,7 +343,44 @@
       <workItem from="1617385477636" duration="5103000" />
       <workItem from="1617436948892" duration="1596000" />
       <workItem from="1617733417322" duration="2797000" />
-      <workItem from="1617771663303" duration="591000" />
+      <workItem from="1617771663303" duration="844000" />
+      <workItem from="1618733496849" duration="1259000" />
+      <workItem from="1620052662139" duration="1333000" />
+      <workItem from="1620149375321" duration="3134000" />
+      <workItem from="1620394771216" duration="1540000" />
+      <workItem from="1620544241631" duration="4675000" />
+      <workItem from="1621241418403" duration="989000" />
+      <workItem from="1621668989251" duration="1228000" />
+      <workItem from="1621745995017" duration="11840000" />
+      <workItem from="1622616486249" duration="5737000" />
+      <workItem from="1622701187805" duration="795000" />
+      <workItem from="1622798040886" duration="1214000" />
+      <workItem from="1623133384187" duration="5010000" />
+      <workItem from="1623222047844" duration="1872000" />
+      <workItem from="1623260341024" duration="375000" />
+      <workItem from="1623309574399" duration="1192000" />
+      <workItem from="1623340380829" duration="5684000" />
+      <workItem from="1623395620501" duration="2174000" />
+      <workItem from="1623563772313" duration="4042000" />
+      <workItem from="1623597466792" duration="5557000" />
+      <workItem from="1623654509138" duration="613000" />
+      <workItem from="1623738322915" duration="3141000" />
+      <workItem from="1623827364130" duration="4739000" />
+      <workItem from="1623914095241" duration="2510000" />
+      <workItem from="1624119707821" duration="593000" />
+      <workItem from="1624169374969" duration="10335000" />
+      <workItem from="1624201648415" duration="4238000" />
+      <workItem from="1624259650665" duration="3811000" />
+      <workItem from="1624301595352" duration="3329000" />
+      <workItem from="1624343594462" duration="2425000" />
+      <workItem from="1624384207278" duration="3798000" />
+      <workItem from="1624430432300" duration="1182000" />
+      <workItem from="1624467535560" duration="2906000" />
+      <workItem from="1624559637698" duration="3990000" />
+      <workItem from="1624646413901" duration="2602000" />
+      <workItem from="1624695219341" duration="2936000" />
+      <workItem from="1624771974429" duration="15308000" />
+      <workItem from="1624819312732" duration="3860000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -552,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617391473869</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="persembe">
+      <created>1617773681965</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1617773681965</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,38 +703,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="persembe" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609692675273">
+    <state width="1345" height="157" key="GridCell.Tab.0.bottom" timestamp="1624819418090">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1609692675273" />
-    <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1613675933754">
+    <state width="1345" height="157" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624819418090" />
+    <state width="1345" height="157" key="GridCell.Tab.0.center" timestamp="1624819418089">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1613675933754" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1615364646802">
+    <state width="1345" height="157" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624819418089" />
+    <state width="1345" height="157" key="GridCell.Tab.0.left" timestamp="1624819418088">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615364646802" />
-    <state width="1345" height="152" key="GridCell.Tab.0.bottom" timestamp="1617734581288">
+    <state width="1345" height="157" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624819418088" />
+    <state width="1345" height="157" key="GridCell.Tab.0.right" timestamp="1624819418090">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1617734581288" />
-    <state width="1345" height="152" key="GridCell.Tab.0.center" timestamp="1617734581288">
+    <state width="1345" height="157" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624819418090" />
+    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1617773686344">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1617734581288" />
-    <state width="1345" height="152" key="GridCell.Tab.0.left" timestamp="1617734581287">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1617734581287" />
-    <state width="1345" height="152" key="GridCell.Tab.0.right" timestamp="1617734581288">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="152" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1617734581288" />
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1617391656588">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1617391656588" />
+    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1617773686344" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1616486510813">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -626,17 +731,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1617734198214" />
-    <state x="128" y="0" width="895" height="728" key="find.popup" timestamp="1614886151129">
+    <state x="128" y="0" width="895" height="728" key="find.popup" timestamp="1623222089333">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="128" y="0" width="895" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1614886151129" />
-    <state x="188" y="28" width="672" height="677" key="run.anything.popup" timestamp="1609692614363">
+    <state x="128" y="0" width="895" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1623222089333" />
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1624189738027">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="188" y="28" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1609692614363" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613566736842">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613566736842" />
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1624189738027" />
   </component>
 </project>

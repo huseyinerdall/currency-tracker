@@ -1081,63 +1081,63 @@ module.exports =
                 "amount": 0
           },
           "Ons Altın": {
-                "shortName": "Ons Altın",
+                "shortName": "ons",
                 "amount": 0
           },
           "Gram Altın": {
-                "shortName": "Gram Altın",
+                "shortName": "gram-altin",
                 "amount": 0
           },
           "Çeyrek Altın": {
-                "shortName": "Çeyrek Altın",
+                "shortName": "ceyrek-altin",
                 "amount": 0
           },
           "Yarım Altın": {
-                "shortName": "Yarım Altın",
+                "shortName": "yarım-altin",
                 "amount": 0
           },
           "Tam Altın": {
-                "shortName": "Tam Altın",
+                "shortName": "tam-altin",
                 "amount": 0
           },
           "Cumhuriyet Altını": {
-                "shortName": "Cumhuriyet Altını",
+                "shortName": "cumhuriyet-altini",
                 "amount": 0
           },
           "Ata Altın": {
-                "shortName": "Ata Altın",
+                "shortName": "ata-altin",
                 "amount": 0
           },
           "Reşat Altın": {
-                "shortName": "Reşat Altın",
+                "shortName": "reşat-altin",
                 "amount": 0
           },
           "Hamit Altın": {
-                "shortName": "Hamit Altın",
+                "shortName": "hamit-altin",
                 "amount": 0
           },
           "İkibuçuk Altın": {
-                "shortName": "İkibuçuk Altın",
+                "shortName": "ikibucuk-altin",
                 "amount": 0
           },
           "Gremse Altın": {
-                "shortName": "Gremse Altın",
+                "shortName": "gremse-altin",
                 "amount": 0
           },
           "Beşli Altın": {
-                "shortName": "Beşli Altın",
+                "shortName": "besli-altin",
                 "amount": 0
           },
           "14 Ayar Altın": {
-                "shortName": "14 Ayar Altın",
+                "shortName": "14-ayar-altin",
                 "amount": 0
           },
           "18 Ayar Altın": {
-                "shortName": "18 Ayar Altın",
+                "shortName": "18-ayar-altin",
                 "amount": 0
           },
           "22 Ayar Bilezik": {
-                "shortName": "22 Ayar Bilezik",
+                "shortName": "22-ayar-bilezik",
                 "amount": 0
           },
           "Gümüş": {
