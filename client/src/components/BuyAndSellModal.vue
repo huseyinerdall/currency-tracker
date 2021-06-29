@@ -540,6 +540,7 @@ export default {
         })
         .then(response => {
           this.emirLoaded = true;
+          this.$toasted.show(`Emir oluşturuldu.`, options);
           console.log(response.data);
         })
         .catch(err => {

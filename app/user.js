@@ -106,7 +106,8 @@ module.exports = function(app,io){
                     req.body.profileImage = filename;
                     req.body.active = 1;
                     req.body.balanceNow = 100000;
-                    req.body.balanceList = [0,0,0,0,0,req.body.balanceNow];
+                    let now = new Date().toLocaleDateString()
+                    req.body.balanceList = {  };
                     db.User.create(req.body);
                     console.log("Kullanıcı kaydedildi!!!");
                     res.send("OK");

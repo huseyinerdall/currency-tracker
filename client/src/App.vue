@@ -39,11 +39,13 @@
         <v-btn href="/capraz-kurlar" text :light="$store.state.isLight">
           <span class="mr-4">ÇAPRAZ KURLAR</span>
         </v-btn>
-
-        <v-menu offset-y style="margin-top: 30px;" v-if="$store.state.login">
+        <v-btn href="/userwallet" text :light="$store.state.isLight">
+          <span class="mr-4">CÜZDAN</span>
+        </v-btn>
+<!--        <v-menu offset-y style="margin-top: 30px;" v-if="$store.state.login">
           <template v-slot:activator="{ attrs, on }">
             <v-btn
-              class="white--text ma-5"
+              class="white&#45;&#45;text ma-5"
               v-bind="attrs"
               v-on="on"
               text
@@ -88,7 +90,7 @@
               <v-list-item-title>Çıkış</v-list-item-title>
             </v-list-item>
           </v-list>
-        </v-menu>
+        </v-menu>-->
         <v-spacer></v-spacer>
         <v-btn
           class="mt-6 mr-2 pl-1"

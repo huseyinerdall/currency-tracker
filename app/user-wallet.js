@@ -37,10 +37,11 @@ class UserWallet{
                 for (let i = 0; i < users.length; i++) {
                     let balance = this.calculateBalance(users[i]["dataValues"]["wallet"],allPrices);
                     let prevbalanceList = users[i]["dataValues"]["balanceList"];
-                    prevbalanceList.pop();
-                    prevbalanceList.push(parseFloat(balance.toFixed(2)));
+                    prevbalanceList[new Date().toLocaleDateString()] = parseFloat(balance.toFixed(2));
+                    console.log(prevbalanceList)
                     db.User.update({
-                        balanceList: prevbalanceList
+                        balanceList: prevbalanceList,
+                        balanceNow: balance
                     }, {
                         where: { id: users[i]["dataValues"]["id"] },
                         returning: true,

@@ -8,8 +8,21 @@
             <v-col cols="12" md="6">
               <div style="border: 1px solid #ddd;border-radius:6px;">
                 <v-row>
-                  <v-col class="ml-4">
-                    <h3 class="white--text">{{ balanceNow | turkishCurrencyformat }}</h3>
+                  <v-col class="ml-2">
+                    <h3 class="white--text">₺{{ balanceNow | turkishCurrencyformat }}</h3>
+                  </v-col>
+                  <v-col class="ml-4" :set="change = userBalanceList[0]['data'][userBalanceList[0]['data'].length-1][1]-userBalanceList[0]['data'][0][1]">
+                    <h4 :class="change > 0 ? 'green-text' : 'red--text'">{{change | signint }}</h4>
+                  </v-col>
+                  <v-col>
+                    <v-select
+                        style="margin-top: -10px;"
+                        :items="timeOptions"
+                        solo
+                        dense
+                        light
+                        value="Haftalık"
+                    ></v-select>
                   </v-col>
                 </v-row>
                 <apexchart
@@ -49,7 +62,17 @@
                       {{item.amount | tofixedftwo}}
                     </td>
                     <td>
-                      {{(parseFloat((allPrices[item.shortName] || allPrices[shortNames[item.shortName]])*item.amount)-parseFloat(item.cost)) | turkishCurrencyformat}}
+                      <div v-if="item.shortName != 'TRY'">
+                        <span
+                            :class="[
+                            (parseFloat((allPrices[item.shortName] || allPrices[shortNames[item.shortName]])*item.amount)-parseFloat(item.cost)) >= 0
+                              ? 'green--text'
+                              : 'red--text'
+                          ]">
+                          {{(parseFloat((allPrices[item.shortName] || allPrices[shortNames[item.shortName]])*item.amount)-parseFloat(item.cost)) | signint}}
+                        </span>
+                      </div>
+                      <div v-else>-</div>
                     </td>
                     <td>
                       {{ ((allPrices[item.shortName] || allPrices[shortNames[item.shortName]])*item.amount) | turkishCurrencyformat}}
@@ -104,7 +127,7 @@
                         <td>
                           <div class="d-flex flex-column">
                             <span v-text="item.OrderType == 'time' ? 'Tarihe Göre' : 'Fiyata Göre'"></span>
-                            <span style="font-size: 11px;" v-if="item.OrderType == 'time'">{{item.Parameter | dateStandartFormat}}</span>
+                            <span style="font-size: 11px;" v-if="item.OrderType == 'time'">{{ (item.Parameter.indexOf('z') > 0 ? new Date(item.Parameter).toLocaleString('tr') : new Date(item.createdAt).toLocaleDateString() )}}</span>
                             <span v-else>{{item.Parameter}}</span>
                           </div>
                         </td>
@@ -116,6 +139,7 @@
                               x-small
                               color="transparent"
                               @click="buyOrderNow()"
+                              :disabled="item.Closed == 1"
                           >
                             <v-icon size="16" color="rgba(255,255,255,0.5)">
                               mdi-check-outline
@@ -128,6 +152,7 @@
                               x-small
                               color="transparent"
                               @click="sellOrderNow()"
+                              :disabled="item.Closed == 1"
                           >
                             <v-icon size="16" color="rgba(255,255,255,0.5)">
                               mdi-check-outline
@@ -138,8 +163,9 @@
                               class="pa-0"
                               x-small
                               color="transparent"
+                              :disabled="item.Closed == 1"
                           >
-                            <v-icon size="16" color="rgba(255,255,255,0.5)" class="ml-1">
+                            <v-icon size="16" color="rgba(255,255,255,0.5)">
                               mdi-pencil-outline
                             </v-icon>
                           </v-btn>
@@ -198,15 +224,15 @@
                           <v-avatar size="32">
                             <img :src="item.profileImage" alt="" />
                           </v-avatar>
-                          <span>{{item.fullName}}</span>
+                          <span>{{item.fullName | tocapitalize}}</span>
                         </v-row>
                       </td>
                       <td>
-                        {{item.balanceNow}}
+                        ₺{{item.balanceNow | turkishCurrencyformat}}
                       </td>
                       <td>
                         <v-row class="pa-0">
-                          {{Object.values(item.graph)}}
+                          {{item.graph}}
                           <span class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(Object.values(item.graph)[0]+Object.values(item.graph)[1]))*200+'px;'">{{ Object.keys(item.graph)[0] }}</span>
                           <span class="green text-center" :style="'width:'+(Object.values(item.graph)[1]/(Object.values(item.graph)[0]+Object.values(item.graph)[1]))*200+'px;'">{{ Object.keys(item.graph)[1] }}</span>
                           <span class="grey text-center" style="width:60px;">DİĞER</span>
@@ -255,13 +281,16 @@ let alertoptions = {
 };
 export default {
   name: "UserWallet",
-  data() {
+  data(app) {
     return {
       i:1,
       userBalanceList: [
         {
           data: [1,2,3,4,56,8]
         }
+      ],
+      timeOptions:[
+        'Günlük','Haftalık','Yıllık','Aylık'
       ],
       chartOptions: {
         chart: {
@@ -281,14 +310,50 @@ export default {
               reset: true
             },
           },
-          xaxis:{
+          xaxis: {
+            type: "datetime",
+            tickAmount: 6,
+            labels: {
+              style: {
+                colors: app.$store.state.isLight ? "#000" : "#ffffff"
+              },
+              datetimeFormatter: {
+                year: "yyyy",
+                month: "MMM 'yy",
+                day: "dd MMM",
+                hour: "HH:mm"
+              }
+            },
+            axisTicks: {
+              color: app.$store.state.isLight ? "#000" : "#ffffff"
+            },
+            axisBorder: {
+              color: app.$store.state.isLight ? "#000" : "#ffffff"
+            },
             lines: {
               show: true,
             }
           },
-          yaxis:{
-            lines: {
-              show: true,
+          yaxis: {
+            labels: {
+              style: {
+                colors: app.$store.state.isLight ? "#000" : "#ffffff"
+              }
+            },
+            title: {
+              style: {
+                color: app.$store.state.isLight ? "#000" : "#ffffff",
+                fontSize: 14,
+                fontWeight: 600
+              }
+            },
+            axisTicks: {
+              show: false,
+              color: app.$store.state.isLight ? "#000" : "#ffffff",
+              width: 0
+            },
+            axisBorder: {
+              color: app.$store.state.isLight ? "#000" : "#ffffff"
             }
           },
         },
@@ -333,7 +398,8 @@ export default {
           theme: false,
           style: {
             fontSize: '12px',
-            fontFamily: undefined
+            fontFamily: undefined,
+            background: "#ff3064"
           },
           onDatasetHover: {
             highlightDataSeries: false,
@@ -346,7 +412,7 @@ export default {
           y: {
             formatter: undefined,
             title: {
-              formatter: (seriesName) => seriesName,
+              formatter: () => '',
             },
           },
           z: {
@@ -522,7 +588,7 @@ export default {
   created() {
     let app = this;
     axios.get("https://finans.truncgil.com/today.json").then(response => {
-      app.dolar = parseFloat(response.data["ABD DOLARI"]["Satış"]);
+      app.dolar = parseFloat(response.data["USD"]["Satış"]);
     });
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("allprices", fetchedData => {
@@ -538,10 +604,10 @@ export default {
           id: JSON.parse(localStorage.getItem("user")).id
         })
         .then(response => {
-          console.log(response.data)
+          console.log(Object.entries(response.data))
           app.userBalanceList = [
             {
-              data: response.data
+              data: Object.entries(response.data)
             }
           ];
         })
@@ -556,6 +622,7 @@ export default {
           for (let i = 0; i < response.data.length; i++) {
             response.data[i].graph = null;
             response.data[i].graph = setGraph(response.data[i]["wallet"],JSON.parse(localStorage.getItem("allprices")));
+            console.log(response.data[i].graph,"---------------------------------")
           }
 
           app.topUsers =  response.data;
@@ -610,12 +677,19 @@ export default {
           });
     },
     deleteOrder(orderId){
+      this.$toasted.show(
+          `Emir iptal edildi.`,
+          options
+      );
+      this.getUserAllOrders();
       axios
           .post(`${this.$store.state.api}/deleteorder`, {
             orderId: orderId
           })
           .then(response => {
-            console.log(response.data)
+            console.log(response.data);
+            alert("kllklkkl")
+
           })
           .catch(err => {
             console.log(err);
@@ -689,6 +763,15 @@ export default {
 };
 </script>
 
+<style>
+.apexcharts-tooltip {
+  background: #ff3366;
+  color: #fff;
+}
+.apexcharts-tooltip-series-group.apexcharts-active{
+  background-color: #ff3366 !important;
+}
+</style>
 
 <style>
 .v-data-table
@@ -805,5 +888,9 @@ h3 {
 }
 .theme--light.v-data-table {
   background-color: rgba(0, 0, 0, 0.3) !important;
+}
+.theme--light.v-text-field--solo > .v-input__control > .v-input__slot{
+  background: transparent !important;
+  color: #fff !important;
 }
 </style>

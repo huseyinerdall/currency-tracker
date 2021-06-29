@@ -26,9 +26,17 @@ Vue.prototype.$addr = "http://localhost";
 Vue.prototype.$port = "4000";
 
 Vue.filter("turkishCurrencyformat", function(num) {
-  return new Intl.NumberFormat("tr-TR", { minimumFractionDigits: 4 }).format(
-    num
-  );
+
+  return new Intl.NumberFormat("tr-TR", {minimumFractionDigits: 4}).format(
+      num
+  ) || '-';
+
+});
+
+Vue.filter("tocapitalize", function(value) {
+
+  return value.toString().toUpperCase()
+
 });
 
 Vue.filter("currencyformat", function(value) {

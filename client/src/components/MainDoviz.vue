@@ -206,7 +206,7 @@ export default {
             : "amber--text accent-3 body-1"
         },
         {
-          text: "Yüzde",
+          text: "Fark",
           value: "Yuzde",
           sortable: false,
           align: "start",
@@ -215,7 +215,7 @@ export default {
             : "amber--text accent-3 body-1"
         },
         {
-          text: "Fark",
+          text: "Yüzde",
           value: "Fark",
           sortable: false,
           align: "start",

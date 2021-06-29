@@ -19,83 +19,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="persembe">
-      <change afterPath="$PROJECT_DIR$/app/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/uploads/adem-elmas.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/uploads/hs-jsj.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/uploads/jjkjk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/uploads/selami-oztürk.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/sitemap.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/defaultbalancelist.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/shortname-convert.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/user.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/allimages.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/shortname-convert.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="end">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/new.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/new.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/varliklar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/varliklar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/defaultbalancelist.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/defaultbalancelist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user-wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/apiTers.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/apiTers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/currencies.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/dump.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/dump.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/images.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/varlikList.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/varlikList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Calculator.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Calculator.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CaprazKurlarTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverterAdvenced.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverterAdvenced.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverterColumn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverterColumn.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Description.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Description.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/EmtiaTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/EmtiaTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/HelloWorld.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/IzlemeSecenek.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/IzlemeSecenek.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrency.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrencyForHomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrencyForHomePage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MatrisTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/TCMBCurrencyTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TCMBCurrencyTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/TodaySummary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TodaySummary.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserOrders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserOrders.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserWallet.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserWalletModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserWalletModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/Logout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Logout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/event-bus.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/event-bus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/full-currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/full-currencies.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/functions/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/CaprazKurlar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CaprazKurlar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Coins.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Coins.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Golds.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/PageNotFound.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/PageNotFound.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Wallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Wallet.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/admin/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/admin/Dashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,7 +315,9 @@
       <workItem from="1624646413901" duration="2602000" />
       <workItem from="1624695219341" duration="2936000" />
       <workItem from="1624771974429" duration="15308000" />
-      <workItem from="1624819312732" duration="3860000" />
+      <workItem from="1624819312732" duration="4339000" />
+      <workItem from="1624895829574" duration="1360000" />
+      <workItem from="1624972426502" duration="10425000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -669,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617773681965</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="end">
+      <created>1624824772585</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1624824772585</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -700,29 +644,30 @@
     <MESSAGE value="pazar" />
     <MESSAGE value="salı" />
     <MESSAGE value="persembe" />
-    <option name="LAST_COMMIT_MESSAGE" value="persembe" />
+    <MESSAGE value="end" />
+    <option name="LAST_COMMIT_MESSAGE" value="end" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1345" height="157" key="GridCell.Tab.0.bottom" timestamp="1624819418090">
+    <state width="1345" height="156" key="GridCell.Tab.0.bottom" timestamp="1624972952174">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="157" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624819418090" />
-    <state width="1345" height="157" key="GridCell.Tab.0.center" timestamp="1624819418089">
+    <state width="1345" height="156" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624972952174" />
+    <state width="1345" height="156" key="GridCell.Tab.0.center" timestamp="1624972952174">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="157" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624819418089" />
-    <state width="1345" height="157" key="GridCell.Tab.0.left" timestamp="1624819418088">
+    <state width="1345" height="156" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624972952174" />
+    <state width="1345" height="156" key="GridCell.Tab.0.left" timestamp="1624972952173">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="157" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624819418088" />
-    <state width="1345" height="157" key="GridCell.Tab.0.right" timestamp="1624819418090">
+    <state width="1345" height="156" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624972952173" />
+    <state width="1345" height="156" key="GridCell.Tab.0.right" timestamp="1624972952174">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="157" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624819418090" />
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1617773686344">
+    <state width="1345" height="156" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624972952174" />
+    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1624824799783">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1617773686344" />
+    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1624824799783" />
     <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1616486510813">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -731,10 +676,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1617734198214" />
-    <state x="128" y="0" width="895" height="728" key="find.popup" timestamp="1623222089333">
+    <state x="128" y="0" width="895" height="728" key="find.popup" timestamp="1624973977795">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="128" y="0" width="895" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1623222089333" />
+    <state x="128" y="0" width="895" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1624973977795" />
     <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1624189738027">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

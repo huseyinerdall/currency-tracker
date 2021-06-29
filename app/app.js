@@ -628,7 +628,7 @@ db.sequelize.sync().then(() => {
 
         axios.get('https://finans.truncgil.com/today.json')
             .then(async response => {
-                dolar = parseFloat(response.data["USD"]["Satış"])
+                dolar = parseFloat(response.data["USD"]["Satış"].replace(',','.'))
                 let sepetalis = ((parseFloat(response.data["USD"]["Alış"].replace(',','.')) + parseFloat(response.data["EUR"]["Alış"].replace(',','.'))) / 2).toFixed(4);
                 let sepetsatis = ((parseFloat(response.data["USD"]["Satış"].replace(',','.')) + parseFloat(response.data["EUR"]["Satış"].replace(',','.'))) / 2).toFixed(4);
                 let updatetime = response.data["Update_Date"];
