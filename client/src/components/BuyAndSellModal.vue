@@ -49,13 +49,11 @@
                   <span
                     :class="$store.state.isLight ? '' : 'white--text'"
                     class="ml-8"
-                    >₺ {{ currentUnit.price | binayracveondalik }}</span
-                  >
+                    >₺ {{ currentUnit.price | binayracveondalik }}</span>
                 </div>
                 <div v-else>
                   <span :class="$store.state.isLight ? '' : 'white--text'"
-                    >$ {{ currentUnit.price }}</span
-                  >
+                    >$ {{ currentUnit.price }}</span>
                   <span
                     :class="$store.state.isLight ? '' : 'white--text'"
                     class="ml-8"
@@ -443,7 +441,16 @@ export default {
   }),
   created() {
     let app = this;
-
+    var socket = io.connect(`${this.$store.state.addr}`);
+    socket.on("coins", fetchedData => {
+      localStorage.setItem("coins250", JSON.stringify(fetchedData));
+    });
+    socket.on("golds", fetchedData => {
+      localStorage.setItem("golds", JSON.stringify(fetchedData));
+    });
+    socket.on("currencies", fetchedData => {
+      localStorage.setItem("currencies", JSON.stringify(fetchedData));
+    });
     if (localStorage.getItem("coins250")) {
       this.data = JSON.parse(localStorage.getItem("coins250"));
       let tempList = JSON.parse(localStorage.getItem("currencies")).concat(
@@ -455,8 +462,7 @@ export default {
           name: tempList[i]["type"],
           shortName: "",
           price: parseFloat(tempList[i]["Satış"].replace(",", ".")),
-          image:
-            images[tempList[i]["type"]] || this.$store.state.api + "/gold.png",
+          image: images[tempList[i]["type"]] || this.$store.state.api + "/gold.png",
           isMajor: true
         });
       }
@@ -465,7 +471,6 @@ export default {
       });
     }
 
-    var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("buy", fetchedData => {
       if (fetchedData.userId == JSON.parse(localStorage.getItem("user")).id) {
         this.$toasted.show(
@@ -487,28 +492,25 @@ export default {
     axios
       .get("https://finans.truncgil.com/today.json")
       .then(response => {
-        app.dolar = +response.data["USD"]["Satış"].replace(",", ".");
+        app.dolar = parseFloat(response.data["USD"]["Satış"].replace(",", "."));
         this.currentUnit.price = this.currentUnit.price * 1;
       })
       .catch(err => console.log(err));
     this.currentUnit = this.data[0];
-    this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(
-        2
-    );
+    this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(2);
     this.chooseUnit();
   },
   methods: {
     chooseUnit() {
       this.image = this.currentUnit.image;
-      this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(
-        2
-      );
+      console.log(this.currentUnit)
+      this.currentUnitTLPrice =this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.dolar).toFixed(2) :(this.currentUnit.price);
       this.calculateSum();
     },
     calculateSum() {
       this.calculatedSum = (
         this.orderNowAmount * parseFloat(this.currentUnitTLPrice)
-      ).toFixed(2);
+      );
     },
     setBuyOrder() {
       if (this.chosen == "time" && this.time < new Date()) {
@@ -533,7 +535,7 @@ export default {
           userId: JSON.parse(localStorage.getItem("user")).id,
           orderType: this.chosen,
           parameter: this.chosen == "price" ? this.price : this.time,
-          wealth: this.currentUnit["name"],
+          wealth: this.currentUnit["shortName"] || this.currentUnit["name"],
           amount:
             this.chosen == "price" ? this.amountByPrice : this.amountByTime,
           major: "TÜRK LİRASI"
@@ -565,7 +567,7 @@ export default {
           userId: JSON.parse(localStorage.getItem("user")).id,
           orderType: this.chosen,
           parameter: this.chosen == "price" ? this.price : this.time,
-          wealth: this.currentUnit["name"],
+          wealth: this.currentUnit["shortName"] || this.currentUnit["name"],
           amount:
             this.chosen == "price" ? this.amountByPrice : this.amountByTime,
           major: "TÜRK LİRASI"
@@ -625,7 +627,7 @@ export default {
           "amount"
         ]
       );
-      if (!(wealth > this.orderNowAmount)) {
+      if (!(wealth >= this.orderNowAmount)) {
         this.$toasted.show(
           `Yeterli ${this.currentUnit["name"]} yok.`,
           alertoptions

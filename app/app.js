@@ -523,7 +523,8 @@ app.post('/setbuyorder', (req, res) => {
     let userId = req.body.userId;
     let orderType = req.body.orderType;
     let parameter = req.body.parameter;
-    let wealth = req.body.wealth;
+    console.log(apiT[req.body.wealth] , req.body.wealth)
+    let wealth = apiT[req.body.wealth] || req.body.wealth;
     let amount = req.body.amount;
     let major = req.body.major || "TÜRK LİRASI";
     let result = Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major);
@@ -604,7 +605,8 @@ db.sequelize.sync().then(() => {
                     temp["time"] = response.data[i]["last_updated"];
                     temp["image"] = response.data[i]["image"];
                     temp["sparkline"] = response.data[i]["sparkline_in_7d"]["price"];
-                    allPrices[response.data[i]["symbol"]] = response.data[i]["current_price"] * dolar;
+                    temp["Tür"] = "Kripto";
+                    allPrices[response.data[i]["symbol"]] = (response.data[i]["current_price"] * dolar).toFixed(2);
                     allImages[response.data[i]["name"]] = response.data[i]["image"];
 
                     factRes.push(temp);
@@ -628,7 +630,7 @@ db.sequelize.sync().then(() => {
 
         axios.get('https://finans.truncgil.com/today.json')
             .then(async response => {
-                dolar = parseFloat(response.data["USD"]["Satış"].replace(',','.'))
+                dolar = parseFloat(response.data["USD"]["Alış"].replace(',','.'))
                 let sepetalis = ((parseFloat(response.data["USD"]["Alış"].replace(',','.')) + parseFloat(response.data["EUR"]["Alış"].replace(',','.'))) / 2).toFixed(4);
                 let sepetsatis = ((parseFloat(response.data["USD"]["Satış"].replace(',','.')) + parseFloat(response.data["EUR"]["Satış"].replace(',','.'))) / 2).toFixed(4);
                 let updatetime = response.data["Update_Date"];
@@ -727,106 +729,107 @@ db.sequelize.sync().then(() => {
                    console.log(`Bekleyen ${openOrders.length} emir var...`);
                    prevOrderNumber = openOrders.length;
                }
-
-
                for (let i = 0; i < openOrders.length; i++) {
 
-                    if(openOrders[i]["dataValues"]["OrderType"] === 'price'){
-                        if(openOrders[i]["dataValues"]["buyOrSell"] == 'buy' &&
-                            (parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")) >=
-                            parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
-                                ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
-                                : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]))){
+                   if(openOrders[i]["dataValues"]["OrderType"] === 'price'){
+                       console.log(parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
+                           ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
+                           : (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"].toLowerCase()]||allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]])),
+                           parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")),"oooooooo",
+                           openOrders[i]["dataValues"]["CoinOrCurrency"],dolar)
+                       if(openOrders[i]["dataValues"]["buyOrSell"] == 'buy' &&
+                           (parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")) >=
+                               parseFloat((allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]] || allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"].toLowerCase()])))){
 
 
 
-                            Trader.buy(
-                                openOrders[i]["dataValues"]["UserId"],
-                                openOrders[i]["dataValues"]["CoinOrCurrency"],
-                                openOrders[i]["dataValues"]["Parameter"],
-                                openOrders[i]["dataValues"]["Amount"],
-                                "TÜRK LİRASI",
-                                openOrders[i]["dataValues"]["id"]
-                            )
+                           Trader.buy(
+                               openOrders[i]["dataValues"]["UserId"],
+                               openOrders[i]["dataValues"]["CoinOrCurrency"],
+                               openOrders[i]["dataValues"]["Parameter"],
+                               openOrders[i]["dataValues"]["Amount"],
+                               "TÜRK LİRASI",
+                               openOrders[i]["dataValues"]["id"]
+                           )
 
-                            io.emit('buy', {
-                                userId: openOrders[i]["dataValues"]["UserId"],
-                                CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
-                                Amount: openOrders[i]["dataValues"]["Amount"]
-                            });
-                            openOrders.splice(i,1);
-                        }
-                        else if(openOrders[i]["dataValues"]["buyOrSell"] == 'sell' &&
-                            (parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")) <=
-                                parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
-                                    ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
-                                    : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]))){
-                            Trader.sell(
-                                openOrders[i]["dataValues"]["UserId"],
-                                openOrders[i]["dataValues"]["CoinOrCurrency"],
-                                openOrders[i]["dataValues"]["Parameter"],
-                                openOrders[i]["dataValues"]["Amount"],
-                                "TÜRK LİRASI",
-                                openOrders[i]["dataValues"]["id"]
-                            )
+                           io.emit('buy', {
+                               userId: openOrders[i]["dataValues"]["UserId"],
+                               CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                               Amount: openOrders[i]["dataValues"]["Amount"]
+                           });
+                           openOrders.splice(i,1);
+                       }
+                       else if(openOrders[i]["dataValues"]["buyOrSell"] == 'sell' &&
+                           (parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")) <=
+                               parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
+                                   ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
+                                   : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]))){
+                           Trader.sell(
+                               openOrders[i]["dataValues"]["UserId"],
+                               openOrders[i]["dataValues"]["CoinOrCurrency"],
+                               openOrders[i]["dataValues"]["Parameter"],
+                               openOrders[i]["dataValues"]["Amount"],
+                               "TÜRK LİRASI",
+                               openOrders[i]["dataValues"]["id"]
+                           )
 
-                            io.emit('sell', {
-                                userId: openOrders[i]["dataValues"]["UserId"],
-                                CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
-                                Amount: openOrders[i]["dataValues"]["Amount"]
-                            });
-                            openOrders.splice(i,1);
-                        }
-                    }else if(openOrders[i].dataValues.OrderType == 'time'){
+                           io.emit('sell', {
+                               userId: openOrders[i]["dataValues"]["UserId"],
+                               CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                               Amount: openOrders[i]["dataValues"]["Amount"]
+                           });
+                           openOrders.splice(i,1);
+                       }
+                   }else if(openOrders[i].dataValues.OrderType == 'time'){
 
-                        if(openOrders[i]["dataValues"]["buyOrSell"] == 'buy' &&
-                            new Date(openOrders[i]["dataValues"]["Parameter"]) <= new Date()){
+                       if(openOrders[i]["dataValues"]["buyOrSell"] == 'buy' &&
+                           new Date(openOrders[i]["dataValues"]["Parameter"]) <= new Date()){
 
-                            let priceNow = parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
-                                ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
-                                : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]])
+                           let priceNow = parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
+                               ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
+                               : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]])
 
-                            Trader.buy(
-                                openOrders[i]["dataValues"]["UserId"],
-                                openOrders[i]["dataValues"]["CoinOrCurrency"],
-                                priceNow,
-                                openOrders[i]["dataValues"]["Amount"],
-                                "TÜRK LİRASI",
-                                openOrders[i]["dataValues"]["id"]
-                            )
+                           Trader.buy(
+                               openOrders[i]["dataValues"]["UserId"],
+                               openOrders[i]["dataValues"]["CoinOrCurrency"],
+                               priceNow,
+                               openOrders[i]["dataValues"]["Amount"],
+                               "TÜRK LİRASI",
+                               openOrders[i]["dataValues"]["id"]
+                           )
 
-                            io.emit('buy', {
-                                userId: openOrders[i]["dataValues"]["UserId"],
-                                CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
-                                Amount: openOrders[i]["dataValues"]["Amount"]
-                            });
-                            openOrders.splice(i,1);
-                        }
+                           io.emit('buy', {
+                               userId: openOrders[i]["dataValues"]["UserId"],
+                               CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                               Amount: openOrders[i]["dataValues"]["Amount"]
+                           });
+                           openOrders.splice(i,1);
+                       }
 
-                        else if(openOrders[i]["dataValues"]["buyOrSell"] == 'sell' &&
-                            new Date(openOrders[i]["dataValues"]["Parameter"]) <= new Date()){
+                       else if(openOrders[i]["dataValues"]["buyOrSell"] == 'sell' &&
+                           new Date(openOrders[i]["dataValues"]["Parameter"]) <= new Date()){
 
-                            let priceNow = parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
-                                ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
-                                : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]])
+                           let priceNow = parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
+                               ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
+                               : allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]])
 
-                            Trader.sell(
-                                openOrders[i]["dataValues"]["UserId"],
-                                openOrders[i]["dataValues"]["CoinOrCurrency"],
-                                priceNow,
-                                openOrders[i]["dataValues"]["Amount"],
-                                "TÜRK LİRASI",
-                                openOrders[i]["dataValues"]["id"]
-                            )
+                           Trader.sell(
+                               openOrders[i]["dataValues"]["UserId"],
+                               openOrders[i]["dataValues"]["CoinOrCurrency"],
+                               priceNow,
+                               openOrders[i]["dataValues"]["Amount"],
+                               "TÜRK LİRASI",
+                               openOrders[i]["dataValues"]["id"]
+                           )
 
-                            io.emit('sell', {
-                                userId: openOrders[i]["dataValues"]["UserId"],
-                                CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
-                                Amount: openOrders[i]["dataValues"]["Amount"]
-                            });
-                            openOrders.splice(i,1);
-                        }
-                    }
+                           io.emit('sell', {
+                               userId: openOrders[i]["dataValues"]["UserId"],
+                               CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                               Amount: openOrders[i]["dataValues"]["Amount"]
+                           });
+                           openOrders.splice(i,1);
+                       }
+                   }
                }
            })
 

@@ -307,6 +307,25 @@
         </v-dialog>
       </v-app-bar>
 
+      <v-footer v-if="$vuetify.breakpoint.smAndDown" app bottom fixed padless style="background: rgb(29, 36, 96);">
+        <v-row class="pl-4 pr-4">
+          <v-col>
+            <v-btn block
+                   color="rgb(2, 192, 118)"
+                   @click="$store.commit('buyselldialog')">
+              AL
+            </v-btn>
+          </v-col>
+          <v-col>
+            <v-btn block
+                   color="rgb(248, 73, 96)"
+                   @click="$store.commit('buyselldialog')">
+              SAT
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-footer>
+
       <v-main :class="{ 'v-main-light': $store.state.isLight }">
         <v-container>
           <router-view />

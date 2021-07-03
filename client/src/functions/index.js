@@ -24,28 +24,37 @@ function search(nameKey, array) {
 }
 
 function setGraph(wallet,allPrices){
-  let f,s = 0;
-  let first,second = null;
-  let balance,diger = 0;
+  let f,s,temp;
+  f = 0;
+  s = 0;
+  let result = {};
+  let first,second  = '';
+  let balance,diger;
+  balance = 0;
+  diger = 0;
   for (const w in wallet) {
+    if(parseFloat(wallet[w]["amount"])>0){
 
-    if(parseFloat(wallet[w]["amount"])){
-      let temp = parseFloat(allPrices[wallet[w]["shortName"]])*parseFloat(wallet[w]["amount"]);
+      temp = parseFloat(allPrices[wallet[w]["shortName"]])*parseFloat(wallet[w]["amount"]);
       balance += temp;
-      if(f<temp){
+
+      if(parseFloat(f)<temp){
         s = f;
-        second = first;
-        first = wallet[w];
         f = temp;
+        second = first;
+        first = wallet[w]["shortName"];
+
       }
-      diger = balance - (f+s);
 
     }
 
   }
-  return {
-    first,second,"diger":diger
-  };
+  diger = balance - (f+s);
+  result[first] = f;
+  result[second] = s;
+  result["diger"] = diger;
+  result["total"] = balance;
+  return result;
 }
 
 module.exports = { search, setGraph };

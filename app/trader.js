@@ -21,8 +21,7 @@ class Trade{
                 let tradePurpose = +amount * parseFloat(wealthPrice.toString().replace(',','.'));
                 temp = await user.dataValues.wallet;
                 temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);
-                temp[wealth].amount = amount;
-                console.log(parseFloat(temp[wealth].cost),parseFloat(tradePurpose))
+                temp[wealth]["amount"] = parseFloat(amount) + temp[wealth]["amount"];
                 temp[wealth].cost = parseFloat(tradePurpose) + (parseFloat(temp[wealth].cost)||0);
                 user.wallet = temp;
                 db.User.update({
@@ -65,11 +64,11 @@ class Trade{
             }
         })
             .then(async(user) =>{
-                let tradePurpose = amount * wealthPrice;
+                let tradePurpose = parseFloat(amount) * parseFloat(wealthPrice);
                 temp = await user.dataValues.wallet;
                 temp["TÜRK LİRASI"].amount = parseFloat(user.dataValues.wallet["TÜRK LİRASI"].amount) + parseFloat(tradePurpose);
-                temp[wealth].amount = temp[wealth].amount - amount;
-                //temp[wealth].cost = 0;
+                temp[wealth].amount = parseFloat(temp[wealth].amount) - parseFloat(amount);
+                temp[wealth].cost = (parseFloat(temp[wealth].cost)||0) - parseFloat(tradePurpose);
                 user.wallet = temp;
                 db.User.update({
                     wallet: temp

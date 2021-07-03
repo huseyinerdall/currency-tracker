@@ -20,16 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="end">
+      <change afterPath="$PROJECT_DIR$/app/public/defaultuserprofileimage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/ont.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/ont.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/tempfilename.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/defaultbalancelist.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/defaultbalancelist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user-wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/apiTers.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/apiTers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserOrders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserOrders.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserWalletModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserWalletModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/functions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -317,7 +324,19 @@
       <workItem from="1624771974429" duration="15308000" />
       <workItem from="1624819312732" duration="4339000" />
       <workItem from="1624895829574" duration="1360000" />
-      <workItem from="1624972426502" duration="10425000" />
+      <workItem from="1624972426502" duration="10839000" />
+      <workItem from="1625028423790" duration="3437000" />
+      <workItem from="1625040745565" duration="8956000" />
+      <workItem from="1625076545488" duration="1794000" />
+      <workItem from="1625114783614" duration="2045000" />
+      <workItem from="1625121940486" duration="7491000" />
+      <workItem from="1625161278354" duration="1188000" />
+      <workItem from="1625202529342" duration="2213000" />
+      <workItem from="1625211169483" duration="15711000" />
+      <workItem from="1625248035110" duration="1117000" />
+      <workItem from="1625287877376" duration="2418000" />
+      <workItem from="1625307013669" duration="3460000" />
+      <workItem from="1625327894543" duration="692000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -613,7 +632,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624824772585</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="end">
+      <created>1624998455322</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1624998455322</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,43 +672,5 @@
     <MESSAGE value="persembe" />
     <MESSAGE value="end" />
     <option name="LAST_COMMIT_MESSAGE" value="end" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1345" height="156" key="GridCell.Tab.0.bottom" timestamp="1624972952174">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="156" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1624972952174" />
-    <state width="1345" height="156" key="GridCell.Tab.0.center" timestamp="1624972952174">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="156" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1624972952174" />
-    <state width="1345" height="156" key="GridCell.Tab.0.left" timestamp="1624972952173">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="156" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1624972952173" />
-    <state width="1345" height="156" key="GridCell.Tab.0.right" timestamp="1624972952174">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1345" height="156" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1624972952174" />
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2" timestamp="1624824799783">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="123" y="79" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1624824799783" />
-    <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1616486510813">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="500" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1616486510813" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617734198214">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1617734198214" />
-    <state x="128" y="0" width="895" height="728" key="find.popup" timestamp="1624973977795">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="128" y="0" width="895" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1624973977795" />
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1624189738027">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1624189738027" />
   </component>
 </project>

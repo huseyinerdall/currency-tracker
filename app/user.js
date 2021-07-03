@@ -89,25 +89,32 @@ module.exports = function(app,io){
             }
         })
             .then(user => {
+                console.log(user,req.body)
                 if (user) {
                     res.send("Bu email adresi çoktan kullanılmış.");
                 } else {
-                    let filename = '';
-                    fs.readdirSync(UPLOAD_FOLDER).forEach(file => {
-                        if(file.includes("tempfilename")){
-                            let ext = path.extname(file);
-                            fs.rename(`${UPLOAD_FOLDER}tempfilename${ext}`, `${UPLOAD_FOLDER}${req.body.profileImage}${ext}`, function(err) {
-                                if ( err ) console.log('ERROR: ' + err);
-                            });
-                            filename = `${req.body.profileImage}${ext}`;
-                        }
-                    });
+                    if(req.body.profileImage.indexOf("googleusercontent")>0){
+                        console.log(user,req.body)
+                    }else{
+                        let filename = '';
+                        fs.readdirSync(UPLOAD_FOLDER).forEach(file => {
+                            if(file.includes("tempfilename")){
+                                let ext = path.extname(file);
+                                fs.rename(`${UPLOAD_FOLDER}tempfilename${ext}`, `${UPLOAD_FOLDER}${req.body.profileImage}${ext}`, function(err) {
+                                    if ( err ) console.log('ERROR: ' + err);
+                                });
+                                filename = `${req.body.profileImage}${ext}`;
+                            }
+                            req.body.profileImage = filename;
+                        });
+                    }
+
                     req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
-                    req.body.profileImage = filename;
+
                     req.body.active = 1;
                     req.body.balanceNow = 100000;
                     let now = new Date().toLocaleDateString()
-                    req.body.balanceList = {  };
+                    req.body.balanceList = {};
                     db.User.create(req.body);
                     console.log("Kullanıcı kaydedildi!!!");
                     res.send("OK");
@@ -152,7 +159,7 @@ module.exports = function(app,io){
                 res.status(200).send({ auth: true, token: token, user: user });
             })
             .catch(err => {
-                res.send("ERROR")
+                console.log(err)
             })
     })
 

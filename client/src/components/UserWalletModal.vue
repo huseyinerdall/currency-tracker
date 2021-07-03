@@ -102,7 +102,7 @@ export default {
   created() {
     let app = this;
     axios.get("https://finans.truncgil.com/today.json").then(response => {
-      app.dolar = parseFloat(response.data["ABD DOLARI"]["Satış"]);
+      app.dolar = parseFloat(response.data["USD"]["Satış"]);
     });
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("allprices", fetchedData => {

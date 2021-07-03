@@ -11,7 +11,7 @@
                   <v-col class="ml-2">
                     <h3 class="white--text">₺{{ balanceNow | turkishCurrencyformat }}</h3>
                   </v-col>
-                  <v-col class="ml-4" :set="change = userBalanceList[0]['data'][userBalanceList[0]['data'].length-1][1]-userBalanceList[0]['data'][0][1]">
+                  <v-col class="ml-4" :set="change = userBalanceList[0]['data'][userBalanceList[0]['data'].length-1]-userBalanceList[0]['data'][0]">
                     <h4 :class="change > 0 ? 'green-text' : 'red--text'">{{change | signint }}</h4>
                   </v-col>
                   <v-col>
@@ -220,9 +220,12 @@
                     <tr>
                       <td>
                         <v-row class="align-center">
-                          <span class="ml-4 mr-4">1</span>
-                          <v-avatar size="32">
-                            <img :src="item.profileImage" alt="" />
+                          <span class="ml-4 mr-4" v-html="(+item.sirano < 4) ? item.sirano+'*' : item.sirano+'&nbsp;&nbsp;'"></span>
+                          <v-avatar size="32" class="ml-2 mr-2" v-if="item.profileImage == ''">
+                            <img :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
+                          </v-avatar>
+                          <v-avatar size="32" class="ml-2 mr-2" v-else>
+                            <img :src="item.profileImage.indexOf('googleusercontent')>0 ? item.profileImage : ($store.state.api + '/uploads/' + item.profileImage)" alt="" />
                           </v-avatar>
                           <span>{{item.fullName | tocapitalize}}</span>
                         </v-row>
@@ -232,10 +235,10 @@
                       </td>
                       <td>
                         <v-row class="pa-0">
-                          {{item.graph}}
-                          <span class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(Object.values(item.graph)[0]+Object.values(item.graph)[1]))*200+'px;'">{{ Object.keys(item.graph)[0] }}</span>
-                          <span class="green text-center" :style="'width:'+(Object.values(item.graph)[1]/(Object.values(item.graph)[0]+Object.values(item.graph)[1]))*200+'px;'">{{ Object.keys(item.graph)[1] }}</span>
-                          <span class="grey text-center" style="width:60px;">DİĞER</span>
+                          {{Object.values(item.graph)}}
+                          <span class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] }}</span>
+                          <span class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] }}</span>
+                          <span class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined" :style="'width:'+item.graph['diger']/(item.graph['total'])+'px;'">DİĞER</span>
                         </v-row>
                       </td>
                     </tr>
@@ -294,7 +297,8 @@ export default {
       ],
       chartOptions: {
         chart: {
-          stacked: false,
+          type:"area",
+          //stacked: false,
           height: 350,
           toolbar: {
             show: false,
@@ -311,7 +315,6 @@ export default {
             },
           },
           xaxis: {
-            type: "datetime",
             tickAmount: 6,
             labels: {
               style: {
@@ -595,6 +598,7 @@ export default {
       localStorage.setItem("allprices", JSON.stringify(fetchedData));
       app.allPrices = fetchedData;
     });
+
     if (localStorage.getItem("user")) {
       this.getUserWallet();
       this.getUserAllOrders();
@@ -604,10 +608,11 @@ export default {
           id: JSON.parse(localStorage.getItem("user")).id
         })
         .then(response => {
-          console.log(Object.entries(response.data))
+          app.chartOptions.chart.xaxis.categories = Object.keys(response.data)
+
           app.userBalanceList = [
             {
-              data: Object.entries(response.data)
+              data: Object.values(response.data)
             }
           ];
         })
@@ -622,7 +627,6 @@ export default {
           for (let i = 0; i < response.data.length; i++) {
             response.data[i].graph = null;
             response.data[i].graph = setGraph(response.data[i]["wallet"],JSON.parse(localStorage.getItem("allprices")));
-            console.log(response.data[i].graph,"---------------------------------")
           }
 
           app.topUsers =  response.data;
@@ -763,7 +767,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .apexcharts-tooltip {
   background: #ff3366;
   color: #fff;

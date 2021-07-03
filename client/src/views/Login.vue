@@ -109,18 +109,20 @@ export default {
     onSuccess(googleUser) {
       // This only gets the user information: id, name, imageUrl and email
       this.overlay = true;
+      console.log(googleUser)
       let temp = googleUser.getBasicProfile();
+      console.log(temp)
       axios
         .post(`${this.$store.state.api}/register`, {
-          fullName: temp["Se"],
-          email: temp["zt"],
+          fullName: temp["Ue"],
+          email: temp["Mt"],
           passwd: "1",
-          profileImage: temp["VI"]
+          profileImage: temp["CJ"]
         })
         .then(() => {
           axios
             .post(`${this.$store.state.api}/login`, {
-              email: temp["zt"],
+              email: temp["Mt"],
               passwd: "1"
             })
             .then(response => {

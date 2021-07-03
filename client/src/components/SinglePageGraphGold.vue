@@ -472,6 +472,7 @@ export default {
           //let tempDates = [];
           let tempValues = [];
           for (let i = 0; i < fetchedData.length; i++) {
+            console.log(fetchedData[i]["createdAt"],"##########")
             tempValues.push([
               fetchedData[i]["createdAt"],
               fetchedData[i]["Satis"]
