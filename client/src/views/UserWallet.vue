@@ -49,6 +49,7 @@
                   :dark="!$store.state.isLight"
                   :light="$store.state.isLight"
                   sort-by.sync="amount"
+                  loading="true"
               >
                 <template v-slot:item="{ item }">
                   <tr>
@@ -235,9 +236,8 @@
                       </td>
                       <td>
                         <v-row class="pa-0">
-                          {{Object.values(item.graph)}}
-                          <span class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] }}</span>
-                          <span class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] }}</span>
+                          <span class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
+                          <span class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
                           <span class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined" :style="'width:'+item.graph['diger']/(item.graph['total'])+'px;'">DİĞER</span>
                         </v-row>
                       </td>

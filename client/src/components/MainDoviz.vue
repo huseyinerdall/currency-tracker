@@ -239,11 +239,11 @@ export default {
   },
   created() {
     let app = this;
-    /*if (this.$vuetify.breakpoint.smAndDown) {
+    if (this.$vuetify.breakpoint.smAndDown) {
       this.headers.pop();
       this.headers.pop();
       this.headers.pop();
-    }*/
+    }
     if (localStorage.getItem("currencies")) {
       app.data = JSON.parse(localStorage.getItem("currencies"));
       let temp = app.data[3];

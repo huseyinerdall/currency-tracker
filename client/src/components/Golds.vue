@@ -185,7 +185,7 @@ export default {
           class: app.$store.state.isLight
             ? "pinkk body-1"
             : "amber--text accent-3 body-1",
-          width: "160px"
+          width: "130px"
         },
         {
           text: "Alış",

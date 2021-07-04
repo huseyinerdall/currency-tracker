@@ -96,14 +96,14 @@
                 style="border-radius: 0;height:240px;"
               >
                 <v-row style="margin-top: 20px;">
-                  <v-col cols="3" class="pb-0 pt-0">
+                  <v-col class="pb-0 pt-0 col-md-12 col-lg-3">
                     <v-text-field
                       v-model="orderNowAmount"
                       type="number"
                       min="1"
                       :style="
                         'width:' + $vuetify.breakpoint.smAndDown
-                          ? 'auto'
+                          ? '60px'
                           : '80px'
                       "
                       style="padding: 0 16px !important;font-size: 12px;"
@@ -119,7 +119,7 @@
                       v-if="currentUnit.isMajor"
                       :style="
                         'width:' + $vuetify.breakpoint.smAndDown
-                          ? 'auto'
+                          ? '60px'
                           : '80px'
                       "
                       style="padding: 0 16px !important;font-size: 12px;"
@@ -136,7 +136,7 @@
                       v-else
                       :style="
                         'width:' + $vuetify.breakpoint.smAndDown
-                          ? 'auto'
+                          ? '60px'
                           : '80px'
                       "
                       style="padding: 0 16px !important;font-size: 12px;"
@@ -184,7 +184,7 @@
                   </v-col>
                 </v-row>
                 <div
-                  class="d-flex flex-row justify-content-end alsat"
+                  class="d-flex flex-row justify-lg-end alsat"
                   style="margin-top: 87px;"
                 >
                   <v-spacer></v-spacer>
@@ -489,13 +489,15 @@ export default {
       }
     });
 
-    axios
-      .get("https://finans.truncgil.com/today.json")
-      .then(response => {
-        app.dolar = parseFloat(response.data["USD"]["Satış"].replace(",", "."));
-        this.currentUnit.price = this.currentUnit.price * 1;
-      })
-      .catch(err => console.log(err));
+    setInterval(()=>{
+      axios
+          .get("https://finans.truncgil.com/today.json")
+          .then(response => {
+            app.dolar = parseFloat(response.data["USD"]["Satış"].replace(",", "."));
+            this.currentUnit.price = this.currentUnit.price * 1;
+          })
+          .catch(err => console.log(err));
+    },5000)
     this.currentUnit = this.data[0];
     this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(2);
     this.chooseUnit();
