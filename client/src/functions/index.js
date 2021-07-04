@@ -39,9 +39,11 @@ function setGraph(wallet,allPrices){
       balance += temp;
 
       if(parseFloat(f)<temp){
-        s = f;
+        if(f>10000){
+          s = f;
+          second = first;
+        }
         f = temp;
-        second = first;
         first = wallet[w]["shortName"];
 
       }

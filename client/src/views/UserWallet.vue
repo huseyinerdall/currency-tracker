@@ -12,7 +12,7 @@
                     <h3 class="white--text">₺{{ balanceNow | turkishCurrencyformat }}</h3>
                   </v-col>
                   <v-col class="ml-4" :set="change = userBalanceList[0]['data'][userBalanceList[0]['data'].length-1]-userBalanceList[0]['data'][0]">
-                    <h4 :class="change > 0 ? 'green-text' : 'red--text'">{{change | signint }}</h4>
+                    <h4 :class="(change >= 0) ? 'green--text' : 'red--text'">{{change | signint }}</h4>
                   </v-col>
                   <v-col>
                     <v-select
