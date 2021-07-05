@@ -34,17 +34,15 @@ function setGraph(wallet,allPrices){
   diger = 0;
   for (const w in wallet) {
     if(parseFloat(wallet[w]["amount"])>0){
-
-      temp = parseFloat(allPrices[wallet[w]["shortName"]])*parseFloat(wallet[w]["amount"]);
+      let l = allPrices[w] ? w : wallet[w]["shortName"]
+      temp = parseFloat(allPrices[w] || allPrices[wallet[w]["shortName"]])*parseFloat(wallet[w]["amount"]);
       balance += temp;
 
       if(parseFloat(f)<temp){
-        if(f>10000){
           s = f;
           second = first;
-        }
         f = temp;
-        first = wallet[w]["shortName"];
+        first = l;
 
       }
 
@@ -53,8 +51,13 @@ function setGraph(wallet,allPrices){
   }
   diger = balance - (f+s);
   result[first] = f;
-  result[second] = s;
-  result["diger"] = diger;
+  if(s<10000){
+    result[second] = 0;
+    result["diger"] = diger+s;
+  }else{
+    result[second] = s;
+    result["diger"] = diger;
+  }
   result["total"] = balance;
   return result;
 }

@@ -526,6 +526,7 @@ app.post('/setbuyorder', (req, res) => {
     console.log(apiT[req.body.wealth] , req.body.wealth)
     let wealth = apiT[req.body.wealth] || req.body.wealth;
     let amount = req.body.amount;
+    console.log(amount,":Amount");
     let major = req.body.major || "TÜRK LİRASI";
     let result = Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major);
     res.send(result);
@@ -606,7 +607,7 @@ db.sequelize.sync().then(() => {
                     temp["image"] = response.data[i]["image"];
                     temp["sparkline"] = response.data[i]["sparkline_in_7d"]["price"];
                     temp["Tür"] = "Kripto";
-                    allPrices[response.data[i]["symbol"]] = (response.data[i]["current_price"] * dolar).toFixed(2);
+                    allPrices[response.data[i]["name"]] = (response.data[i]["current_price"] * dolar).toFixed(2);
                     allImages[response.data[i]["name"]] = response.data[i]["image"];
 
                     factRes.push(temp);
@@ -732,16 +733,10 @@ db.sequelize.sync().then(() => {
                for (let i = 0; i < openOrders.length; i++) {
 
                    if(openOrders[i]["dataValues"]["OrderType"] === 'price'){
-                       console.log(parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]<0
-                           ? (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]*dolar*-1)
-                           : (allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"].toLowerCase()]||allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]])),
-                           parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")),"oooooooo",
-                           openOrders[i]["dataValues"]["CoinOrCurrency"],dolar)
+
                        if(openOrders[i]["dataValues"]["buyOrSell"] == 'buy' &&
                            (parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")) >=
                                parseFloat((allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]] || allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"].toLowerCase()])))){
-
-
 
                            Trader.buy(
                                openOrders[i]["dataValues"]["UserId"],
@@ -751,13 +746,20 @@ db.sequelize.sync().then(() => {
                                "TÜRK LİRASI",
                                openOrders[i]["dataValues"]["id"]
                            )
+                               .then((result) => {
+                                   if(result == "OK"){
+                                       io.emit('buy', {
+                                           userId: openOrders[i]["dataValues"]["UserId"],
+                                           CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                           Amount: openOrders[i]["dataValues"]["Amount"],
+                                           orderId: openOrders[i]["dataValues"]["id"]
+                                       });
+                                   }
+                                   openOrders.splice(i,1);
+                               })
+                               .catch((err)=>{
+                                   console.log(err)})
 
-                           io.emit('buy', {
-                               userId: openOrders[i]["dataValues"]["UserId"],
-                               CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
-                               Amount: openOrders[i]["dataValues"]["Amount"]
-                           });
-                           openOrders.splice(i,1);
                        }
                        else if(openOrders[i]["dataValues"]["buyOrSell"] == 'sell' &&
                            (parseFloat(openOrders[i]["dataValues"]["Parameter"].replace(",",".")) <=
@@ -772,13 +774,19 @@ db.sequelize.sync().then(() => {
                                "TÜRK LİRASI",
                                openOrders[i]["dataValues"]["id"]
                            )
-
-                           io.emit('sell', {
-                               userId: openOrders[i]["dataValues"]["UserId"],
-                               CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
-                               Amount: openOrders[i]["dataValues"]["Amount"]
-                           });
-                           openOrders.splice(i,1);
+                               .then((result) => {
+                                   if(result == "OK"){
+                                       io.emit('sell', {
+                                           userId: openOrders[i]["dataValues"]["UserId"],
+                                           CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                           Amount: openOrders[i]["dataValues"]["Amount"],
+                                           orderId: openOrders[i]["dataValues"]["id"]
+                                       });
+                                   }
+                                   openOrders.splice(i,1);
+                               })
+                               .catch((err)=>{
+                                   console.log(err)})
                        }
                    }else if(openOrders[i].dataValues.OrderType == 'time'){
 

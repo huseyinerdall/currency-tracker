@@ -472,20 +472,24 @@ export default {
     }
 
     socket.on("buy", fetchedData => {
-      if (fetchedData.userId == JSON.parse(localStorage.getItem("user")).id) {
+      let prevId = -1;
+      if (fetchedData.userId == JSON.parse(localStorage.getItem("user")).id || fetchedData.orderId != prevId) {
         this.$toasted.show(
           `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
           options
         );
+        prevId = fetchedData.orderId;
       }
     });
 
     socket.on("sell", fetchedData => {
-      if (fetchedData.userId == JSON.parse(localStorage.getItem("user")).id) {
+      let prevId = -1;
+      if (fetchedData.userId == JSON.parse(localStorage.getItem("user")).id || fetchedData.orderId != prevId) {
         this.$toasted.show(
           `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
           options
         );
+        prevId = fetchedData.orderId;
       }
     });
 
@@ -532,12 +536,13 @@ export default {
       }
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
+      console.log(this.chosen == "price" ? this.amountByPrice : this.amountByTime,":Amount");
       axios
         .post(`${this.$store.state.api}/setbuyorder`, {
           userId: JSON.parse(localStorage.getItem("user")).id,
           orderType: this.chosen,
           parameter: this.chosen == "price" ? this.price : this.time,
-          wealth: this.currentUnit["shortName"] || this.currentUnit["name"],
+          wealth: this.currentUnit["name"],
           amount:
             this.chosen == "price" ? this.amountByPrice : this.amountByTime,
           major: "TÜRK LİRASI"
@@ -569,7 +574,7 @@ export default {
           userId: JSON.parse(localStorage.getItem("user")).id,
           orderType: this.chosen,
           parameter: this.chosen == "price" ? this.price : this.time,
-          wealth: this.currentUnit["shortName"] || this.currentUnit["name"],
+          wealth: this.currentUnit["name"],
           amount:
             this.chosen == "price" ? this.amountByPrice : this.amountByTime,
           major: "TÜRK LİRASI"

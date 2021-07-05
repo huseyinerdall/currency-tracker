@@ -11,42 +11,45 @@ class Trade{
         major = "TÜRK LİRASI",
         orderId
     ){
-        let temp = {};
-        db.User.findOne({
-            where: {
-                id: userId
-            }
-        })
-            .then(async(user) =>{
-                let tradePurpose = +amount * parseFloat(wealthPrice.toString().replace(',','.'));
-                temp = await user.dataValues.wallet;
-                temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);
-                temp[wealth]["amount"] = parseFloat(amount) + temp[wealth]["amount"];
-                temp[wealth].cost = parseFloat(tradePurpose) + (parseFloat(temp[wealth].cost)||0);
-                user.wallet = temp;
-                db.User.update({
-                    wallet: temp
-                }, {
-                    where: { id: userId },
-                    returning: true,
-                    plain: true
-                })
-                    .then(function (result) {
-                        db.Order.update({
-                            Closed: 1
-                        }, {
-                            where: { id: orderId },
-                            returning: true,
-                            plain: true
-                        })
-                            .then(()=>{
-                                console.log("Order Occured!!!")})
-                            .catch(()=>{return 0;})
-                        return 1;
-                    })
-                    .catch(()=>{return 0;})
+        return new Promise((resolve,reject) => {
+            let temp = {};
+            db.User.findOne({
+                where: {
+                    id: userId
+                }
             })
-            .catch((err)=>{console.log(err);return 0;})
+                .then((user) =>{
+                    let tradePurpose = +amount * parseFloat(wealthPrice.toString().replace(',','.'));
+                    temp = user.dataValues.wallet;
+                    temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);
+                    temp[wealth]["amount"] = parseFloat(amount) + temp[wealth]["amount"];
+                    temp[wealth].cost = parseFloat(tradePurpose) + (parseFloat(temp[wealth].cost)||0);
+                    user.wallet = temp;
+                    db.User.update({
+                        wallet: temp
+                    }, {
+                        where: { id: userId },
+                        returning: true,
+                        plain: true
+                    })
+                        .then(function (result) {
+                            db.Order.update({
+                                Closed: 1
+                            }, {
+                                where: { id: orderId },
+                                returning: true,
+                                plain: true
+                            })
+                                .then(()=> {
+                                    resolve("OK");
+                                })
+                                .catch((err)=>{reject(err);})
+                            return 1;
+                        })
+                        .catch((err)=>{reject(err);})
+                })
+                .catch((err)=>{console.log(err);return 0;})
+        })
     }
 
     sell(
@@ -57,40 +60,42 @@ class Trade{
         major = "TÜRK LİRASI",
         orderId
     ){
-        let temp = null;
-        db.User.findOne({
-            where: {
-                id: userId
-            }
-        })
-            .then(async(user) =>{
-                let tradePurpose = parseFloat(amount) * parseFloat(wealthPrice);
-                temp = await user.dataValues.wallet;
-                temp["TÜRK LİRASI"].amount = parseFloat(user.dataValues.wallet["TÜRK LİRASI"].amount) + parseFloat(tradePurpose);
-                temp[wealth].amount = parseFloat(temp[wealth].amount) - parseFloat(amount);
-                temp[wealth].cost = (parseFloat(temp[wealth].cost)||0) - parseFloat(tradePurpose);
-                user.wallet = temp;
-                db.User.update({
-                    wallet: temp
-                }, {
-                    where: { id: userId },
-                    returning: true,
-                    plain: true
-                })
-                    .then(function (result) {
-                        db.Order.update({
-                            Closed: 1
-                        }, {
-                            where: { id: orderId },
-                            returning: true,
-                            plain: true
-                        })
-                            .then(()=>{
-                                console.log("Order Occured!!!")})
-                            .catch(()=>{return 0;})
-                    });
+        return new Promise((resolve,reject) => {
+            let temp = {};
+            db.User.findOne({
+                where: {
+                    id: userId
+                }
             })
-            .catch((err)=>{console.log(err)})
+                .then(async(user) =>{
+                    let tradePurpose = parseFloat(amount) * parseFloat(wealthPrice);
+                    temp = await user.dataValues.wallet;
+                    temp["TÜRK LİRASI"].amount = parseFloat(user.dataValues.wallet["TÜRK LİRASI"].amount) + parseFloat(tradePurpose);
+                    temp[wealth].amount = parseFloat(temp[wealth].amount) - parseFloat(amount);
+                    temp[wealth].cost = (parseFloat(temp[wealth].cost)||0) - parseFloat(tradePurpose);
+                    user.wallet = temp;
+                    db.User.update({
+                        wallet: temp
+                    }, {
+                        where: { id: userId },
+                        returning: true,
+                        plain: true
+                    })
+                        .then(function (result) {
+                            db.Order.update({
+                                Closed: 1
+                            }, {
+                                where: { id: orderId },
+                                returning: true,
+                                plain: true
+                            })
+                                .then(()=>{
+                                    resolve("OK");})
+                                .catch((err)=>{reject(err);})
+                        });
+                })
+                .catch((err)=>{reject(err)})
+        })
     }
 
     setBuyOrder(
