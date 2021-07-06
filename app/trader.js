@@ -280,5 +280,23 @@ class Trade{
                 console.log("Order Occured!!!")})
             .catch(()=>{return 0;})
     }
+
+    buySellNow(
+        orderId
+    ) {
+        return new Promise((resolve,reject) => {
+            db.Order.update({
+                Parameter: new Date().toString(),
+                OrderType: 'time'
+            }, {
+                where: { id: orderId },
+                returning: true,
+                plain: true
+            })
+                .then(()=>{
+                    resolve("OK");})
+                .catch((err)=>{reject(err);})
+        })
+    }
 }
 module.exports = new Trade();

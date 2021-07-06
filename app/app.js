@@ -518,6 +518,30 @@ app.post('/sellnow', (req, res) => {
     res.sendStatus(200);
 });
 
+app.post('/buysellnow', (req, res) => {
+    let orderId = req.body.orderId;
+    let buyOrSell = req.body.buyOrSell;
+    let userId = req.body.userId;
+    let wealth = req.body.coinOrCurrency;
+    let amount = req.body.amount;
+    console.log(orderId,buyOrSell,"*******-**************")
+    Trader.buySellNow(orderId)
+        .then((result) => {
+            if(result == "OK"){
+                io.emit(buyOrSell, {
+                    userId: userId,
+                    CoinOrCurrency: wealth,
+                    Amount: amount
+                });
+                res.sendStatus(200);
+            }
+        })
+        .catch((err) => {
+            console.log(err)})
+
+
+});
+
 
 app.post('/setbuyorder', (req, res) => {
     let userId = req.body.userId;

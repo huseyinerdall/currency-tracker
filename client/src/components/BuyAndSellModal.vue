@@ -608,9 +608,10 @@ export default {
         .post(`${this.$store.state.api}/buynow`, {
           userId: JSON.parse(localStorage.getItem("user")).id,
           orderType: "time",
-          parameter: this.currentUnit.isMajor
+          parameter: new Date().toString(),
+          /*parameter: this.currentUnit.isMajor
             ? this.currentUnit.price
-            : this.currentUnit.price * this.dolar,
+            : this.currentUnit.price * this.dolar,*/
           wealth: this.currentUnit["name"],
           amount: this.orderNowAmount,
           major: "TÜRK LİRASI"

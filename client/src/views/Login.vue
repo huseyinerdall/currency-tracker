@@ -111,13 +111,13 @@ export default {
       this.overlay = true;
       console.log(googleUser)
       let temp = googleUser.getBasicProfile();
-      console.log(temp)
+      console.log(temp.getEmail())
       axios
         .post(`${this.$store.state.api}/register`, {
-          fullName: temp["Ue"],
-          email: temp["Mt"],
+          fullName: temp.getName(),
+          email: temp.getEmail(),
           passwd: "1",
-          profileImage: temp["CJ"]
+          profileImage: temp.getImageUrl()
         })
         .then(() => {
           axios

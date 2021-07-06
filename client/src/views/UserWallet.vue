@@ -18,10 +18,13 @@
                     <v-select
                         style="margin-top: -10px;"
                         :items="timeOptions"
+                        item-text="text"
+                        item-value="time"
                         solo
                         dense
                         light
-                        value="Haftalık"
+                        :value="select"
+                        @change="setChart"
                     ></v-select>
                   </v-col>
                 </v-row>
@@ -134,31 +137,23 @@
                         </td>
                         <td>
                           <v-btn
-                              v-if="item.buyOrSell=='buy'"
                               min-width="0"
                               class="pa-0"
                               x-small
                               color="transparent"
-                              @click="buyOrderNow()"
+                              @click="buySellNow(
+                                item.id,
+                                item.buyOrSell,
+                                item.CoinOrCurrency,
+                                item.Amount
+                              )"
                               :disabled="item.Closed == 1"
                           >
                             <v-icon size="16" color="rgba(255,255,255,0.5)">
                               mdi-check-outline
                             </v-icon>
                           </v-btn>
-                          <v-btn
-                              v-else
-                              min-width="0"
-                              class="pa-0"
-                              x-small
-                              color="transparent"
-                              @click="sellOrderNow()"
-                              :disabled="item.Closed == 1"
-                          >
-                            <v-icon size="16" color="rgba(255,255,255,0.5)">
-                              mdi-check-outline
-                            </v-icon>
-                          </v-btn>
+
                           <v-btn
                               min-width="0"
                               class="pa-0"
@@ -235,10 +230,12 @@
                         ₺{{item.balanceNow | turkishCurrencyformat}}
                       </td>
                       <td>
+                        {{(Object.values(item.graph)[0]/(item.graph['total']))*200}}-
+                        {{(Object.values(item.graph)[1]/(item.graph['total']))*200}}
                         <v-row class="pa-0">
-                          <span class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
-                          <span class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
-                          <span class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined" :style="'width:'+item.graph['diger']/(item.graph['total'])+'px;'">DİĞER</span>
+                          <span style="font-size:10px;" class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
+                          <span style="font-size:10px;" class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
+                          <span style="font-size:10px;" class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined" :style="'width:'+item.graph['diger']/(item.graph['total'])+'px;'">DİĞER</span>
                         </v-row>
                       </td>
                     </tr>
@@ -272,7 +269,7 @@ let options = {
   duration: 1600,
   containerClass: "green accent-3 text-center",
   className: "text-center"
-};
+};/*
 let alertoptions = {
   type: "error",
   icon: "error",
@@ -281,7 +278,7 @@ let alertoptions = {
   duration: 1600,
   containerClass: "red accent-3 text-center",
   className: "text-center"
-};
+};*/
 export default {
   name: "UserWallet",
   data(app) {
@@ -292,9 +289,13 @@ export default {
           data: [1,2,3,4,56,8]
         }
       ],
-      timeOptions:[
-        'Günlük','Haftalık','Yıllık','Aylık'
+      timeOptions: [
+        { text: 'Günlük', time: 1 },
+        { text: 'Haftalık', time: 7 },
+        { text: 'Aylık', time: 30 },
+        { text: 'Yıllık', time: 999 }
       ],
+      select: { text: 'Haftalık', time: 7 },
       chartOptions: {
         chart: {
           type:"area",
@@ -699,67 +700,45 @@ export default {
             console.log(err);
           });
     },
-    buyOrderNow() {
+    buySellNow(orderId,buyOrSell,coinOrCurrency,amount) {
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
-      this.$toasted.show(`Alım emriniz alındı.`, options);
+      this.$toasted.show(buyOrSell == 'buy' ? `Alım emriniz alındı.` : `Satım emriniz alındı.`, options);
       axios
-          .post(`${this.$store.state.api}/buynow`, {
+          .post(`${this.$store.state.api}/buysellnow`, {
+            orderId: orderId,
+            buyOrSell: buyOrSell,
             userId: JSON.parse(localStorage.getItem("user")).id,
-            orderType: "time",
-            parameter: this.currentUnit.isMajor
-                ? this.currentUnit.price
-                : this.currentUnit.price * this.dolar,
-            wealth: this.currentUnit["name"],
-            amount: this.orderNowAmount,
-            major: "TÜRK LİRASI"
+            coinOrCurrency: coinOrCurrency,
+            amount: amount
           })
-          .then(response => {
+          .then(() => {
             this.emirLoaded = true;
             this.getUserWallet();
-            console.log(response.data);
           })
           .catch(err => {
             console.log(err);
           });
     },
-    sellOrderNow() {
-      if (this.orderNowAmount < 0.1) {
-        this.$toasted.show(`Miktar 0,1'den küçük olamaz.`, alertoptions);
-        return;
-      }
-      let wealth = parseFloat(
-          JSON.parse(localStorage.getItem("wallet"))[this.currentUnit["name"]][
-              "amount"
-              ]
-      );
-      if (!(wealth > this.orderNowAmount)) {
-        this.$toasted.show(
-            `Yeterli ${this.currentUnit["name"]} yok.`,
-            alertoptions
-        );
-        return;
-      }
-      //userId,orderType,parameter,wealth,amount,major
-      this.emirLoaded = false;
-      this.$toasted.show(`Satım emriniz alındı.`, options);
+    setChart(){
+      let time = (this.select.time);
       axios
-          .post(`${this.$store.state.api}/sellnow`, {
-            userId: JSON.parse(localStorage.getItem("user")).id,
-            orderType: "price",
-            parameter: this.currentUnitTLPrice,
-            wealth: this.currentUnit["name"],
-            amount: this.orderNowAmount,
-            major: "TÜRK LİRASI"
+          .post(`${this.$store.state.api}/getuserbalancelist`, {
+            id: JSON.parse(localStorage.getItem("user")).id
           })
           .then(response => {
-            this.getUserWallet();
-            console.log(response.data);
+            this.chartOptions.chart.xaxis.categories = Object.keys(response.data).slice(-1*time)
+
+            this.userBalanceList = [
+              {
+                data: Object.values(response.data).slice(-1*time)
+              }
+            ];
           })
           .catch(err => {
             console.log(err);
           });
-    },
+    }
   },
   computed: mapState({
     userwalletdialog: state => state.userwalletdialog
