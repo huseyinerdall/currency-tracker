@@ -20,11 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="end">
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/uploads/.jpg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/student-2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/assets/short-to-name.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/uploads/tempfilename.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,16 +64,17 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src\pages" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\components" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\public\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets\" />
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src\pages" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -332,6 +338,9 @@
       <workItem from="1625468897528" duration="4974000" />
       <workItem from="1625501356338" duration="5857000" />
       <workItem from="1625547229067" duration="1946000" />
+      <workItem from="1625556463310" duration="682000" />
+      <workItem from="1625589397223" duration="2530000" />
+      <workItem from="1625634127324" duration="1602000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>

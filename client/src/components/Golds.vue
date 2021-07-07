@@ -109,7 +109,7 @@
             >
               {{
                 (parseFloat(item["Satış"].replace('$','').replace('.','').replace(',','.')) - parseFloat(item.close.replace('$','').replace('.','').replace(',','.'))) | signint
-              }}%
+              }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
@@ -129,7 +129,7 @@
                   parseFloat(item.close.replace('$','').replace('.','').replace(',','.'))) *
                   100)
                   | signint
-              }}
+              }}%
             </span>
           </td>
           <td
@@ -206,7 +206,7 @@ export default {
             : "amber--text accent-3 body-1"
         },
         {
-          text: "Yüzde",
+          text: "Fark",
           value: "Yuzde",
           sortable: false,
           align: "start",
@@ -215,7 +215,7 @@ export default {
             : "amber--text accent-3 body-1"
         },
         {
-          text: "Fark",
+          text: "Yüzde",
           value: "Fark",
           sortable: false,
           align: "start",

@@ -110,7 +110,7 @@
                 (parseFloat(item["Satış"].replace(",", ".")) -
                   parseFloat(item.close.replace(",", ".")))
                   | signint
-              }}%
+              }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
@@ -129,7 +129,7 @@
                   parseFloat(item.close.replace(",", "."))) *
                   100)
                   | signint
-              }}
+              }}%
             </span>
           </td>
           <td

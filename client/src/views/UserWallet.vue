@@ -57,10 +57,11 @@
                 <template v-slot:item="{ item }">
                   <tr>
                     <td>
+                      {{item}}
                       {{item.shortName | uppercase}}
                     </td>
                     <td>
-                      {{(allPrices[item.shortName] || allPrices[shortNames[item.shortName]]) | turkishCurrencyformat }}
+                      {{(allPrices[item.shortName] || allPrices[shortToName[item.shortName]]) | turkishCurrencyformat }}
                     </td>
                     <td>
                       {{item.amount | tofixedftwo}}
@@ -69,17 +70,17 @@
                       <div v-if="item.shortName != 'TRY'">
                         <span
                             :class="[
-                            (parseFloat((allPrices[item.shortName] || allPrices[shortNames[item.shortName]])*item.amount)-parseFloat(item.cost)) >= 0
+                            (parseFloat((allPrices[item.shortName] || allPrices[shortToName[item.shortName]])*item.amount)-parseFloat(item.cost)) >= 0
                               ? 'green--text'
                               : 'red--text'
                           ]">
-                          {{(parseFloat((allPrices[item.shortName] || allPrices[shortNames[item.shortName]])*item.amount)-parseFloat(item.cost)) | signint}}
+                          {{(parseFloat((allPrices[item.shortName] || allPrices[shortToName[item.shortName]])*item.amount)-parseFloat(item.cost)) | signint}}
                         </span>
                       </div>
                       <div v-else>-</div>
                     </td>
                     <td>
-                      {{ ((allPrices[item.shortName] || allPrices[shortNames[item.shortName]])*item.amount) | turkishCurrencyformat}}
+                      {{ ((allPrices[item.shortName] || allPrices[shortToName[item.shortName]])*item.amount) | turkishCurrencyformat}}
                     </td>
                   </tr>
                 </template>
@@ -261,6 +262,7 @@ import {mapState} from "vuex";
 import { setGraph } from "@/functions";
 import shortNames from "@/assets/shortname-convert";
 import allImages from "@/assets/allimages";
+import shortToName from "@/assets/short-to-name.json";
 let options = {
   type: "success",
   icon: "check",
@@ -586,7 +588,8 @@ export default {
       topUsers: [],
       allPrices: [],
       shortNames: shortNames,
-      allImages: allImages
+      allImages: allImages,
+      shortToName: shortToName
     };
   },
   created() {
@@ -662,7 +665,7 @@ export default {
       let balance = 0;
       for (const key in wallet) {
         if(wallet[key]["amount"]>0){
-          balance += (wallet[key]["amount"]*allPrices[wallet[key]["shortName"]]) || 0;
+          balance += (wallet[key]["amount"]*allPrices[shortToName[wallet[key]["shortName"]]]) || 0;
         }
       }
       return balance;

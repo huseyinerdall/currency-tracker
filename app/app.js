@@ -471,16 +471,10 @@ app.post('/buynow', (req, res) => {
     let wealth = req.body.wealth;
     let amount = req.body.amount;
     let major = req.body.major || "TÜRK LİRASI";
+    console.log(userId,orderType,parameter,wealth,amount,major);
     Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major,1)
         .then((orderId)=>{
-            Trader.buy(
-                userId,
-                wealth,
-                parameter,
-                amount,
-                "TÜRK LİRASI",
-                orderId
-            )
+            console.log(orderId)
         })
 
     io.emit('buy', {
@@ -609,6 +603,7 @@ db.sequelize.sync().then(() => {
     let currencies = [];
     let dolar = 1;
     allPrices["TRY"] = 1;
+    let ters = {};
     setInterval(() => {
         factRes30 = [];
         factRes = [];
@@ -631,6 +626,7 @@ db.sequelize.sync().then(() => {
                     temp["image"] = response.data[i]["image"];
                     temp["sparkline"] = response.data[i]["sparkline_in_7d"]["price"];
                     temp["Tür"] = "Kripto";
+                    ters[response.data[i]["symbol"]] = response.data[i]["name"];
                     allPrices[response.data[i]["name"]] = (response.data[i]["current_price"] * dolar).toFixed(2);
                     allImages[response.data[i]["name"]] = response.data[i]["image"];
 
@@ -734,7 +730,8 @@ db.sequelize.sync().then(() => {
         // bburada açık emirlerin hepsi alınacak ve gerekli condition sağlanıyorsa işlem gerçekleştirilecek
 
         UserWallet.saveUsersBalanceDaily(allPrices);
-
+        let data = JSON.stringify(ters);
+        fs.writeFileSync('student-2.json', data);
     }, MAINLOOPINTERVAL)
 
     setInterval(() => {

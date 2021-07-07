@@ -132,6 +132,7 @@
                       @input="calculateSum"
                     >
                     </v-text-field>
+
                     <v-text-field
                       v-else
                       :style="
