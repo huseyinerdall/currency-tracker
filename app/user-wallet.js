@@ -1,5 +1,6 @@
 const db = require("./models");
 const Op = db.Sequelize.Op;
+const shortToName = require("./static/short-to-name")
 
 
 class UserWallet{
@@ -24,7 +25,7 @@ class UserWallet{
         let balance = 0;
         for (const key in wallet) {
             if(wallet[key]["amount"]>0){
-                balance += (wallet[key]["amount"]*allPrices[wallet[key]["shortName"]]) || 0;
+                balance += (wallet[key]["amount"]*allPrices[shortToName[wallet[key]["shortName"]]]) || 0;
             }
         }
         return balance;

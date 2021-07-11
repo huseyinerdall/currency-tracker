@@ -20,17 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="end">
-      <change afterPath="$PROJECT_DIR$/app/public/uploads/.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/uploads/.jpg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/student-2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/short-to-name.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/short-to-name.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/tempfilename.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/student-2.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/student-2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user-wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,7 +338,13 @@
       <workItem from="1625547229067" duration="1946000" />
       <workItem from="1625556463310" duration="682000" />
       <workItem from="1625589397223" duration="2530000" />
-      <workItem from="1625634127324" duration="1602000" />
+      <workItem from="1625634127324" duration="1940000" />
+      <workItem from="1625652976365" duration="512000" />
+      <workItem from="1625687143525" duration="1688000" />
+      <workItem from="1625902029770" duration="597000" />
+      <workItem from="1625941509088" duration="657000" />
+      <workItem from="1625989587279" duration="5537000" />
+      <workItem from="1626000946652" duration="4998000" />
     </task>
     <task id="LOCAL-00001" summary="Second Stage">
       <created>1607013014477</created>
@@ -671,7 +675,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625462348277</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="end">
+      <created>1625636119415</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1625636119415</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

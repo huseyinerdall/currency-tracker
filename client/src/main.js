@@ -10,17 +10,39 @@ import VueApexCharts from "vue-apexcharts";
 import DatetimePicker from "vuetify-datetime-picker";
 import currencies from "./assets/currencies";
 import Toasted from "vue-toasted";
+import VueAuthenticate from 'vue-authenticate';
 Vue.use(VueMeta, {
   // optional pluginOptions
   refreshOnceOnNavigation: true
 });
 Vue.use(VueApexCharts);
 Vue.use(DatetimePicker);
+
+Vue.use(VueAuthenticate, {
+  baseUrl: 'http://localhost:4000', // Your API domain
+
+  providers: {
+    facebook: {
+      clientId:"543577080115436",
+      name: 'facebook',
+      url: '/auth/facebook',
+      authorizationEndpoint: 'https://www.facebook.com/v10.0/dialog/oauth',
+      redirectUri: "http://localhost:8080/",
+      requiredUrlParams: ['display', 'scope'],
+      scope: ['email'],
+      scopeDelimiter: ',',
+      display: 'popup',
+      oauthType: '2.0',
+      popupOptions: { width: 580, height: 400 },
+    },
+  }
+})
 Vue.component("apexchart", VueApexCharts);
 Vue.config.productionTip = false;
 //axios.defaults.baseConfig = "http://localhost:4000/";
 Vue.use(VueAxios, axios);
 Vue.use(Toasted);
+
 //for server
 Vue.prototype.$addr = "http://localhost";
 Vue.prototype.$port = "4000";

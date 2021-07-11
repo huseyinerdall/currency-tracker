@@ -19,40 +19,47 @@
             v-model="password"
           ></v-text-field>
           <v-row>
-            <v-col cols="3">
-              <v-btn color="blue-grey" class="white--text" @click="login" tile>
-                GİRİŞ
-                <v-icon right dark>
-                  mdi-login
-                </v-icon>
-              </v-btn>
-            </v-col>
-            <v-col cols="5">
-              <GoogleLogin :params="params" :onSuccess="onSuccess">
-                <v-btn color="red darken-1" class="white--text" tile>
-                  Google ile
+              <v-col class="pl-6 row justify-space-between">
+                <v-btn color="blue-grey" class="white--text" @click="login" tile>
+                  GİRİŞ
                   <v-icon right dark>
-                    mdi-google
+                    mdi-login
                   </v-icon>
                 </v-btn>
-              </GoogleLogin>
-            </v-col>
-            <v-col cols="4">
-              <v-btn
-                color="blue-grey"
-                style="text-decoration: none;"
-                class="white--text"
-                href="/register"
-                tile
-              >
-                KAYDOL
-                <v-icon right dark>
-                  mdi-login
-                </v-icon>
-              </v-btn>
-            </v-col>
+                <v-btn
+                    color="blue-grey"
+                    style="text-decoration: none;"
+                    class="white--text"
+                    href="/register"
+                    tile
+                >
+                  KAYDOL
+                  <v-icon right dark>
+                    mdi-login
+                  </v-icon>
+                </v-btn>
+              </v-col>
           </v-row>
+          <GoogleLogin :params="params" :onSuccess="onSuccess">
+            <v-btn color="red darken-1" class="white--text" tile block width="460">
+              Google İle
+              <v-icon right dark>
+                mdi-google
+              </v-icon>
+            </v-btn>
+          </GoogleLogin>
+          <v-btn
+              color="#3b5998"
+              class="white--text mt-2"
+              block tile
+              @click="authenticate('facebook')">
+            Facebook İLE
+            <v-icon right dark>
+              mdi-facebook
+            </v-icon>
+          </v-btn>
         </v-col>
+
       </v-row>
     </v-container>
     <v-overlay
@@ -90,14 +97,14 @@ export default {
       },
       // only needed if you want to render the button with the google ui
       renderParams: {
-        width: 250,
-        height: 50,
+        width: 460,
+        height: 38,
         longtitle: true
-      }
+      },
     };
   },
   components: {
-    GoogleLogin
+    GoogleLogin,
   },
   methods: {
     googlelogin() {
@@ -199,6 +206,11 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    authenticate: function (provider) {
+      this.$auth.authenticate(provider).then(function () {
+        // Execute application logic after successful social authentication
+      })
     }
   }
 };
