@@ -27,13 +27,11 @@ Vue.use(VueAuthenticate, {
       name: 'facebook',
       url: '/auth/facebook',
       authorizationEndpoint: 'https://www.facebook.com/v10.0/dialog/oauth',
-      redirectUri: "http://localhost:8080/",
+      redirectUri: "https://para.guru/",
       requiredUrlParams: ['display', 'scope'],
       scope: ['email'],
       scopeDelimiter: ',',
-      display: 'popup',
-      oauthType: '2.0',
-      popupOptions: { width: 580, height: 400 },
+      responseType: 'token',
     },
   }
 })

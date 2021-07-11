@@ -59,7 +59,6 @@
             </v-icon>
           </v-btn>
         </v-col>
-
       </v-row>
     </v-container>
     <v-overlay
@@ -116,9 +115,7 @@ export default {
     onSuccess(googleUser) {
       // This only gets the user information: id, name, imageUrl and email
       this.overlay = true;
-      console.log(googleUser)
       let temp = googleUser.getBasicProfile();
-      console.log(temp.getEmail())
       axios
         .post(`${this.$store.state.api}/register`, {
           fullName: temp.getName(),
@@ -208,8 +205,66 @@ export default {
         });
     },
     authenticate: function (provider) {
+      this.overlay = true;
+      const app = this;
       this.$auth.authenticate(provider).then(function () {
         // Execute application logic after successful social authentication
+        let token = app.$auth.getToken()
+        if (provider === 'facebook') {
+          app.$http.get('https://graph.facebook.com/v3.0/me?fields=id,name,email,picture', {
+            params: { access_token: token }
+          }).then(function (response) {
+            app.profile = response;
+            axios
+                .post(`${this.$store.state.api}/register`, {
+                  fullName: response.data.name,
+                  email: response.data.email,
+                  passwd: "1",
+                  profileImage: response.data.picture.data.url
+                })
+                .then(() => {
+                  axios
+                      .post(`${this.$store.state.api}/login`, {
+                        email: response.data.email,
+                        passwd: "1"
+                      })
+                      .then(response => {
+                        if (response.data == "ERROR") {
+                          alert("Kullanıcı bulunamadı");
+                          return;
+                        } else {
+                          localStorage.setItem(
+                              "user",
+                              JSON.stringify(response.data.user)
+                          );
+                          localStorage.setItem(
+                              "wallet",
+                              JSON.stringify(
+                                  JSON.parse(localStorage.getItem("user")).wallet
+                              )
+                          );
+                          localStorage.setItem("jwt", response.data.token);
+                          this.overlay = false;
+                          this.$store.commit("login", true);
+                        }
+
+                        if (localStorage.getItem("jwt") != null) {
+                          this.$emit("loggedIn");
+                          if (this.$route.params.nextUrl != null) {
+                            this.$router.push(this.$route.params.nextUrl);
+                          } else {
+                            this.$router.push({
+                              name: "Home"
+                            });
+                          }
+                        }
+                      })
+                      .catch(err => {
+                        console.log(err);
+                      });
+                });
+          })
+        }
       })
     }
   }
