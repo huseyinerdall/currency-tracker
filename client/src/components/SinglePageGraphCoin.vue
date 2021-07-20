@@ -294,7 +294,7 @@ export default {
             month: "MMM 'yy",
             day: "dd MMM",
             hour: "HH:mm"
-          }
+          },
         },
         axisTicks: {
           color: app.$store.state.isLight ? "#000" : "#ffffff"

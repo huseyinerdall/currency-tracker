@@ -3,7 +3,6 @@
     <div>
       <v-row>
         <v-col class="col-md-12">
-
           <v-row>
             <v-col cols="12" md="6">
               <div style="border: 1px solid #ddd;border-radius:6px;">
@@ -16,7 +15,7 @@
                   </v-col>
                   <v-col>
                     <v-select
-                        style="margin-top: -10px;"
+                        style="margin-top: -10px;font-size:11px;"
                         :items="timeOptions"
                         item-text="text"
                         item-value="time"
@@ -57,7 +56,6 @@
                 <template v-slot:item="{ item }">
                   <tr>
                     <td>
-                      {{item}}
                       {{item.shortName | uppercase}}
                     </td>
                     <td>
@@ -110,10 +108,10 @@
                   >
                     <template v-slot:item="{ item }">
                       <tr>
-                        <td v-if="!$vuetify.breakpoint.smAndDown"
+                        <td style="font-size: 10px;"
                             :class="{ 'black--text': $store.state.isLight }">
                           <v-row class="align-center">
-                            <v-avatar size="32" class="ml-2 mr-2">
+                            <v-avatar size="28" class="ml-2 mr-2">
                               <img :src="allImages[item.CoinOrCurrency] || $store.state.api + '/gold.png'" alt="" />
                             </v-avatar>
                             <div class="d-flex flex-column">
@@ -123,13 +121,13 @@
                             </div>
                           </v-row>
                         </td>
-                        <td :class="{ 'black--text': $store.state.isLight }">
+                        <td :class="{ 'black--text': $store.state.isLight }" style="font-size: 10px;">
                           <div>
                             {{item.buyOrSell=='buy' ? '+' : '-'}}
                             {{item.Amount}}
                           </div>
                         </td>
-                        <td>
+                        <td style="font-size: 11px;">
                           <div class="d-flex flex-column">
                             <span v-text="item.OrderType == 'time' ? 'Tarihe Göre' : 'Fiyata Göre'"></span>
                             <span style="font-size: 11px;" v-if="item.OrderType == 'time'">{{ (item.Parameter.indexOf('z') > 0 ? new Date(item.Parameter).toLocaleString('tr') : new Date(item.createdAt).toLocaleDateString() )}}</span>
@@ -179,7 +177,7 @@
                             </v-icon>
                           </v-btn>
                         </td>
-                        <td>
+                        <td style="font-size: 11px;">
                           <div v-if="item.Closed == 1">
                             <span class="green--text">GERÇEKLEŞTİ</span>
                           </div>
@@ -190,7 +188,7 @@
                             <span class="red--text">BEKLİYOR</span>
                           </div>
                         </td>
-                        <td>
+                        <td style="font-size: 11px;">
                           <div class="text-right">
                             {{item.createdAt | dateStandartFormat}}
                           </div>
@@ -218,7 +216,7 @@
                       <td>
                         <v-row class="align-center">
                           <span class="ml-4 mr-4" v-html="(+item.sirano < 4) ? item.sirano+'*' : item.sirano+'&nbsp;&nbsp;'"></span>
-                          <v-avatar size="32" class="ml-2 mr-2" v-if="item.profileImage == ''">
+                          <v-avatar size="32" class="ml-2 mr-2" v-if="item.profileImage == '' || item.profileImage.length == 4">
                             <img :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
                           </v-avatar>
                           <v-avatar size="32" class="ml-2 mr-2" v-else>
@@ -299,6 +297,197 @@ export default {
       ],
       select: { text: 'Haftalık', time: 7 },
       chartOptions: {
+        chart: {
+          type: "area",
+          stacked: false,
+          height: 350,
+          zoom: {
+            type: "x",
+            enabled: true,
+            autoScaleYaxis: true
+          },
+          toolbar: {
+            show: false,
+            offsetX: 0,
+            offsetY: 0,
+            tools: {
+              download: false,
+              selection: false,
+              zoom: false,
+              zoomin: false,
+              zoomout: false,
+              pan: false,
+              reset: false
+            },
+            autoSelected: "zoom"
+          },
+          locales: [
+            {
+              name: "en",
+              options: {
+                months: [
+                  "Ocak",
+                  "Şubat",
+                  "Mart",
+                  "Nisan",
+                  "Mayıs",
+                  "Haziran",
+                  "Temmuz",
+                  "Ağustos",
+                  "Eylül",
+                  "Ekim",
+                  "Kasım",
+                  "Aralık"
+                ],
+                shortMonths: [
+                  "Oca",
+                  "Şub",
+                  "Mar",
+                  "Nis",
+                  "May",
+                  "Haz",
+                  "Tem",
+                  "Agu",
+                  "Eyl",
+                  "Eki",
+                  "Kas",
+                  "Ara"
+                ],
+                days: [
+                  "Pazar",
+                  "Pazartesi",
+                  "Salı",
+                  "Çarşamba",
+                  "Perşembe",
+                  "Cuma",
+                  "Cumartesi"
+                ],
+                shortDays: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"]
+              }
+            }
+          ]
+        },
+        stroke: {
+          width: 2,
+          colors:['#ff3064'],
+          curve: 'smooth',
+        },
+        dataLabels: {
+          enabled: false
+        },
+        markers: {
+          size: 6,
+          colors: ['#ff3064'],
+          strokeColors: '#fff',
+          strokeWidth: 1,
+          strokeOpacity: 0.9,
+          strokeDashArray: 0,
+          fillOpacity: 1,
+          discrete: [],
+          shape: "circle",
+          radius: 2,
+          offsetX: 0,
+          offsetY: 0,
+          onClick: undefined,
+          onDblClick: undefined,
+          showNullDataPoints: true,
+          hover: {
+            size: undefined,
+            sizeOffset: 3
+          }
+        },
+        title: {
+          align: "left"
+        },
+        yaxis: {
+          labels: {
+            style: {
+              colors: app.$store.state.isLight ? "#000" : "#ffffff"
+            }
+          },
+          axisTicks: {
+            show: false,
+            color: app.$store.state.isLight ? "#000" : "#ffffff",
+            width: 0
+          },
+          axisBorder: {
+            color: app.$store.state.isLight ? "#000" : "#ffffff"
+          }
+        },
+        xaxis: {
+          type: "datetime",
+          tickAmount: 6,
+          labels: {
+            style: {
+              colors: app.$store.state.isLight ? "#000" : "#ffffff"
+            },
+            datetimeFormatter: {
+              year: "yyyy",
+              month: "MMM 'yy",
+              day: "dddd",
+              hour: ""
+            },
+            datetimeUTC: false
+          },
+          axisTicks: {
+            color: app.$store.state.isLight ? "#000" : "#ffffff"
+          },
+          axisBorder: {
+            color: app.$store.state.isLight ? "#000" : "#ffffff"
+          }
+        },
+        tooltip: {
+          shared: true,
+          y: {
+            formatter: function(val) {
+              return val + " $";
+            }
+          },
+          x: {
+            format: "dd MMM yyyy HH:mm:ss",
+            formatter: function(val) {
+              return new Date(val).toLocaleDateString();
+            }
+          },
+          custom: function({series, seriesIndex, dataPointIndex,w}) {
+            return '<div class="arrow_box tooltipp">' +
+                '<span style="font-weight: 600;">' + '₺' + series[seriesIndex][dataPointIndex] + '</span><br>' +
+                '<span style="font-size: 14px;">' + new Date(w.globals.labels[dataPointIndex]).toLocaleDateString() + '</span>' +
+                '</div>'
+          },
+        },
+        grid: {
+          show: true,
+          borderColor: 'rgba(255,255,255,.4)',
+          strokeDashArray: 1,
+          position: 'back',
+          xaxis: {
+            lines: {
+              show: true
+            }
+          },
+          yaxis: {
+            lines: {
+              show: true
+            }
+          },
+          row: {
+            colors: undefined,
+            opacity: 0.5
+          },
+          column: {
+            colors: undefined,
+            opacity: 0.5
+          },
+          padding: {
+            top: 0,
+            right: 20,
+            bottom: 0,
+            left: 20
+          },
+        }
+      },
+      /*chartOptions: {
         chart: {
           type:"area",
           //stacked: false,
@@ -448,7 +637,7 @@ export default {
           borderColor: '#eee',
           strokeDashArray: 1,
         }
-      },
+      },*/
       data: [],
       allUnits: [],
       menu: false,
@@ -462,19 +651,19 @@ export default {
           text: "EMİRLERİM",
           sortable: false,
           value: "CoinOrCurrency",
-          width: "140px",
+          width: "104px",
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "MİKTAR",
           value: "Parameter",
           sortable: false,
-          width: "40px",
+          width: "32px",
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption text-center",
         },
         {
           text: "TİP",
@@ -482,8 +671,8 @@ export default {
           sortable: false,
           width: "120px",
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "",
@@ -491,8 +680,8 @@ export default {
           sortable: false,
           width: "80px",
           class: this.$store.state.isLight
-              ? "pinkk body-2"
-              : "amber--text accent-3 body-2",
+              ? "pinkk caption"
+              : "amber--text accent-3 caption",
         },
         {
           text: "DURUM",
@@ -500,16 +689,16 @@ export default {
           sortable: false,
           width: "50px",
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "TARİH/SAAT",
           value: "createdAt",
           sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
           align: "end"
         }
       ],
@@ -520,40 +709,40 @@ export default {
           sortable: false,
           value: "shortName",
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "FİYAT",
           value: "amount",
           sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "MİKTAR",
           value: "amount",
-          sortable: true,
+          sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "KAR/ZARAR",
           value: "amount",
           sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "TOPLAM",
           value: "amount",
           sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         }
       ],
       walletLoaded: false,
@@ -565,24 +754,24 @@ export default {
           sortable: false,
           value: "fullName",
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "BAKİYE",
           value: "balanceNow",
           sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         },
         {
           text: "PORTFÖY",
           value: "graph",
           sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk body-2"
-            : "amber--text accent-3 body-2",
+            ? "pinkk caption"
+            : "amber--text accent-3 caption",
         }
       ],
       topUsers: [],
@@ -593,10 +782,33 @@ export default {
     };
   },
   created() {
+    if (this.$vuetify.breakpoint.smAndDown) {
+      this.chartOptions.responsive = [
+        {
+          breakpoint: 768,
+          options: {
+            xaxis: {
+              axisTicks: {
+                show: false,
+                color: "#ff0000"
+              },
+              labels: {
+                show: false
+              }
+            },
+            yaxis: {
+              axisTicks: {
+                show: false
+              },
+              labels: {
+                show: false
+              }
+            }
+          }
+        }
+      ];
+    }
     let app = this;
-    axios.get("https://finans.truncgil.com/today.json").then(response => {
-      app.dolar = parseFloat(response.data["USD"]["Satış"]);
-    });
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("allprices", fetchedData => {
       localStorage.setItem("allprices", JSON.stringify(fetchedData));
@@ -612,11 +824,23 @@ export default {
           id: JSON.parse(localStorage.getItem("user")).id
         })
         .then(response => {
-          app.chartOptions.chart.xaxis.categories = Object.keys(response.data)
-
+          /*app.chartOptions.chart.xaxis.categories = Object.keys(response.data)*/
+          app.balanceNow = response.data[new Date(new Date().toDateString())]
           app.userBalanceList = [
             {
               data: Object.values(response.data)
+            }
+          ];
+          let tempValues = [];
+          for (const key in response.data) {
+            tempValues.push([
+              key,
+              response.data[key]
+            ]);
+          }
+          this.userBalanceList = [
+            {
+              data: tempValues
             }
           ];
         })
@@ -646,6 +870,7 @@ export default {
           })
           .then(response => {
             let allPrices = JSON.parse(localStorage.getItem("allprices"));
+            localStorage.setItem("wallet", JSON.stringify(response.data));
             let data = Object.values(response.data);
             let temp = [];
             for (let i = 0; i < data.length; i++) {
@@ -654,7 +879,7 @@ export default {
               }
             }
             this.data = temp;
-            this.balanceNow = this.calculateBalance(JSON.parse(localStorage.getItem("wallet")),JSON.parse(localStorage.getItem("allprices")));
+            //this.balanceNow = this.calculateBalance(JSON.parse(localStorage.getItem("wallet")),JSON.parse(localStorage.getItem("allprices")));
             Object(allPrices);
           })
           .catch(err => {
@@ -665,7 +890,7 @@ export default {
       let balance = 0;
       for (const key in wallet) {
         if(wallet[key]["amount"]>0){
-          balance += (wallet[key]["amount"]*allPrices[shortToName[wallet[key]["shortName"]]]) || 0;
+          balance += (wallet[key]["amount"]*allPrices[wallet[key]]) || 0;
         }
       }
       return balance;
@@ -749,10 +974,36 @@ export default {
 };
 </script>
 
-<style scoped>
-.apexcharts-tooltip {
+<style>
+.tooltipp {
+  padding: 0px 20px;
   background: #ff3366;
+  color: #FFFFFF;
+  border-radius: 9px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+}
+
+
+/* tooltip  after*/
+/*.tooltipp::after {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 12px 12.5px 0 12.5px;
+  border-color: #ff3366 transparent transparent transparent;
+  position: absolute;
+  top: 47px;
+  left: 40%;
+
+}*/
+.apexcharts-tooltip {
+  background: transparent !important;
   color: #fff;
+  overflow: visible !important;
+  border: none !important;
 }
 .apexcharts-tooltip-series-group.apexcharts-active{
   background-color: #ff3366 !important;
@@ -879,4 +1130,5 @@ h3 {
   background: transparent !important;
   color: #fff !important;
 }
+
 </style>

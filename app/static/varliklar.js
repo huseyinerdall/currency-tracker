@@ -1,1147 +1,1433 @@
 module.exports =
     {
-          "Bitcoin": {
-                "shortName": "btc",
-                "amount": 0
-          },
-          "Ethereum": {
-                "shortName": "eth",
-                "amount": 0
-          },
-          "Cardano": {
-                "shortName": "ada",
-                "amount": 0
-          },
-          "Binance Coin": {
-                "shortName": "bnb",
-                "amount": 0
-          },
-          "Tether": {
-                "shortName": "usdt",
-                "amount": 0
-          },
-          "Polkadot": {
-                "shortName": "dot",
-                "amount": 0
-          },
-          "XRP": {
-                "shortName": "xrp",
-                "amount": 0
-          },
-          "Chainlink": {
-                "shortName": "link",
-                "amount": 0
-          },
-          "Litecoin": {
-                "shortName": "ltc",
-                "amount": 0
-          },
-          "Stellar": {
-                "shortName": "xlm",
-                "amount": 0
-          },
-          "Bitcoin Cash": {
-                "shortName": "bch",
-                "amount": 0
-          },
-          "USD Coin": {
-                "shortName": "usdc",
-                "amount": 0
-          },
-          "Uniswap": {
-                "shortName": "uni",
-                "amount": 0
-          },
-          "Dogecoin": {
-                "shortName": "doge",
-                "amount": 0
-          },
-          "NEM": {
-                "shortName": "xem",
-                "amount": 0
-          },
-          "Wrapped Bitcoin": {
-                "shortName": "wbtc",
-                "amount": 0
-          },
-          "Aave": {
-                "shortName": "aave",
-                "amount": 0
-          },
-          "Cosmos": {
-                "shortName": "atom",
-                "amount": 0
-          },
-          "OKB": {
-                "shortName": "okb",
-                "amount": 0
-          },
-          "Monero": {
-                "shortName": "xmr",
-                "amount": 0
-          },
-          "Solana": {
-                "shortName": "sol",
-                "amount": 0
-          },
-          "Crypto.com Coin": {
-                "shortName": "cro",
-                "amount": 0
-          },
-          "Theta Network": {
-                "shortName": "theta",
-                "amount": 0
-          },
-          "EOS": {
-                "shortName": "eos",
-                "amount": 0
-          },
-          "Bitcoin SV": {
-                "shortName": "bsv",
-                "amount": 0
-          },
-          "TRON": {
-                "shortName": "trx",
-                "amount": 0
-          },
-          "IOTA": {
-                "shortName": "miota",
-                "amount": 0
-          },
-          "Synthetix Network Token": {
-                "shortName": "snx",
-                "amount": 0
-          },
-          "VeChain": {
-                "shortName": "vet",
-                "amount": 0
-          },
-          "Tezos": {
-                "shortName": "xtz",
-                "amount": 0
-          },
-          "Binance USD": {
-                "shortName": "busd",
-                "amount": 0
-          },
-          "FTX Token": {
-                "shortName": "ftt",
-                "amount": 0
-          },
-          "NEO": {
-                "shortName": "neo",
-                "amount": 0
-          },
-          "Huobi Token": {
-                "shortName": "ht",
-                "amount": 0
-          },
-          "cDAI": {
-                "shortName": "cdai",
-                "amount": 0
-          },
-          "Terra": {
-                "shortName": "luna",
-                "amount": 0
-          },
-          "Elrond": {
-                "shortName": "egld",
-                "amount": 0
-          },
-          "Dai": {
-                "shortName": "dai",
-                "amount": 0
-          },
-          "Sushi": {
-                "shortName": "sushi",
-                "amount": 0
-          },
-          "The Graph": {
-                "shortName": "grt",
-                "amount": 0
-          },
-          "Compound": {
-                "shortName": "comp",
-                "amount": 0
-          },
-          "Dash": {
-                "shortName": "dash",
-                "amount": 0
-          },
-          "Filecoin": {
-                "shortName": "fil",
-                "amount": 0
-          },
-          "Avalanche": {
-                "shortName": "AVAX",
-                "amount": 0
-          },
-          "LEO Token": {
-                "shortName": "leo",
-                "amount": 0
-          },
-          "Kusama": {
-                "shortName": "ksm",
-                "amount": 0
-          },
-          "Maker": {
-                "shortName": "mkr",
-                "amount": 0
-          },
-          "cUSDC": {
-                "shortName": "cusdc",
-                "amount": 0
-          },
-          "Decred": {
-                "shortName": "dcr",
-                "amount": 0
-          },
-          "cETH": {
-                "shortName": "ceth",
-                "amount": 0
-          },
-          "Celsius Network": {
-                "shortName": "cel",
-                "amount": 0
-          },
-          "PancakeSwap": {
-                "shortName": "cake",
-                "amount": 0
-          },
-          "Voyager Token": {
-                "shortName": "vgx",
-                "amount": 0
-          },
-          "xSUSHI": {
-                "shortName": "xsushi",
-                "amount": 0
-          },
-          "Ravencoin": {
-                "shortName": "rvn",
-                "amount": 0
-          },
-          "Zilliqa": {
-                "shortName": "zil",
-                "amount": 0
-          },
-          "Fantom": {
-                "shortName": "ftm",
-                "amount": 0
-          },
-          "Zcash": {
-                "shortName": "zec",
-                "amount": 0
-          },
-          "Ethereum Classic": {
-                "shortName": "etc",
-                "amount": 0
-          },
-          "Near": {
-                "shortName": "near",
-                "amount": 0
-          },
-          "NEXO": {
-                "shortName": "nexo",
-                "amount": 0
-          },
-          "yearn.finance": {
-                "shortName": "yfi",
-                "amount": 0
-          },
-          "THORChain": {
-                "shortName": "rune",
-                "amount": 0
-          },
-          "UMA": {
-                "shortName": "uma",
-                "amount": 0
-          },
-          "Huobi BTC": {
-                "shortName": "hbtc",
-                "amount": 0
-          },
-          "Polygon": {
-                "shortName": "matic",
-                "amount": 0
-          },
-          "Stacks": {
-                "shortName": "stx",
-                "amount": 0
-          },
-          "Paxos Standard": {
-                "shortName": "pax",
-                "amount": 0
-          },
-          "0x": {
-                "shortName": "zrx",
-                "amount": 0
-          },
-          "ICON": {
-                "shortName": "icx",
-                "amount": 0
-          },
-          "REN": {
-                "shortName": "ren",
-                "amount": 0
-          },
-          "Waves": {
-                "shortName": "waves",
-                "amount": 0
-          },
-          "Hedera Hashgraph": {
-                "shortName": "hbar",
-                "amount": 0
-          },
-          "Amp": {
-                "shortName": "amp",
-                "amount": 0
-          },
-          "HUSD": {
-                "shortName": "husd",
-                "amount": 0
-          },
-          "Algorand": {
-                "shortName": "algo",
-                "amount": 0
-          },
-          "SwissBorg": {
-                "shortName": "chsb",
-                "amount": 0
-          },
-          "Basic Attention Token": {
-                "shortName": "bat",
-                "amount": 0
-          },
-          "renBTC": {
-                "shortName": "renbtc",
-                "amount": 0
-          },
-          "BitTorrent": {
-                "shortName": "btt",
-                "amount": 0
-          },
-          "DigiByte": {
-                "shortName": "dgb",
-                "amount": 0
-          },
-          "IOST": {
-                "shortName": "iost",
-                "amount": 0
-          },
-          "Loopring": {
-                "shortName": "lrc",
-                "amount": 0
-          },
-          "Ontology": {
-                "shortName": "ont",
-                "amount": 0
-          },
-          "Enjin Coin": {
-                "shortName": "enj",
-                "amount": 0
-          },
-          "TerraUSD": {
-                "shortName": "ust",
-                "amount": 0
-          },
-          "Nano": {
-                "shortName": "nano",
-                "amount": 0
-          },
-          "Flow": {
-                "shortName": "flow",
-                "amount": 0
-          },
-          "OMG Network": {
-                "shortName": "omg",
-                "amount": 0
-          },
-          "Bancor Network Token": {
-                "shortName": "bnt",
-                "amount": 0
-          },
-          "Mdex": {
-                "shortName": "mdx",
-                "amount": 0
-          },
-          "Reserve Rights Token": {
-                "shortName": "rsr",
-                "amount": 0
-          },
-          "Qtum": {
-                "shortName": "qtum",
-                "amount": 0
-          },
-          "XDC Network": {
-                "shortName": "xdc",
-                "amount": 0
-          },
-          "Bitmax Token": {
-                "shortName": "btmx",
-                "amount": 0
-          },
-          "Horizen": {
-                "shortName": "zen",
-                "amount": 0
-          },
-          "Curve DAO Token": {
-                "shortName": "crv",
-                "amount": 0
-          },
-          "Holo": {
-                "shortName": "hot",
-                "amount": 0
-          },
-          "Pundi X": {
-                "shortName": "npxs",
-                "amount": 0
-          },
-          "Arweave": {
-                "shortName": "ar",
-                "amount": 0
-          },
-          "Siacoin": {
-                "shortName": "sc",
-                "amount": 0
-          },
-          "Bitcoin Gold": {
-                "shortName": "btg",
-                "amount": 0
-          },
-          "Badger DAO": {
-                "shortName": "badger",
-                "amount": 0
-          },
-          "Lisk": {
-                "shortName": "lsk",
-                "amount": 0
-          },
-          "ZKSwap": {
-                "shortName": "zks",
-                "amount": 0
-          },
-          "Energy Web Token": {
-                "shortName": "ewt",
-                "amount": 0
-          },
-          "Quant": {
-                "shortName": "qnt",
-                "amount": 0
-          },
-          "Venus": {
-                "shortName": "xvs",
-                "amount": 0
-          },
-          "Nexus Mutual": {
-                "shortName": "nxm",
-                "amount": 0
-          },
-          "DODO": {
-                "shortName": "dodo",
-                "amount": 0
-          },
-          "Balancer": {
-                "shortName": "bal",
-                "amount": 0
-          },
-          "Alpha Finance": {
-                "shortName": "alpha",
-                "amount": 0
-          },
-          "1inch": {
-                "shortName": "1inch",
-                "amount": 0
-          },
-          "Celo": {
-                "shortName": "celo",
-                "amount": 0
-          },
-          "Ocean Protocol": {
-                "shortName": "ocean",
-                "amount": 0
-          },
-          "KuCoin Token": {
-                "shortName": "kcs",
-                "amount": 0
-          },
-          "Decentraland": {
-                "shortName": "mana",
-                "amount": 0
-          },
-          "Ampleforth": {
-                "shortName": "ampl",
-                "amount": 0
-          },
-          "Kyber Network": {
-                "shortName": "knc",
-                "amount": 0
-          },
-          "Golem": {
-                "shortName": "glm",
-                "amount": 0
-          },
-          "Chiliz": {
-                "shortName": "chz",
-                "amount": 0
-          },
-          "Status": {
-                "shortName": "SNT",
-                "amount": 0
-          },
-          "cUSDT": {
-                "shortName": "cusdt",
-                "amount": 0
-          },
-          "Verge": {
-                "shortName": "xvg",
-                "amount": 0
-          },
-          "Orion Protocol": {
-                "shortName": "orn",
-                "amount": 0
-          },
-          "Band Protocol": {
-                "shortName": "band",
-                "amount": 0
-          },
-          "TrueUSD": {
-                "shortName": "tusd",
-                "amount": 0
-          },
-          "Bitcoin Cash ABC": {
-                "shortName": "bcha",
-                "amount": 0
-          },
-          "Helium": {
-                "shortName": "hnt",
-                "amount": 0
-          },
-          "Lido Staked Ether": {
-                "shortName": "steth",
-                "amount": 0
-          },
-          "Harmony": {
-                "shortName": "one",
-                "amount": 0
-          },
-          "Serum": {
-                "shortName": "srm",
-                "amount": 0
-          },
-          "Polkastarter": {
-                "shortName": "pols",
-                "amount": 0
-          },
-          "Polymath Network": {
-                "shortName": "poly",
-                "amount": 0
-          },
-          "Civic": {
-                "shortName": "cvc",
-                "amount": 0
-          },
-          "Trustswap": {
-                "shortName": "swap",
-                "amount": 0
-          },
-          "NuCypher": {
-                "shortName": "nu",
-                "amount": 0
-          },
-          "Nervos Network": {
-                "shortName": "ckb",
-                "amount": 0
-          },
-          "sUSD": {
-                "shortName": "susd",
-                "amount": 0
-          },
-          "Aave [OLD]": {
-                "shortName": "lend",
-                "amount": 0
-          },
-          "cUNI": {
-                "shortName": "cuni",
-                "amount": 0
-          },
-          "Kava.io": {
-                "shortName": "kava",
-                "amount": 0
-          },
-          "Secret": {
-                "shortName": "scrt",
-                "amount": 0
-          },
-          "GateToken": {
-                "shortName": "gt",
-                "amount": 0
-          },
-          "Numeraire": {
-                "shortName": "nmr",
-                "amount": 0
-          },
-          "Akash Network": {
-                "shortName": "akt",
-                "amount": 0
-          },
-          "Aave ETH": {
-                "shortName": "aeth",
-                "amount": 0
-          },
-          "Electroneum": {
-                "shortName": "etn",
-                "amount": 0
-          },
-          "Ark": {
-                "shortName": "ark",
-                "amount": 0
-          },
-          "DerivaDAO": {
-                "shortName": "ddx",
-                "amount": 0
-          },
-          "BTC Standard Hashrate Token": {
-                "shortName": "btcst",
-                "amount": 0
-          },
-          "Gala": {
-                "shortName": "gala",
-                "amount": 0
-          },
-          "Gnosis": {
-                "shortName": "gno",
-                "amount": 0
-          },
-          "Mirror Protocol": {
-                "shortName": "mir",
-                "amount": 0
-          },
-          "district0x": {
-                "shortName": "dnt",
-                "amount": 0
-          },
-          "RedFOX Labs": {
-                "shortName": "rfox",
-                "amount": 0
-          },
-          "Fetch.ai": {
-                "shortName": "fet",
-                "amount": 0
-          },
-          "Telcoin": {
-                "shortName": "tel",
-                "amount": 0
-          },
-          "Swipe": {
-                "shortName": "sxp",
-                "amount": 0
-          },
-          "SingularityNET": {
-                "shortName": "agi",
-                "amount": 0
-          },
-          "Bitcoin Diamond": {
-                "shortName": "bcd",
-                "amount": 0
-          },
-          "SafePal": {
-                "shortName": "sfp",
-                "amount": 0
-          },
-          "MaidSafeCoin": {
-                "shortName": "maid",
-                "amount": 0
-          },
-          "MATH": {
-                "shortName": "math",
-                "amount": 0
-          },
-          "Ankr": {
-                "shortName": "ankr",
-                "amount": 0
-          },
-          "RSK Infrastructure Framework": {
-                "shortName": "rif",
-                "amount": 0
-          },
-          "Injective Protocol": {
-                "shortName": "inj",
-                "amount": 0
-          },
-          "Trust Wallet Token": {
-                "shortName": "twt",
-                "amount": 0
-          },
-          "sETH": {
-                "shortName": "seth",
-                "amount": 0
-          },
-          "FunFair": {
-                "shortName": "fun",
-                "amount": 0
-          },
-          "Augur": {
-                "shortName": "rep",
-                "amount": 0
-          },
-          "CoinMetro": {
-                "shortName": "xcm",
-                "amount": 0
-          },
-          "Unibright": {
-                "shortName": "ubt",
-                "amount": 0
-          },
-          "Ardor": {
-                "shortName": "ardr",
-                "amount": 0
-          },
-          "Neutrino USD": {
-                "shortName": "usdn",
-                "amount": 0
-          },
-          "Reddcoin": {
-                "shortName": "rdd",
-                "amount": 0
-          },
-          "Vai": {
-                "shortName": "vai",
-                "amount": 0
-          },
-          "SAND": {
-                "shortName": "sand",
-                "amount": 0
-          },
-          "Rocket Pool": {
-                "shortName": "rpl",
-                "amount": 0
-          },
-          "OriginTrail": {
-                "shortName": "trac",
-                "amount": 0
-          },
-          "Gas": {
-                "shortName": "gas",
-                "amount": 0
-          },
-          "Steem": {
-                "shortName": "steem",
-                "amount": 0
-          },
-          "Sora": {
-                "shortName": "xor",
-                "amount": 0
-          },
-          "saffron.finance": {
-                "shortName": "sfi",
-                "amount": 0
-          },
-          "WINk": {
-                "shortName": "win",
-                "amount": 0
-          },
-          "Komodo": {
-                "shortName": "kmd",
-                "amount": 0
-          },
-          "Syntropy": {
-                "shortName": "noia",
-                "amount": 0
-          },
-          "IoTeX": {
-                "shortName": "iotx",
-                "amount": 0
-          },
-          "UTRUST": {
-                "shortName": "utk",
-                "amount": 0
-          },
-          "c0x": {
-                "shortName": "czrx",
-                "amount": 0
-          },
-          "VeThor Token": {
-                "shortName": "vtho",
-                "amount": 0
-          },
-          "KeeperDAO": {
-                "shortName": "rook",
-                "amount": 0
-          },
-          "Aave USDC": {
-                "shortName": "ausdc",
-                "amount": 0
-          },
-          "sBTC": {
-                "shortName": "sbtc",
-                "amount": 0
-          },
-          "Aragon": {
-                "shortName": "ant",
-                "amount": 0
-          },
-          "Ultra": {
-                "shortName": "uos",
-                "amount": 0
-          },
-          "Dent": {
-                "shortName": "dent",
-                "amount": 0
-          },
-          "Oasis Network": {
-                "shortName": "rose",
-                "amount": 0
-          },
-          "TomoChain": {
-                "shortName": "tomo",
-                "amount": 0
-          },
-          "PARSIQ": {
-                "shortName": "prq",
-                "amount": 0
-          },
-          "COTI": {
-                "shortName": "coti",
-                "amount": 0
-          },
-          "MonaCoin": {
-                "shortName": "mona",
-                "amount": 0
-          },
-          "Tokenlon": {
-                "shortName": "lon",
-                "amount": 0
-          },
-          "Litentry": {
-                "shortName": "lit",
-                "amount": 0
-          },
-          "Wanchain": {
-                "shortName": "wan",
-                "amount": 0
-          },
-          "Tether Gold": {
-                "shortName": "xaut",
-                "amount": 0
-          },
-          "Bytom": {
-                "shortName": "btm",
-                "amount": 0
-          },
-          "SKALE": {
-                "shortName": "skl",
-                "amount": 0
-          },
-          "LGO Token": {
-                "shortName": "lgo",
-                "amount": 0
-          },
-          "NFTX": {
-                "shortName": "nftx",
-                "amount": 0
-          },
-          "Haven": {
-                "shortName": "xhv",
-                "amount": 0
-          },
-          "Gemini Dollar": {
-                "shortName": "gusd",
-                "amount": 0
-          },
-          "BitShares": {
-                "shortName": "bts",
-                "amount": 0
-          },
-          "PAX Gold": {
-                "shortName": "paxg",
-                "amount": 0
-          },
-          "WHALE": {
-                "shortName": "whale",
-                "amount": 0
-          },
-          "Ergo": {
-                "shortName": "erg",
-                "amount": 0
-          },
-          "Stratis": {
-                "shortName": "strax",
-                "amount": 0
-          },
-          "Hifi Finance": {
-                "shortName": "mft",
-                "amount": 0
-          },
-          "Keep Network": {
-                "shortName": "keep",
-                "amount": 0
-          },
-          "Wootrade Network": {
-                "shortName": "woo",
-                "amount": 0
-          },
-          "API3": {
-                "shortName": "api3",
-                "amount": 0
-          },
-          "DeFiPulse Index": {
-                "shortName": "dpi",
-                "amount": 0
-          },
-          "Edgeware": {
-                "shortName": "edg",
-                "amount": 0
-          },
-          "Perpetual Protocol": {
-                "shortName": "perp",
-                "amount": 0
-          },
-          "Hathor": {
-                "shortName": "htr",
-                "amount": 0
-          },
-          "WAX": {
-                "shortName": "waxp",
-                "amount": 0
-          },
-          "elf": {
-                "shortName": "elf",
-                "amount": 0
-          },
-          "SuperFarm": {
-                "shortName": "super",
-                "amount": 0
-          },
-          "Hive": {
-                "shortName": "hive",
-                "amount": 0
-          },
-          "Handshake": {
-                "shortName": "hns",
-                "amount": 0
-          },
-          "Phala Network": {
-                "shortName": "pha",
-                "amount": 0
-          },
-          "xDAI Stake": {
-                "shortName": "stake",
-                "amount": 0
-          },
-          "Harvest Finance": {
-                "shortName": "farm",
-                "amount": 0
-          },
-          "Uquid Coin": {
-                "shortName": "uqc",
-                "amount": 0
-          },
-          "e-Radix": {
-                "shortName": "exrd",
-                "amount": 0
-          },
-          "IRISnet": {
-                "shortName": "iris",
-                "amount": 0
-          },
-          "DuckDaoDime": {
-                "shortName": "ddim",
-                "amount": 0
-          },
-          "LTO Network": {
-                "shortName": "lto",
-                "amount": 0
-          },
-          "Axie Infinity": {
-                "shortName": "axs",
-                "amount": 0
-          },
-          "Travala.com": {
-                "shortName": "ava",
-                "amount": 0
-          },
-          "Power Ledger": {
-                "shortName": "powr",
-                "amount": 0
-          },
-          "iExec RLC": {
-                "shortName": "rlc",
-                "amount": 0
-          },
-          "Linear": {
-                "shortName": "lina",
-                "amount": 0
-          },
-          "Loom Network": {
-                "shortName": "loom",
-                "amount": 0
-          },
-          "StakeHound Staked Ether": {
-                "shortName": "steth",
-                "amount": 0
-          },
-          "Sora Validator Token": {
-                "shortName": "val",
-                "amount": 0
-          },
-          "Unifi Protocol DAO": {
-                "shortName": "unfi",
-                "amount": 0
-          },
-          "Syscoin": {
-                "shortName": "sys",
-                "amount": 0
-          },
-          "Cashaa": {
-                "shortName": "cas",
-                "amount": 0
-          },
-          "Prometeus": {
-                "shortName": "prom",
-                "amount": 0
-          },
-          "ABD DOLARI": {
-                "shortName": "USD",
-                "amount": 0
-          },
-          "EURO": {
-                "shortName": "EUR",
-                "amount": 0
-          },
-          "TÜRK LİRASI": {
-                "shortName": "TRY",
-                "amount": 100000
-          },
-          "AVUSTRALYA DOLARI": {
-                "shortName": "AUD",
-                "amount": 0
-          },
-          "BULGAR LEVASI": {
-                "shortName": "BGN",
-                "amount": 0
-          },
-          "KANADA DOLARI": {
-                "shortName": "CAD",
-                "amount": 0
-          },
-          "İSVİÇRE FRANGI": {
-                "shortName": "CHF",
-                "amount": 0
-          },
-          "ÇİN YUANI": {
-                "shortName": "CNY",
-                "amount": 0
-          },
-          "DANİMARKA KRONU": {
-                "shortName": "DKK",
-                "amount": 0
-          },
-          "İNGİLİZ STERLİNİ": {
-                "shortName": "GBP",
-                "amount": 0
-          },
-          "İRAN RİYALİ": {
-                "shortName": "IRR",
-                "amount": 0
-          },
-          "JAPON YENİ": {
-                "shortName": "JPY",
-                "amount": 0
-          },
-          "KUVEYT DİNARI": {
-                "shortName": "KWD",
-                "amount": 0
-          },
-          "NORVEÇ KRONU": {
-                "shortName": "NOK",
-                "amount": 0
-          },
-          "PAKİSTAN RUPİSİ": {
-                "shortName": "PKR",
-                "amount": 0
-          },
-          "RUMEN LEYİ": {
-                "shortName": "RON",
-                "amount": 0
-          },
-          "KATAR RİYALİ": {
-                "shortName": "QAR",
-                "amount": 0
-          },
-          "RUS RUBLESİ": {
-                "shortName": "RUB",
-                "amount": 0
-          },
-          "SUUDİ ARABİSTAN RİYALİ": {
-                "shortName": "SAR",
-                "amount": 0
-          },
-          "İSVEÇ KRONU": {
-                "shortName": "SEK",
-                "amount": 0
-          },
-          "Ons Altın": {
-                "shortName": "ons",
-                "amount": 0
-          },
-          "Gram Altın": {
-                "shortName": "gram-altin",
-                "amount": 0
-          },
-          "Çeyrek Altın": {
-                "shortName": "ceyrek-altin",
-                "amount": 0
-          },
-          "Yarım Altın": {
-                "shortName": "yarım-altin",
-                "amount": 0
-          },
-          "Tam Altın": {
-                "shortName": "tam-altin",
-                "amount": 0
-          },
-          "Cumhuriyet Altını": {
-                "shortName": "cumhuriyet-altini",
-                "amount": 0
-          },
-          "Ata Altın": {
-                "shortName": "ata-altin",
-                "amount": 0
-          },
-          "Reşat Altın": {
-                "shortName": "reşat-altin",
-                "amount": 0
-          },
-          "Hamit Altın": {
-                "shortName": "hamit-altin",
-                "amount": 0
-          },
-          "İkibuçuk Altın": {
-                "shortName": "ikibucuk-altin",
-                "amount": 0
-          },
-          "Gremse Altın": {
-                "shortName": "gremse-altin",
-                "amount": 0
-          },
-          "Beşli Altın": {
-                "shortName": "besli-altin",
-                "amount": 0
-          },
-          "14 Ayar Altın": {
-                "shortName": "14-ayar-altin",
-                "amount": 0
-          },
-          "18 Ayar Altın": {
-                "shortName": "18-ayar-altin",
-                "amount": 0
-          },
-          "22 Ayar Bilezik": {
-                "shortName": "22-ayar-bilezik",
-                "amount": 0
-          },
-          "Gümüş": {
-                "shortName": "Gümüş",
-                "amount": 0
-          }
+        "TÜRK LİRASI": {
+            "amount": 100000,
+            "shortName": "TRY",
+            "cost": 0
+        },
+        "ABD DOLARI": {
+            "amount": 0,
+            "shortName": "USD",
+            "cost": 0
+        },
+        "EURO": {
+            "amount": 0,
+            "shortName": "EUR",
+            "cost": 0
+        },
+        "İNGİLİZ STERLİNİ": {
+            "amount": 0,
+            "shortName": "GBP",
+            "cost": 0
+        },
+        "İSVİÇRE FRANGI": {
+            "amount": 0,
+            "shortName": "CHF",
+            "cost": 0
+        },
+        "KANADA DOLARI": {
+            "amount": 0,
+            "shortName": "CAD",
+            "cost": 0
+        },
+        "RUS RUBLESİ": {
+            "amount": 0,
+            "shortName": "RUB",
+            "cost": 0
+        },
+        "AVUSTRALYA DOLARI": {
+            "amount": 0,
+            "shortName": "AUD",
+            "cost": 0
+        },
+        "DANİMARKA KRONU": {
+            "amount": 0,
+            "shortName": "DKK",
+            "cost": 0
+        },
+        "İSVEÇ KRONU": {
+            "amount": 0,
+            "shortName": "SEK",
+            "cost": 0
+        },
+        "NORVEÇ KRONU": {
+            "amount": 0,
+            "shortName": "NOK",
+            "cost": 0
+        },
+        "JAPON YENİ": {
+            "amount": 0,
+            "shortName": "JPY",
+            "cost": 0
+        },
+        "KUVEYT DİNARI": {
+            "amount": 0,
+            "shortName": "KWD",
+            "cost": 0
+        },
+        "SUUDİ ARABİSTAN RİYALİ": {
+            "amount": 0,
+            "shortName": "SAR",
+            "cost": 0
+        },
+        "İRAN RİYALİ": {
+            "amount": 0,
+            "shortName": "IRR",
+            "cost": 0
+        },
+        "RUMEN LEYİ": {
+            "amount": 0,
+            "shortName": "RON",
+            "cost": 0
+        },
+        "ÇİN YUANI": {
+            "amount": 0,
+            "shortName": "CNY",
+            "cost": 0
+        },
+        "KATAR RİYALİ": {
+            "amount": 0,
+            "shortName": "QAR",
+            "cost": 0
+        },
+        "BULGAR LEVASI": {
+            "amount": 0,
+            "shortName": "BGN",
+            "cost": 0
+        },
+        "Ons Altın": {
+            "amount": 0,
+            "shortName": "ons",
+            "cost": 0
+        },
+        "Gram Altın": {
+            "amount": 0,
+            "shortName": "gram-altin",
+            "cost": 0
+        },
+        "Çeyrek Altın": {
+            "amount": 0,
+            "shortName": "ceyrek-altin",
+            "cost": 0
+        },
+        "Yarım Altın": {
+            "amount": 0,
+            "shortName": "yarim-altin",
+            "cost": 0
+        },
+        "Tam Altın": {
+            "amount": 0,
+            "shortName": "tam-altin",
+            "cost": 0
+        },
+        "Cumhuriyet Altını": {
+            "amount": 0,
+            "shortName": "cumhuriyet-altini",
+            "cost": 0
+        },
+        "Ata Altın": {
+            "amount": 0,
+            "shortName": "ata-altin",
+            "cost": 0
+        },
+        "Reşat Altın": {
+            "amount": 0,
+            "shortName": "resat-altin",
+            "cost": 0
+        },
+        "Hamit Altın": {
+            "amount": 0,
+            "shortName": "hamit-altin",
+            "cost": 0
+        },
+        "İkibuçuk Altın": {
+            "amount": 0,
+            "shortName": "ikibucuk-altin",
+            "cost": 0
+        },
+        "Gremse Altın": {
+            "amount": 0,
+            "shortName": "gremse-altin",
+            "cost": 0
+        },
+        "Beşli Altın": {
+            "amount": 0,
+            "shortName": "besli-altin",
+            "cost": 0
+        },
+        "14 Ayar Altın": {
+            "amount": 0,
+            "shortName": "14-ayar-altin",
+            "cost": 0
+        },
+        "18 Ayar Altın": {
+            "amount": 0,
+            "shortName": "18-ayar-altin",
+            "cost": 0
+        },
+        "22 Ayar Bilezik": {
+            "amount": 0,
+            "shortName": "22-ayar-bilezik",
+            "cost": 0
+        },
+        "Gümüş": {
+            "amount": 0,
+            "shortName": "gumus",
+            "cost": 0
+        },
+        "SEPET KUR": {
+            "amount": 0,
+            "shortName": "SEPET KUR",
+            "cost": 0
+        },
+        "Bitcoin": {
+            "amount": 0,
+            "shortName": "btc",
+            "cost": 0
+        },
+        "Ethereum": {
+            "amount": 0,
+            "shortName": "eth",
+            "cost": 0
+        },
+        "Tether": {
+            "amount": 0,
+            "shortName": "usdt",
+            "cost": 0
+        },
+        "Binance Coin": {
+            "amount": 0,
+            "shortName": "bnb",
+            "cost": 0
+        },
+        "Cardano": {
+            "amount": 0,
+            "shortName": "ada",
+            "cost": 0
+        },
+        "USD Coin": {
+            "amount": 0,
+            "shortName": "usdc",
+            "cost": 0
+        },
+        "XRP": {
+            "amount": 0,
+            "shortName": "xrp",
+            "cost": 0
+        },
+        "Dogecoin": {
+            "amount": 0,
+            "shortName": "doge",
+            "cost": 0
+        },
+        "Polkadot": {
+            "amount": 0,
+            "shortName": "dot",
+            "cost": 0
+        },
+        "Binance USD": {
+            "amount": 0,
+            "shortName": "busd",
+            "cost": 0
+        },
+        "Uniswap": {
+            "amount": 0,
+            "shortName": "uni",
+            "cost": 0
+        },
+        "Bitcoin Cash": {
+            "amount": 0,
+            "shortName": "bch",
+            "cost": 0
+        },
+        "Litecoin": {
+            "amount": 0,
+            "shortName": "ltc",
+            "cost": 0
+        },
+        "Solana": {
+            "amount": 0,
+            "shortName": "sol",
+            "cost": 0
+        },
+        "Chainlink": {
+            "amount": 0,
+            "shortName": "link",
+            "cost": 0
+        },
+        "Wrapped Bitcoin": {
+            "amount": 0,
+            "shortName": "wbtc",
+            "cost": 0
+        },
+        "Ethereum Classic": {
+            "amount": 0,
+            "shortName": "etc",
+            "cost": 0
+        },
+        "Dai": {
+            "amount": 0,
+            "shortName": "dai",
+            "cost": 0
+        },
+        "Stellar": {
+            "amount": 0,
+            "shortName": "xlm",
+            "cost": 0
+        },
+        "Polygon": {
+            "amount": 0,
+            "shortName": "matic",
+            "cost": 0
+        },
+        "cUSDC": {
+            "amount": 0,
+            "shortName": "cusdc",
+            "cost": 0
+        },
+        "Internet Computer": {
+            "amount": 0,
+            "shortName": "icp",
+            "cost": 0
+        },
+        "VeChain": {
+            "amount": 0,
+            "shortName": "vet",
+            "cost": 0
+        },
+        "Theta Network": {
+            "amount": 0,
+            "shortName": "theta",
+            "cost": 0
+        },
+        "Filecoin": {
+            "amount": 0,
+            "shortName": "fil",
+            "cost": 0
+        },
+        "cDAI": {
+            "amount": 0,
+            "shortName": "cdai",
+            "cost": 0
+        },
+        "TRON": {
+            "amount": 0,
+            "shortName": "trx",
+            "cost": 0
+        },
+        "Monero": {
+            "amount": 0,
+            "shortName": "xmr",
+            "cost": 0
+        },
+        "EOS": {
+            "amount": 0,
+            "shortName": "eos",
+            "cost": 0
+        },
+        "Shiba Inu": {
+            "amount": 0,
+            "shortName": "shib",
+            "cost": 0
+        },
+        "Aave": {
+            "amount": 0,
+            "shortName": "aave",
+            "cost": 0
+        },
+        "Cosmos": {
+            "amount": 0,
+            "shortName": "atom",
+            "cost": 0
+        },
+        "LEO Token": {
+            "amount": 0,
+            "shortName": "leo",
+            "cost": 0
+        },
+        "Crypto.com Coin": {
+            "amount": 0,
+            "shortName": "cro",
+            "cost": 0
+        },
+        "OKB": {
+            "amount": 0,
+            "shortName": "okb",
+            "cost": 0
+        },
+        "FTX Token": {
+            "amount": 0,
+            "shortName": "ftt",
+            "cost": 0
+        },
+        "cETH": {
+            "amount": 0,
+            "shortName": "ceth",
+            "cost": 0
+        },
+        "Terra": {
+            "amount": 0,
+            "shortName": "luna",
+            "cost": 0
+        },
+        "PancakeSwap": {
+            "amount": 0,
+            "shortName": "cake",
+            "cost": 0
+        },
+        "Algorand": {
+            "amount": 0,
+            "shortName": "algo",
+            "cost": 0
+        },
+        "Klaytn": {
+            "amount": 0,
+            "shortName": "klay",
+            "cost": 0
+        },
+        "Bitcoin SV": {
+            "amount": 0,
+            "shortName": "bsv",
+            "cost": 0
+        },
+        "Celsius Network": {
+            "amount": 0,
+            "shortName": "cel",
+            "cost": 0
+        },
+        "Maker": {
+            "amount": 0,
+            "shortName": "mkr",
+            "cost": 0
+        },
+        "TerraUSD": {
+            "amount": 0,
+            "shortName": "ust",
+            "cost": 0
+        },
+        "Amp": {
+            "amount": 0,
+            "shortName": "amp",
+            "cost": 0
+        },
+        "NEO": {
+            "amount": 0,
+            "shortName": "neo",
+            "cost": 0
+        },
+        "Tezos": {
+            "amount": 0,
+            "shortName": "xtz",
+            "cost": 0
+        },
+        "Compound": {
+            "amount": 0,
+            "shortName": "comp",
+            "cost": 0
+        },
+        "IOTA": {
+            "amount": 0,
+            "shortName": "miota",
+            "cost": 0
+        },
+        "Avalanche": {
+            "amount": 0,
+            "shortName": "AVAX",
+            "cost": 0
+        },
+        "Hedera Hashgraph": {
+            "amount": 0,
+            "shortName": "hbar",
+            "cost": 0
+        },
+        "SafeMoon": {
+            "amount": 0,
+            "shortName": "safemoon",
+            "cost": 0
+        },
+        "The Graph": {
+            "amount": 0,
+            "shortName": "grt",
+            "cost": 0
+        },
+        "Kusama": {
+            "amount": 0,
+            "shortName": "ksm",
+            "cost": 0
+        },
+        "Theta Fuel": {
+            "amount": 0,
+            "shortName": "tfuel",
+            "cost": 0
+        },
+        "Decred": {
+            "amount": 0,
+            "shortName": "dcr",
+            "cost": 0
+        },
+        "Elrond": {
+            "amount": 0,
+            "shortName": "egld",
+            "cost": 0
+        },
+        "BitTorrent": {
+            "amount": 0,
+            "shortName": "btt",
+            "cost": 0
+        },
+        "Synthetix Network Token": {
+            "amount": 0,
+            "shortName": "snx",
+            "cost": 0
+        },
+        "Huobi Token": {
+            "amount": 0,
+            "shortName": "ht",
+            "cost": 0
+        },
+        "TrueUSD": {
+            "amount": 0,
+            "shortName": "tusd",
+            "cost": 0
+        },
+        "Waves": {
+            "amount": 0,
+            "shortName": "waves",
+            "cost": 0
+        },
+        "Sushi": {
+            "amount": 0,
+            "shortName": "sushi",
+            "cost": 0
+        },
+        "Huobi BTC": {
+            "amount": 0,
+            "shortName": "hbtc",
+            "cost": 0
+        },
+        "Chiliz": {
+            "amount": 0,
+            "shortName": "chz",
+            "cost": 0
+        },
+        "NEM": {
+            "amount": 0,
+            "shortName": "xem",
+            "cost": 0
+        },
+        "Lido Staked Ether": {
+            "amount": 0,
+            "shortName": "steth",
+            "cost": 0
+        },
+        "Dash": {
+            "amount": 0,
+            "shortName": "dash",
+            "cost": 0
+        },
+        "BitClout": {
+            "amount": 0,
+            "shortName": "clout",
+            "cost": 0
+        },
+        "Zcash": {
+            "amount": 0,
+            "shortName": "zec",
+            "cost": 0
+        },
+        "Enjin Coin": {
+            "amount": 0,
+            "shortName": "enj",
+            "cost": 0
+        },
+        "THORChain": {
+            "amount": 0,
+            "shortName": "rune",
+            "cost": 0
+        },
+        "yearn.finance": {
+            "amount": 0,
+            "shortName": "yfi",
+            "cost": 0
+        },
+        "Stacks": {
+            "amount": 0,
+            "shortName": "stx",
+            "cost": 0
+        },
+        "XDC Network": {
+            "amount": 0,
+            "shortName": "xdc",
+            "cost": 0
+        },
+        "Helium": {
+            "amount": 0,
+            "shortName": "hnt",
+            "cost": 0
+        },
+        "Paxos Standard": {
+            "amount": 0,
+            "shortName": "pax",
+            "cost": 0
+        },
+        "Axie Infinity": {
+            "amount": 0,
+            "shortName": "axs",
+            "cost": 0
+        },
+        "Quant": {
+            "amount": 0,
+            "shortName": "qnt",
+            "cost": 0
+        },
+        "Holo": {
+            "amount": 0,
+            "shortName": "hot",
+            "cost": 0
+        },
+        "NEXO": {
+            "amount": 0,
+            "shortName": "nexo",
+            "cost": 0
+        },
+        "Decentraland": {
+            "amount": 0,
+            "shortName": "mana",
+            "cost": 0
+        },
+        "Mdex": {
+            "amount": 0,
+            "shortName": "mdx",
+            "cost": 0
+        },
+        "Basic Attention Token": {
+            "amount": 0,
+            "shortName": "bat",
+            "cost": 0
+        },
+        "Near": {
+            "amount": 0,
+            "shortName": "near",
+            "cost": 0
+        },
+        "Zilliqa": {
+            "amount": 0,
+            "shortName": "zil",
+            "cost": 0
+        },
+        "KuCoin Token": {
+            "amount": 0,
+            "shortName": "kcs",
+            "cost": 0
+        },
+        "Telcoin": {
+            "amount": 0,
+            "shortName": "tel",
+            "cost": 0
+        },
+        "Flow": {
+            "amount": 0,
+            "shortName": "flow",
+            "cost": 0
+        },
+        "Bitcoin Gold": {
+            "amount": 0,
+            "shortName": "btg",
+            "cost": 0
+        },
+        "TitanSwap": {
+            "amount": 0,
+            "shortName": "titan",
+            "cost": 0
+        },
+        "cUSDT": {
+            "amount": 0,
+            "shortName": "cusdt",
+            "cost": 0
+        },
+        "Bancor Network Token": {
+            "amount": 0,
+            "shortName": "bnt",
+            "cost": 0
+        },
+        "Harmony": {
+            "amount": 0,
+            "shortName": "one",
+            "cost": 0
+        },
+        "ECOMI": {
+            "amount": 0,
+            "shortName": "omi",
+            "cost": 0
+        },
+        "Qtum": {
+            "amount": 0,
+            "shortName": "qtum",
+            "cost": 0
+        },
+        "HUSD": {
+            "amount": 0,
+            "shortName": "husd",
+            "cost": 0
+        },
+        "Horizen": {
+            "amount": 0,
+            "shortName": "zen",
+            "cost": 0
+        },
+        "Ontology": {
+            "amount": 0,
+            "shortName": "ont",
+            "cost": 0
+        },
+        "DigiByte": {
+            "amount": 0,
+            "shortName": "dgb",
+            "cost": 0
+        },
+        "Siacoin": {
+            "amount": 0,
+            "shortName": "sc",
+            "cost": 0
+        },
+        "0x": {
+            "amount": 0,
+            "shortName": "zrx",
+            "cost": 0
+        },
+        "UMA": {
+            "amount": 0,
+            "shortName": "uma",
+            "cost": 0
+        },
+        "xSUSHI": {
+            "amount": 0,
+            "shortName": "xsushi",
+            "cost": 0
+        },
+        "Bitcoin Cash ABC": {
+            "amount": 0,
+            "shortName": "bcha",
+            "cost": 0
+        },
+        "SwissBorg": {
+            "amount": 0,
+            "shortName": "chsb",
+            "cost": 0
+        },
+        "OMG Network": {
+            "amount": 0,
+            "shortName": "omg",
+            "cost": 0
+        },
+        "Nexus Mutual": {
+            "amount": 0,
+            "shortName": "nxm",
+            "cost": 0
+        },
+        "Ravencoin": {
+            "amount": 0,
+            "shortName": "rvn",
+            "cost": 0
+        },
+        "Nano": {
+            "amount": 0,
+            "shortName": "nano",
+            "cost": 0
+        },
+        "Liquity USD": {
+            "amount": 0,
+            "shortName": "lusd",
+            "cost": 0
+        },
+        "Curve DAO Token": {
+            "amount": 0,
+            "shortName": "crv",
+            "cost": 0
+        },
+        "ICON": {
+            "amount": 0,
+            "shortName": "icx",
+            "cost": 0
+        },
+        "GateToken": {
+            "amount": 0,
+            "shortName": "gt",
+            "cost": 0
+        },
+        "Fantom": {
+            "amount": 0,
+            "shortName": "ftm",
+            "cost": 0
+        },
+        "Ankr": {
+            "amount": 0,
+            "shortName": "ankr",
+            "cost": 0
+        },
+        "WazirX": {
+            "amount": 0,
+            "shortName": "wrx",
+            "cost": 0
+        },
+        "Voyager Token": {
+            "amount": 0,
+            "shortName": "vgx",
+            "cost": 0
+        },
+        "IOST": {
+            "amount": 0,
+            "shortName": "iost",
+            "cost": 0
+        },
+        "Olympus": {
+            "amount": 0,
+            "shortName": "ohm",
+            "cost": 0
+        },
+        "Neutrino USD": {
+            "amount": 0,
+            "shortName": "usdn",
+            "cost": 0
+        },
+        "Ultra": {
+            "amount": 0,
+            "shortName": "uos",
+            "cost": 0
+        },
+        "Pirate Chain": {
+            "amount": 0,
+            "shortName": "arrr",
+            "cost": 0
+        },
+        "renBTC": {
+            "amount": 0,
+            "shortName": "renbtc",
+            "cost": 0
+        },
+        "Arweave": {
+            "amount": 0,
+            "shortName": "ar",
+            "cost": 0
+        },
+        "Fei Protocol": {
+            "amount": 0,
+            "shortName": "fei",
+            "cost": 0
+        },
+        "1inch": {
+            "amount": 0,
+            "shortName": "1inch",
+            "cost": 0
+        },
+        "Lisk": {
+            "amount": 0,
+            "shortName": "lsk",
+            "cost": 0
+        },
+        "Constellation": {
+            "amount": 0,
+            "shortName": "dag",
+            "cost": 0
+        },
+        "Bitcoin Diamond": {
+            "amount": 0,
+            "shortName": "bcd",
+            "cost": 0
+        },
+        "Perpetual Protocol": {
+            "amount": 0,
+            "shortName": "perp",
+            "cost": 0
+        },
+        "Gemini Dollar": {
+            "amount": 0,
+            "shortName": "gusd",
+            "cost": 0
+        },
+        "PAX Gold": {
+            "amount": 0,
+            "shortName": "paxg",
+            "cost": 0
+        },
+        "The Sandbox": {
+            "amount": 0,
+            "shortName": "sand",
+            "cost": 0
+        },
+        "BakerySwap": {
+            "amount": 0,
+            "shortName": "bake",
+            "cost": 0
+        },
+        "TON Crystal": {
+            "amount": 0,
+            "shortName": "ton",
+            "cost": 0
+        },
+        "HBTC Captain Token": {
+            "amount": 0,
+            "shortName": "hbc",
+            "cost": 0
+        },
+        "Verge": {
+            "amount": 0,
+            "shortName": "xvg",
+            "cost": 0
+        },
+        "Livepeer": {
+            "amount": 0,
+            "shortName": "lpt",
+            "cost": 0
+        },
+        "Golem": {
+            "amount": 0,
+            "shortName": "glm",
+            "cost": 0
+        },
+        "Celo": {
+            "amount": 0,
+            "shortName": "celo",
+            "cost": 0
+        },
+        "sUSD": {
+            "amount": 0,
+            "shortName": "susd",
+            "cost": 0
+        },
+        "AscendEx Token": {
+            "amount": 0,
+            "shortName": "asd",
+            "cost": 0
+        },
+        "Oxygen": {
+            "amount": 0,
+            "shortName": "oxy",
+            "cost": 0
+        },
+        "Pundi X": {
+            "amount": 0,
+            "shortName": "pundix",
+            "cost": 0
+        },
+        "Kava.io": {
+            "amount": 0,
+            "shortName": "kava",
+            "cost": 0
+        },
+        "REN": {
+            "amount": 0,
+            "shortName": "ren",
+            "cost": 0
+        },
+        "Loopring": {
+            "amount": 0,
+            "shortName": "lrc",
+            "cost": 0
+        },
+        "Reserve Rights Token": {
+            "amount": 0,
+            "shortName": "rsr",
+            "cost": 0
+        },
+        "Tribe": {
+            "amount": 0,
+            "shortName": "tribe",
+            "cost": 0
+        },
+        "Nervos Network": {
+            "amount": 0,
+            "shortName": "ckb",
+            "cost": 0
+        },
+        "Gnosis": {
+            "amount": 0,
+            "shortName": "gno",
+            "cost": 0
+        },
+        "Frax": {
+            "amount": 0,
+            "shortName": "frax",
+            "cost": 0
+        },
+        "Pundi X [OLD]": {
+            "amount": 0,
+            "shortName": "npxs",
+            "cost": 0
+        },
+        "SKALE": {
+            "amount": 0,
+            "shortName": "skl",
+            "cost": 0
+        },
+        "MaidSafeCoin": {
+            "amount": 0,
+            "shortName": "maid",
+            "cost": 0
+        },
+        "WINkLink": {
+            "amount": 0,
+            "shortName": "win",
+            "cost": 0
+        },
+        "Alchemix USD": {
+            "amount": 0,
+            "shortName": "alusd",
+            "cost": 0
+        },
+        "Klever": {
+            "amount": 0,
+            "shortName": "klv",
+            "cost": 0
+        },
+        "Medibloc": {
+            "amount": 0,
+            "shortName": "med",
+            "cost": 0
+        },
+        "Mirror Protocol": {
+            "amount": 0,
+            "shortName": "mir",
+            "cost": 0
+        },
+        "Status": {
+            "amount": 0,
+            "shortName": "SNT",
+            "cost": 0
+        },
+        "Audius": {
+            "amount": 0,
+            "shortName": "audio",
+            "cost": 0
+        },
+        "Chia": {
+            "amount": 0,
+            "shortName": "xch",
+            "cost": 0
+        },
+        "cUNI": {
+            "amount": 0,
+            "shortName": "cuni",
+            "cost": 0
+        },
+        "Origin Protocol": {
+            "amount": 0,
+            "shortName": "ogn",
+            "cost": 0
+        },
+        "FOX Token": {
+            "amount": 0,
+            "shortName": "fox",
+            "cost": 0
+        },
+        "Alien Worlds": {
+            "amount": 0,
+            "shortName": "tlm",
+            "cost": 0
+        },
+        "sETH": {
+            "amount": 0,
+            "shortName": "seth",
+            "cost": 0
+        },
+        "Energy Web Token": {
+            "amount": 0,
+            "shortName": "ewt",
+            "cost": 0
+        },
+        "SingularityNET": {
+            "amount": 0,
+            "shortName": "agix",
+            "cost": 0
+        },
+        "TomoChain": {
+            "amount": 0,
+            "shortName": "tomo",
+            "cost": 0
+        },
+        "Balancer": {
+            "amount": 0,
+            "shortName": "bal",
+            "cost": 0
+        },
+        "Persistence": {
+            "amount": 0,
+            "shortName": "xprt",
+            "cost": 0
+        },
+        "Mina Protocol": {
+            "amount": 0,
+            "shortName": "mina",
+            "cost": 0
+        },
+        "WAX": {
+            "amount": 0,
+            "shortName": "waxp",
+            "cost": 0
+        },
+        "VeThor Token": {
+            "amount": 0,
+            "shortName": "vtho",
+            "cost": 0
+        },
+        "Wootrade Network": {
+            "amount": 0,
+            "shortName": "woo",
+            "cost": 0
+        },
+        "Ergo": {
+            "amount": 0,
+            "shortName": "erg",
+            "cost": 0
+        },
+        "Tokamak Network": {
+            "amount": 0,
+            "shortName": "ton",
+            "cost": 0
+        },
+        "Nominex": {
+            "amount": 0,
+            "shortName": "nmx",
+            "cost": 0
+        },
+        "Prometeus": {
+            "amount": 0,
+            "shortName": "prom",
+            "cost": 0
+        },
+        "IoTeX": {
+            "amount": 0,
+            "shortName": "iotx",
+            "cost": 0
+        },
+        "Dent": {
+            "amount": 0,
+            "shortName": "dent",
+            "cost": 0
+        },
+        "Osmosis": {
+            "amount": 0,
+            "shortName": "osmo",
+            "cost": 0
+        },
+        "Unibright": {
+            "amount": 0,
+            "shortName": "ubt",
+            "cost": 0
+        },
+        "Ledgis": {
+            "amount": 0,
+            "shortName": "led",
+            "cost": 0
+        },
+        "Numeraire": {
+            "amount": 0,
+            "shortName": "nmr",
+            "cost": 0
+        },
+        "Injective Protocol": {
+            "amount": 0,
+            "shortName": "inj",
+            "cost": 0
+        },
+        "Band Protocol": {
+            "amount": 0,
+            "shortName": "band",
+            "cost": 0
+        },
+        "Akash Network": {
+            "amount": 0,
+            "shortName": "akt",
+            "cost": 0
+        },
+        "Conflux": {
+            "amount": 0,
+            "shortName": "cfx",
+            "cost": 0
+        },
+        "Anchor Protocol": {
+            "amount": 0,
+            "shortName": "anc",
+            "cost": 0
+        },
+        "Metadium": {
+            "amount": 0,
+            "shortName": "meta",
+            "cost": 0
+        },
+        "iExec RLC": {
+            "amount": 0,
+            "shortName": "rlc",
+            "cost": 0
+        },
+        "Reef Finance": {
+            "amount": 0,
+            "shortName": "reef",
+            "cost": 0
+        },
+        "Electroneum": {
+            "amount": 0,
+            "shortName": "etn",
+            "cost": 0
+        },
+        "Venus": {
+            "amount": 0,
+            "shortName": "xvs",
+            "cost": 0
+        },
+        "Rocket Pool": {
+            "amount": 0,
+            "shortName": "rpl",
+            "cost": 0
+        },
+        "Ocean Protocol": {
+            "amount": 0,
+            "shortName": "ocean",
+            "cost": 0
+        },
+        "FEG Token": {
+            "amount": 0,
+            "shortName": "feg",
+            "cost": 0
+        },
+        "Tether Gold": {
+            "amount": 0,
+            "shortName": "xaut",
+            "cost": 0
+        },
+        "Raydium": {
+            "amount": 0,
+            "shortName": "ray",
+            "cost": 0
+        },
+        "StormX": {
+            "amount": 0,
+            "shortName": "stmx",
+            "cost": 0
+        },
+        "Uquid Coin": {
+            "amount": 0,
+            "shortName": "uqc",
+            "cost": 0
+        },
+        "sEUR": {
+            "amount": 0,
+            "shortName": "seur",
+            "cost": 0
+        },
+        "FUNToken": {
+            "amount": 0,
+            "shortName": "fun",
+            "cost": 0
+        },
+        "Fetch.ai": {
+            "amount": 0,
+            "shortName": "fet",
+            "cost": 0
+        },
+        "Orchid Protocol": {
+            "amount": 0,
+            "shortName": "oxt",
+            "cost": 0
+        },
+        "Stratis": {
+            "amount": 0,
+            "shortName": "strax",
+            "cost": 0
+        },
+        "Polymath Network": {
+            "amount": 0,
+            "shortName": "poly",
+            "cost": 0
+        },
+        "MATH": {
+            "amount": 0,
+            "shortName": "math",
+            "cost": 0
+        },
+        "Cartesi": {
+            "amount": 0,
+            "shortName": "ctsi",
+            "cost": 0
+        },
+        "Orbs": {
+            "amount": 0,
+            "shortName": "orbs",
+            "cost": 0
+        },
+        "Ampleforth": {
+            "amount": 0,
+            "shortName": "ampl",
+            "cost": 0
+        },
+        "Kirobo": {
+            "amount": 0,
+            "shortName": "kiro",
+            "cost": 0
+        },
+        "Sapphire": {
+            "amount": 0,
+            "shortName": "sapp",
+            "cost": 0
+        },
+        "Swipe": {
+            "amount": 0,
+            "shortName": "sxp",
+            "cost": 0
+        },
+        "Ardor": {
+            "amount": 0,
+            "shortName": "ardr",
+            "cost": 0
+        },
+        "e-Radix": {
+            "amount": 0,
+            "shortName": "exrd",
+            "cost": 0
+        },
+        "ZKSwap": {
+            "amount": 0,
+            "shortName": "zks",
+            "cost": 0
+        },
+        "Chromia": {
+            "amount": 0,
+            "shortName": "chr",
+            "cost": 0
+        },
+        "Serum": {
+            "amount": 0,
+            "shortName": "srm",
+            "cost": 0
+        },
+        "Alpha Finance": {
+            "amount": 0,
+            "shortName": "alpha",
+            "cost": 0
+        },
+        "BTC Standard Hashrate Token": {
+            "amount": 0,
+            "shortName": "btcst",
+            "cost": 0
+        },
+        "Smooth Love Potion": {
+            "amount": 0,
+            "shortName": "slp",
+            "cost": 0
+        },
+        "Ark": {
+            "amount": 0,
+            "shortName": "ark",
+            "cost": 0
+        },
+        "Phala Network": {
+            "amount": 0,
+            "shortName": "pha",
+            "cost": 0
+        },
+        "Aave [OLD]": {
+            "amount": 0,
+            "shortName": "lend",
+            "cost": 0
+        },
+        "Evolution Finance": {
+            "amount": 0,
+            "shortName": "evn",
+            "cost": 0
+        },
+        "Civic": {
+            "amount": 0,
+            "shortName": "cvc",
+            "cost": 0
+        },
+        "Steem": {
+            "amount": 0,
+            "shortName": "steem",
+            "cost": 0
+        },
+        "Alchemix": {
+            "amount": 0,
+            "shortName": "alcx",
+            "cost": 0
+        },
+        "Hxro": {
+            "amount": 0,
+            "shortName": "hxro",
+            "cost": 0
+        },
+        "Celer Network": {
+            "amount": 0,
+            "shortName": "celr",
+            "cost": 0
+        },
+        "Kyber Network Crystal": {
+            "amount": 0,
+            "shortName": "knc",
+            "cost": 0
+        },
+        "NKN": {
+            "amount": 0,
+            "shortName": "nkn",
+            "cost": 0
+        },
+        "Cream": {
+            "amount": 0,
+            "shortName": "cream",
+            "cost": 0
+        },
+        "KardiaChain": {
+            "amount": 0,
+            "shortName": "kai",
+            "cost": 0
+        },
+        "Ampleforth Governance Token": {
+            "amount": 0,
+            "shortName": "forth",
+            "cost": 0
+        },
+        "StakeHound Staked Ether": {
+            "amount": 0,
+            "shortName": "steth",
+            "cost": 0
+        },
+        "Aragon": {
+            "amount": 0,
+            "shortName": "ant",
+            "cost": 0
+        },
+        "RSK Infrastructure Framework": {
+            "amount": 0,
+            "shortName": "rif",
+            "cost": 0
+        },
+        "DODO": {
+            "amount": 0,
+            "shortName": "dodo",
+            "cost": 0
+        },
+        "Unit Protocol": {
+            "amount": 0,
+            "shortName": "col",
+            "cost": 0
+        },
+        "Kyber Network Crystal Legacy": {
+            "amount": 0,
+            "shortName": "kncl",
+            "cost": 0
+        },
+        "Orion Protocol": {
+            "amount": 0,
+            "shortName": "orn",
+            "cost": 0
+        },
+        "Storj": {
+            "amount": 0,
+            "shortName": "storj",
+            "cost": 0
+        },
+        "Escoin Token": {
+            "amount": 0,
+            "shortName": "elg",
+            "cost": 0
+        }
     }

@@ -19,6 +19,7 @@ class Trade{
                 }
             })
                 .then((user) =>{
+                    console.log(wealthPrice)
                     let tradePurpose = +amount * parseFloat(wealthPrice.toString().replace(',','.'));
                     temp = user.dataValues.wallet;
                     temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);

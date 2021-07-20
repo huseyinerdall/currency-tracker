@@ -28,14 +28,14 @@ function setGraph(wallet,allPrices){
   f = 0;
   s = 0;
   let result = {};
-  let first,second  = '';
+  let first,second  =  '';
   let balance,diger;
   balance = 0;
   diger = 0;
   for (const w in wallet) {
     if(parseFloat(wallet[w]["amount"])>0){
-      let l = allPrices[w] ? w : wallet[w]["shortName"]
-      temp = parseFloat(allPrices[w] || allPrices[wallet[w]["shortName"]])*parseFloat(wallet[w]["amount"]);
+      let l = allPrices[w]["shortName"];
+      temp = parseFloat(allPrices[w] || allPrices[w])*parseFloat(wallet[w]["amount"]);
       balance += temp;
 
       if(parseFloat(f)<temp){

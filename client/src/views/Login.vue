@@ -224,7 +224,7 @@ export default {
                 })
                 .then(() => {
                   axios
-                      .post(`${this.$store.state.api}/login`, {
+                      .post(`${app.$store.state.api}/login`, {
                         email: response.data.email,
                         passwd: "1"
                       })
@@ -244,16 +244,16 @@ export default {
                               )
                           );
                           localStorage.setItem("jwt", response.data.token);
-                          this.overlay = false;
-                          this.$store.commit("login", true);
+                          app.overlay = false;
+                          app.$store.commit("login", true);
                         }
 
                         if (localStorage.getItem("jwt") != null) {
-                          this.$emit("loggedIn");
-                          if (this.$route.params.nextUrl != null) {
-                            this.$router.push(this.$route.params.nextUrl);
+                          app.$emit("loggedIn");
+                          if (app.$route.params.nextUrl != null) {
+                            app.$router.push(app.$route.params.nextUrl);
                           } else {
-                            this.$router.push({
+                            app.$router.push({
                               name: "Home"
                             });
                           }

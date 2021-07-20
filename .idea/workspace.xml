@@ -20,10 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="end">
+      <change afterPath="$PROJECT_DIR$/app/models/BAHREYNDINARI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/flags/silver.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/varliklar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/apiTers.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/apiTers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/varliklar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/varliklar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/student-2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user-wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/allimages.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/allimages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/short-to-name.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/short-to-name.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/functions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +64,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/public/flags" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -58,11 +75,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\public\flags" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\components" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src" />
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\public\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets\" />
@@ -339,14 +356,19 @@
       <workItem from="1625902029770" duration="597000" />
       <workItem from="1625941509088" duration="657000" />
       <workItem from="1625989587279" duration="5537000" />
-      <workItem from="1626000946652" duration="10104000" />
-    </task>
-    <task id="LOCAL-00001" summary="Second Stage">
-      <created>1607013014477</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1607013014478</updated>
+      <workItem from="1626000946652" duration="11802000" />
+      <workItem from="1626094748653" duration="1196000" />
+      <workItem from="1626108884463" duration="1586000" />
+      <workItem from="1626159471250" duration="1198000" />
+      <workItem from="1626280300177" duration="1666000" />
+      <workItem from="1626327821492" duration="8400000" />
+      <workItem from="1626370547454" duration="1812000" />
+      <workItem from="1626506991563" duration="897000" />
+      <workItem from="1626590971637" duration="2510000" />
+      <workItem from="1626693551793" duration="1653000" />
+      <workItem from="1626722977468" duration="853000" />
+      <workItem from="1626727278816" duration="1719000" />
+      <workItem from="1626756415910" duration="22220000" />
     </task>
     <task id="LOCAL-00002" summary="Test">
       <created>1608201110096</created>
@@ -684,7 +706,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626008956909</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="end">
+      <created>1626014972837</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1626014972838</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -14,7 +14,7 @@ module.exports =
         "JPY": "JAPON YENİ",
         "KWD": "KUVEYT DİNARI",
         "ZAR": "",
-        "BHD": "",
+        "BHD": "BAHREYN DİNARI",
         "LYD": "",
         "SAR": "SUUDİ ARABİSTAN RİYALİ",
         "IQD": "",

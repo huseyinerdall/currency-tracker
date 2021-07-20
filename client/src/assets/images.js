@@ -19,5 +19,6 @@ module.exports = {
   "KATAR RİYALİ": IP + "flags/qatar.png",
   "RUS RUBLESİ": IP + "flags/russia.png",
   "SUUDİ ARABİSTAN RİYALİ": IP + "flags/saudi-arabia.png",
-  "İSVEÇ KRONU": IP + "flags/sweden.png"
+  "İSVEÇ KRONU": IP + "flags/sweden.png",
+  "BAHREYN DİNARI": IP + "flags/bahrain.png"
 };

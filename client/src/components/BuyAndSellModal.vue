@@ -5,6 +5,7 @@
       max-width="700"
       style="border-radius:0 !important;"
       v-model="$store.state.buyselldialog"
+      :fullscreen="$vuetify.breakpoint.smAndDown"
     >
       <v-container
         style="border: 1px solid #ddd;border-radius:0;position:relative;"
@@ -44,8 +45,8 @@
               ></v-combobox>
             </v-row>
             <v-row>
-              <v-col class="d-flex flex-row justify-space-between">
-                <div v-if="currentUnit.isMajor" class="float-left">
+              <v-col class="d-flex flex-row justify-space-evenly">
+                <div v-if="currentUnit.isMajor" :class="$vuetify.breakpoint.smAndDown ? 'd-flex flex-row justify-space-between' : 'float-left'">
                   <span
                     :class="$store.state.isLight ? '' : 'white--text'"
                     class="ml-8"
@@ -55,10 +56,10 @@
                   <span :class="$store.state.isLight ? '' : 'white--text'"
                     >$ {{ currentUnit.price }}</span>
                   <span
+                      class="ml-9"
                     :class="$store.state.isLight ? '' : 'white--text'"
-                    class="ml-8"
                     >₺
-                    {{ (currentUnit.price * dolar) | binayracveondalik }}</span
+                    {{ (currentUnit.price * $store.state.dolar) | binayracveondalik }}</span
                   >
                 </div>
               </v-col>
@@ -69,7 +70,8 @@
           <v-tabs
             v-model="tab"
             background-color="transparent"
-            right
+            :right="!$vuetify.breakpoint.smAndDown"
+            :centered="$vuetify.breakpoint.smAndDown"
             color="pink"
             height="30"
           >
@@ -91,12 +93,13 @@
                 :style="
                   $store.state.isLight
                     ? 'background-color:#f9f9f9;'
-                    : 'background-color:rgba(11,14,63,0.1);'
+                    : 'background-color:rgba(11,14,63,0.1);'+
+                    $vuetify.breakpoint.smAndDown ? 'height:auto;' : 'height:240px;'
                 "
-                style="border-radius: 0;height:240px;"
+                style="border-radius: 0;"
               >
-                <v-row style="margin-top: 20px;">
-                  <v-col class="pb-0 pt-0 col-md-12 col-lg-3">
+                <v-row style="margin-top: 20px;" :class="$vuetify.breakpoint.smAndDown ? 'flex-column' : 'flex-row'">
+                  <v-col class="pb-0 pt-0" :cols="$vuetify.breakpoint.smAndDown ? 12 : 3">
                     <v-text-field
                       v-model="orderNowAmount"
                       type="number"
@@ -114,7 +117,7 @@
                       @input="calculateSum"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="3" class="pb-0 pt-0">
+                  <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 3" class="pb-0 pt-0">
                     <v-text-field
                       v-if="currentUnit.isMajor"
                       :style="
@@ -150,7 +153,7 @@
                       @input="calculateSum"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="1" class="text-center pb-0 pt-0 ma-0">
+                  <v-col cols="1" class="text-center pb-0 pt-0 ma-0" :class="$vuetify.breakpoint.smAndDown ? 'mx-auto' : ''">
                     <v-icon
                       size="40"
                       :color="$store.state.isLight ? '#ff3366' : '#ffbf00'"
@@ -162,7 +165,7 @@
                       mdi-arrow-right
                     </v-icon>
                   </v-col>
-                  <v-col cols="3" class="pb-0 pt-0">
+                  <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 3" class="pb-0 pt-0">
                     <v-text-field
                       :color="$store.state.isLight ? 'black' : 'white'"
                       class="ml-6 centered-input"
@@ -178,7 +181,7 @@
                       v-model="calculatedSum"
                     ></v-text-field>
                   </v-col>
-                  <v-col class="pa-0 ma-0">
+                  <v-col class="pa-0 ma-0" v-if="!$vuetify.breakpoint.smAndDown">
                     <v-btn icon style="background: transparent;">
                       <v-icon color="white">mdi-plus-box-outline</v-icon>
                     </v-btn>
@@ -186,7 +189,7 @@
                 </v-row>
                 <div
                   class="d-flex flex-row justify-lg-end alsat"
-                  style="margin-top: 87px;"
+                  :style="$vuetify.breakpoint.smAndDown ? 'margin-top: 0;' : 'margin-top: 87px;'"
                 >
                   <v-spacer></v-spacer>
                   <div>
@@ -230,9 +233,10 @@
                 :style="
                   $store.state.isLight
                     ? 'background-color:#f9f9f9;'
-                    : 'background-color:rgba(0,0,0,0.1);'
+                    : 'background-color:rgba(0,0,0,0.1);' +
+                    $vuetify.breakpoint.smAndDown ? 'height:auto;' : 'height:240px;'
                 "
-                style="border-radius: 0;height:240px;"
+                style="border-radius: 0;"
               >
                 <v-radio-group v-model="chosen">
                   <v-radio value="price" color="#ff3366">
@@ -248,7 +252,7 @@
                         class="d-flex flex-row"
                       >
                         <div>Fiyata Göre</div>
-                        <div class="d-flex flex-row">
+                        <div class="d-flex" :class="$vuetify.breakpoint.smAndDown ? 'flex-column' : 'flex-row'">
                           <v-text-field
                             type="number"
                             min="1"
@@ -294,13 +298,13 @@
                         class="d-flex flex-row"
                       >
                         <div>Tarihe Göre</div>
-                        <div class="d-flex flex-row">
+                        <div class="d-flex" :class="$vuetify.breakpoint.smAndDown ? 'flex-column' : 'flex-row'">
                           <v-text-field
                             type="number"
                             min="1"
                             v-model="amountByTime"
                             :color="$store.state.isLight ? 'black' : 'white'"
-                            class="ml-6 mr-6 centered-input"
+                            class="ml-6 centered-input"
                             :style="
                               'width:' + $vuetify.breakpoint.smAndDown
                                 ? 'auto'
@@ -334,9 +338,9 @@
                 </v-radio-group>
                 <div class="d-flex flex-row justify-content-end alsat">
                   <v-spacer></v-spacer>
-                  <div style="align-items:end;" class="text--white">
+                  <div style="align-items:end;" class="text--white" :class="$vuetify.breakpoint.smAndDown ? 'mt-0' : 'mt-6'">
                     <v-btn
-                      class="mt-6 pl-1"
+                      class="pl-1"
                       tile
                       color="rgb(248, 73, 96)"
                       @click="setSellOrder"
@@ -351,7 +355,7 @@
                       Sat
                     </v-btn>
                     <v-btn
-                      class="mt-6 pl-1 ml-4 text--white"
+                      class="pl-1 ml-4 text--white"
                       tile
                       color="rgb(2, 192, 118)"
                       @click="setBuyOrder"
@@ -433,7 +437,7 @@ export default {
       format: "24hr"
     },
     inputProps: {
-      style: "padding: 0 16px !important;font-size:12px !important;",
+      style: "padding: 0 16px !important;font-size:12px !important;margin-left:24px !important;",
       dark: !app.$store.state.isLight
     },
     orderNowAmount: 0,
@@ -480,6 +484,7 @@ export default {
           options
         );
         prevId = fetchedData.orderId;
+        this.getUserWallet();
       }
     });
 
@@ -490,6 +495,7 @@ export default {
           `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
           options
         );
+        this.getUserWallet();
         prevId = fetchedData.orderId;
       }
     });
@@ -500,6 +506,7 @@ export default {
           .then(response => {
             app.dolar = parseFloat(response.data["USD"]["Satış"].replace(",", "."));
             this.currentUnit.price = this.currentUnit.price * 1;
+            this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(2);
           })
           .catch(err => console.log(err));
     },5000)
@@ -510,7 +517,6 @@ export default {
   methods: {
     chooseUnit() {
       this.image = this.currentUnit.image;
-      console.log(this.currentUnit)
       this.currentUnitTLPrice =this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.dolar).toFixed(2) :(this.currentUnit.price);
       this.calculateSum();
     },
@@ -598,28 +604,25 @@ export default {
         this.$toasted.show(`Yeterli TÜRK LİRASI yok.`, alertoptions);
         return;
       }
-      if (this.orderNowAmount < 0.1) {
-        this.$toasted.show(`Miktar 0,1'den küçük olamaz.`, alertoptions);
+      if (this.orderNowAmount < 0.01) {
+        this.$toasted.show(`Miktar 0,01'den küçük olamaz.`, alertoptions);
         return;
       }
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
       this.$toasted.show(`Alım emriniz alındı.`, options);
+      console.log(this.currentUnit["name"],"#######")
       axios
         .post(`${this.$store.state.api}/buynow`, {
           userId: JSON.parse(localStorage.getItem("user")).id,
           orderType: "time",
           parameter: new Date().toString(),
-          /*parameter: this.currentUnit.isMajor
-            ? this.currentUnit.price
-            : this.currentUnit.price * this.dolar,*/
           wealth: this.currentUnit["name"],
           amount: this.orderNowAmount,
           major: "TÜRK LİRASI"
         })
         .then(response => {
           this.emirLoaded = true;
-          this.getUserWallet();
           console.log(response.data);
         })
         .catch(err => {
@@ -649,15 +652,14 @@ export default {
       axios
         .post(`${this.$store.state.api}/sellnow`, {
           userId: JSON.parse(localStorage.getItem("user")).id,
-          orderType: "price",
-          parameter: this.currentUnitTLPrice,
+          orderType: "time",
+          parameter: new Date().toString(),
           wealth: this.currentUnit["name"],
           amount: this.orderNowAmount,
           major: "TÜRK LİRASI"
         })
         .then(response => {
           this.emirLoaded = true;
-          this.getUserWallet();
           console.log(response.data);
         })
         .catch(err => {
@@ -670,6 +672,7 @@ export default {
           id: JSON.parse(localStorage.getItem("user")).id
         })
         .then(response => {
+          console.log(response.data)
           localStorage.setItem("wallet", JSON.stringify(response.data));
         })
         .catch(err => {

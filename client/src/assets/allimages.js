@@ -20,6 +20,7 @@ module.exports = {
     "RUS RUBLESİ": IP + "flags/russia.png",
     "SUUDİ ARABİSTAN RİYALİ": IP + "flags/saudi-arabia.png",
     "İSVEÇ KRONU": IP + "flags/sweden.png",
+    "Gümüş": IP + "flags/silver.png",
     "Bitcoin": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
     "Ethereum": "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
     "Tether": "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707",

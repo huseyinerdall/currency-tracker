@@ -19,7 +19,8 @@ export default new Vuex.Store({
     userwalletdialog: false,
     userorderdialog: false,
     isLight: localStorage.getItem("light") == "true",
-    login: false
+    login: false,
+    dolar: 1
   },
   getters: {
     isAuthenticated: state => !!state.token,
@@ -29,7 +30,9 @@ export default new Vuex.Store({
     userwalletdialog: state => state.userwalletdialog,
     userorderdialog: state => state.userorderdialog,
     isLight: state => state.isLight,
-    login: state => state.login
+    login: state => state.login,
+    dolar: state => state.dolar
+
   },
   mutations: {
     ["AUTH_REQUEST"]: state => {
@@ -65,6 +68,13 @@ export default new Vuex.Store({
         state.isLight = true;
         localStorage.setItem("light", true);
       }
+    },
+    dolar(state) {
+      setInterval(() => {
+        axios.get("https://finans.truncgil.com/today.json").then(response => {
+          state.dolar = parseFloat(response.data["USD"]["Satış"].replace(",","."));
+        });
+      },5000)
     }
   },
   actions: {

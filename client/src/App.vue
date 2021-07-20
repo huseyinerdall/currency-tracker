@@ -312,6 +312,7 @@
           <v-col>
             <v-btn block
                    color="rgb(2, 192, 118)"
+                   style="color: #fff;"
                    @click="$store.commit('buyselldialog')">
               AL
             </v-btn>
@@ -319,6 +320,7 @@
           <v-col>
             <v-btn block
                    color="rgb(248, 73, 96)"
+                   style="color: #fff;"
                    @click="$store.commit('buyselldialog')">
               SAT
             </v-btn>
@@ -382,6 +384,7 @@ export default {
     }
   },
   created() {
+    this.$store.commit('dolar');
     setInterval(this.updateTime, 1000);
     this.isAuthenticated = localStorage.getItem("user") != undefined;
   }

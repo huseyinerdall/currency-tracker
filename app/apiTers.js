@@ -34,5 +34,6 @@ module.exports =
         "18 Ayar Altın": "18-ayar-altin",
         "22 Ayar Bilezik": "22-ayar-bilezik",
         "Gümüş": "gumus",
-        "SEPET KUR": "SEPET KUR"
+        "SEPET KUR": "SEPET KUR",
+            "BAHREYN DİNARI": "BHD",
     }
