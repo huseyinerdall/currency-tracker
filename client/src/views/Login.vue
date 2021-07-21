@@ -154,7 +154,9 @@ export default {
                 if (this.$route.params.nextUrl != null) {
                   this.$router.push(this.$route.params.nextUrl);
                 } else {
-                  this.$router.go();
+                  this.$router.push({
+                    name: "Home"
+                  });
                 }
               }
             })

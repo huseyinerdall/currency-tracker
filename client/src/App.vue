@@ -96,7 +96,7 @@
           class="mt-6 mr-2 pl-1"
           tile
           color="rgb(248, 73, 96)"
-          @click="isAuthenticated ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
+          @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
         >
           <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
             mdi-arrow-down
@@ -107,7 +107,7 @@
           class="mt-6 mr-6 pl-1"
           tile
           color="rgb(2, 192, 118)"
-          @click="isAuthenticated ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
+          @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
         >
           <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
             mdi-arrow-up
@@ -250,7 +250,8 @@
             <v-list-item-content class="justify-center pb-0">
               <div class="mx-auto text-center">
                 <v-avatar>
-                  <v-img :src="user.profileImage"></v-img>
+                  <v-img v-if="user.profileImage!=''" :src="user.profileImage"></v-img>
+                  <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
                 </v-avatar>
                 <h3>{{ user.fullName }}</h3>
                 <p class="text-caption mt-1">
@@ -410,6 +411,23 @@
                 </v-list-item-content>
               </v-list-item>
               <v-divider color="#0059b2"></v-divider>
+              <v-list-item to="/userwallet" @click="dialog = false">
+                <v-list-item-icon>
+                  <v-icon>mdi-currency-sign</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    <v-btn
+                        text
+                        :light="$store.state.isLight"
+                        :dark="!$store.state.isLight"
+                    >
+                      CÜZDAN
+                    </v-btn>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider color="#0059b2"></v-divider>
             </v-list-item-group>
           </v-card>
         </v-dialog>
@@ -421,7 +439,7 @@
             <v-btn block
                    color="rgb(2, 192, 118)"
                    style="color: #fff;"
-                   @click="isAuthenticated ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
+                   @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
               AL
             </v-btn>
           </v-col>
@@ -429,7 +447,7 @@
             <v-btn block
                    color="rgb(248, 73, 96)"
                    style="color: #fff;"
-                   @click="isAuthenticated ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
+                   @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
               SAT
             </v-btn>
           </v-col>
