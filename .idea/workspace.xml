@@ -20,26 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="end">
-      <change afterPath="$PROJECT_DIR$/app/models/BAHREYNDINARI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/flags/silver.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/varliklar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/apiTers.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/apiTers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/varliklar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/varliklar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/student-2.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user-wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/allimages.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/allimages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/images.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/short-to-name.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/short-to-name.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/apiTers.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/apiTers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/functions/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/PageNotFound.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/PageNotFound.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -368,14 +359,9 @@
       <workItem from="1626693551793" duration="1653000" />
       <workItem from="1626722977468" duration="853000" />
       <workItem from="1626727278816" duration="1719000" />
-      <workItem from="1626756415910" duration="22220000" />
-    </task>
-    <task id="LOCAL-00002" summary="Test">
-      <created>1608201110096</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1608201110096</updated>
+      <workItem from="1626756415910" duration="22338000" />
+      <workItem from="1626788182098" duration="8207000" />
+      <workItem from="1626842373691" duration="12432000" />
     </task>
     <task id="LOCAL-00003" summary="Test">
       <created>1608202042905</created>
@@ -713,7 +699,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626014972838</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="end">
+      <created>1626787873320</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1626787873727</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -24,7 +24,7 @@
         <v-btn
           href="/doviz"
           text
-          style="margin-left: 6%;"
+          style="margin-left: 2%;"
           :light="$store.state.isLight"
         >
           <span class="mr-4">DÖVİZ</span>
@@ -96,7 +96,7 @@
           class="mt-6 mr-2 pl-1"
           tile
           color="rgb(248, 73, 96)"
-          @click="$store.commit('buyselldialog')"
+          @click="isAuthenticated ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
         >
           <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
             mdi-arrow-down
@@ -107,7 +107,7 @@
           class="mt-6 mr-6 pl-1"
           tile
           color="rgb(2, 192, 118)"
-          @click="$store.commit('buyselldialog')"
+          @click="isAuthenticated ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
         >
           <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
             mdi-arrow-up
@@ -126,6 +126,60 @@
             mdi-theme-light-dark
           </v-icon>
         </v-btn>
+
+        <v-menu
+            bottom
+            min-width="200px"
+            rounded
+            v-if="$store.state.login || isAuthenticated"
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+                class="mt-6 mr-6"
+                icon
+                small
+                v-on="on"
+            >
+              <v-avatar size="40">
+                <v-img v-if="user.profileImage!=''" :src="user.profileImage"></v-img>
+                <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
+              </v-avatar>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-list-item-content class="justify-center pb-0">
+              <div class="mx-auto text-center">
+                <v-avatar>
+                  <v-img v-if="user.profileImage!=''" :src="user.profileImage"></v-img>
+                  <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
+                </v-avatar>
+                <h3>{{ user.fullName }}</h3>
+                <p class="text-caption mt-1">
+                  {{ user.email }}
+                </p>
+                <v-divider></v-divider>
+                <v-btn
+                    depressed
+                    rounded
+                    text
+                    href="/profil"
+                >
+                  PROFİL
+                </v-btn>
+                <v-divider></v-divider>
+                <v-btn
+                    depressed
+                    rounded
+                    text
+                    href="/logout"
+                >
+                  ÇIKIŞ
+                </v-btn>
+              </div>
+            </v-list-item-content>
+          </v-card>
+        </v-menu>
+
         <h1
           class="body-1"
           style="padding-top: 30px;font-size:24px !important;"
@@ -171,6 +225,60 @@
             mdi-theme-light-dark
           </v-icon>
         </v-btn>
+
+        <v-menu
+            offset-x
+            min-width="200px"
+            rounded
+            v-if="$store.state.login || isAuthenticated"
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+                class="mr-1"
+                icon
+                small
+                v-on="on"
+            >
+              <v-avatar size="40">
+                <v-img v-if="user.profileImage!=''" :src="user.profileImage"></v-img>
+                <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
+              </v-avatar>
+
+            </v-btn>
+          </template>
+          <v-card>
+            <v-list-item-content class="justify-center pb-0">
+              <div class="mx-auto text-center">
+                <v-avatar>
+                  <v-img :src="user.profileImage"></v-img>
+                </v-avatar>
+                <h3>{{ user.fullName }}</h3>
+                <p class="text-caption mt-1">
+                  {{ user.email }}
+                </p>
+                <v-divider></v-divider>
+                <v-btn
+                    depressed
+                    rounded
+                    text
+                    href="/profil"
+                >
+                  PROFİL
+                </v-btn>
+                <v-divider></v-divider>
+                <v-btn
+                    depressed
+                    rounded
+                    text
+                    href="/logout"
+                >
+                  ÇIKIŞ
+                </v-btn>
+              </div>
+            </v-list-item-content>
+          </v-card>
+        </v-menu>
+
         <v-app-bar-nav-icon
           dark
           @click="dialog = true"
@@ -313,7 +421,7 @@
             <v-btn block
                    color="rgb(2, 192, 118)"
                    style="color: #fff;"
-                   @click="$store.commit('buyselldialog')">
+                   @click="isAuthenticated ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
               AL
             </v-btn>
           </v-col>
@@ -321,7 +429,7 @@
             <v-btn block
                    color="rgb(248, 73, 96)"
                    style="color: #fff;"
-                   @click="$store.commit('buyselldialog')">
+                   @click="isAuthenticated ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
               SAT
             </v-btn>
           </v-col>
@@ -362,10 +470,10 @@ export default {
   },
 
   data: () => ({
-    isAuthenticated: false,
+    //isAuthenticated: false,
     dialog: false,
     isDropped: false,
-    clock: ""
+    clock: "",
   }),
   methods: {
     updateTime: function() {
@@ -386,7 +494,18 @@ export default {
   created() {
     this.$store.commit('dolar');
     setInterval(this.updateTime, 1000);
-    this.isAuthenticated = localStorage.getItem("user") != undefined;
+    //this.isAuthenticated = !!(localStorage.getItem("user"))||(localStorage.getItem("user") != undefined);
+  },
+  mounted() {
+    //this.isAuthenticated = !!(localStorage.getItem("user"))||(localStorage.getItem("user") != undefined);
+  },
+  computed: {
+    user() {
+      return JSON.parse(localStorage.getItem("user"));
+    },
+    isAuthenticated() {
+      return !!(localStorage.getItem("user"))||(localStorage.getItem("user") != undefined);
+    }
   }
 };
 </script>

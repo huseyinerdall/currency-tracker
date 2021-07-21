@@ -24,41 +24,34 @@ function search(nameKey, array) {
 }
 
 function setGraph(wallet,allPrices){
-  let f,s,temp;
-  f = 0;
-  s = 0;
   let result = {};
-  let first,second  =  '';
-  let balance,diger;
+  let balance,temp;
+  let f = 0;
+  let s = 0;
+  let fkey = "";
+  let skey = "";
+  temp = 0;
   balance = 0;
-  diger = 0;
   for (const w in wallet) {
     if(parseFloat(wallet[w]["amount"])>0){
-      let l = allPrices[w]["shortName"];
-      temp = parseFloat(allPrices[w] || allPrices[w])*parseFloat(wallet[w]["amount"]);
-      balance += temp;
 
-      if(parseFloat(f)<temp){
-          s = f;
-          second = first;
+      temp = parseFloat(allPrices[w])*parseFloat(wallet[w]["amount"]) ||0;
+      if(f<temp){
+        s = f;
+        skey = fkey;
         f = temp;
-        first = l;
-
+        fkey = wallet[w]["shortName"];
       }
-
+      balance += temp;
     }
+  }
 
-  }
-  diger = balance - (f+s);
-  result[first] = f;
-  if(s<10000){
-    result[second] = 0;
-    result["diger"] = diger+s;
-  }else{
-    result[second] = s;
-    result["diger"] = diger;
-  }
+
+  result[fkey] = f;
+  result[skey] = s;
+  result["diger"] = balance-(f+s);
   result["total"] = balance;
+  console.log(result)
   return result;
 }
 

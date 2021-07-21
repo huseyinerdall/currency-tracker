@@ -414,9 +414,7 @@ export default {
             parseFloat(response.data["EUR"]["Satış"].toString().replace(',','.'))) /
           2
         );
-        console.log(response.data)
         response.data["SEPET KUR"] = { Alış: sepetalis.toString().replace('.',','), Satış: sepetsatis.toString().replace('.',',') };
-        console.log(response.data["SEPET KUR"])
         //response.data[gold]["time"] = response.data["Update_Date"];
         if (
           gold.indexOf("Altın") > 0 ||

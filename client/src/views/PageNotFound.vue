@@ -5,9 +5,10 @@
         <div class="mainbox d-flex flex-row">
           <div class="err">4</div>
           <v-icon
-            size="170"
+            size="158"
             color="white"
-            style="position: absolute;top:15%;left:39%;"
+            class="middle-ikon"
+            style="position: absolute;top:15%;"
             >mdi-spin mdi-progress-question</v-icon
           >
           <div class="err2">4</div>
@@ -40,6 +41,21 @@ export default {
   position: absolute;
   left: 20%;
   top: 8%;
+}
+.middle-ikon{
+  left:39%;
+}
+@media screen and (max-width: 768px)  {
+  .err {
+    color: #ffffff;
+    font-size: 11rem;
+    position: absolute;
+    left: 0;
+    top: 8%;
+  }
+  .middle-ikon{
+    left:25%;
+  }
 }
 
 .far {

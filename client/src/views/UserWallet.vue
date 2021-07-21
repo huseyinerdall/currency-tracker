@@ -10,8 +10,11 @@
                   <v-col class="ml-2">
                     <h3 class="white--text">₺{{ balanceNow | turkishCurrencyformat }}</h3>
                   </v-col>
-                  <v-col class="ml-4" :set="change = userBalanceList[0]['data'][userBalanceList[0]['data'].length-1]-userBalanceList[0]['data'][0]">
+                  <v-col class="ml-2" :set="change = userBalanceList[0]['data'][userBalanceList[0]['data'].length-1][1]-userBalanceList[0]['data'][0][1]">
                     <h4 :class="(change >= 0) ? 'green--text' : 'red--text'">{{change | signint }}</h4>
+                  </v-col>
+                  <v-col class="ml-0" :set="yuzde = (change/userBalanceList[0]['data'][0][1])*100">
+                    <h4 :class="(change >= 0) ? 'green--text' : 'red--text'">{{yuzde | signint }}%</h4>
                   </v-col>
                   <v-col>
                     <v-select
@@ -55,16 +58,16 @@
               >
                 <template v-slot:item="{ item }">
                   <tr>
-                    <td>
+                    <td style="font-size: 11px;">
                       {{item.shortName | uppercase}}
                     </td>
-                    <td>
+                    <td style="font-size: 11px;">
                       {{(allPrices[item.shortName] || allPrices[shortToName[item.shortName]]) | turkishCurrencyformat }}
                     </td>
-                    <td>
+                    <td style="font-size: 11px;">
                       {{item.amount | tofixedftwo}}
                     </td>
-                    <td>
+                    <td style="font-size: 11px;">
                       <div v-if="item.shortName != 'TRY'">
                         <span
                             :class="[
@@ -77,7 +80,7 @@
                       </div>
                       <div v-else>-</div>
                     </td>
-                    <td>
+                    <td style="font-size: 11px;">
                       {{ ((allPrices[item.shortName] || allPrices[shortToName[item.shortName]])*item.amount) | turkishCurrencyformat}}
                     </td>
                   </tr>
@@ -154,17 +157,6 @@
                           </v-btn>
 
                           <v-btn
-                              min-width="0"
-                              class="pa-0"
-                              x-small
-                              color="transparent"
-                              :disabled="item.Closed == 1"
-                          >
-                            <v-icon size="16" color="rgba(255,255,255,0.5)">
-                              mdi-pencil-outline
-                            </v-icon>
-                          </v-btn>
-                          <v-btn
                               :disabled="item.Closed == 1 || item.Closed == -1"
                               min-width="0"
                               class="pa-0"
@@ -213,7 +205,7 @@
                 >
                   <template v-slot:item="{ item }">
                     <tr>
-                      <td>
+                      <td style="font-size: 12px;">
                         <v-row class="align-center">
                           <span class="ml-4 mr-4" v-html="(+item.sirano < 4) ? item.sirano+'*' : item.sirano+'&nbsp;&nbsp;'"></span>
                           <v-avatar size="32" class="ml-2 mr-2" v-if="item.profileImage == '' || item.profileImage.length == 4">
@@ -225,16 +217,14 @@
                           <span>{{item.fullName | tocapitalize}}</span>
                         </v-row>
                       </td>
-                      <td>
+                      <td style="font-size: 12px;">
                         ₺{{item.balanceNow | turkishCurrencyformat}}
                       </td>
                       <td>
-                        {{(Object.values(item.graph)[0]/(item.graph['total']))*200}}-
-                        {{(Object.values(item.graph)[1]/(item.graph['total']))*200}}
                         <v-row class="pa-0">
                           <span style="font-size:10px;" class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
                           <span style="font-size:10px;" class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
-                          <span style="font-size:10px;" class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined" :style="'width:'+item.graph['diger']/(item.graph['total'])+'px;'">DİĞER</span>
+                          <span style="font-size:10px;" class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined && (item.graph['diger']/(item.graph['total'])*200)>10" :style="'width:'+item.graph['diger']/(item.graph['total'])*200+'px;'">DİĞER</span>
                         </v-row>
                       </td>
                     </tr>

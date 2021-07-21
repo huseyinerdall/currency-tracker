@@ -19,8 +19,7 @@ class Trade{
                 }
             })
                 .then((user) =>{
-                    console.log(wealthPrice)
-                    let tradePurpose = +amount * parseFloat(wealthPrice.toString().replace(',','.'));
+                    let tradePurpose = parseFloat(amount) * parseFloat(wealthPrice.toString().replace(',','.'));
                     temp = user.dataValues.wallet;
                     temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);
                     temp[wealth]["amount"] = parseFloat(amount) + temp[wealth]["amount"];
@@ -68,10 +67,10 @@ class Trade{
                     id: userId
                 }
             })
-                .then(async(user) =>{
+                .then((user) =>{
                     let tradePurpose = parseFloat(amount) * parseFloat(wealthPrice);
-                    temp = await user.dataValues.wallet;
-                    temp["TÜRK LİRASI"].amount = parseFloat(user.dataValues.wallet["TÜRK LİRASI"].amount) + parseFloat(tradePurpose);
+                    temp = user.dataValues.wallet;
+                    temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"]["amount"]||0) + parseFloat(tradePurpose);
                     temp[wealth].amount = parseFloat(temp[wealth].amount) - parseFloat(amount);
                     temp[wealth].cost = (parseFloat(temp[wealth].cost)||0) - parseFloat(tradePurpose);
                     user.wallet = temp;

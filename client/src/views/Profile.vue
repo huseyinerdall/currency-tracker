@@ -6,14 +6,14 @@
           <v-avatar size="100" color="red">
             <img
               v-if="userInfo.profileImage"
-              :src="$store.state.api + '/uploads/' + userInfo.profileImage"
+              :src="userInfo.profileImage"
               alt="avatar"
             />
             <span v-else class="white--text headline">{{
               userInfo.fullName | nameAvatar
             }}</span>
           </v-avatar>
-          <v-btn
+<!--          <v-btn
             color="primary"
             class="text-none ml-6"
             rounded
@@ -25,7 +25,7 @@
               mdi-camera
             </v-icon>
             {{ buttonText }}
-          </v-btn>
+          </v-btn>-->
           <input
             ref="file"
             class="d-none"
@@ -68,7 +68,7 @@
             </tr>
           </table>
         </v-card-text>
-        <v-btn @click="save">KAYDET</v-btn>
+<!--        <v-btn @click="save">KAYDET</v-btn>-->
       </v-card>
     </v-flex>
   </div>

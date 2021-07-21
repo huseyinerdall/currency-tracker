@@ -30,7 +30,7 @@ export default new Vuex.Store({
     userwalletdialog: state => state.userwalletdialog,
     userorderdialog: state => state.userorderdialog,
     isLight: state => state.isLight,
-    login: state => state.login,
+    login: state => state.login || !!localStorage.getItem("user"),
     dolar: state => state.dolar
 
   },

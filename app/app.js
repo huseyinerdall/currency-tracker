@@ -859,8 +859,8 @@ db.sequelize.sync().then(() => {
                        else if(openOrders[i]["dataValues"]["buyOrSell"] == 'sell' &&
                            new Date(openOrders[i]["dataValues"]["Parameter"]) <= new Date()){
 
-                           let priceNow = parseFloat((allPrices[allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]
-                           ||apiT[openOrders[i]["dataValues"]["CoinOrCurrency"]]]));
+                           let priceNow = parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]) ||
+                               parseFloat(allPrices[apiT[openOrders[i]["dataValues"]["CoinOrCurrency"]].replace(",",".")]);
 
                            Trader.sell(
                                openOrders[i]["dataValues"]["UserId"],
