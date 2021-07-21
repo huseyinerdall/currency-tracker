@@ -477,27 +477,17 @@ export default {
     }
 
     socket.on("buy", fetchedData => {
-      let prevId = -1;
-      if (fetchedData.userId == JSON.parse(localStorage.getItem("user")).id || fetchedData.orderId != prevId) {
-        this.$toasted.show(
+      app.$toasted.show(
           `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
           options
-        );
-        prevId = fetchedData.orderId;
-        this.getUserWallet();
-      }
+      );
     });
 
     socket.on("sell", fetchedData => {
-      let prevId = -1;
-      if (fetchedData.userId == JSON.parse(localStorage.getItem("user")).id || fetchedData.orderId != prevId) {
         this.$toasted.show(
           `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
           options
         );
-        this.getUserWallet();
-        prevId = fetchedData.orderId;
-      }
     });
 
     setInterval(()=>{
@@ -554,10 +544,14 @@ export default {
             this.chosen == "price" ? this.amountByPrice : this.amountByTime,
           major: "TÜRK LİRASI"
         })
-        .then(response => {
+        .then(() => {
           this.emirLoaded = true;
           this.$toasted.show(`Emir oluşturuldu.`, options);
-          console.log(response.data);
+          this.$toasted.show(
+              `${this.chosen == "price" ? this.amountByPrice : this.amountByTime} adet ${this.currentUnit["name"]} alım emriniz gerçekleşti.`,
+              options
+          );
+          setTimeout(()=>{this.$router.go();},1700);
         })
         .catch(err => {
           console.log(err);
@@ -586,9 +580,14 @@ export default {
             this.chosen == "price" ? this.amountByPrice : this.amountByTime,
           major: "TÜRK LİRASI"
         })
-        .then(response => {
+        .then(() => {
           this.emirLoaded = true;
-          console.log(response.data);
+          this.$toasted.show(`Emir oluşturuldu.`, options);
+          this.$toasted.show(
+              `${this.chosen == "price" ? this.amountByPrice : this.amountByTime} adet ${this.currentUnit["name"]} satım emriniz gerçekleşti.`,
+              options
+          );
+          setTimeout(()=>{this.$router.go();},1700);
         })
         .catch(err => {
           console.log(err);
@@ -624,6 +623,11 @@ export default {
         .then(response => {
           this.emirLoaded = true;
           console.log(response.data);
+          this.$toasted.show(
+              `${this.orderNowAmount} adet ${this.currentUnit["name"]} alım emriniz gerçekleşti.`,
+              options
+          );
+          setTimeout(()=>{this.$router.go();},1700);
         })
         .catch(err => {
           console.log(err);
@@ -661,6 +665,11 @@ export default {
         .then(response => {
           this.emirLoaded = true;
           console.log(response.data);
+          this.$toasted.show(
+              `${this.orderNowAmount} adet ${this.currentUnit["name"]} satım emriniz gerçekleşti.`,
+              options
+          );
+          setTimeout(()=>{this.$router.go();},1700);
         })
         .catch(err => {
           console.log(err);
