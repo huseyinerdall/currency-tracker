@@ -99,5 +99,10 @@ module.exports = [
     name: "İSVEÇ KRONU",
     symbol: "SEK",
     image: IP + "flags/sweden.png"
+  },
+  {
+    name: "BAHREYN DİNARI",
+    symbol: "BHD",
+    image: IP + "flags/bahrain.png"
   }
 ];

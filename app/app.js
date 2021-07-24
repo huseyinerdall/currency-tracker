@@ -730,7 +730,7 @@ db.sequelize.sync().then(() => {
         if(factRes.length == 250){io.emit('coins', factRes);}
         if(factRes30.length == 30){io.emit('coins30', factRes30);}
         if(golds.length == 16){io.emit('golds', golds);}
-        if(currencies.length == 19){io.emit('currencies', currencies);}
+        if(currencies.length == 20){io.emit('currencies', currencies);}
         io.emit('allprices', allPrices);
     },1000);
 

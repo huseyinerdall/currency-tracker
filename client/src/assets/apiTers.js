@@ -17,6 +17,7 @@ module.exports = {
   "ÇİN YUANI": "CNY",
   "KATAR RİYALİ": "QAR",
   "BULGAR LEVASI": "BGN",
+  "BAHREYN DİNARI": "BHD",
   "Ons Altın": "ons",
   "Gram Altın": "gram-altin",
   "Çeyrek Altın": "ceyrek-altin",

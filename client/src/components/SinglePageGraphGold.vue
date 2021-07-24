@@ -9,10 +9,10 @@
 
       <div class="flex-column d-flex ml-2" style="width: 200px;">
         <div>
-          <h3 :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'">
+          <h4 :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'">
             {{ gold | shorten }} {{ type == "Altın" ? "" : "-" }}
             {{ gold | tosymbol }}
-          </h3>
+          </h4>
         </div>
         <div class="d-flex flex-row justify-space-between">
           <v-select

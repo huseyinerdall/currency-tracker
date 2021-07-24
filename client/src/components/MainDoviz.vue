@@ -253,6 +253,7 @@ export default {
         app.data.pop();
         app.data.pop();
         app.data.pop();
+        app.data.pop();
       }
       this.overlay = false;
     }
@@ -267,6 +268,7 @@ export default {
         app.data[18] = temp;
 
         if (app.$route.path == "/") {
+          app.data.pop();
           app.data.pop();
           app.data.pop();
           app.data.pop();
