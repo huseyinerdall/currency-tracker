@@ -40,8 +40,8 @@
                 </v-btn>
               </v-col>
           </v-row>
-          <GoogleLogin :params="params" :onSuccess="onSuccess">
-            <v-btn color="red darken-1" class="white--text" tile block width="460">
+          <GoogleLogin :params="params" :onSuccess="onSuccess" style="max-width: 100%;">
+            <v-btn color="red darken-1" class="white--text" tile block width="460" style="max-width: 100%;">
               Google İle
               <v-icon right dark>
                 mdi-google

@@ -812,7 +812,6 @@ export default {
   })
 };
 </script>
-
 <style>
 .tooltipp {
   padding: 0px 20px;
@@ -823,8 +822,8 @@ export default {
   transition: all 0.3s ease-in-out;
   box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
 }
-
-
+</style>
+<style scoped>
 /* tooltip  after*/
 /*.tooltipp::after {
   content: " ";

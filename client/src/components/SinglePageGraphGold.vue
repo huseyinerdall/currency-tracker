@@ -385,7 +385,6 @@ export default {
       ];
     }
     let app = this;
-    console.log(this.gold);
     axios
       .post(`${this.$store.state.admin}/getgoldseodata`, {
         gold: this.gold
@@ -398,7 +397,7 @@ export default {
       });
 
     axios.get(`${this.$store.state.api}/gold/${this.gold}`).then(response => {
-      this.close = response.data["close"];
+      this.close = response.data["close"].replace('$','').replace('.','').replace(',','.');
     });
     axios
       .get("https://finans.truncgil.com/today.json")
@@ -470,7 +469,6 @@ export default {
           //let tempDates = [];
           let tempValues = [];
           for (let i = 0; i < fetchedData.length; i++) {
-            console.log(fetchedData[i]["createdAt"],"##########")
             tempValues.push([
               fetchedData[i]["createdAt"],
               fetchedData[i]["Satis"]
@@ -514,9 +512,9 @@ export default {
           axios
             .get(`${this.$store.state.api}/gold/${this.gold}`)
             .then(response => {
-              this.alis = response.data["Alış"].replace(',','.');
-              this.satis = response.data["Satış"];
-              this.close = response.data["close"];
+              this.alis = response.data["Alış"].replace('$','').replace('.','').replace(',','.');
+              this.satis = response.data["Satış"].replace('$','').replace('.','').replace(',','.');
+              this.close = response.data["close"].replace('$','').replace('.','').replace(',','.');
               this.updatetime = response.data["time"];
               this.type = response.data["Tür"];
             });

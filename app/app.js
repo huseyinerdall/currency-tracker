@@ -54,7 +54,6 @@ app.get('/tcmb', (req, res) => {
         .then(response => {
             xml = response.data.toString();
             parseString(xml, function(err, result) {
-                console.log(result["Tarih_Date"])
                 result = result["Tarih_Date"]["Currency"];
 
                 for (let i = 0; i < result.length; i++) {
@@ -115,7 +114,7 @@ app.get('/gold/:goldName', (req, res) => {
             let sepetsatis = ((parseFloat(response.data["USD"]["Satış"].replace(',','.')) + parseFloat(response.data["EUR"]["Satış"].replace(',','.'))) / 2).toFixed(4).replace('.',',');
             response.data["SEPET KUR"] = {"Alış":sepetalis,"Satış":sepetsatis};
             response.data[element]["time"] = response.data["Update_Date"];
-            if (element.indexOf("altin") > 0 || element == '22-ayar-bilezik' || element == 'gumus') {
+            if (element.indexOf("altin") > 0 || element == '22-ayar-bilezik' || element == 'gumus' || element.indexOf("ons") > -1) {
                 response.data[element]["type"] = api[element];
                 indis = "Gold" + utils.turkishToEnglish(api[element])
                 let date = new Date().toLocaleDateString("ISO");
@@ -154,7 +153,6 @@ app.get('/gold/:goldName', (req, res) => {
                 }
 
             }
-            console.log(response.data[element])
             res.json(response.data[element]);
         })
         .catch(err => console.log(err));
@@ -331,7 +329,6 @@ app.post('/golddescriptions', async(req, res) => {
 
 app.post('/bintltable', async(req, res) => {
     let time = req.body.time || 1;
-    console.log(time)
     let temp;
     let BINTL = {};
     let BEGIN = moment().subtract(time, 'd').toDate() || DEFAULT;
@@ -417,10 +414,8 @@ app.get('/pariteler', async(req, res) => {
                             }
                         }
                     }).catch((err)=>console.log(err))
-                    console.log(a)
                     temp["yesterday"] = a["dataValues"]["Satis"];
                     data.push(temp);
-                    console.log(temp)
                 }
 
             }
@@ -430,12 +425,9 @@ app.get('/pariteler', async(req, res) => {
 })
 
 app.post('/converter', (req, res) => {
-    console.log(req.body.source)
     let source = req.body.source;
     let target = req.body.target;
     let amount = req.body.amount;
-    console.log(source,target)
-    console.log(target)
     axios.get(truncgil)
         .then((response) => {
             let s;
@@ -471,7 +463,6 @@ app.post('/buynow', (req, res) => {
     let wealth = req.body.wealth;
     let amount = req.body.amount;
     let major = req.body.major || "TÜRK LİRASI";
-    console.log(userId,orderType,parameter,wealth,amount,major);
     Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major)
         .then((orderId)=>{
             console.log(orderId)
@@ -517,7 +508,6 @@ app.post('/buysellnow', (req, res) => {
     let userId = req.body.userId;
     let wealth = req.body.coinOrCurrency;
     let amount = req.body.amount;
-    console.log(orderId,buyOrSell,"*******-**************")
     Trader.buySellNow(orderId)
         .then((result) => {
             if(result == "OK"){
@@ -540,10 +530,8 @@ app.post('/setbuyorder', (req, res) => {
     let userId = req.body.userId;
     let orderType = req.body.orderType;
     let parameter = req.body.parameter;
-    console.log(apiT[req.body.wealth] , req.body.wealth)
     let wealth = apiT[req.body.wealth] || req.body.wealth;
     let amount = req.body.amount;
-    console.log(amount,":Amount");
     let major = req.body.major || "TÜRK LİRASI";
     let result = Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major);
     res.send(result);
@@ -567,7 +555,6 @@ app.post('/deleteorder', (req, res) => {
 
 app.post('/getallorder', async(req, res) => {
     let userId = req.body.userId;
-    console.log(userId)
     let response = await Trader.getOrdersByUser(userId);
     res.json(response);
 })
@@ -603,7 +590,6 @@ db.sequelize.sync().then(() => {
     let dolar = 1;
     allPrices["TRY"] = 1;
     let ters = {};
-    let varliklar = {};
     setInterval(() => {
         factRes30 = [];
         factRes = [];
@@ -629,11 +615,6 @@ db.sequelize.sync().then(() => {
                     ters[response.data[i]["symbol"]] = response.data[i]["name"];
                     allPrices[response.data[i]["name"]] = (response.data[i]["current_price"] * dolar);
                     allImages[response.data[i]["name"]] = response.data[i]["image"];
-                    varliklar[response.data[i]["name"]] = {
-                        amount: 0,
-                        shortName: response.data[i]["symbol"],
-                        cost: 0
-                    }
                     factRes.push(temp);
                     if(i<30){
                         factRes30.push(temp);
@@ -675,7 +656,7 @@ db.sequelize.sync().then(() => {
                         if (db[indis] && response.data[element]["Alış"] != C[indis] ||
                             (new Date().getHours() == "1" && new Date().getMinutes() == "20" && new Date().getSeconds() < 15)) {
                             db[indis]
-                                .create({Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"]})
+                                .create({Alis: response.data[element]["Alış"].replace('$','').replace('.','').replace(',','.'), Satis: response.data[element]["Satış"].replace('$','').replace('.','').replace(',','.')})
                             C[indis] = response.data[element]["Alış"];
                         }
                         let date = new Date().toISOString().substring(0, 10);
@@ -696,12 +677,6 @@ db.sequelize.sync().then(() => {
 
                         golds.push(response.data[element]);
                         allPrices[api[element]] = parseFloat(response.data[element]["Satış"].replace(",","."));
-
-                        varliklar[api[element]] = {
-                            amount: 0,
-                            shortName: element,
-                            cost: 0
-                        }
 
                     } else if (api[element].indexOf("Update_Date") < 0 && api[element].indexOf("ÇEKME") < 0) {
                         response.data[element]["type"] = api[element];
@@ -734,11 +709,6 @@ db.sequelize.sync().then(() => {
                         currencies.push(response.data[element]);
                         allPrices[api[element]] = parseFloat(response.data[element]["Satış"].replace(",","."));
 
-                        varliklar[api[element]] = {
-                            amount: 0,
-                            shortName: element,
-                            cost: 0
-                        }
                     }
                 }
             })
@@ -830,7 +800,6 @@ db.sequelize.sync().then(() => {
                                    console.log(err)})
                        }
                    }else if(openOrders[i].dataValues.OrderType == 'time'){
-                       console.log(new Date(openOrders[i]["dataValues"]["Parameter"]),"000000000000000")
                        if(openOrders[i]["dataValues"]["buyOrSell"] == 'buy' &&
                            new Date(openOrders[i]["dataValues"]["Parameter"]) <= new Date()){
 
@@ -838,7 +807,6 @@ db.sequelize.sync().then(() => {
                            ||apiT[openOrders[i]["dataValues"]["CoinOrCurrency"]]]));*/
                            let priceNow = parseFloat(allPrices[openOrders[i]["dataValues"]["CoinOrCurrency"]]) ||
                                           parseFloat(allPrices[apiT[openOrders[i]["dataValues"]["CoinOrCurrency"]].replace(",",".")]);
-                           console.log(openOrders[i]["dataValues"]["CoinOrCurrency"],"coin or currency")
                            Trader.buy(
                                openOrders[i]["dataValues"]["UserId"],
                                openOrders[i]["dataValues"]["CoinOrCurrency"],

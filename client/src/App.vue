@@ -171,6 +171,15 @@
                     depressed
                     rounded
                     text
+                    href="/userwallet"
+                >
+                  CÜZDAN
+                </v-btn>
+                <v-divider></v-divider>
+                <v-btn
+                    depressed
+                    rounded
+                    text
                     href="/logout"
                 >
                   ÇIKIŞ
@@ -265,6 +274,15 @@
                     href="/profil"
                 >
                   PROFİL
+                </v-btn>
+                <v-divider></v-divider>
+                <v-btn
+                    depressed
+                    rounded
+                    text
+                    href="/userwallet"
+                >
+                  CÜZDAN
                 </v-btn>
                 <v-divider></v-divider>
                 <v-btn
@@ -413,7 +431,7 @@
               <v-divider color="#0059b2"></v-divider>
               <v-list-item to="/userwallet" @click="dialog = false">
                 <v-list-item-icon>
-                  <v-icon>mdi-currency-sign</v-icon>
+                  <v-icon>mdi-cash-multiple</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>
@@ -519,7 +537,13 @@ export default {
   },
   computed: {
     user() {
-      return JSON.parse(localStorage.getItem("user"));
+      try{
+        return JSON.parse(localStorage.getItem("user")) ||null;
+      }catch (e) {
+        console.log(e);
+        localStorage.removeItem("user");
+        return null;
+      }
     },
     isAuthenticated() {
       return !!(localStorage.getItem("user"))||(localStorage.getItem("user") != undefined);

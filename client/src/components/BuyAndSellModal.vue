@@ -477,6 +477,7 @@ export default {
     }
 
     socket.on("buy", fetchedData => {
+      alert("buyıldı")
       app.$toasted.show(
           `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
           options
