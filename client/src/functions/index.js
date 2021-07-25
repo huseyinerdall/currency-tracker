@@ -51,7 +51,6 @@ function setGraph(wallet,allPrices){
   result[skey] = s;
   result["diger"] = balance-(f+s);
   result["total"] = balance;
-  console.log(result)
   return result;
 }
 

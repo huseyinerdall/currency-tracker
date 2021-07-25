@@ -48,16 +48,23 @@
               </v-icon>
             </v-btn>
           </GoogleLogin>
-          <v-btn
+<!--          <v-btn
               color="#3b5998"
-              class="white--text mt-2"
+              class="white&#45;&#45;text mt-2"
               block tile
               @click="authenticate('facebook')">
             Facebook İLE
             <v-icon right dark>
               mdi-facebook
             </v-icon>
-          </v-btn>
+          </v-btn>-->
+
+          <template>
+            <v-facebook-login app-id="543577080115436" style="width: 100%;" class="mt-2">
+            </v-facebook-login>
+          </template>
+
+
         </v-col>
       </v-row>
     </v-container>
@@ -82,6 +89,7 @@
 <script>
 import axios from "axios";
 import GoogleLogin from "vue-google-login";
+import VFacebookLogin from 'vue-facebook-login-component';
 export default {
   name: "Login",
   data() {
@@ -104,6 +112,7 @@ export default {
   },
   components: {
     GoogleLogin,
+    VFacebookLogin,
   },
   methods: {
     googlelogin() {
@@ -126,7 +135,7 @@ export default {
         .then(() => {
           axios
             .post(`${this.$store.state.api}/login`, {
-              email: temp["Mt"],
+              email: temp.getEmail(),
               passwd: "1"
             })
             .then(response => {

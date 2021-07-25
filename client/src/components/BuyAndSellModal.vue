@@ -383,6 +383,7 @@
 
 <script>
 import { mapState } from "vuex";
+import EventBus from '../event-bus';
 import axios from "axios";
 import io from "socket.io-client";
 import images from "../assets/images.js";
@@ -456,6 +457,22 @@ export default {
     socket.on("currencies", fetchedData => {
       localStorage.setItem("currencies", JSON.stringify(fetchedData));
     });
+
+    socket.on("buy", fetchedData => {
+      app.$toasted.show(
+          `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
+          options
+      );
+      app.emitMethod();
+    });
+
+    socket.on("sell", fetchedData => {
+      this.$toasted.show(
+          `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
+          options
+      );
+      this.emitMethod();
+    });
     if (localStorage.getItem("coins250")) {
       this.data = JSON.parse(localStorage.getItem("coins250"));
       let tempList = JSON.parse(localStorage.getItem("currencies")).concat(
@@ -476,20 +493,7 @@ export default {
       });
     }
 
-    socket.on("buy", fetchedData => {
-      alert("buyıldı")
-      app.$toasted.show(
-          `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
-          options
-      );
-    });
 
-    socket.on("sell", fetchedData => {
-        this.$toasted.show(
-          `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
-          options
-        );
-    });
 
     setInterval(()=>{
       axios
@@ -497,18 +501,20 @@ export default {
           .then(response => {
             app.dolar = parseFloat(response.data["USD"]["Satış"].replace(",", "."));
             this.currentUnit.price = this.currentUnit.price * 1;
-            this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(2);
+            this.currentUnitTLPrice = this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.dolar).toFixed(2) :(this.currentUnit.price);
+            //this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(2);
           })
           .catch(err => console.log(err));
     },5000)
     this.currentUnit = this.data[0];
-    this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(2);
+    this.currentUnitTLPrice = this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.dolar).toFixed(2) :(this.currentUnit.price);
     this.chooseUnit();
   },
   methods: {
     chooseUnit() {
       this.image = this.currentUnit.image;
       this.currentUnitTLPrice =this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.dolar).toFixed(2) :(this.currentUnit.price);
+
       this.calculateSum();
     },
     calculateSum() {
@@ -534,7 +540,6 @@ export default {
       }
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
-      console.log(this.chosen == "price" ? this.amountByPrice : this.amountByTime,":Amount");
       axios
         .post(`${this.$store.state.api}/setbuyorder`, {
           userId: JSON.parse(localStorage.getItem("user")).id,
@@ -547,12 +552,8 @@ export default {
         })
         .then(() => {
           this.emirLoaded = true;
+          this.$store.commit('buyselldialog');
           this.$toasted.show(`Emir oluşturuldu.`, options);
-          this.$toasted.show(
-              `${this.chosen == "price" ? this.amountByPrice : this.amountByTime} adet ${this.currentUnit["name"]} alım emriniz gerçekleşti.`,
-              options
-          );
-          setTimeout(()=>{this.$router.go();},1700);
         })
         .catch(err => {
           console.log(err);
@@ -583,12 +584,8 @@ export default {
         })
         .then(() => {
           this.emirLoaded = true;
+          this.$store.commit('buyselldialog');
           this.$toasted.show(`Emir oluşturuldu.`, options);
-          this.$toasted.show(
-              `${this.chosen == "price" ? this.amountByPrice : this.amountByTime} adet ${this.currentUnit["name"]} satım emriniz gerçekleşti.`,
-              options
-          );
-          setTimeout(()=>{this.$router.go();},1700);
         })
         .catch(err => {
           console.log(err);
@@ -623,12 +620,8 @@ export default {
         })
         .then(response => {
           this.emirLoaded = true;
+          this.$store.commit('buyselldialog');
           console.log(response.data);
-          this.$toasted.show(
-              `${this.orderNowAmount} adet ${this.currentUnit["name"]} alım emriniz gerçekleşti.`,
-              options
-          );
-          setTimeout(()=>{this.$router.go();},1700);
         })
         .catch(err => {
           console.log(err);
@@ -665,16 +658,15 @@ export default {
         })
         .then(response => {
           this.emirLoaded = true;
+          this.$store.commit('buyselldialog');
           console.log(response.data);
-          this.$toasted.show(
-              `${this.orderNowAmount} adet ${this.currentUnit["name"]} satım emriniz gerçekleşti.`,
-              options
-          );
-          setTimeout(()=>{this.$router.go();},1700);
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    emitMethod () {
+      EventBus.$emit('boughtorsold');
     },
     getUserWallet: function() {
       axios

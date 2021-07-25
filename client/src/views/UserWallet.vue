@@ -5,7 +5,15 @@
         <v-col class="col-md-12">
           <v-row>
             <v-col cols="12" md="6">
-              <div style="border: 1px solid #ddd;border-radius:6px;">
+              <v-card style="border: 1px solid #ddd;border-radius:6px;background: transparent;" :loading="loading1">
+                <template slot="progress">
+                  <v-progress-circular
+                      color="white"
+                      height="12"
+                      indeterminate
+                      style="position: absolute;top:48%;left:48%;"
+                  ></v-progress-circular>
+                </template>
                 <v-row>
                   <v-col class="ml-2">
                     <h3 class="white--text">₺{{ balanceNow | turkishCurrencyformat }}</h3>
@@ -16,15 +24,16 @@
                   <v-col class="ml-0" :set="yuzde = (change/userBalanceList[0]['data'][0][1])*100">
                     <h4 :class="(change >= 0) ? 'green--text' : 'red--text'">{{yuzde | signint }}%</h4>
                   </v-col>
-                  <v-col>
+                  <v-col class="time-dropdown">
                     <v-select
-                        style="margin-top: -10px;font-size:11px;"
+                        style="margin-top: -10px;font-size:14px;background: transparent;"
                         :items="timeOptions"
                         item-text="text"
                         item-value="time"
                         solo
                         dense
-                        light
+                        dark
+                        v-model="time"
                         :value="select"
                         @change="setChart"
                     ></v-select>
@@ -38,37 +47,46 @@
                     :options="chartOptions"
                     :series="userBalanceList"
                 ></apexchart>
-              </div>
+              </v-card>
             </v-col>
 
             <v-col cols="12" md="6">
-              <v-data-table
-                  :headers="headers"
-                  :items="data"
-                  dense
-                  mobile-breakpoint="0"
-                  hide-default-footer
-                  :items-per-page="itemPerPage"
-                  no-data-text=""
-                  style="border: 1px solid #ddd;border-radius:6px;"
-                  :dark="!$store.state.isLight"
-                  :light="$store.state.isLight"
-                  sort-by.sync="amount"
-                  loading="true"
-              >
-                <template v-slot:item="{ item }">
-                  <tr>
-                    <td style="font-size: 11px;">
-                      {{item.shortName | uppercase}}
-                    </td>
-                    <td style="font-size: 11px;">
-                      {{(allPrices[item.shortName] || allPrices[shortToName[item.shortName]]) | turkishCurrencyformat }}
-                    </td>
-                    <td style="font-size: 11px;">
-                      {{item.amount | tofixedftwo}}
-                    </td>
-                    <td style="font-size: 11px;">
-                      <div v-if="item.shortName != 'TRY'">
+              <v-card style="background: transparent;" :loading="loading2">
+                <template slot="progress">
+                  <v-progress-circular
+                      color="white"
+                      height="12"
+                      indeterminate
+                      style="position: absolute;top:48%;left:48%;"
+                  ></v-progress-circular>
+                </template>
+                <v-data-table
+                    :headers="headers"
+                    :items="data"
+                    dense
+                    mobile-breakpoint="0"
+                    hide-default-footer
+                    :items-per-page="itemPerPage"
+                    no-data-text=""
+                    style="border: 1px solid #ddd;border-radius:6px;"
+                    :dark="!$store.state.isLight"
+                    :light="$store.state.isLight"
+                    sort-by.sync="amount"
+                    loading="true"
+                >
+                  <template v-slot:item="{ item }">
+                    <tr>
+                      <td style="font-size: 11px;">
+                        {{item.shortName | uppercase}}
+                      </td>
+                      <td style="font-size: 11px;">
+                        {{(allPrices[item.shortName] || allPrices[shortToName[item.shortName]]) | turkishCurrencyformat }}
+                      </td>
+                      <td style="font-size: 11px;">
+                        {{item.amount | tofixedftwo}}
+                      </td>
+                      <td style="font-size: 11px;">
+                        <div v-if="item.shortName != 'TRY'">
                         <span
                             :class="[
                             (parseFloat((allPrices[item.shortName] || allPrices[shortToName[item.shortName]])*item.amount)-parseFloat(item.cost)) >= 0
@@ -77,159 +95,179 @@
                           ]">
                           {{(parseFloat((allPrices[item.shortName] || allPrices[shortToName[item.shortName]])*item.amount)-parseFloat(item.cost)) | signint}}
                         </span>
-                      </div>
-                      <div v-else>-</div>
-                    </td>
-                    <td style="font-size: 11px;">
-                      {{ ((allPrices[item.shortName] || allPrices[shortToName[item.shortName]])*item.amount) | turkishCurrencyformat}}
-                    </td>
-                  </tr>
-                </template>
-              </v-data-table>
+                        </div>
+                        <div v-else>-</div>
+                      </td>
+                      <td style="font-size: 11px;">
+                        {{ ((allPrices[item.shortName] || allPrices[shortToName[item.shortName]])*item.amount) | turkishCurrencyformat}}
+                      </td>
+                    </tr>
+                  </template>
+                </v-data-table>
+              </v-card>
             </v-col>
           </v-row>
           <v-row>
+              <v-col cols="12" md="6">
+                <v-card style="background: transparent;" :loading="loading3">
+                  <template slot="progress">
+                    <v-progress-circular
+                        color="white"
+                        height="12"
+                        indeterminate
+                        style="position: absolute;top:48%;left:48%;"
+                    ></v-progress-circular>
+                  </template>
+                    <v-data-table
+                        :headers="orderHeaders"
+                        :items="orders"
+                        dense
+                        mobile-breakpoint="0"
+                        hide-default-footer
+                        :items-per-page="itemPerPage"
+                        item-class="text--white"
+                        no-data-text="Henüz herhangi bir emir vermediniz."
+                        style="border: 1px solid #ddd;border-radius:6px;"
+                        :style="[
+                          $store.state.isLight
+                            ? 'color:#rgba(0,0,0,0.87); background-color:rgba(255,255,255,.3);'
+                            : 'color:#ffffff !important;background-color:rgba(0,0,0,.3);'
+                        ]"
+                        :dark="!$store.state.isLight"
+                        :light="$store.state.isLight"
+                    >
+                      <template v-slot:item="{ item }">
+                        <tr>
+                          <td style="font-size: 10px;"
+                              :class="{ 'black--text': $store.state.isLight }">
+                            <v-row class="align-center">
+                              <v-avatar size="28" class="ml-2 mr-2">
+                                <img :src="allImages[item.CoinOrCurrency] || $store.state.api + '/gold.png'" alt="" />
+                              </v-avatar>
+                              <div class="d-flex flex-column">
+                                <span>{{item.CoinOrCurrency}}</span>
+                                <span v-if="item.buyOrSell=='buy'">ALIŞ</span>
+                                <span v-else>SATIŞ</span>
+                              </div>
+                            </v-row>
+                          </td>
+                          <td :class="{ 'black--text': $store.state.isLight }" style="font-size: 10px;">
+                            <div>
+                              {{item.buyOrSell=='buy' ? '+' : '-'}}
+                              {{item.Amount}}
+                            </div>
+                          </td>
+                          <td style="font-size: 11px;">
+                            <div class="d-flex flex-column">
+                              <span v-text="item.OrderType == 'time' ? 'Tarihe Göre' : 'Fiyata Göre'"></span>
+                              <span style="font-size: 11px;" v-if="item.OrderType == 'time'">{{ (item.Parameter.indexOf('z') > 0 ? new Date(item.Parameter).toLocaleString('tr') : new Date(item.createdAt).toLocaleDateString() )}}</span>
+                              <span v-else>{{item.Parameter}}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <v-btn
+                                min-width="0"
+                                class="pa-0"
+                                x-small
+                                color="transparent"
+                                @click="buySellNow(
+                                  item.id,
+                                  item.buyOrSell,
+                                  item.CoinOrCurrency,
+                                  item.Amount
+                                )"
+                                :disabled="item.Closed == 1 || item.Closed == -1"
+                            >
+                              <v-icon size="16" color="rgba(255,255,255,0.5)">
+                                mdi-check-outline
+                              </v-icon>
+                            </v-btn>
+
+                            <v-btn
+                                :disabled="item.Closed == 1 || item.Closed == -1"
+                                min-width="0"
+                                class="pa-0"
+                                x-small
+                                color="transparent"
+                                @click="deleteOrder(item.id)"
+                            >
+                              <v-icon size="16" color="rgba(255,255,255,0.5)" class="ml-1">
+                                mdi-close-outline
+                              </v-icon>
+                            </v-btn>
+                          </td>
+                          <td style="font-size: 11px;">
+                            <div v-if="item.Closed == 1">
+                              <span class="green--text">GERÇEKLEŞTİ</span>
+                            </div>
+                            <div v-else-if="item.Closed == -1">
+                              <span class="yellow--text">İPTAL EDİLDİ</span>
+                            </div>
+                            <div v-else>
+                              <span class="red--text">BEKLİYOR</span>
+                            </div>
+                          </td>
+                          <td style="font-size: 11px;">
+                            <div class="text-right">
+                              {{item.createdAt | dateStandartFormat}}
+                            </div>
+                          </td>
+                        </tr>
+                      </template>
+                    </v-data-table>
+                </v-card>
+              </v-col>
 
               <v-col cols="12" md="6">
+                <v-card style="background: transparent;" :loading="loading4">
+                  <template slot="progress">
+                    <v-progress-circular
+                        color="white"
+                        height="12"
+                        indeterminate
+                        style="position: absolute;top:48%;left:48%;"
+                    ></v-progress-circular>
+                  </template>
                   <v-data-table
-                      :headers="orderHeaders"
-                      :items="orders"
+                      :headers="topUserHeaders"
+                      :items="topUsers"
                       dense
                       mobile-breakpoint="0"
                       hide-default-footer
                       :items-per-page="itemPerPage"
                       item-class="text--white"
-                      no-data-text="Henüz herhangi bir emir vermediniz."
                       style="border: 1px solid #ddd;border-radius:6px;"
-                      :style="[
-                        $store.state.isLight
-                          ? 'color:#rgba(0,0,0,0.87); background-color:rgba(255,255,255,.3);'
-                          : 'color:#ffffff !important;background-color:rgba(0,0,0,.3);'
-                      ]"
                       :dark="!$store.state.isLight"
                       :light="$store.state.isLight"
                   >
                     <template v-slot:item="{ item }">
                       <tr>
-                        <td style="font-size: 10px;"
-                            :class="{ 'black--text': $store.state.isLight }">
+                        <td style="font-size: 12px;">
                           <v-row class="align-center">
-                            <v-avatar size="28" class="ml-2 mr-2">
-                              <img :src="allImages[item.CoinOrCurrency] || $store.state.api + '/gold.png'" alt="" />
+                            <span class="ml-4 mr-4" v-html="(+item.sirano < 4) ? item.sirano+'*' : item.sirano+'&nbsp;&nbsp;'"></span>
+                            <v-avatar size="32" class="ml-2 mr-2" v-if="item.profileImage == '' || item.profileImage.length == 4">
+                              <img :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
                             </v-avatar>
-                            <div class="d-flex flex-column">
-                              <span>{{item.CoinOrCurrency}}</span>
-                              <span v-if="item.buyOrSell=='buy'">ALIŞ</span>
-                              <span v-else>SATIŞ</span>
-                            </div>
+                            <v-avatar size="32" class="ml-2 mr-2" v-else>
+                              <img :src="item.profileImage.indexOf('googleusercontent')>0 ? item.profileImage : ($store.state.api + '/uploads/' + item.profileImage)" alt="" />
+                            </v-avatar>
+                            <span>{{item.fullName | tocapitalize}}</span>
                           </v-row>
                         </td>
-                        <td :class="{ 'black--text': $store.state.isLight }" style="font-size: 10px;">
-                          <div>
-                            {{item.buyOrSell=='buy' ? '+' : '-'}}
-                            {{item.Amount}}
-                          </div>
-                        </td>
-                        <td style="font-size: 11px;">
-                          <div class="d-flex flex-column">
-                            <span v-text="item.OrderType == 'time' ? 'Tarihe Göre' : 'Fiyata Göre'"></span>
-                            <span style="font-size: 11px;" v-if="item.OrderType == 'time'">{{ (item.Parameter.indexOf('z') > 0 ? new Date(item.Parameter).toLocaleString('tr') : new Date(item.createdAt).toLocaleDateString() )}}</span>
-                            <span v-else>{{item.Parameter}}</span>
-                          </div>
+                        <td style="font-size: 12px;">
+                          ₺{{item.balanceNow | turkishCurrencyformat}}
                         </td>
                         <td>
-                          <v-btn
-                              min-width="0"
-                              class="pa-0"
-                              x-small
-                              color="transparent"
-                              @click="buySellNow(
-                                item.id,
-                                item.buyOrSell,
-                                item.CoinOrCurrency,
-                                item.Amount
-                              )"
-                              :disabled="item.Closed == 1"
-                          >
-                            <v-icon size="16" color="rgba(255,255,255,0.5)">
-                              mdi-check-outline
-                            </v-icon>
-                          </v-btn>
-
-                          <v-btn
-                              :disabled="item.Closed == 1 || item.Closed == -1"
-                              min-width="0"
-                              class="pa-0"
-                              x-small
-                              color="transparent"
-                              @click="deleteOrder(item.id)"
-                          >
-                            <v-icon size="16" color="rgba(255,255,255,0.5)" class="ml-1">
-                              mdi-close-outline
-                            </v-icon>
-                          </v-btn>
-                        </td>
-                        <td style="font-size: 11px;">
-                          <div v-if="item.Closed == 1">
-                            <span class="green--text">GERÇEKLEŞTİ</span>
-                          </div>
-                          <div v-else-if="item.Closed == -1">
-                            <span class="yellow--text">İPTAL EDİLDİ</span>
-                          </div>
-                          <div v-else>
-                            <span class="red--text">BEKLİYOR</span>
-                          </div>
-                        </td>
-                        <td style="font-size: 11px;">
-                          <div class="text-right">
-                            {{item.createdAt | dateStandartFormat}}
-                          </div>
+                          <v-row class="pa-0">
+                            <span style="font-size:10px;" class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
+                            <span style="font-size:10px;" class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
+                            <span style="font-size:10px;" class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined && (item.graph['diger']/(item.graph['total'])*200)>10" :style="'width:'+item.graph['diger']/(item.graph['total'])*200+'px;'">DİĞER</span>
+                          </v-row>
                         </td>
                       </tr>
                     </template>
                   </v-data-table>
-              </v-col>
-
-              <v-col cols="12" md="6">
-                <v-data-table
-                    :headers="topUserHeaders"
-                    :items="topUsers"
-                    dense
-                    mobile-breakpoint="0"
-                    hide-default-footer
-                    :items-per-page="itemPerPage"
-                    item-class="text--white"
-                    style="border: 1px solid #ddd;border-radius:6px;"
-                    :dark="!$store.state.isLight"
-                    :light="$store.state.isLight"
-                >
-                  <template v-slot:item="{ item }">
-                    <tr>
-                      <td style="font-size: 12px;">
-                        <v-row class="align-center">
-                          <span class="ml-4 mr-4" v-html="(+item.sirano < 4) ? item.sirano+'*' : item.sirano+'&nbsp;&nbsp;'"></span>
-                          <v-avatar size="32" class="ml-2 mr-2" v-if="item.profileImage == '' || item.profileImage.length == 4">
-                            <img :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
-                          </v-avatar>
-                          <v-avatar size="32" class="ml-2 mr-2" v-else>
-                            <img :src="item.profileImage.indexOf('googleusercontent')>0 ? item.profileImage : ($store.state.api + '/uploads/' + item.profileImage)" alt="" />
-                          </v-avatar>
-                          <span>{{item.fullName | tocapitalize}}</span>
-                        </v-row>
-                      </td>
-                      <td style="font-size: 12px;">
-                        ₺{{item.balanceNow | turkishCurrencyformat}}
-                      </td>
-                      <td>
-                        <v-row class="pa-0">
-                          <span style="font-size:10px;" class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
-                          <span style="font-size:10px;" class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
-                          <span style="font-size:10px;" class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined && (item.graph['diger']/(item.graph['total'])*200)>10" :style="'width:'+item.graph['diger']/(item.graph['total'])*200+'px;'">DİĞER</span>
-                        </v-row>
-                      </td>
-                    </tr>
-                  </template>
-                </v-data-table>
+                </v-card>
               </v-col>
             </v-row>
         </v-col>
@@ -242,8 +280,6 @@
 </template>
 
 <script>
-//import axios from "axios";
-
 import axios from "axios";
 import io from "socket.io-client";
 import {mapState} from "vuex";
@@ -251,6 +287,9 @@ import { setGraph } from "@/functions";
 import shortNames from "@/assets/shortname-convert";
 import allImages from "@/assets/allimages";
 import shortToName from "@/assets/short-to-name.json";
+import moment from "moment";
+import _ from "lodash";
+import EventBus from '../event-bus';
 let options = {
   type: "success",
   icon: "check",
@@ -280,11 +319,11 @@ export default {
         }
       ],
       timeOptions: [
-        { text: 'Günlük', time: 1 },
         { text: 'Haftalık', time: 7 },
         { text: 'Aylık', time: 30 },
         { text: 'Yıllık', time: 999 }
       ],
+      time: 7,
       select: { text: 'Haftalık', time: 7 },
       chartOptions: {
         chart: {
@@ -355,7 +394,10 @@ export default {
                 shortDays: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"]
               }
             }
-          ]
+          ],
+          xaxis: {
+            categories: []
+          }
         },
         stroke: {
           width: 2,
@@ -617,7 +659,11 @@ export default {
       allPrices: [],
       shortNames: shortNames,
       allImages: allImages,
-      shortToName: shortToName
+      shortToName: shortToName,
+      loading1: true,
+      loading2: true,
+      loading3: true,
+      loading4: true,
     };
   },
   created() {
@@ -630,9 +676,6 @@ export default {
               axisTicks: {
                 show: false,
                 color: "#ff0000"
-              },
-              labels: {
-                show: false
               }
             },
             yaxis: {
@@ -682,6 +725,7 @@ export default {
               data: tempValues
             }
           ];
+          this.loading1 = false;
         })
         .catch(err => {
           console.log(err);
@@ -697,18 +741,24 @@ export default {
           }
 
           app.topUsers =  response.data;
+          app.loading4 = false;
         });
+  },
+  mounted() {
+    const app = this;
+    EventBus.$on('boughtorsold', function () {
+      app.getUserWallet();
+    });
   },
   methods: {
     getUserWallet: function() {
-      this.walletLoaded = false;
+      this.loading2 = true;
       this.balance = 0;
       axios
           .post(`${this.$store.state.api}/getuserwallet`, {
             id: JSON.parse(localStorage.getItem("user")).id
           })
           .then(response => {
-            let allPrices = JSON.parse(localStorage.getItem("allprices"));
             localStorage.setItem("wallet", JSON.stringify(response.data));
             let data = Object.values(response.data);
             let temp = [];
@@ -718,8 +768,7 @@ export default {
               }
             }
             this.data = temp;
-            //this.balanceNow = this.calculateBalance(JSON.parse(localStorage.getItem("wallet")),JSON.parse(localStorage.getItem("allprices")));
-            Object(allPrices);
+            this.loading2 = false;
           })
           .catch(err => {
             console.log(err);
@@ -741,8 +790,8 @@ export default {
             userId: JSON.parse(localStorage.getItem("user")).id
           })
           .then(response => {
-            console.log(response.data)
             this.orders = response.data;
+            this.loading3 = false;
           })
           .catch(err => {
             console.log(err);
@@ -760,8 +809,6 @@ export default {
           })
           .then(response => {
             console.log(response.data);
-            alert("kllklkkl")
-
           })
           .catch(err => {
             console.log(err);
@@ -788,17 +835,20 @@ export default {
           });
     },
     setChart(){
-      let time = (this.select.time);
       axios
           .post(`${this.$store.state.api}/getuserbalancelist`, {
             id: JSON.parse(localStorage.getItem("user")).id
           })
           .then(response => {
-            this.chartOptions.chart.xaxis.categories = Object.keys(response.data).slice(-1*time)
-
+            let tempValues = [];
+            _.forEach(response.data,(v,k)=>{
+              if(moment().subtract(this.time,'d')<moment(k)){
+                tempValues.push([k,v]);
+              }
+            });
             this.userBalanceList = [
               {
-                data: Object.values(response.data).slice(-1*time)
+                data: tempValues
               }
             ];
           })
@@ -822,21 +872,27 @@ export default {
   transition: all 0.3s ease-in-out;
   box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
 }
+.v-card__progress{
+  background: rgba(0, 0, 0,.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+}
+.time-dropdown .theme--dark.v-text-field--solo > .v-input__control > .v-input__slot {
+  background: transparent;
+}
+.time-dropdown .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot {
+  box-shadow: none;
+}
+.time-dropdown .v-select.v-input--dense .v-select__selection--comma {
+  margin: 5px 4px 0px 0;
+}
+.time-dropdown .v-select__slot{
+  border-bottom: 1px solid #fff;
+}
 </style>
 <style scoped>
-/* tooltip  after*/
-/*.tooltipp::after {
-  content: " ";
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 12px 12.5px 0 12.5px;
-  border-color: #ff3366 transparent transparent transparent;
-  position: absolute;
-  top: 47px;
-  left: 40%;
-
-}*/
 .apexcharts-tooltip {
   background: transparent !important;
   color: #fff;

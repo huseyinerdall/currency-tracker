@@ -11,6 +11,9 @@ import DatetimePicker from "vuetify-datetime-picker";
 import currencies from "./assets/currencies";
 import Toasted from "vue-toasted";
 import VueAuthenticate from 'vue-authenticate';
+import _ from 'lodash';
+import moment from 'moment';
+
 Vue.use(VueMeta, {
   // optional pluginOptions
   refreshOnceOnNavigation: true
@@ -40,6 +43,8 @@ Vue.config.productionTip = false;
 //axios.defaults.baseConfig = "http://localhost:4000/";
 Vue.use(VueAxios, axios);
 Vue.use(Toasted);
+Vue.use(_);
+Vue.use(moment);
 
 //for server
 Vue.prototype.$addr = "http://localhost";
