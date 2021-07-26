@@ -36,7 +36,7 @@
           :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'"
           :class="[state > 0 ? 'price-up' : 'price-down']"
         >
-          {{ (current_price * dolar || 0) | binayracveondalik }} ₺
+          {{ (current_price * $store.state.dolar || 0) | binayracveondalik }} ₺
         </div>
         <div
           class="mt-2"
@@ -432,13 +432,6 @@ export default {
         }
       }
     });
-    axios
-      .get("https://finans.truncgil.com/today.json")
-      .then(response => {
-        app.dolar = response.data["USD"]["Satış"].replace(',','.');
-      })
-      .catch(err => console.log(err));
-
     this.getGraphData();
   },
   watch: {

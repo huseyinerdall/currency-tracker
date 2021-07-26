@@ -43,6 +43,7 @@ var io = require('socket.io')(server, {
     }
 });
 
+
 require('./user')(app,io);
 let Trader = require('./trader');
 let UserWallet = require('./user-wallet');
@@ -761,12 +762,13 @@ db.sequelize.sync().then(() => {
                            )
                                .then((result) => {
                                    console.log(result);
-                                   io.emit('buy', {
+                                   let data = {
                                        userId: openOrders[i]["dataValues"]["UserId"],
                                        CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
                                        Amount: openOrders[i]["dataValues"]["Amount"],
                                        orderId: openOrders[i]["dataValues"]["id"]
-                                   });
+                                   };
+                                   io.emit('buy', data);
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{
@@ -786,12 +788,13 @@ db.sequelize.sync().then(() => {
                            )
                                .then((result) => {
                                    console.log(result);
-                                   io.emit('sell', {
+                                   let data = {
                                        userId: openOrders[i]["dataValues"]["UserId"],
                                        CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
                                        Amount: openOrders[i]["dataValues"]["Amount"],
                                        orderId: openOrders[i]["dataValues"]["id"]
-                                   });
+                                   };
+                                   io.emit('sell', data);
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{
@@ -815,12 +818,13 @@ db.sequelize.sync().then(() => {
                            )
                                .then((result) => {
                                    console.log(result);
-                                   io.emit('buy', {
+                                   let data = {
                                        userId: openOrders[i]["dataValues"]["UserId"],
                                        CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
                                        Amount: openOrders[i]["dataValues"]["Amount"],
                                        orderId: openOrders[i]["dataValues"]["id"]
-                                   });
+                                   };
+                                   io.emit('buy', data);
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{
@@ -843,12 +847,13 @@ db.sequelize.sync().then(() => {
                            )
                                .then((result) => {
                                    console.log(openOrders[i]);
-                                   io.emit('sell', {
+                                   let data = {
                                        userId: openOrders[i]["dataValues"]["UserId"],
-                                       CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                           CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
                                        Amount: openOrders[i]["dataValues"]["Amount"],
                                        orderId: openOrders[i]["dataValues"]["id"]
-                                   });
+                                   };
+                                   io.emit('sell', data);
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{

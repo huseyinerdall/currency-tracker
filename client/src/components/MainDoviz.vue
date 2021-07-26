@@ -70,9 +70,7 @@
             <v-icon
               v-if="
                 $vuetify.breakpoint.smAndDown &&
-                  item['Satış'].replace(',', '.') -
-                    item.close.replace(',', '.') >=
-                    0
+                item['Değişim'].indexOf('-')<0
               "
               class="float-right"
               size="20"
@@ -83,9 +81,7 @@
             <v-icon
               v-else-if="
                 $vuetify.breakpoint.smAndDown &&
-                  item['Satış'].replace(',', '.') -
-                    item.close.replace(',', '.') <
-                    0
+                !(item['Değişim'].indexOf('-')<0)
               "
               class="float-right"
               size="20"
@@ -96,10 +92,8 @@
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span
-              :class="[
-                item['Satış'].replace(',', '.') -
-                  item.close.replace(',', '.') >=
-                0
+                :class="[
+                  item['Değişim'].indexOf('-')<0
                   ? 'green--text'
                   : 'red--text'
               ]"
@@ -107,16 +101,14 @@
               :style="`font-size: ${$store.state.tdFontSize} !important;`"
             >
               {{
-                (parseFloat(item["Satış"].replace(",", ".")) -
-                  parseFloat(item.close.replace(",", ".")))
-                  | signint
+                (parseFloat(item["Satış"].replace(",", ".")) * parseFloat(item['Değişim'].replace('%','').replace(',','.')))/100 | signint
               }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span
-              :class="[
-                (item['Satış'] - item.close) / item.close >= 0
+                :class="[
+                  item['Değişim'].indexOf('-')<0
                   ? 'green--text'
                   : 'red--text'
               ]"
@@ -124,12 +116,8 @@
               :style="`font-size: ${$store.state.tdFontSize} !important;`"
             >
               {{
-                (((parseFloat(item["Satış"].replace(",", ".")) -
-                  parseFloat(item.close.replace(",", "."))) /
-                  parseFloat(item.close.replace(",", "."))) *
-                  100)
-                  | signint
-              }}%
+                item["Değişim"]
+              }}
             </span>
           </td>
           <td

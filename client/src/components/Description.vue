@@ -50,7 +50,7 @@ export default {
           this.description = response.data;
         });
     } else if (this.$route.params.gold) {
-      console.log(this.$route.params.gold);
+      this.$route.params.gold;
     }
   }
 };

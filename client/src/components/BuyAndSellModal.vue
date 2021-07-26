@@ -493,27 +493,19 @@ export default {
       });
     }
 
-
-
     setInterval(()=>{
-      axios
-          .get("https://finans.truncgil.com/today.json")
-          .then(response => {
-            app.dolar = parseFloat(response.data["USD"]["Satış"].replace(",", "."));
-            this.currentUnit.price = this.currentUnit.price * 1;
-            this.currentUnitTLPrice = this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.dolar).toFixed(2) :(this.currentUnit.price);
-            //this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(2);
-          })
-          .catch(err => console.log(err));
+      this.currentUnit.price = this.currentUnit.price * 1;
+      this.currentUnitTLPrice = this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.$store.state.dolar).toFixed(2) :(this.currentUnit.price);
+      //this.currentUnitTLPrice = (this.currentUnit.price * this.dolar).toFixed(2);
     },5000)
     this.currentUnit = this.data[0];
-    this.currentUnitTLPrice = this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.dolar).toFixed(2) :(this.currentUnit.price);
+    this.currentUnitTLPrice = this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.$store.state.dolar).toFixed(2) :(this.currentUnit.price);
     this.chooseUnit();
   },
   methods: {
     chooseUnit() {
       this.image = this.currentUnit.image;
-      this.currentUnitTLPrice =this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.dolar).toFixed(2) :(this.currentUnit.price);
+      this.currentUnitTLPrice =this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.$store.state.dolar).toFixed(2) :(this.currentUnit.price);
 
       this.calculateSum();
     },

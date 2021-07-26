@@ -256,10 +256,7 @@ export default {
     items: ["AÇIK EMİRLERİM", "GERÇEKLEŞMİŞ EMİRLERİM"]
   }),
   created() {
-    let app = this;
-    axios.get("https://finans.truncgil.com/today.json").then(response => {
-      app.dolar = parseFloat(response.data["USD"]["Satış"]);
-    });
+    //let app = this;
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("allprices", fetchedData => {
       localStorage.setItem("allprices", JSON.stringify(fetchedData));

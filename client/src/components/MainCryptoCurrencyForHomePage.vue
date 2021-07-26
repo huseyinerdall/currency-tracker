@@ -86,7 +86,7 @@
                 `font-size: ${$store.state.tdFontSize} !important;font-weight:400;`
               "
             >
-              {{ (item.price * dolar) | binayracveondalik }}
+              {{ (item.price * $store.state.dolar) | binayracveondalik }}
             </h3>
           </td>
           <td
@@ -160,10 +160,8 @@
 </template>
 
 <script>
-//import axios from "axios";
 //import coins from '../assets/coins.json';
 import io from "socket.io-client";
-import axios from "axios";
 
 export default {
   props: {
@@ -299,12 +297,6 @@ export default {
       localStorage.setItem("coins250", JSON.stringify(fetchedData));
       app.overlay = false;
     });
-    axios
-      .get("https://finans.truncgil.com/today.json")
-      .then(response => {
-        app.dolar = response.data["USD"]["Satış"].replace(",", ".");
-      })
-      .catch(err => console.log(err));
   },
   methods: {},
   computed: {

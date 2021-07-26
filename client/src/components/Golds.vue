@@ -73,9 +73,7 @@
             <v-icon
               v-if="
                 $vuetify.breakpoint.smAndDown &&
-                  item['Satış'].replace(',', '.') -
-                    item.close.replace(',', '.') >=
-                    0
+                item['Değişim'].indexOf('-')<0
               "
               class="float-right"
               size="20"
@@ -86,9 +84,7 @@
             <v-icon
               v-else-if="
                 $vuetify.breakpoint.smAndDown &&
-                  item['Satış'].replace(',', '.') -
-                    item.close.replace(',', '.') <
-                    0
+                !(item['Değişim'].indexOf('-')<0)
               "
               class="float-right"
               size="20"
@@ -99,8 +95,8 @@
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span
-              :class="[
-                parseFloat(item['Satış'].replace('$','').replace('.','').replace(',','.')) - parseFloat(item.close.replace('$','').replace('.','').replace(',','.')) >= 0
+                :class="[
+                  item['Değişim'].indexOf('-')<0
                   ? 'green--text'
                   : 'red--text'
               ]"
@@ -108,16 +104,14 @@
               :style="`font-size: ${$store.state.tdFontSize} !important;`"
             >
               {{
-                (parseFloat(item["Satış"].replace('$','').replace('.','').replace(',','.')) - parseFloat(item.close.replace('$','').replace('.','').replace(',','.'))) | signint
+                (parseFloat(item["Satış"].replace('$','').replace('.','').replace(',','.')) * parseFloat(item['Değişim'].replace('%','').replace(',','.')))/100 | signint
               }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span
               :class="[
-                (parseFloat(item['Satış'].replace('$','').replace('.','').replace(',','.')) - parseFloat(item.close.replace('$','').replace('.','').replace(',','.'))) /
-                  parseFloat(item.close) >=
-                0
+                  item['Değişim'].indexOf('-')<0
                   ? 'green--text'
                   : 'red--text'
               ]"
@@ -125,11 +119,8 @@
               :style="`font-size: ${$store.state.tdFontSize} !important;`"
             >
               {{
-                (((parseFloat(item["Satış"].replace('$','').replace('.','').replace(',','.')) - parseFloat(item.close.replace('$','').replace('.','').replace(',','.'))) /
-                  parseFloat(item.close.replace('$','').replace('.','').replace(',','.'))) *
-                  100)
-                  | signint
-              }}%
+                item["Değişim"]
+              }}
             </span>
           </td>
           <td
@@ -216,7 +207,7 @@ export default {
         },
         {
           text: "Yüzde",
-          value: "Fark",
+          value: "Değişim",
           sortable: false,
           align: "start",
           class: app.$store.state.isLight

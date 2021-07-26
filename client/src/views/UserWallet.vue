@@ -36,6 +36,7 @@
                         v-model="time"
                         :value="select"
                         @change="setChart"
+                        hide-details
                     ></v-select>
                   </v-col>
                 </v-row>
@@ -241,7 +242,8 @@
                       :light="$store.state.isLight"
                   >
                     <template v-slot:item="{ item }">
-                      <tr>
+                      <tr style="position: relative;"
+                          :style="$vuetify.breakpoint.smAndDown ? 'height: 50px;vertical-align: baseline;' : ''">
                         <td style="font-size: 12px;">
                           <v-row class="align-center">
                             <span class="ml-4 mr-4" v-html="(+item.sirano < 4) ? item.sirano+'*' : item.sirano+'&nbsp;&nbsp;'"></span>
@@ -257,14 +259,23 @@
                         <td style="font-size: 12px;">
                           ₺{{item.balanceNow | turkishCurrencyformat}}
                         </td>
-                        <td>
-                          <v-row class="pa-0">
-                            <span style="font-size:10px;" class="red text-center" :style="'width:'+(Object.values(item.graph)[0]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
-                            <span style="font-size:10px;" class="green text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+(Object.values(item.graph)[1]/(item.graph['total']))*200+'px;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
-                            <span style="font-size:10px;" class="grey text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined && (item.graph['diger']/(item.graph['total'])*200)>10" :style="'width:'+item.graph['diger']/(item.graph['total'])*200+'px;'">DİĞER</span>
+                        <td v-if="!$vuetify.breakpoint.smAndDown">
+                          <v-row class="pa-0"
+                          :style="'width:'+(116+item.balanceNow/topUsers[0]['balanceNow']*100)+'px;'">
+                            <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+Object.values(item.graph)[0]+'%;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
+                            <span style="font-size:10px;background: #228B22;" class="text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+Object.values(item.graph)[1]+'%;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
+                            <span style="font-size:10px;background: #778899;" class="text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined && item.graph['diger']>10" :style="'width:'+item.graph['diger']+'%;'">DİĞER</span>
                           </v-row>
                         </td>
+                        <v-row class="pa-0" v-if="$vuetify.breakpoint.smAndDown"
+                               style="position: absolute;bottom: 0;left: 13px;right: 13px;"
+                               :style="'width:'+(50+item.balanceNow/topUsers[0]['balanceNow']*50)+'%;'">
+                          <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+Object.values(item.graph)[0]+'%;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
+                          <span style="font-size:10px;background: #228B22;" class="text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+Object.values(item.graph)[1]+'%;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
+                          <span style="font-size:10px;background: #778899;" class="text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined && item.graph['diger']>10" :style="'width:'+item.graph['diger']+'%;'">DİĞER</span>
+                        </v-row>
                       </tr>
+
                     </template>
                   </v-data-table>
                 </v-card>
@@ -637,6 +648,7 @@ export default {
           class: this.$store.state.isLight
             ? "pinkk caption"
             : "amber--text accent-3 caption",
+          width: !app.$vuetify.breakpoint.smAndDown ? "200px" : "auto"
         },
         {
           text: "BAKİYE",
@@ -645,6 +657,7 @@ export default {
           class: this.$store.state.isLight
             ? "pinkk caption"
             : "amber--text accent-3 caption",
+          width: "140px"
         },
         {
           text: "PORTFÖY",
@@ -656,7 +669,7 @@ export default {
         }
       ],
       topUsers: [],
-      allPrices: [],
+      allPrices: JSON.parse(localStorage.getItem("allprices")),
       shortNames: shortNames,
       allImages: allImages,
       shortToName: shortToName,
@@ -689,6 +702,7 @@ export default {
           }
         }
       ];
+      this.topUserHeaders.pop();
     }
     let app = this;
     var socket = io.connect(`${this.$store.state.addr}`);
@@ -706,8 +720,8 @@ export default {
           id: JSON.parse(localStorage.getItem("user")).id
         })
         .then(response => {
-          /*app.chartOptions.chart.xaxis.categories = Object.keys(response.data)*/
-          app.balanceNow = response.data[new Date(new Date().toDateString())]
+          //app.balanceNow = response.data[new Date(new Date().toDateString())];
+          app.balanceNow = Object.values(response.data).pop();
           app.userBalanceList = [
             {
               data: Object.values(response.data)
@@ -773,15 +787,6 @@ export default {
           .catch(err => {
             console.log(err);
           });
-    },
-    calculateBalance(wallet,allPrices){
-      let balance = 0;
-      for (const key in wallet) {
-        if(wallet[key]["amount"]>0){
-          balance += (wallet[key]["amount"]*allPrices[wallet[key]]) || 0;
-        }
-      }
-      return balance;
     },
     getUserAllOrders: function() {
       this.walletLoaded = false;

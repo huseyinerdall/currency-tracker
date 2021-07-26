@@ -59,23 +59,21 @@
           class="mt-2"
           :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'"
           :class="[
-            parseFloat(satis) - parseFloat(close) >= 0
+            degisim.indexOf('-')<0
               ? 'green--text'
               : 'red--text'
           ]"
         >
-          {{ (parseFloat(satis) - parseFloat(close)) | signint }}
-          <v-icon color="red" v-if="parseFloat(satis) - parseFloat(close) < 0"
-            >mdi-trending-down</v-icon
-          >
+          {{ (parseFloat(satis) * parseFloat(degisim.replace('%','').replace(',','.')))/100 | signint }}
+          <v-icon color="red" v-if="!degisim.indexOf('-')<0"
+            >mdi-trending-down</v-icon>
           <v-icon
             color="green"
-            v-else-if="parseFloat(satis) - parseFloat(close) > 0"
-            >mdi-trending-up</v-icon
-          >
+            v-else-if="degisim.indexOf('-')<0"
+            >mdi-trending-up</v-icon>
           <v-icon
             color="gray"
-            v-else-if="parseFloat(satis) - parseFloat(close) == 0"
+            v-else-if="degisim.indexOf('0,00')>-1"
             >mdi-trending-neutral</v-icon
           >
         </div>
@@ -83,16 +81,14 @@
           class="mt-2"
           :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'"
           :class="[
-            parseFloat(satis) - parseFloat(close) >= 0
+            degisim.indexOf('-')<0
               ? 'green--text'
               : 'red--text'
           ]"
         >
           {{
-            (((parseFloat(satis) - parseFloat(close)) / parseFloat(close)) *
-              100)
-              | signint
-          }}%
+            degisim
+          }}
         </div>
       </v-row>
       <v-row
@@ -193,6 +189,7 @@ export default {
     alis: "",
     satis: "",
     close: "",
+    degisim: "",
     type: "",
     updatetime: "",
     series: [
@@ -431,6 +428,7 @@ export default {
         this.satis = response.data[gold]["Satış"].replace('$','').replace('.','').replace(',','.');
         this.updatetime = response.data["Update_Date"];
         this.type = response.data[gold]["Tür"];
+        this.degisim = response.data[gold]["Değişim"];
       })
       .catch(err => console.log(err));
 
