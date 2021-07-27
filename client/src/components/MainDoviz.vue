@@ -18,6 +18,22 @@
       :dark="!$store.state.isLight"
       :light="$store.state.isLight"
     >
+      <template v-slot:header.time="{ header }">
+        <div class="convert-dropdown row">
+          {{header.text = ''}}
+          <v-select
+              style="font-size:15px;background: transparent;width: 90px;margin-top: -7px;"
+              class="amber--text accent-3"
+              :items="convertTo"
+              solo
+              dense
+              dark
+              v-model="selected"
+              hide-details
+              @change="convertTable"
+          ></v-select>
+        </div>
+      </template>
       <template v-slot:item="{ item }">
         <tr>
           <td
@@ -57,7 +73,7 @@
                 : 'color:#ffffff !important;'
             ]"
           >
-            {{ item["Alış"].replace(",", ".") | turkishCurrencyformat }}
+            {{ item["Alış"].replace(",", ".")/denominator | turkishCurrencyformat }}
           </td>
           <td
             :style="[
@@ -66,7 +82,7 @@
                 : 'color:#ffffff !important;'
             ]"
           >
-            {{ item["Satış"].replace(",", ".") | turkishCurrencyformat }}
+            {{ item["Satış"].replace(",", ".")/denominator | turkishCurrencyformat }}
             <v-icon
               v-if="
                 $vuetify.breakpoint.smAndDown &&
@@ -222,6 +238,9 @@ export default {
         }
       ],
       data: [],
+      convertTo: ["USD","TRY"],
+      selected: "TRY",
+      denominator: 1,
       overlay: false
     };
   },
@@ -331,10 +350,41 @@ export default {
       ];
     }
   },
-  methods: {}
+  methods: {
+    convertTable: function (){
+      if(this.selected == "TRY"){
+        this.denominator = 1;
+      }else if(this.selected == "USD"){
+        this.denominator = this.$store.state.dolar;
+      }
+    }
+  }
 };
 </script>
-
+<style>
+.convert-dropdown .theme--dark.v-text-field--solo > .v-input__control > .v-input__slot {
+  background: transparent;
+}
+.convert-dropdown .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot {
+  box-shadow: none;
+}
+.convert-dropdown .v-select.v-input--dense .v-select__selection--comma {
+  margin: 5px 4px 0px 0;
+  color: #ffc107 !important;
+}
+.convert-dropdown .v-select__slot{
+  border-bottom: none;
+}
+.convert-dropdown .v-application--is-ltr .v-text-field .v-input__append-inner{
+  padding: 0;
+}
+.convert-dropdown .v-icon.v-icon{
+  color:#ffc107 !important;
+}
+.v-data-table__wrapper{
+  overflow-x: hidden;
+}
+</style>
 <style scoped>
 .v-data-table
   > .v-data-table__wrapper
@@ -365,5 +415,8 @@ h3 {
 }
 .pinkk {
   color: #ff3366 !important;
+}
+.v-application--is-ltr .v-text-field .v-input__append-inner{
+  padding-left: 0;
 }
 </style>

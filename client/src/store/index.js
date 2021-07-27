@@ -2,7 +2,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 Vue.use(Vuex);
-console.log(process.env);
 export default new Vuex.Store({
   state: {
     appName: "Para.Guru",

@@ -13,7 +13,7 @@ import Toasted from "vue-toasted";
 import VueAuthenticate from 'vue-authenticate';
 import _ from 'lodash';
 import moment from 'moment';
-
+moment.suppressDeprecationWarnings = true;
 Vue.use(VueMeta, {
   // optional pluginOptions
   refreshOnceOnNavigation: true

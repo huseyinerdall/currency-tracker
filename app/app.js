@@ -40,7 +40,8 @@ var io = require('socket.io')(server, {
         origin: [`http://localhost:8080`,`http://localhost:8081`,"http://192.168.1.54:8080"],
         //origin: ["https://para.guru","https://www.para.guru","http://para.guru"],
         methods: ["GET", "POST"]
-    }
+    },
+    pingTimeout: 60000
 });
 
 
@@ -219,7 +220,7 @@ app.get('/coins', (req, res) => {
         })
 })
 
-app.get('/closes', async (req, res) => {
+/*app.get('/closes', async (req, res) => {
     let BEGIN = moment().subtract(1, 'd').toString() || DEFAULT;
     const NOW = new Date();
     data = await db["Closes"].findAll({
@@ -230,7 +231,7 @@ app.get('/closes', async (req, res) => {
         }
     });
     res.json(data);
-})
+})*/
 
 app.get('/gettopusers', async (req, res) => {
     UserWallet.getTopUsers()
@@ -641,7 +642,8 @@ db.sequelize.sync().then(() => {
                 let sepetalis = ((parseFloat(response.data["USD"]["Alış"].replace(',','.')) + parseFloat(response.data["EUR"]["Alış"].replace(',','.'))) / 2).toFixed(4);
                 let sepetsatis = ((parseFloat(response.data["USD"]["Satış"].replace(',','.')) + parseFloat(response.data["EUR"]["Satış"].replace(',','.'))) / 2).toFixed(4);
                 let updatetime = response.data["Update_Date"];
-                response.data["SEPET KUR"] = {"Alış":sepetalis.replace('.',','),"Satış":sepetsatis.replace('.',','),"Tür": 'Döviz',"type":"SEPET KUR","time":updatetime};
+                let sepetkurdegisim = (parseFloat(response.data["USD"]["Değişim"].replace("%","").replace(",",".")) + parseFloat(response.data["EUR"]["Değişim"].replace("%","").replace(",",".")))/2;
+                response.data["SEPET KUR"] = {"Alış":sepetalis.replace('.',','),"Satış":sepetsatis.replace('.',','),"Tür": 'Döviz',"type":"SEPET KUR","time":updatetime,"Değişim":sepetkurdegisim.toString()};
                 for (const element in response.data) {
                     if (api[element] == "" || !api[element]) {
                         continue;
@@ -660,7 +662,7 @@ db.sequelize.sync().then(() => {
                                 .create({Alis: response.data[element]["Alış"].replace('$','').replace('.','').replace(',','.'), Satis: response.data[element]["Satış"].replace('$','').replace('.','').replace(',','.')})
                             C[indis] = response.data[element]["Alış"];
                         }
-                        let date = new Date().toISOString().substring(0, 10);
+                        /*let date = new Date().toISOString().substring(0, 10);
                         let prevTime = "01:19";
                         let nextTime = "01:21";
                         a = await db[indis].findOne({
@@ -674,7 +676,7 @@ db.sequelize.sync().then(() => {
                             response.data[element]["close"] = a["dataValues"]["Satis"];
                         } catch {
                             response.data[element]["close"] = response.data[element]["Satış"]
-                        }
+                        }*/
 
                         golds.push(response.data[element]);
                         allPrices[api[element]] = parseFloat(response.data[element]["Satış"].replace(",","."));
@@ -692,7 +694,7 @@ db.sequelize.sync().then(() => {
                                 .create({Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"]})
                             C[indis] = response.data[element]["Alış"];
                         }
-                        let date = new Date().toISOString().substring(0, 10);
+                        /*let date = new Date().toISOString().substring(0, 10);
                         let prevTime = "01:20";
                         let nextTime = "01:22";
                         a = await db[indis].findOne({
@@ -706,7 +708,7 @@ db.sequelize.sync().then(() => {
                             response.data[element]["close"] = a["dataValues"]["Satis"];
                         } catch {
                             response.data[element]["close"] = response.data[element]["Satış"]
-                        }
+                        }*/
                         currencies.push(response.data[element]);
                         allPrices[api[element]] = parseFloat(response.data[element]["Satış"].replace(",","."));
 
@@ -726,7 +728,16 @@ db.sequelize.sync().then(() => {
 
         UserWallet.saveUsersBalanceDaily(allPrices);
     }, MAINLOOPINTERVAL)
-
+    let sampleBuySellWebsocketData = {
+        userId: 999999999,
+        CoinOrCurrency: "Bitcoin",
+        Amount: 1,
+        orderId: 100000
+    }
+    setInterval(() => {
+        io.emit('buy', sampleBuySellWebsocketData);
+        io.emit('sell', sampleBuySellWebsocketData);
+    },3000);
     setInterval(() => {
         if(factRes.length == 250){io.emit('coins', factRes);}
         if(factRes30.length == 30){io.emit('coins30', factRes30);}

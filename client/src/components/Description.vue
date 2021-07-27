@@ -7,6 +7,7 @@
       $route.params.coin | uppercase
     }}</v-card-title>
     <v-card-title v-else-if="$route.params.gold">{{ gold }}</v-card-title>
+
     <v-card-text
       :style="$store.state.isLight ? 'color:rgba(0,0,0,0.87);' : 'color:#fff;'"
       v-html="description"
@@ -52,6 +53,23 @@ export default {
     } else if (this.$route.params.gold) {
       this.$route.params.gold;
     }
-  }
+  },
+  /*mounted() {
+    let tradingViewScript = document.createElement('script');
+    tradingViewScript.setAttribute('src', 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js');
+    tradingViewScript.innerHTML = `
+      {
+        "interval": "1m",
+        "width": 425,
+        "isTransparent": true,
+        "height": 450,
+        "symbol": "BINANCE:BTCUSDT",
+        "showIntervalTabs": true,
+        "locale": "tr",
+        "colorTheme": "light"
+      }
+    `;
+    document.body.appendChild(tradingViewScript);
+  },*/
 };
 </script>

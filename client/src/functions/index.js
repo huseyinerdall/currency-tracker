@@ -54,4 +54,8 @@ function setGraph(wallet,allPrices){
   return result;
 }
 
-module.exports = { search, setGraph };
+function turkishPriceToEngPrice(price){
+  return price.replace("$","").replace(".","").replace(",",".");
+}
+
+module.exports = { search, setGraph, turkishPriceToEngPrice };

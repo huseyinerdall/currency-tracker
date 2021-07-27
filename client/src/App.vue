@@ -483,8 +483,6 @@
       <router-view />
     </v-app>
     <BuyAndSellModal />
-    <UserWalletModal />
-    <UserOrders />
   </main>
 </template>
 
@@ -492,17 +490,13 @@
 //import VueJwtDecode from "vue-jwt-decode";
 import Footer from "./components/common/Footer";
 import BuyAndSellModal from "./components/BuyAndSellModal";
-import UserWalletModal from "./components/UserWalletModal";
-import UserOrders from "./components/UserOrders";
 
 export default {
   name: "App",
 
   components: {
     Footer,
-    BuyAndSellModal,
-    UserWalletModal,
-    UserOrders
+    BuyAndSellModal
   },
 
   data: () => ({
