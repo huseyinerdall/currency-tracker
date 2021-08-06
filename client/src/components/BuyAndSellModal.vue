@@ -653,9 +653,14 @@ export default {
           major: "TÜRK LİRASI"
         })
         .then(response => {
+          console.log(response.data);
+          this.$toasted.show(
+              `${response.data.Amount} adet ${response.data.CoinOrCurrency} satım emriniz gerçekleşti.`,
+              options
+          );
+          this.emitMethod();
           this.emirLoaded = true;
           this.$store.commit('buyselldialog');
-          console.log(response.data);
         })
         .catch(err => {
           console.log(err);

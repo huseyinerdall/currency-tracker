@@ -9,6 +9,10 @@ const SECRET_KEY = 'SI6ImM1Z';
 var upload = require('./utils/upload');
 const UPLOAD_FOLDER = path.join(__dirname,"public/uploads/");
 const url = require('url');
+var nodemailer = require('nodemailer');
+const secret = require(__dirname + '/config/secret.json');
+let utils = require('./utils');
+var transporter = nodemailer.createTransport(secret.gmail);
 
 module.exports = function(app,io){
 
@@ -37,16 +41,28 @@ module.exports = function(app,io){
                             }
                             req.body.profileImage = filename;
                         });
+                        var mailOptions = {
+                            from: secret.gmail.auth.user,
+                            to: req.body.email,
+                            subject: 'Para.Guru Hesap Aktivasyon',
+                            html: utils.mailTemplate()
+                        };
+                        transporter.sendMail(mailOptions, function(error, info){
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                console.log('Email sent: ' + info.response);
+                            }
+                        });
                     }
 
                     req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
 
-                    req.body.active = 1;
+                    req.body.active = 0;
                     req.body.balanceNow = 100000;
                     let now = new Date().toLocaleDateString()
                     req.body.balanceList = {};
                     db.User.create(req.body);
-                    console.log("Kullanıcı kaydedildi!!!");
                     res.send("OK");
                 }
             })
@@ -54,6 +70,26 @@ module.exports = function(app,io){
                 console.log(err)
                 res.send(err)
             })
+    })
+
+    app.post('/sendactivation', (req, res) => {
+        if (!req.body.email) {
+            res.send("Email adresi gelmedi!")
+        }
+        var mailOptions = {
+            from: secret.gmail.auth.user,
+            to: req.body.email,
+            subject: 'Para.Guru Hesap Aktivasyon',
+            html: utils.mailTemplate(req.body.userId,req.body.url)
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+        res.send("MAILOK");
     })
 
     app.post('/avatar', upload.single('file'), (req, res) => {
@@ -72,7 +108,6 @@ module.exports = function(app,io){
     });
 
     app.post('/login', (req, res) => {
-        console.log(req.body)
         if (!req.body.email || !req.body.passwd) {
             res.send("Alanlar boş bırakılamaz!")
         }
@@ -93,7 +128,25 @@ module.exports = function(app,io){
             })
     })
 
+    app.get('/activate/:activationcode/user/:userid', (req, res) => {
+        console.log(req.params.activationcode,req.params.userid);
+        if(req.params.activationcode == "NdwpcOASVe5gdcPSfZpwFvWkJzoUzy7n6bi"){
+            db.User.update({
+                active: 1
+            }, {
+                where: { id: req.params.userid },
+                returning: true,
+                plain: true
+            })
+                .then((user) => {
+                    console.log(user[1]["dataValues"])
+                    res.redirect('http://localhost:8080/userwallet');
+                })
+        } else {
+            res.send("Aktivasyon kodu hatalı");
+        }
 
+    })
 
     app.post('/sendcomment', async(req, res) => {
         let fullName = req.body.fullName;
@@ -208,7 +261,6 @@ module.exports = function(app,io){
 
         res.json("OK");
     })
-
 
     app.post('/getuserbalancelist', async(req, res) => {
         let userId = req.body.id;

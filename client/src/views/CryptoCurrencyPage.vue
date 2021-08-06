@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <v-container>
+      <GlobalInfos />
       <MainCryptoCurrency :coin="coin" />
     </v-container>
   </div>
@@ -9,6 +10,7 @@
 <script>
 // @ is an alias to /src
 import MainCryptoCurrency from "@/components/MainCryptoCurrency.vue";
+import GlobalInfos from "@/components/GlobalInfos.vue";
 
 export default {
   name: "Home",
@@ -38,7 +40,8 @@ export default {
     };
   },
   components: {
-    MainCryptoCurrency
+    MainCryptoCurrency,
+    GlobalInfos
   }
 };
 </script>

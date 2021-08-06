@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="golds">
     <v-data-table
       :headers="headers"
       :items="data"
@@ -281,7 +281,7 @@ export default {
           class: this.$store.state.isLight
             ? "pinkk body-1"
             : "amber--text accent-3 body-1",
-          width: "160px"
+          width: "130px"
         },
         {
           text: "Alış",
@@ -329,6 +329,11 @@ export default {
             : "amber--text accent-3 body-1"
         }
       ];
+      if (this.$vuetify.breakpoint.smAndDown) {
+        this.headers.pop();
+        this.headers.pop();
+        this.headers.pop();
+      }
     }
   },
   methods: {
@@ -365,8 +370,8 @@ export default {
 .convert-dropdown .v-icon.v-icon{
   color:#ffc107 !important;
 }
-.v-data-table__wrapper{
-  overflow-x: hidden;
+.golds .v-data-table__wrapper{
+  overflow-x: hidden !important;
 }
 </style>
 <style scoped>

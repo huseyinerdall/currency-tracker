@@ -1,5 +1,6 @@
 /client/node_modules
 /app/node_modules
+/app/config/secret.json
 # Logs
 logs
 *.log

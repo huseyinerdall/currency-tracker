@@ -20,22 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="end">
-      <change afterPath="$PROJECT_DIR$/comment-center/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-center/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-center/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/comment-center/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/config/secret.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/AMP.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/GRT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/SHIB.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/utils/mail.template.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/GlobalInfos.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/views/Activate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Description.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Description.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/functions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,17 +72,17 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\models" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\public\flags" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\components" />
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets\" />
@@ -378,14 +386,20 @@
       <workItem from="1627295384422" duration="3933000" />
       <workItem from="1627315204221" duration="9293000" />
       <workItem from="1627368664509" duration="5018000" />
-      <workItem from="1627376279436" duration="2618000" />
-    </task>
-    <task id="LOCAL-00009" summary="salı">
-      <created>1609228674930</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1609228674930</updated>
+      <workItem from="1627376279436" duration="4171000" />
+      <workItem from="1627407253368" duration="316000" />
+      <workItem from="1627490630592" duration="2826000" />
+      <workItem from="1627544316021" duration="504000" />
+      <workItem from="1627714078882" duration="1282000" />
+      <workItem from="1627884760918" duration="7826000" />
+      <workItem from="1627922694362" duration="5452000" />
+      <workItem from="1627973681333" duration="5440000" />
+      <workItem from="1628009421558" duration="13331000" />
+      <workItem from="1628059596684" duration="3787000" />
+      <workItem from="1628098147566" duration="312000" />
+      <workItem from="1628144240641" duration="6276000" />
+      <workItem from="1628159980684" duration="6126000" />
+      <workItem from="1628231142551" duration="3870000" />
     </task>
     <task id="LOCAL-00010" summary="salı">
       <created>1609229227603</created>
@@ -723,7 +737,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627286829386</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="end">
+      <created>1627383095431</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1627383095433</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -136,6 +136,7 @@
                         ]"
                         :dark="!$store.state.isLight"
                         :light="$store.state.isLight"
+                        height="340"
                     >
                       <template v-slot:item="{ item }">
                         <tr>
@@ -334,7 +335,7 @@ export default {
         { text: 'Aylık', time: 30 },
         { text: 'Yıllık', time: 999 }
       ],
-      time: 7,
+      time: 999,
       select: { text: 'Haftalık', time: 7 },
       chartOptions: {
         chart: {
@@ -487,7 +488,7 @@ export default {
             }
           },
           x: {
-            format: "dd MMM yyyy HH:mm:ss",
+            format: "dd  MMM yyyy HH:mm:ss",
             formatter: function(val) {
               return new Date(val).toLocaleDateString();
             }

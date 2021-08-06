@@ -1,5 +1,6 @@
 let THE_BEGINNING_OF_EVERYTHING = true;
 let express = require('express');
+const WebSocket = require('ws');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -43,6 +44,7 @@ var io = require('socket.io')(server, {
     },
     pingTimeout: 60000
 });
+const websocket = new WebSocket.Server({ port : 8081 });
 
 
 require('./user')(app,io);
@@ -185,7 +187,7 @@ app.get('/coin/:coinName', (req, res) => {
                 DEFAULT = moment().startOf('day').toString();
 
                 let BEGIN = moment().subtract(1, 'd').toString() || DEFAULT;
-                const NOW = new Date();
+                const NOW = moment();
                 data = await db[coinSymbol.toUpperCase()].findAll({
                     where: {
                         createdAt: {
@@ -219,19 +221,6 @@ app.get('/coins', (req, res) => {
             res.json(factRes);
         })
 })
-
-/*app.get('/closes', async (req, res) => {
-    let BEGIN = moment().subtract(1, 'd').toString() || DEFAULT;
-    const NOW = new Date();
-    data = await db["Closes"].findAll({
-        where: {
-            createdAt: {
-                [Op.between]: [BEGIN, NOW],
-            }
-        }
-    });
-    res.json(data);
-})*/
 
 app.get('/gettopusers', async (req, res) => {
     UserWallet.getTopUsers()
@@ -390,6 +379,17 @@ app.post('/bintltable', async(req, res) => {
         .catch(err => console.log(err));
 })
 
+app.get('/global',(req,res) =>{
+    let result = {};
+    axios.get(`https://api.coingecko.com/api/v3/global`)
+        .then((response) => {
+            result["dominance"] = response.data["data"]["market_cap_percentage"];
+            result["market_cap_change_percentage_24h_usd"] = response.data["data"]["market_cap_change_percentage_24h_usd"];
+            result["active_cryptocurrencies"] = response.data["data"]["active_cryptocurrencies"];
+            res.json(result);
+        })
+})
+
 app.get('/pariteler', async(req, res) => {
     let temp;
     let BEGIN = moment().subtract(1, 'd').toDate() || DEFAULT;
@@ -467,7 +467,7 @@ app.post('/buynow', (req, res) => {
     let major = req.body.major || "TÜRK LİRASI";
     Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major)
         .then((orderId)=>{
-            console.log(orderId)
+            //console.log(orderId)
         })
 
     res.sendStatus(200);
@@ -482,25 +482,8 @@ app.post('/sellnow', (req, res) => {
     let major = req.body.major || "TÜRK LİRASI";
     Trader.setSellOrder(userId,orderType,parameter,wealth,amount,major)
         .then((orderId)=>{
-            console.log(orderId)
+            //console.log(orderId);
         })
-    /*Trader.setSellOrder(userId,orderType,parameter,wealth,amount,major,1)
-        .then((orderId)=>{
-            Trader.sell(
-                userId,
-                wealth,
-                parameter,
-                amount,
-                "TÜRK LİRASI",
-                orderId
-            )
-        })
-
-    io.emit('sell', {
-        userId: userId,
-        CoinOrCurrency: wealth,
-        Amount: amount
-    });*/
     res.sendStatus(200);
 });
 
@@ -526,7 +509,6 @@ app.post('/buysellnow', (req, res) => {
 
 
 });
-
 
 app.post('/setbuyorder', (req, res) => {
     let userId = req.body.userId;
@@ -717,7 +699,7 @@ db.sequelize.sync().then(() => {
             })
             .catch(err => console.log(err));
         // al sat yapılacak yer
-        // bburada açık emirlerin hepsi alınacak ve gerekli condition sağlanıyorsa işlem gerçekleştirilecek
+        // burada açık emirlerin hepsi alınacak ve gerekli condition sağlanıyorsa işlem gerçekleştirilecek
 
         /*fs.writeFile('varliklar.json', JSON.stringify(varliklar), (err) => {
             if (err) {
@@ -780,6 +762,11 @@ db.sequelize.sync().then(() => {
                                        orderId: openOrders[i]["dataValues"]["id"]
                                    };
                                    io.emit('buy', data);
+                                   websocket.on('connection', function connection(ws) {
+
+                                       ws.send("aaaaaaaaaaaaaaaaaaa");
+
+                                   });
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{

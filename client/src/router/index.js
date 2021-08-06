@@ -14,6 +14,7 @@ import Profile from "../views/Profile.vue";
 import CaprazKurlar from "../views/CaprazKurlar.vue";
 import UserWallet from "../views/UserWallet.vue";
 import PageNotFound from "../views/PageNotFound.vue";
+import Activate from "../views/Activate.vue";
 // Admin Side
 function toCapitalize(str) {
   str = str
@@ -101,6 +102,14 @@ const routes = [
     }
   },
   {
+    path: "/activate",
+    name: "Activate",
+    component: Activate,
+    meta: {
+      activate: true
+    }
+  },
+  {
     path: "/kripto-paralar/:coin",
     name: "Coins",
     component: Coins,
@@ -180,22 +189,20 @@ router.beforeEach((to, from, next) => {
             next({ name: 'Home' })
         }
     }*/
-
+  let user = JSON.parse(localStorage.getItem("user"));
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("jwt") == null) {
       next({
         path: "/login",
         params: { nextUrl: to.fullPath }
       });
+    } else if (user.active == 1 && to.path == "/activate") {
+      next({ name : "Home" });
+    } else if (user.active == 0 && to.path != "/logout") {
+      next({ name : "Activate" });
     } else {
-      let user = JSON.parse(localStorage.getItem("user"));
-      console.log(user);
       if (to.matched.some(record => record.meta.is_admin)) {
-        if (user.is_admin) {
-          next();
-        } else {
-          next();
-        }
+        next();
       } else {
         next();
       }

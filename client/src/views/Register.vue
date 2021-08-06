@@ -133,14 +133,13 @@ export default {
           profileImage: this.fullName.toLowerCase().replaceAll(" ", "-")
         })
         .then(res => {
-          console.log(res.data);
           if (res.data !== "OK") return;
           if (this.$route.params.nextUrl != null) {
             this.$router.push(this.$route.params.nextUrl);
           } else {
-            this.$router.push("Login");
+            this.$router.push("Activate");
           }
-          this.$router.push("Login");
+          this.$router.push("Activate");
         });
     },
     onFileChanged() {

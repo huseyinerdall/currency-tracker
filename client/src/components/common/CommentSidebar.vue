@@ -344,6 +344,17 @@ export default {
     if (localStorage.getItem("user")) {
       this.isAuthenticated = true;
     }
+
+    try {
+      const ws = new WebSocket("ws://localhost:8081/");
+      ws.onmessage = ({data}) => {
+        this.message =  data;
+        console.log(this.message);
+      }
+    } catch(err) {
+      console.log(err);
+    }
+
   },
   watch: {
     drawer() {

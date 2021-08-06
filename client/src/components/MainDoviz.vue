@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-doviz">
     <v-data-table
       :headers="headers"
       :items="data"
@@ -20,17 +20,17 @@
     >
       <template v-slot:header.time="{ header }">
         <div class="convert-dropdown row">
-          {{header.text = ''}}
+          {{ (header.text = "") }}
           <v-select
-              style="font-size:15px;background: transparent;width: 90px;margin-top: -7px;"
-              class="amber--text accent-3"
-              :items="convertTo"
-              solo
-              dense
-              dark
-              v-model="selected"
-              hide-details
-              @change="convertTable"
+            style="font-size:15px;background: transparent;width: 90px;margin-top: -7px;"
+            class="amber--text accent-3"
+            :items="convertTo"
+            solo
+            dense
+            dark
+            v-model="selected"
+            hide-details
+            @change="convertTable"
           ></v-select>
         </div>
       </template>
@@ -73,7 +73,10 @@
                 : 'color:#ffffff !important;'
             ]"
           >
-            {{ item["Alış"].replace(",", ".")/denominator | turkishCurrencyformat }}
+            {{
+              (item["Alış"].replace(",", ".") / denominator)
+                | turkishCurrencyformat
+            }}
           </td>
           <td
             :style="[
@@ -82,11 +85,14 @@
                 : 'color:#ffffff !important;'
             ]"
           >
-            {{ item["Satış"].replace(",", ".")/denominator | turkishCurrencyformat }}
+            {{
+              (item["Satış"].replace(",", ".") / denominator)
+                | turkishCurrencyformat
+            }}
             <v-icon
               v-if="
                 $vuetify.breakpoint.smAndDown &&
-                item['Değişim'].indexOf('-')<0
+                  item['Değişim'].indexOf('-') < 0
               "
               class="float-right"
               size="20"
@@ -97,7 +103,7 @@
             <v-icon
               v-else-if="
                 $vuetify.breakpoint.smAndDown &&
-                !(item['Değişim'].indexOf('-')<0)
+                  !(item['Değişim'].indexOf('-') < 0)
               "
               class="float-right"
               size="20"
@@ -108,32 +114,31 @@
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span
-                :class="[
-                  item['Değişim'].indexOf('-')<0
-                  ? 'green--text'
-                  : 'red--text'
+              :class="[
+                item['Değişim'].indexOf('-') < 0 ? 'green--text' : 'red--text'
               ]"
               class="body-1"
               :style="`font-size: ${$store.state.tdFontSize} !important;`"
             >
               {{
-                (parseFloat(item["Satış"].replace(",", ".")) * parseFloat(item['Değişim'].replace('%','').replace(',','.')))/100 | signint
+                ((parseFloat(item["Satış"].replace(",", ".")) *
+                  parseFloat(
+                    item["Değişim"].replace("%", "").replace(",", ".")
+                  )) /
+                  100)
+                  | signint
               }}
             </span>
           </td>
           <td v-if="!$vuetify.breakpoint.smAndDown">
             <span
-                :class="[
-                  item['Değişim'].indexOf('-')<0
-                  ? 'green--text'
-                  : 'red--text'
+              :class="[
+                item['Değişim'].indexOf('-') < 0 ? 'green--text' : 'red--text'
               ]"
               class="body-1"
               :style="`font-size: ${$store.state.tdFontSize} !important;`"
             >
-              {{
-                item["Değişim"]
-              }}
+              {{ item["Değişim"] }}
             </span>
           </td>
           <td
@@ -238,7 +243,7 @@ export default {
         }
       ],
       data: [],
-      convertTo: ["USD","TRY"],
+      convertTo: ["USD", "TRY"],
       selected: "TRY",
       denominator: 1,
       overlay: false
@@ -256,7 +261,7 @@ export default {
       let temp = app.data[3];
       app.data[3] = app.data[18];
       app.data[18] = temp;
-      if (app.$route.path == "/") {
+      if (app.$route.path === "/") {
         app.data.pop();
         app.data.pop();
         app.data.pop();
@@ -265,7 +270,7 @@ export default {
       this.overlay = false;
     }
 
-    var socket = io.connect(`${this.$store.state.addr}`);
+    const socket = io.connect(`${this.$store.state.addr}`);
     socket.on("currencies", fetchedData => {
       if (fetchedData[0]) {
         app.data = fetchedData;
@@ -274,7 +279,7 @@ export default {
         app.data[3] = app.data[18];
         app.data[18] = temp;
 
-        if (app.$route.path == "/") {
+        if (app.$route.path === "/") {
           app.data.pop();
           app.data.pop();
           app.data.pop();
@@ -321,7 +326,7 @@ export default {
             : "amber--text accent-3 body-1"
         },
         {
-          text: "Yüzde",
+          text: "Fark",
           value: "Yuzde",
           sortable: false,
           align: "start",
@@ -330,7 +335,7 @@ export default {
             : "amber--text accent-3 body-1"
         },
         {
-          text: "Fark",
+          text: "Yüzde",
           value: "Fark",
           sortable: false,
           align: "start",
@@ -348,13 +353,18 @@ export default {
             : "amber--text accent-3 body-1"
         }
       ];
+      if (this.$vuetify.breakpoint.smAndDown) {
+        this.headers.pop();
+        this.headers.pop();
+        this.headers.pop();
+      }
     }
   },
   methods: {
-    convertTable: function (){
-      if(this.selected == "TRY"){
+    convertTable: function() {
+      if (this.selected == "TRY") {
         this.denominator = 1;
-      }else if(this.selected == "USD"){
+      } else if (this.selected == "USD") {
         this.denominator = this.$store.state.dolar;
       }
     }
@@ -362,27 +372,33 @@ export default {
 };
 </script>
 <style>
-.convert-dropdown .theme--dark.v-text-field--solo > .v-input__control > .v-input__slot {
+.convert-dropdown
+  .theme--dark.v-text-field--solo
+  > .v-input__control
+  > .v-input__slot {
   background: transparent;
 }
-.convert-dropdown .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot {
+.convert-dropdown
+  .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)
+  > .v-input__control
+  > .v-input__slot {
   box-shadow: none;
 }
 .convert-dropdown .v-select.v-input--dense .v-select__selection--comma {
   margin: 5px 4px 0px 0;
   color: #ffc107 !important;
 }
-.convert-dropdown .v-select__slot{
+.convert-dropdown .v-select__slot {
   border-bottom: none;
 }
-.convert-dropdown .v-application--is-ltr .v-text-field .v-input__append-inner{
+.convert-dropdown .v-application--is-ltr .v-text-field .v-input__append-inner {
   padding: 0;
 }
-.convert-dropdown .v-icon.v-icon{
-  color:#ffc107 !important;
+.convert-dropdown .v-icon.v-icon {
+  color: #ffc107 !important;
 }
-.v-data-table__wrapper{
-  overflow-x: hidden;
+.main-doviz .v-data-table__wrapper{
+  overflow-x: hidden !important;
 }
 </style>
 <style scoped>
@@ -416,7 +432,7 @@ h3 {
 .pinkk {
   color: #ff3366 !important;
 }
-.v-application--is-ltr .v-text-field .v-input__append-inner{
+.v-application--is-ltr .v-text-field .v-input__append-inner {
   padding-left: 0;
 }
 </style>
