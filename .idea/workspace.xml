@@ -19,25 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Mail activation added">
-      <change afterPath="$PROJECT_DIR$/admin/src/pages/Users.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/Activating.vue" afterDir="false" />
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Facebook login canceled">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/admin/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/layout/dashboard/DashboardLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/layout/dashboard/DashboardLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/pages/Dashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/router/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user-wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Activate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Activate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/pages/Users.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/pages/Users.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +30,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1l8XycQLb9n0xFGVGY9Riyy7KQ8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -397,14 +380,7 @@
       <workItem from="1628231142551" duration="11036000" />
       <workItem from="1628271825232" duration="1738000" />
       <workItem from="1628316516071" duration="52000" />
-      <workItem from="1628664106105" duration="10882000" />
-    </task>
-    <task id="LOCAL-00011" summary="salı">
-      <created>1609272959900</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1609272959901</updated>
+      <workItem from="1628664106105" duration="15495000" />
     </task>
     <task id="LOCAL-00012" summary="salı">
       <created>1609613413736</created>
@@ -742,7 +718,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628241441504</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Facebook login canceled">
+      <created>1628679957638</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1628679957639</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -775,6 +758,7 @@
     <MESSAGE value="persembe" />
     <MESSAGE value="end" />
     <MESSAGE value="Mail activation added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mail activation added" />
+    <MESSAGE value="Facebook login canceled" />
+    <option name="LAST_COMMIT_MESSAGE" value="Facebook login canceled" />
   </component>
 </project>

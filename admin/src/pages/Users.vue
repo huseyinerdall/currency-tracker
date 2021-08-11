@@ -3,13 +3,31 @@
     <div class="col-12">
       <card title="Users">
         <div>
-          <b-table striped hover :items="users" :fields="fields" sort-by="id">
+          <b-form-group
+            label="Filter"
+            label-for="filter-input"
+            label-cols-sm="3"
+            label-align-sm="right"
+            label-size="sm"
+            class="mb-0"
+          >
+            <b-input-group size="sm">
+              <b-form-input
+                id="filter-input"
+                v-model="filter"
+                type="search"
+                placeholder="Type to Search"
+              ></b-form-input>
+
+            </b-input-group>
+          </b-form-group>
+          <b-table striped hover :items="users" :fields="fields" sort-by="id" :filter="filter">
             <template #cell(id)="data">
               <span v-html="data.value"></span>
             </template>
-            <template #cell(actions)="row">
+            <template #cell(actions)="data">
               <b-btn
-                @click="removeUser(4)"
+                @click="removeUser(data.item.id)"
               >Delete
               </b-btn>
             </template>
@@ -31,6 +49,7 @@ export default {
     return {
       users: null,
       fields: ['id','fullName','email','active','balanceNow','actions'],
+      filter: null
     };
   },
   created() {
