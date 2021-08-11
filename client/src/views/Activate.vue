@@ -33,6 +33,15 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
+let options = {
+  type: "success",
+  icon: "check",
+  fullWidth: true,
+  position: "top-center",
+  duration: 1600,
+  containerClass: "green accent-3 text-center",
+  className: "text-center"
+};
 export default {
   name: "Activate",
   data() {
@@ -53,6 +62,10 @@ export default {
           })
           .then(res => {
             if (res.data == "MAILOK") {
+              this.$toasted.show(
+                  `Eposta başarılı bir şekilde gönderildi.Gelen kutunuzu kontrol edebilirsiniz.`,
+                  options
+              );
               this.emailsending = false;
             }
           });

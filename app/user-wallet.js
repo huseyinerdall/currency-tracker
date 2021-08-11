@@ -21,6 +21,35 @@ class UserWallet{
         });
     }
 
+    removeUser(userId){
+        return new Promise((resolve, reject)=>{
+            db.User.destroy({
+                where: {
+                    id: userId
+                }
+            })
+                .then((data)=>{
+                    db.Order.destroy({
+                        where: {
+                            UserId: userId
+                        }
+                    })
+                        .then((data)=>{
+                            resolve(data);
+                        })
+                        .catch((err)=>{
+                            console.log(err);
+                            reject(err);
+                        })
+                })
+                .catch((err)=>{
+                    console.log(err);
+                    reject(err);
+                })
+
+        });
+    }
+
     calculateBalance(wallet,allPrices){
         let balance = 0;
         for (const key in wallet) {

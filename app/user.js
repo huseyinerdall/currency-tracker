@@ -45,7 +45,7 @@ module.exports = function(app,io){
                             from: secret.gmail.auth.user,
                             to: req.body.email,
                             subject: 'Para.Guru Hesap Aktivasyon',
-                            html: utils.mailTemplate()
+                            html: utils.mailTemplate(req.body.userId,req.body.url)
                         };
                         transporter.sendMail(mailOptions, function(error, info){
                             if (error) {
@@ -140,7 +140,13 @@ module.exports = function(app,io){
             })
                 .then((user) => {
                     console.log(user[1]["dataValues"])
-                    res.redirect('http://localhost:8080/userwallet');
+                    //res.redirect('http://localhost/userwallet');
+                    res.redirect(url.format({
+                        pathname:"http://localhost:8080/activating",
+                        /*query: {
+                            "activated": 1
+                        }*/
+                    }))
                 })
         } else {
             res.send("Aktivasyon kodu hatalı");

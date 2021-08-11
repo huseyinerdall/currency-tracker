@@ -1,6 +1,7 @@
 const fs = require('fs');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+let userWallet = require('./user-wallet');
 var app = require('express')();
 app.use(cors({ credentials: true }));
 app.use(bodyParser.json());
@@ -69,4 +70,25 @@ app.post('/addnewdescription', (req, res) => {
     }
 })
 
+app.get('/getallusers', (req, res) => {
+    userWallet.getAllUsers()
+        .then((data) => {
+            res.json(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
+app.post('/removeuser', (req, res) => {
+    let userId = req.body.userId;
+    userWallet.removeUser(userId)
+        .then((result) => {
+            res.send("DELETEDUSER");
+        })
+        .catch((err) => {
+            res.send(err)
+            console.log(err);
+        })
+})
 module.exports = app;

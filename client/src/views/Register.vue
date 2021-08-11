@@ -134,6 +134,7 @@ export default {
         })
         .then(res => {
           if (res.data !== "OK") return;
+          console.log(res.data)
           if (this.$route.params.nextUrl != null) {
             this.$router.push(this.$route.params.nextUrl);
           } else {

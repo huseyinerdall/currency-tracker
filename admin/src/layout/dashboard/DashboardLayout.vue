@@ -3,7 +3,8 @@
     <side-bar>
       <template slot="links">
         <sidebar-link to="/dashboard" :name="'Dashboard'" icon="tim-icons icon-chart-pie-36"/>
-        <sidebar-link to="/seo" name="SEO" icon="tim-icons icon-chart-pie-36"/>
+        <sidebar-link to="/seo" name="SEO" icon="tim-icons icon-spaceship"/>
+        <sidebar-link to="/users" name="USERS" icon="tim-icons icon-single-02"/>
       </template>
     </side-bar>
     <div class="main-panel">

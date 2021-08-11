@@ -15,6 +15,7 @@ import CaprazKurlar from "../views/CaprazKurlar.vue";
 import UserWallet from "../views/UserWallet.vue";
 import PageNotFound from "../views/PageNotFound.vue";
 import Activate from "../views/Activate.vue";
+import Activating from "../views/Activating.vue";
 // Admin Side
 function toCapitalize(str) {
   str = str
@@ -169,6 +170,14 @@ const routes = [
       requiresAuth: true
     }
   },
+  {
+    path: "/activating",
+    name: "activating",
+    component: Activating,
+    meta: {
+      requiresAuth: true
+    }
+  },
   { path: "*", component: PageNotFound }
 ];
 
@@ -196,6 +205,8 @@ router.beforeEach((to, from, next) => {
         path: "/login",
         params: { nextUrl: to.fullPath }
       });
+    } else if (to.path == "/activating") {
+      next();
     } else if (user.active == 1 && to.path == "/activate") {
       next({ name : "Home" });
     } else if (user.active == 0 && to.path != "/logout") {

@@ -59,10 +59,10 @@
             </v-icon>
           </v-btn>-->
 
-          <template>
+<!--          <template>
             <v-facebook-login app-id="543577080115436" style="width: 100%;" class="mt-2">
             </v-facebook-login>
-          </template>
+          </template>-->
 
 
         </v-col>
@@ -89,7 +89,7 @@
 <script>
 import axios from "axios";
 import GoogleLogin from "vue-google-login";
-import VFacebookLogin from 'vue-facebook-login-component';
+//import VFacebookLogin from 'vue-facebook-login-component';
 export default {
   name: "Login",
   data() {
@@ -112,7 +112,7 @@ export default {
   },
   components: {
     GoogleLogin,
-    VFacebookLogin,
+    //VFacebookLogin,
   },
   methods: {
     googlelogin() {

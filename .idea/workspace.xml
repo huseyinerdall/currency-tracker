@@ -19,29 +19,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="end">
-      <change afterPath="$PROJECT_DIR$/app/config/secret.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/AMP.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/GRT.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/SHIB.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/mail.template.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/GlobalInfos.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/Activate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Mail activation added">
+      <change afterPath="$PROJECT_DIR$/admin/src/pages/Users.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/views/Activating.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/admin/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/layout/dashboard/DashboardLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/layout/dashboard/DashboardLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/pages/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/router/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user-wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user-wallet.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Activate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Activate.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
@@ -67,7 +61,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vue-flask-bi" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -85,6 +79,7 @@
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\views" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets\" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\static" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\admin\src\pages" />
@@ -399,14 +394,10 @@
       <workItem from="1628098147566" duration="312000" />
       <workItem from="1628144240641" duration="6276000" />
       <workItem from="1628159980684" duration="6126000" />
-      <workItem from="1628231142551" duration="3870000" />
-    </task>
-    <task id="LOCAL-00010" summary="salı">
-      <created>1609229227603</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1609229227603</updated>
+      <workItem from="1628231142551" duration="11036000" />
+      <workItem from="1628271825232" duration="1738000" />
+      <workItem from="1628316516071" duration="52000" />
+      <workItem from="1628664106105" duration="10882000" />
     </task>
     <task id="LOCAL-00011" summary="salı">
       <created>1609272959900</created>
@@ -744,7 +735,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627383095433</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Mail activation added">
+      <created>1628241441503</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1628241441504</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -776,6 +774,7 @@
     <MESSAGE value="salı" />
     <MESSAGE value="persembe" />
     <MESSAGE value="end" />
-    <option name="LAST_COMMIT_MESSAGE" value="end" />
+    <MESSAGE value="Mail activation added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mail activation added" />
   </component>
 </project>

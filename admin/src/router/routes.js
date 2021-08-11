@@ -6,6 +6,7 @@ import NotFound from "@/pages/NotFoundPage.vue";
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
 const Seo = () => import(/* webpackChunkName: "common" */ "@/pages/Seo.vue");
 const Login = () => import(/* webpackChunkName: "common" */ "@/pages/Login.vue");
+const Users = () => import(/* webpackChunkName: "common" */ "@/pages/Users.vue");
 
 const routes = [
   {
@@ -33,6 +34,14 @@ const routes = [
         path: "login",
         name: "login",
         component: Login,
+        meta: {
+          requiresAuth: false
+        }
+      },
+      {
+        path: "users",
+        name: "users",
+        component: Users,
         meta: {
           requiresAuth: false
         }

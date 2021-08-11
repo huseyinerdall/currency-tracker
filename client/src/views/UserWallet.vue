@@ -42,7 +42,7 @@
                 </v-row>
                 <apexchart
                     ref="realtimeChart"
-                    class="ma-0 pa-0"
+                    class="ma-0 pa-0 balanceGraph"
                     type="line"
                     height="330"
                     :options="chartOptions"
@@ -261,19 +261,28 @@
                           ₺{{item.balanceNow | turkishCurrencyformat}}
                         </td>
                         <td v-if="!$vuetify.breakpoint.smAndDown">
-                          <v-row class="pa-0"
+                          <v-row class="pa-0" v-if="item.graph['']"
                           :style="'width:'+(116+item.balanceNow/topUsers[0]['balanceNow']*100)+'px;'">
                             <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+Object.values(item.graph)[0]+'%;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
                             <span style="font-size:10px;background: #228B22;" class="text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+Object.values(item.graph)[1]+'%;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
-                            <span style="font-size:10px;background: #778899;" class="text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined && item.graph['diger']>10" :style="'width:'+item.graph['diger']+'%;'">DİĞER</span>
+                            <span style="font-size:10px;background: #778899;" class="text-center" v-if="item.graph['diger']!=null && item.graph['diger']!=0 && item.graph['diger']!=undefined && item.graph['diger']>10" :style="'width:'+item.graph['diger']+'%;'">DİĞER</span>
+                          </v-row>
+                          <v-row class="pa-0" v-else
+                                 :style="'width:'+(116+item.balanceNow/topUsers[0]['balanceNow']*100)+'px;'">
+                            <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+100+'%;'">TRY</span>
                           </v-row>
                         </td>
-                        <v-row class="pa-0" v-if="$vuetify.breakpoint.smAndDown"
+                        <v-row class="pa-0" v-if="$vuetify.breakpoint.smAndDown && item.graph['']"
                                style="position: absolute;bottom: 0;left: 13px;right: 13px;"
                                :style="'width:'+(50+item.balanceNow/topUsers[0]['balanceNow']*50)+'%;'">
                           <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+Object.values(item.graph)[0]+'%;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
                           <span style="font-size:10px;background: #228B22;" class="text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+Object.values(item.graph)[1]+'%;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
                           <span style="font-size:10px;background: #778899;" class="text-center" v-if="item.graph['diger']!=0 && item.graph['diger']!=undefined && item.graph['diger']>10" :style="'width:'+item.graph['diger']+'%;'">DİĞER</span>
+                        </v-row>
+                        <v-row class="pa-0" v-else-if="$vuetify.breakpoint.smAndDown"
+                               style="position: absolute;bottom: 0;left: 13px;right: 13px;"
+                               :style="'width:'+(50+item.balanceNow/topUsers[0]['balanceNow']*50)+'%;'">
+                          <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+100+'%;'">TRY</span>
                         </v-row>
                       </tr>
 
@@ -493,10 +502,9 @@ export default {
               return new Date(val).toLocaleDateString();
             }
           },
-          custom: function({series, seriesIndex, dataPointIndex,w}) {
+          custom: function({series, seriesIndex, dataPointIndex/*,w*/}) {
             return '<div class="arrow_box tooltipp">' +
                 '<span style="font-weight: 600;">' + '₺' + series[seriesIndex][dataPointIndex] + '</span><br>' +
-                '<span style="font-size: 14px;">' + new Date(w.globals.labels[dataPointIndex]).toLocaleDateString() + '</span>' +
                 '</div>'
           },
         },
@@ -649,7 +657,7 @@ export default {
           class: this.$store.state.isLight
             ? "pinkk caption"
             : "amber--text accent-3 caption",
-          width: !app.$vuetify.breakpoint.smAndDown ? "200px" : "auto"
+          width: !app.$vuetify.breakpoint.smAndDown ? "210px" : "auto"
         },
         {
           text: "BAKİYE",
@@ -658,7 +666,7 @@ export default {
           class: this.$store.state.isLight
             ? "pinkk caption"
             : "amber--text accent-3 caption",
-          width: "140px"
+          width: "130px"
         },
         {
           text: "PORTFÖY",
@@ -897,6 +905,10 @@ export default {
 .time-dropdown .v-select__slot{
   border-bottom: 1px solid #fff;
 }
+.balanceGraph .apexcharts-tooltip.apexcharts-theme-light{
+  background: transparent !important;
+  border: none !important;
+}
 </style>
 <style scoped>
 .apexcharts-tooltip {
@@ -1030,5 +1042,4 @@ h3 {
   background: transparent !important;
   color: #fff !important;
 }
-
 </style>
