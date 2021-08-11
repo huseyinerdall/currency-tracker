@@ -459,22 +459,30 @@ export default {
     });
 
     socket.on("buy", fetchedData => {
-      if(JSON.parse(localStorage.getItem("user")).id == fetchedData.userId){
-        app.$toasted.show(
-            `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
-            options
-        );
-        app.emitMethod();
+      try{
+        if (JSON.parse(localStorage.getItem("user")).id == fetchedData.userId) {
+          app.$toasted.show(
+              `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
+              options
+          );
+          app.emitMethod();
+        }
+      }catch (e){
+        e;
       }
     });
 
     socket.on("sell", fetchedData => {
-      if(JSON.parse(localStorage.getItem("user")).id == fetchedData.userId) {
-        this.$toasted.show(
-            `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
-            options
-        );
-        this.emitMethod();
+      try{
+        if (JSON.parse(localStorage.getItem("user")).id == fetchedData.userId) {
+          this.$toasted.show(
+              `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
+              options
+          );
+          this.emitMethod();
+        }
+      }catch (e) {
+        e;
       }
     });
     if (localStorage.getItem("coins250")) {

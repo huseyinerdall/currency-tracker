@@ -910,6 +910,9 @@ export default {
   background: transparent !important;
   border: none !important;
 }
+.v-data-table--fixed-header > .v-data-table__wrapper > table > thead > tr > th{
+  background: transparent !important;
+}
 </style>
 <style scoped>
 .apexcharts-tooltip {

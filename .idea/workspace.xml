@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Facebook login canceled">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Orders table header fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/pages/Users.vue" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/pages/Users.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +79,7 @@
       <recentPaths value="$PROJECT_DIR$/admin" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.serve">
+  <component name="RunManager" selected="npm.admin">
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -380,21 +381,8 @@
       <workItem from="1628231142551" duration="11036000" />
       <workItem from="1628271825232" duration="1738000" />
       <workItem from="1628316516071" duration="52000" />
-      <workItem from="1628664106105" duration="15495000" />
-    </task>
-    <task id="LOCAL-00012" summary="salı">
-      <created>1609613413736</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1609613413736</updated>
-    </task>
-    <task id="LOCAL-00013" summary="cumartesi">
-      <created>1609613680779</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1609613680779</updated>
+      <workItem from="1628664106105" duration="15803000" />
+      <workItem from="1628698615558" duration="2304000" />
     </task>
     <task id="LOCAL-00014" summary="pazar">
       <created>1609667991996</created>
@@ -725,7 +713,21 @@
       <option name="project" value="LOCAL" />
       <updated>1628679957639</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Admin side Users.vue editted">
+      <created>1628687891315</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1628687891315</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Orders table header fixed">
+      <created>1628705372075</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1628705372076</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -759,6 +761,8 @@
     <MESSAGE value="end" />
     <MESSAGE value="Mail activation added" />
     <MESSAGE value="Facebook login canceled" />
-    <option name="LAST_COMMIT_MESSAGE" value="Facebook login canceled" />
+    <MESSAGE value="Admin side Users.vue editted" />
+    <MESSAGE value="Orders table header fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Orders table header fixed" />
   </component>
 </project>
