@@ -128,6 +128,7 @@
                         :items-per-page="itemPerPage"
                         item-class="text--white"
                         no-data-text="Henüz herhangi bir emir vermediniz."
+                        fixed-header
                         style="border: 1px solid #ddd;border-radius:6px;"
                         :style="[
                           $store.state.isLight
