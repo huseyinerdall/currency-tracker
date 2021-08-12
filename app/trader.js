@@ -156,6 +156,64 @@ class Trade{
         })
     }
 
+    setBuyOrderNow(
+        userId,
+        orderType,
+        parameter,
+        wealth,
+        amount,
+        major = "TÜRK LİRASI",
+        closed=1
+    ){
+        return new Promise((resolve, reject)=>{
+            db.Order.create({
+                UserId: userId,
+                buyOrSell: 'buy',
+                OrderType: orderType, // "time" or "price"
+                Parameter: parameter, // time or price
+                CoinOrCurrency: wealth,
+                MajorCurrency: major,
+                Amount: amount,
+                Closed: closed
+            })
+                .then((data)=>{
+                    resolve(data.dataValues.id);
+                })
+                .catch((err)=>{
+                    reject(err);
+                })
+        })
+    }
+
+    setSellOrderNow(
+        userId,
+        orderType,
+        parameter,
+        wealth,
+        amount,
+        major = "TÜRK LİRASI",
+        closed=1
+    ){
+        return new Promise((resolve, reject)=>{
+            db.Order.create({
+                UserId: userId,
+                buyOrSell: 'sell',
+                OrderType: orderType, // "time" or "price"
+                Parameter: parameter, // time or price
+                CoinOrCurrency: wealth,
+                MajorCurrency: major,
+                Amount: amount,
+                Closed: closed
+            })
+                .then((data)=>{
+                    resolve(data.dataValues.id);
+                })
+                .catch((err)=>{
+                    reject(err);
+                })
+        })
+    }
+
     getAllOpenOrders(){
         return new Promise((resolve, reject)=>{
             db.Order.findAll({

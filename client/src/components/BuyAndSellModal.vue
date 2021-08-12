@@ -462,21 +462,28 @@ export default {
     });
 
     this.connection.onmessage = function(event) {
-      let fetchedData = JSON.parse(event.data) || event.data;
-      if (fetchedData.type == "buy") {
-        app.$toasted.show(
-            `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
-            options
-        );
-      } else if (fetchedData.type == "sell") {
-        app.$toasted.show(
-            `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
-            options
-        );
-      } /*else {
+      if(localStorage.getItem('user')){
+        let fetchedData = JSON.parse(event.data) || event.data;
+        if (fetchedData.type == "buy") {
+          if(fetchedData.userId == JSON.parse(localStorage.getItem('user')).id){
+            app.$toasted.show(
+                `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
+                options
+            );
+            app.emitMethod();
+          }
+        } else if (fetchedData.type == "sell") {
+          if(fetchedData.userId == JSON.parse(localStorage.getItem('user')).id){
+            app.$toasted.show(
+                `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
+                options
+            );
+          }
+          app.emitMethod();
+        } /*else {
 
-      }*/
-      app.emitMethod();
+        }*/
+      }
     }
     if (localStorage.getItem("coins250")) {
       this.data = JSON.parse(localStorage.getItem("coins250"));
@@ -653,12 +660,7 @@ export default {
           major: "TÜRK LİRASI"
         })
         .then(response => {
-          console.log(response.data);
-          this.$toasted.show(
-              `${response.data.Amount} adet ${response.data.CoinOrCurrency} satım emriniz gerçekleşti.`,
-              options
-          );
-          this.emitMethod();
+          response;
           this.emirLoaded = true;
           this.$store.commit('buyselldialog');
         })

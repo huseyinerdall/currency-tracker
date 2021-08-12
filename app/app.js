@@ -482,9 +482,25 @@ app.post('/buynow', (req, res) => {
     let wealth = req.body.wealth;
     let amount = req.body.amount;
     let major = req.body.major || "TÜRK LİRASI";
-    Trader.setBuyOrder(userId,orderType,parameter,wealth,amount,major)
+    Trader.setBuyOrderNow(userId,orderType,parameter,wealth,amount,major)
         .then((orderId)=>{
             //console.log(orderId)
+            let priceNow = parseFloat(allPrices[wealth]) ||
+                parseFloat(allPrices[apiT[wealth].replace(",",".")]);
+            Trader.buy(userId,wealth,priceNow,amount,"TÜRK LİRASI",orderId)
+                .then((result) => {
+                    let data = JSON.stringify({
+                        type: "buy",
+                        userId: userId,
+                        CoinOrCurrency: wealth,
+                        Amount: amount,
+                        orderId: orderId
+                    });
+                    //io.emit('buy', data);
+                    CustomEventEmitters.emit('buy',data);
+                })
+                .catch((err)=>{
+                    console.log(err)})
         })
 
     res.sendStatus(200);
@@ -500,6 +516,22 @@ app.post('/sellnow', (req, res) => {
     Trader.setSellOrder(userId,orderType,parameter,wealth,amount,major)
         .then((orderId)=>{
             //console.log(orderId);
+            let priceNow = parseFloat(allPrices[wealth]) ||
+                parseFloat(allPrices[apiT[wealth].replace(",",".")]);
+            Trader.sell(userId,wealth,priceNow,amount,"TÜRK LİRASI",orderId)
+                .then((result) => {
+                    let data = JSON.stringify({
+                        type: "sell",
+                        userId: userId,
+                        CoinOrCurrency: wealth,
+                        Amount: amount,
+                        orderId: orderId
+                    });
+                    //io.emit('buy', data);
+                    CustomEventEmitters.emit('sell',data);
+                })
+                .catch((err)=>{
+                    console.log(err)})
         })
     res.sendStatus(200);
 });
@@ -740,7 +772,6 @@ db.sequelize.sync().then(() => {
                                openOrders[i]["dataValues"]["id"]
                            )
                                .then((result) => {
-                                   console.log(result);
                                    let data = JSON.stringify({
                                        type: "buy",
                                        userId: openOrders[i]["dataValues"]["UserId"],
@@ -830,7 +861,6 @@ db.sequelize.sync().then(() => {
                                openOrders[i]["dataValues"]["id"]
                            )
                                .then((result) => {
-                                   console.log(openOrders[i]);
                                    let data = JSON.stringify({
                                        type: "sell",
                                        userId: openOrders[i]["dataValues"]["UserId"],
@@ -849,13 +879,7 @@ db.sequelize.sync().then(() => {
                }
            })
 
-        UserWallet.getAllUsers()
-            .then((users)=>{
-                for (let i = 0; i < users.length; i++) {
-                    users[i]["dataValues"]
-                }
-            })
-    },3000);
+    },1000);
 
 })
 

@@ -19,15 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Orders table header fixed">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Notifications added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/passport-setup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -388,14 +385,7 @@
       <workItem from="1628316516071" duration="52000" />
       <workItem from="1628664106105" duration="15803000" />
       <workItem from="1628698615558" duration="2649000" />
-      <workItem from="1628749110824" duration="9802000" />
-    </task>
-    <task id="LOCAL-00015" summary="salı">
-      <created>1609875524842</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1609875524842</updated>
+      <workItem from="1628749110824" duration="14951000" />
     </task>
     <task id="LOCAL-00016" summary="salı">
       <created>1609875661039</created>
@@ -733,7 +723,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628706798642</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Notifications added">
+      <created>1628763803401</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1628763803402</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -769,6 +766,7 @@
     <MESSAGE value="Facebook login canceled" />
     <MESSAGE value="Admin side Users.vue editted" />
     <MESSAGE value="Orders table header fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Orders table header fixed" />
+    <MESSAGE value="Notifications added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Notifications added" />
   </component>
 </project>
