@@ -443,10 +443,13 @@ export default {
     },
     orderNowAmount: 0,
     calculatedSum: 0,
-    emirLoaded: true
+    emirLoaded: true,
+    connection: null
   }),
   created() {
     let app = this;
+    this.connection = new WebSocket(`${app.$store.state.websocket}`);
+
     var socket = io.connect(`${this.$store.state.addr}`);
     socket.on("coins", fetchedData => {
       localStorage.setItem("coins250", JSON.stringify(fetchedData));
@@ -458,33 +461,23 @@ export default {
       localStorage.setItem("currencies", JSON.stringify(fetchedData));
     });
 
-    socket.on("buy", fetchedData => {
-      try{
-        if (JSON.parse(localStorage.getItem("user")).id == fetchedData.userId) {
-          app.$toasted.show(
-              `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
-              options
-          );
-          app.emitMethod();
-        }
-      }catch (e){
-        e;
-      }
-    });
+    this.connection.onmessage = function(event) {
+      let fetchedData = JSON.parse(event.data) || event.data;
+      if (fetchedData.type == "buy") {
+        app.$toasted.show(
+            `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} alım emriniz gerçekleşti.`,
+            options
+        );
+      } else if (fetchedData.type == "sell") {
+        app.$toasted.show(
+            `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
+            options
+        );
+      } /*else {
 
-    socket.on("sell", fetchedData => {
-      try{
-        if (JSON.parse(localStorage.getItem("user")).id == fetchedData.userId) {
-          this.$toasted.show(
-              `${fetchedData.Amount} adet ${fetchedData.CoinOrCurrency} satım emriniz gerçekleşti.`,
-              options
-          );
-          this.emitMethod();
-        }
-      }catch (e) {
-        e;
-      }
-    });
+      }*/
+      app.emitMethod();
+    }
     if (localStorage.getItem("coins250")) {
       this.data = JSON.parse(localStorage.getItem("coins250"));
       let tempList = JSON.parse(localStorage.getItem("currencies")).concat(
@@ -612,7 +605,6 @@ export default {
       //userId,orderType,parameter,wealth,amount,major
       this.emirLoaded = false;
       this.$toasted.show(`Alım emriniz alındı.`, options);
-      console.log(this.currentUnit["name"],"#######")
       axios
         .post(`${this.$store.state.api}/buynow`, {
           userId: JSON.parse(localStorage.getItem("user")).id,
@@ -625,7 +617,7 @@ export default {
         .then(response => {
           this.emirLoaded = true;
           this.$store.commit('buyselldialog');
-          console.log(response.data);
+          response;
         })
         .catch(err => {
           console.log(err);

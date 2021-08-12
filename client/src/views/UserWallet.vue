@@ -772,6 +772,7 @@ export default {
     const app = this;
     EventBus.$on('boughtorsold', function () {
       app.getUserWallet();
+      app.getUserAllOrders();
     });
   },
   methods: {

@@ -1,6 +1,9 @@
 let THE_BEGINNING_OF_EVERYTHING = true;
 let express = require('express');
 const WebSocket = require('ws');
+const EventEmitter = require('events');
+class EventEmitters extends EventEmitter {};
+const CustomEventEmitters = new EventEmitters();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -42,10 +45,24 @@ var io = require('socket.io')(server, {
         //origin: ["https://para.guru","https://www.para.guru","http://para.guru"],
         methods: ["GET", "POST"]
     },
-    pingTimeout: 60000
+    pingTimeout: 60000,
+    pingInterval: 10000,
+    allowUpgrades: false,
+    upgrade: false,
+    cookie: false
 });
-const websocket = new WebSocket.Server({ port : 8081 });
+//const websocket = new WebSocket.Server({ port : 8081 });
 
+
+const wss = new WebSocket.Server({ server: server, path:'/websocketchannel' });
+wss.on('connection', function connection(ws, req) {
+    CustomEventEmitters.on('buy', (payload) => {
+        ws.send(payload);
+    });
+    CustomEventEmitters.on('sell', (payload) => {
+        ws.send(payload);
+    });
+});
 
 require('./user')(app,io);
 let Trader = require('./trader');
@@ -644,22 +661,6 @@ db.sequelize.sync().then(() => {
                                 .create({Alis: response.data[element]["Alış"].replace('$','').replace('.','').replace(',','.'), Satis: response.data[element]["Satış"].replace('$','').replace('.','').replace(',','.')})
                             C[indis] = response.data[element]["Alış"];
                         }
-                        /*let date = new Date().toISOString().substring(0, 10);
-                        let prevTime = "01:19";
-                        let nextTime = "01:21";
-                        a = await db[indis].findOne({
-                            where: {
-                                createdAt: {
-                                    [Op.between]: [moment(date + ' ' + prevTime).toDate(), moment(date + ' ' + nextTime).toDate()]
-                                }
-                            }
-                        }).catch((err) => console.log("Geç"))
-                        try {
-                            response.data[element]["close"] = a["dataValues"]["Satis"];
-                        } catch {
-                            response.data[element]["close"] = response.data[element]["Satış"]
-                        }*/
-
                         golds.push(response.data[element]);
                         allPrices[api[element]] = parseFloat(response.data[element]["Satış"].replace(",","."));
 
@@ -676,21 +677,6 @@ db.sequelize.sync().then(() => {
                                 .create({Alis: response.data[element]["Alış"], Satis: response.data[element]["Satış"]})
                             C[indis] = response.data[element]["Alış"];
                         }
-                        /*let date = new Date().toISOString().substring(0, 10);
-                        let prevTime = "01:20";
-                        let nextTime = "01:22";
-                        a = await db[indis].findOne({
-                            where: {
-                                createdAt: {
-                                    [Op.between]: [moment(date + ' ' + prevTime).toDate(), moment(date + ' ' + nextTime).toDate()]
-                                }
-                            }
-                        }).catch((err) => console.log("Geç"))
-                        try {
-                            response.data[element]["close"] = a["dataValues"]["Satis"];
-                        } catch {
-                            response.data[element]["close"] = response.data[element]["Satış"]
-                        }*/
                         currencies.push(response.data[element]);
                         allPrices[api[element]] = parseFloat(response.data[element]["Satış"].replace(",","."));
 
@@ -710,23 +696,23 @@ db.sequelize.sync().then(() => {
 
         UserWallet.saveUsersBalanceDaily(allPrices);
     }, MAINLOOPINTERVAL)
-    let sampleBuySellWebsocketData = {
+    /*let sampleBuySellWebsocketData = {
         userId: 999999999,
         CoinOrCurrency: "Bitcoin",
         Amount: 1,
         orderId: 100000
-    }
-    setInterval(() => {
-        io.emit('buy', sampleBuySellWebsocketData);
-        io.emit('sell', sampleBuySellWebsocketData);
-    },3000);
+    }*/
     setInterval(() => {
         if(factRes.length == 250){io.emit('coins', factRes);}
         if(factRes30.length == 30){io.emit('coins30', factRes30);}
         if(golds.length == 16){io.emit('golds', golds);}
         if(currencies.length == 20){io.emit('currencies', currencies);}
+        /*io.emit('coins', factRes);
+        io.emit('coins30', factRes30);
+        io.emit('golds', golds);
+        io.emit('currencies', currencies);*/
         io.emit('allprices', allPrices);
-    },1000);
+    },3000);
 
     let prevOrderNumber = 0;
     setInterval(() => {
@@ -755,18 +741,15 @@ db.sequelize.sync().then(() => {
                            )
                                .then((result) => {
                                    console.log(result);
-                                   let data = {
+                                   let data = JSON.stringify({
+                                       type: "buy",
                                        userId: openOrders[i]["dataValues"]["UserId"],
                                        CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
                                        Amount: openOrders[i]["dataValues"]["Amount"],
                                        orderId: openOrders[i]["dataValues"]["id"]
-                                   };
-                                   io.emit('buy', data);
-                                   websocket.on('connection', function connection(ws) {
-
-                                       ws.send("aaaaaaaaaaaaaaaaaaa");
-
                                    });
+                                   //io.emit('buy', data);
+                                   CustomEventEmitters.emit('buy',data);
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{
@@ -785,14 +768,15 @@ db.sequelize.sync().then(() => {
                                openOrders[i]["dataValues"]["id"]
                            )
                                .then((result) => {
-                                   console.log(result);
-                                   let data = {
+                                   let data = JSON.stringify({
+                                       type: "sell",
                                        userId: openOrders[i]["dataValues"]["UserId"],
                                        CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
                                        Amount: openOrders[i]["dataValues"]["Amount"],
                                        orderId: openOrders[i]["dataValues"]["id"]
-                                   };
-                                   io.emit('sell', data);
+                                   });
+                                   CustomEventEmitters.emit('sell',data);
+                                   //io.emit('sell', data);
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{
@@ -816,13 +800,15 @@ db.sequelize.sync().then(() => {
                            )
                                .then((result) => {
                                    console.log(result);
-                                   let data = {
+                                   let data = JSON.stringify({
+                                       type: "buy",
                                        userId: openOrders[i]["dataValues"]["UserId"],
                                        CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
                                        Amount: openOrders[i]["dataValues"]["Amount"],
                                        orderId: openOrders[i]["dataValues"]["id"]
-                                   };
-                                   io.emit('buy', data);
+                                   });
+                                   CustomEventEmitters.emit('buy',data);
+                                   //io.emit('buy', data);
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{
@@ -845,13 +831,15 @@ db.sequelize.sync().then(() => {
                            )
                                .then((result) => {
                                    console.log(openOrders[i]);
-                                   let data = {
+                                   let data = JSON.stringify({
+                                       type: "sell",
                                        userId: openOrders[i]["dataValues"]["UserId"],
-                                           CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
+                                       CoinOrCurrency: openOrders[i]["dataValues"]["CoinOrCurrency"],
                                        Amount: openOrders[i]["dataValues"]["Amount"],
                                        orderId: openOrders[i]["dataValues"]["id"]
-                                   };
-                                   io.emit('sell', data);
+                                   });
+                                   CustomEventEmitters.emit('sell',data);
+                                   //io.emit('sell', data);
                                    openOrders.splice(i,1);
                                })
                                .catch((err)=>{

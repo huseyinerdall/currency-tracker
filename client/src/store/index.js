@@ -9,6 +9,7 @@ export default new Vuex.Store({
     addr: process.env.VUE_APP_CLIENT_URL,
     api: process.env.VUE_APP_API_URL,
     admin: process.env.VUE_APP_ADMIN_URL,
+    websocket: process.env.VUE_APP_WEBSOCKET_CHANNEL,
     port: "4000",
     tdFontSize: "12px",
     token: localStorage.getItem("jwt") || "",
