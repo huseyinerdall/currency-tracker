@@ -156,7 +156,7 @@ function mailTemplate(userId,url) {
                                                             <td width="10"></td>
                                                             <td height="30" align="center"
                                                                 style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#ffffff;">
-                                                                <a href="${'https://para.guru'}/activate/NdwpcOASVe5gdcPSfZpwFvWkJzoUzy7n6bi/user/${userId}"
+                                                                <a href="${'https://para.guru'}/activating/NdwpcOASVe5gdcPSfZpwFvWkJzoUzy7n6bi/user/${userId}"
                                                                    style="color:#ffffff;">AKTİF ET</a>
                                                             </td>
                                                             <td width="10"></td>

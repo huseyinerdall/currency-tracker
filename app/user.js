@@ -125,25 +125,17 @@ module.exports = function(app,io){
             })
     })
 
-    app.get('/activate/:activationcode/user/:userid', (req, res) => {
-        console.log(req.params.activationcode,req.params.userid);
-        if(req.params.activationcode == "NdwpcOASVe5gdcPSfZpwFvWkJzoUzy7n6bi"){
+    app.post('/activate', (req, res) => {
+        if(req.body.activationcode == "NdwpcOASVe5gdcPSfZpwFvWkJzoUzy7n6bi"){
             db.User.update({
                 active: 1
             }, {
-                where: { id: req.params.userid },
+                where: { id: req.body.userid },
                 returning: true,
                 plain: true
             })
                 .then((user) => {
-                    console.log(user[1]["dataValues"])
-                    //res.redirect('http://localhost/userwallet');
-                    res.redirect(url.format({
-                        pathname:"http://localhost:8080/activating",
-                        /*query: {
-                            "activated": 1
-                        }*/
-                    }))
+                    res.send("ACTIVATED");
                 })
         } else {
             res.send("Aktivasyon kodu hatalı");

@@ -20,16 +20,27 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Activating",
   data: () => ({}),
   created() {
-    let temp = JSON.parse(localStorage.getItem('user'));
-    temp.active = 1;
-    localStorage.setItem('user',JSON.stringify(temp));
-    this.$router.push({
-      name: "UserWallet"
-    });
+    axios
+        .post(`${this.$store.state.api}/activate`, {
+          activationcode: this.$route.params.activationcode,
+          userid: this.$route.params.userid,
+        })
+        .then(response => {
+          if(response.data === "ACTIVATED"){
+            let temp = JSON.parse(localStorage.getItem('user'));
+            temp.active = 1;
+            localStorage.setItem('user',JSON.stringify(temp));
+            this.$router.push({
+              name: "UserWallet"
+            });
+          }
+        });
+
   }
 };
 </script>

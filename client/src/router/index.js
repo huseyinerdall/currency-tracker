@@ -171,11 +171,11 @@ const routes = [
     }
   },
   {
-    path: "/activating",
+    path: "/activating/:activationcode/user/:userid",
     name: "activating",
     component: Activating,
     meta: {
-      requiresAuth: true
+      requiresAuth: false
     }
   },
   { path: "*", component: PageNotFound }

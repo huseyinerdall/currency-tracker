@@ -21,9 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="getTopUsers function fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Activating.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Activating.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +81,7 @@
       <recentPaths value="$PROJECT_DIR$/admin" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.serve">
+  <component name="RunManager" selected="npm.admin">
     <configuration default="true" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -390,14 +391,8 @@
       <workItem from="1628967254768" duration="3297000" />
       <workItem from="1629052364560" duration="2275000" />
       <workItem from="1629094685764" duration="4187000" />
-      <workItem from="1629111818832" duration="6279000" />
-    </task>
-    <task id="LOCAL-00020" summary="perşembe">
-      <created>1611226672556</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1611226672556</updated>
+      <workItem from="1629111818832" duration="7023000" />
+      <workItem from="1629132331739" duration="1633000" />
     </task>
     <task id="LOCAL-00021" summary="perşembe">
       <created>1611484452483</created>
@@ -735,7 +730,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629115710549</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="getTopUsers function fixed">
+      <created>1629119309464</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1629119309465</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
