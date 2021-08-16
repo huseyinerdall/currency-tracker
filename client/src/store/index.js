@@ -70,11 +70,10 @@ export default new Vuex.Store({
       }
     },
     dolar(state) {
-      setInterval(() => {
-        axios.get("https://finans.truncgil.com/today.json").then(response => {
-          state.dolar = parseFloat(response.data["USD"]["Satış"].replace(",","."));
-        });
-      },5000)
+      let connection = new WebSocket(`${state.websocket}`);
+      connection.onmessage = function(event) {
+        state.dolar = parseFloat(event.data);
+      }
     }
   },
   actions: {

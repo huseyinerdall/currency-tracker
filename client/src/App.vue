@@ -578,4 +578,7 @@ export default {
   border-bottom: 1px solid #0059b2;
   background-color: #f9f9f9 !important;
 }
+.v-application a{
+  font-weight: 400;
+}
 </style>

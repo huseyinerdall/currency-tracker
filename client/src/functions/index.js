@@ -34,8 +34,12 @@ function setGraph(wallet,allPrices){
   balance = 0;
   for (const w in wallet) {
     if(parseFloat(wallet[w]["amount"])>0){
+      if(w == "TÜRK LİRASI"){
+        temp = parseFloat(allPrices["TRY"])*parseFloat(wallet[w]["amount"]) ||0;
+      }else{
+        temp = parseFloat(allPrices[w])*parseFloat(wallet[w]["amount"]) ||0;
+      }
 
-      temp = parseFloat(allPrices[w])*parseFloat(wallet[w]["amount"]) ||0;
       if(f<temp){
         s = f;
         skey = fkey;

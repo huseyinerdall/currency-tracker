@@ -23,12 +23,11 @@ module.exports = function(app,io){
             }
         })
             .then(user => {
-                console.log(user,req.body)
                 if (user) {
-                    res.send("Bu email adresi çoktan kullanılmış.");
+                    res.send("ALREADY");
                 } else {
                     if(req.body.profileImage.indexOf("googleusercontent")>0){
-                        console.log(user,req.body)
+                        req.body.active = 1;
                     }else{
                         let filename = '';
                         fs.readdirSync(UPLOAD_FOLDER).forEach(file => {
@@ -54,11 +53,9 @@ module.exports = function(app,io){
                                 console.log('Email sent: ' + info.response);
                             }
                         });
+                        req.body.active = 0;
                     }
-
                     req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
-
-                    req.body.active = 0;
                     req.body.balanceNow = 100000;
                     let now = new Date().toLocaleDateString()
                     req.body.balanceList = {};

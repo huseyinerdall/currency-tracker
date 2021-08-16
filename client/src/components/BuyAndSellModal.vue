@@ -132,7 +132,7 @@
                       placeholder="0,00"
                       v-model="currentUnit.price"
                       readonly
-                      @input="calculateSum"
+                      @input="calculateSum(1)"
                     >
                     </v-text-field>
 
@@ -267,6 +267,7 @@
                             style="padding: 0 16px !important;font-size:12px !important;"
                             :dark="!$store.state.isLight"
                             placeholder="Miktarı Giriniz"
+                            @input="calculateSum(2)"
                           ></v-text-field>
                           <v-text-field
                             v-model="price"
@@ -312,6 +313,7 @@
                             "
                             style="padding: 0 16px !important;font-size:12px !important;"
                             :dark="!$store.state.isLight"
+                            @input="calculateSum(3)"
                             placeholder="Miktarı Giriniz"
                           ></v-text-field>
                           <v-datetime-picker
@@ -521,10 +523,26 @@ export default {
 
       this.calculateSum();
     },
-    calculateSum() {
-      this.calculatedSum = (
-        this.orderNowAmount * parseFloat(this.currentUnitTLPrice)
-      );
+    calculateSum(which) {
+      switch (which){
+        case 1:
+          this.calculatedSum = (
+              this.orderNowAmount * parseFloat(this.currentUnitTLPrice)
+          );
+          break;
+        case 2:
+          this.calculatedSum = (
+              this.amountByPrice * parseFloat(this.currentUnitTLPrice)
+          );
+          break;
+        case 3:
+          this.calculatedSum = (
+              this.amountByTime * parseFloat(this.currentUnitTLPrice)
+          );
+          break;
+
+      }
+
     },
     setBuyOrder() {
       if (this.chosen == "time" && this.time < new Date()) {
@@ -537,9 +555,9 @@ export default {
         this.$toasted.show(`Miktar 0,1'den küçük olamaz.`, alertoptions);
         return;
       }
-      let tl = JSON.parse(localStorage.getItem("user")).wallet["TÜRK LİRASI"];
-      if (!tl > this.calculateSum) {
-        this.$toasted.warn(`Yeterli TÜRK LİRASI yok.`, options);
+      let tl = JSON.parse(localStorage.getItem("user")).wallet["TÜRK LİRASI"]["amount"];
+      if (!(tl > this.calculatedSum)) {
+        this.$toasted.show(`Yeterli TÜRK LİRASI yok.`, alertoptions);
         return;
       }
       //userId,orderType,parameter,wealth,amount,major
@@ -572,6 +590,12 @@ export default {
         (this.chosen == "price" ? this.amountByPrice : this.amountByTime) < 0.1
       ) {
         this.$toasted.show(`Miktar 0,1'den küçük olamaz.`, alertoptions);
+        return;
+      }
+      let amount = this.chosen == "price" ? this.amountByPrice : this.amountByTime;
+      let desiredAmount = JSON.parse(localStorage.getItem("user")).wallet[this.currentUnit["name"]]["amount"];
+      if(desiredAmount<amount){
+        this.$toasted.show(`Yeterli ${this.currentUnit["name"]} yok.`, alertoptions);
         return;
       }
       //userId,orderType,parameter,wealth,amount,major

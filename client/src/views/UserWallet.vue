@@ -262,7 +262,7 @@
                           ₺{{item.balanceNow | turkishCurrencyformat}}
                         </td>
                         <td v-if="!$vuetify.breakpoint.smAndDown">
-                          <v-row class="pa-0" v-if="item.graph['']"
+                          <v-row class="pa-0" v-if="!isNaN(item.graph[''])"
                           :style="'width:'+(116+item.balanceNow/topUsers[0]['balanceNow']*100)+'px;'">
                             <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+Object.values(item.graph)[0]+'%;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
                             <span style="font-size:10px;background: #228B22;" class="text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+Object.values(item.graph)[1]+'%;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
@@ -273,7 +273,7 @@
                             <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+100+'%;'">TRY</span>
                           </v-row>
                         </td>
-                        <v-row class="pa-0" v-if="$vuetify.breakpoint.smAndDown && item.graph['']"
+                        <v-row class="pa-0" v-if="$vuetify.breakpoint.smAndDown && !isNaN(item.graph[''])"
                                style="position: absolute;bottom: 0;left: 13px;right: 13px;"
                                :style="'width:'+(50+item.balanceNow/topUsers[0]['balanceNow']*50)+'%;'">
                           <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+Object.values(item.graph)[0]+'%;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
@@ -541,6 +541,7 @@ export default {
         }
       },
       data: [],
+      expanded: [],
       allUnits: [],
       menu: false,
       dolar: 1,
@@ -814,17 +815,16 @@ export default {
           });
     },
     deleteOrder(orderId){
-      this.$toasted.show(
-          `Emir iptal edildi.`,
-          options
-      );
-      this.getUserAllOrders();
       axios
           .post(`${this.$store.state.api}/deleteorder`, {
             orderId: orderId
           })
-          .then(response => {
-            console.log(response.data);
+          .then(() => {
+            this.$toasted.show(
+                `Emir iptal edildi.`,
+                options
+            );
+            this.getUserAllOrders();
           })
           .catch(err => {
             console.log(err);

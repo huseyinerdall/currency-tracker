@@ -62,6 +62,9 @@ wss.on('connection', function connection(ws, req) {
     CustomEventEmitters.on('sell', (payload) => {
         ws.send(payload);
     });
+    CustomEventEmitters.on('dolar', (payload) => {
+        ws.send(payload);
+    });
 });
 
 require('./user')(app,io);
@@ -486,7 +489,7 @@ app.post('/buynow', (req, res) => {
         .then((orderId)=>{
             //console.log(orderId)
             let priceNow = parseFloat(allPrices[wealth]) ||
-                parseFloat(allPrices[apiT[wealth].replace(",",".")]);
+                parseFloat(allPrices[apiT[wealth]].replace(",","."));
             Trader.buy(userId,wealth,priceNow,amount,"TÜRK LİRASI",orderId)
                 .then((result) => {
                     let data = JSON.stringify({
@@ -669,7 +672,8 @@ db.sequelize.sync().then(() => {
 
         axios.get('https://finans.truncgil.com/today.json')
             .then(async response => {
-                dolar = parseFloat(response.data["USD"]["Alış"].replace(',','.'))
+                dolar = parseFloat(response.data["USD"]["Satış"].replace(',','.'));
+                CustomEventEmitters.emit('dolar',dolar);
                 let sepetalis = ((parseFloat(response.data["USD"]["Alış"].replace(',','.')) + parseFloat(response.data["EUR"]["Alış"].replace(',','.'))) / 2).toFixed(4);
                 let sepetsatis = ((parseFloat(response.data["USD"]["Satış"].replace(',','.')) + parseFloat(response.data["EUR"]["Satış"].replace(',','.'))) / 2).toFixed(4);
                 let updatetime = response.data["Update_Date"];
@@ -718,13 +722,6 @@ db.sequelize.sync().then(() => {
             .catch(err => console.log(err));
         // al sat yapılacak yer
         // burada açık emirlerin hepsi alınacak ve gerekli condition sağlanıyorsa işlem gerçekleştirilecek
-
-        /*fs.writeFile('varliklar.json', JSON.stringify(varliklar), (err) => {
-            if (err) {
-                throw err;
-            }
-            console.log("JSON data is saved.");
-        });*/
 
         UserWallet.saveUsersBalanceDaily(allPrices);
     }, MAINLOOPINTERVAL)

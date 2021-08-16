@@ -188,11 +188,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  var interval_id = window.setInterval("", 9999); // Get a reference to the last
-
-  for (var i = 1; i < interval_id; i++) {
-    window.clearInterval(i);
-  }
   /*if (localStorage.getItem('jwt') != null) {
         if (to.matched.some(record => record.name == 'Login')) {
             next({ name: 'Home' })

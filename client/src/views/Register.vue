@@ -133,6 +133,9 @@ export default {
           profileImage: this.fullName.toLowerCase().replaceAll(" ", "-")
         })
         .then(res => {
+          if (res.data == "ALREADY") {
+            alert("Bu eposta çoktan kullanılmış.")
+          };
           if (res.data !== "OK") return;
           console.log(res.data)
           if (this.$route.params.nextUrl != null) {
