@@ -19,19 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Notifications added">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="User registration fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/functions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,14 +388,7 @@
       <workItem from="1628967254768" duration="3297000" />
       <workItem from="1629052364560" duration="2275000" />
       <workItem from="1629094685764" duration="4187000" />
-      <workItem from="1629111818832" duration="517000" />
-    </task>
-    <task id="LOCAL-00017" summary="perşembe">
-      <created>1610014804726</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1610014804726</updated>
+      <workItem from="1629111818832" duration="2056000" />
     </task>
     <task id="LOCAL-00018" summary="perşembe">
       <created>1610099689162</created>
@@ -743,7 +726,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628769309075</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="User registration fixed">
+      <created>1629112426992</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1629112426993</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -780,6 +770,7 @@
     <MESSAGE value="Admin side Users.vue editted" />
     <MESSAGE value="Orders table header fixed" />
     <MESSAGE value="Notifications added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Notifications added" />
+    <MESSAGE value="User registration fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="User registration fixed" />
   </component>
 </project>

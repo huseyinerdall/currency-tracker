@@ -62,22 +62,31 @@
               ></v-file-input>
             </v-col>
           </v-row>
-          <v-btn
-            color="blue-grey"
-            class="white--text mx-auto"
-            @click="register"
-          >
-            KAYDOL
-            <v-icon right dark>
-              mdi-login
-            </v-icon>
-          </v-btn>
-          <v-btn style="background:#de5246;" class="white--text float-right">
-            Google
-            <v-icon right dark>
-              mdi-google
-            </v-icon>
-          </v-btn>
+          <v-row>
+            <v-btn
+                color="blue-grey"
+                class="white--text mx-auto"
+                @click="register"
+                tile
+            >
+              KAYDOL
+              <v-icon right dark>
+                mdi-login
+              </v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn
+                color="blue"
+                class="white--text mx-auto"
+                href="/login"
+                tile
+            >
+              GİRİŞ YAP
+              <v-icon right dark>
+                mdi-login
+              </v-icon>
+            </v-btn>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>
@@ -86,10 +95,10 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "Login",
-  components: {},
+  components: {
+  },
   data() {
     return {
       email: "",
@@ -100,6 +109,16 @@ export default {
       show2: false,
       file: "",
       guestID: "",
+      params: {
+        client_id:
+            "948525970652-voasdag8fk7qsou5fi1eag5562u5i058.apps.googleusercontent.com"
+      },
+      // only needed if you want to render the button with the google ui
+      renderParams: {
+        width: 90,
+        height: 38,
+        longtitle: true
+      },
       rules: {
         required: value => !!value || "Gerekli alan.",
         counter: value => value.length >= 8 || "Minimum 8 karakter",
@@ -145,6 +164,65 @@ export default {
           }
           this.$router.push("Activate");
         });
+    },
+    googlelogin() {
+      this.overlay = true;
+      axios.get(`${this.$store.state.api}/google`).then(response => {
+        console.log(response.data);
+      });
+    },
+    onSuccess(googleUser) {
+      // This only gets the user information: id, name, imageUrl and email
+      this.overlay = true;
+      let temp = googleUser.getBasicProfile();
+      axios
+          .post(`${this.$store.state.api}/register`, {
+            fullName: temp.getName(),
+            email: temp.getEmail(),
+            passwd: "1",
+            profileImage: temp.getImageUrl()
+          })
+          .then(() => {
+            axios
+                .post(`${this.$store.state.api}/login`, {
+                  email: temp.getEmail(),
+                  passwd: "1"
+                })
+                .then(response => {
+                  if (response.data == "ERROR") {
+                    alert("Kullanıcı bulunamadı");
+                    return;
+                  } else {
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify(response.data.user)
+                    );
+                    localStorage.setItem(
+                        "wallet",
+                        JSON.stringify(
+                            JSON.parse(localStorage.getItem("user")).wallet
+                        )
+                    );
+                    localStorage.setItem("jwt", response.data.token);
+                    this.overlay = false;
+                    this.$store.commit("login", true);
+                  }
+
+                  if (localStorage.getItem("jwt") != null) {
+                    this.$emit("loggedIn");
+                    if (this.$route.params.nextUrl != null) {
+                      this.$router.push(this.$route.params.nextUrl);
+                    } else {
+                      this.$router.push({
+                        name: "Home"
+                      });
+                    }
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+          });
     },
     onFileChanged() {
       this.file = this.$refs.avatar.$refs.input.files[0];
