@@ -725,6 +725,7 @@ export default {
     if (localStorage.getItem("user")) {
       this.getUserWallet();
       this.getUserAllOrders();
+      this.getTopUsers();
     }
     axios
         .post(`${this.$store.state.api}/getuserbalancelist`, {
@@ -755,25 +756,13 @@ export default {
         .catch(err => {
           console.log(err);
         });
-
-    axios
-        .get(`${this.$store.state.api}/gettopusers`)
-        .then(response => {
-
-          for (let i = 0; i < response.data.length; i++) {
-            response.data[i].graph = null;
-            response.data[i].graph = setGraph(response.data[i]["wallet"],JSON.parse(localStorage.getItem("allprices")));
-          }
-
-          app.topUsers =  response.data;
-          app.loading4 = false;
-        });
   },
   mounted() {
     const app = this;
     EventBus.$on('boughtorsold', function () {
       app.getUserWallet();
       app.getUserAllOrders();
+      app.getTopUsers();
     });
   },
   methods: {
@@ -812,6 +801,19 @@ export default {
           })
           .catch(err => {
             console.log(err);
+          });
+    },
+    getTopUsers: function () {
+      axios
+          .get(`${this.$store.state.api}/gettopusers`)
+          .then(response => {
+
+            for (let i = 0; i < response.data.length; i++) {
+              response.data[i].graph = null;
+              response.data[i].graph = setGraph(response.data[i]["wallet"],JSON.parse(localStorage.getItem("allprices")));
+            }
+            this.topUsers =  response.data;
+            this.loading4 = false;
           });
     },
     deleteOrder(orderId){

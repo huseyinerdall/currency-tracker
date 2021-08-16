@@ -2,10 +2,10 @@
   <div class="home">
     <v-container>
       <v-row>
-        <v-col cols="12" md="8" class="pa-0">
+        <v-col cols="12" md="8">
           <Golds />
         </v-col>
-        <v-col cols="12" md="4" class="pa-0">
+        <v-col cols="12" md="4">
           <BinTLTable />
         </v-col>
       </v-row>

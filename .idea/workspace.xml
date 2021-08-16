@@ -21,7 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="User registration fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -388,14 +390,7 @@
       <workItem from="1628967254768" duration="3297000" />
       <workItem from="1629052364560" duration="2275000" />
       <workItem from="1629094685764" duration="4187000" />
-      <workItem from="1629111818832" duration="2056000" />
-    </task>
-    <task id="LOCAL-00018" summary="perşembe">
-      <created>1610099689162</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1610099689163</updated>
+      <workItem from="1629111818832" duration="3606000" />
     </task>
     <task id="LOCAL-00019" summary="cuma">
       <created>1610101630679</created>
@@ -733,7 +728,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629112426993</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="User registration fixed">
+      <created>1629114021087</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1629114021087</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
