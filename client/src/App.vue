@@ -92,28 +92,35 @@
           </v-list>
         </v-menu>-->
         <v-spacer></v-spacer>
-        <v-btn
-          class="mt-6 mr-2 pl-1"
-          tile
-          color="rgb(248, 73, 96)"
-          @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
-        >
-          <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
-            mdi-arrow-down
-          </v-icon>
-          Sat
-        </v-btn>
-        <v-btn
-          class="mt-6 mr-6 pl-1"
-          tile
-          color="rgb(2, 192, 118)"
-          @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
-        >
-          <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
-            mdi-arrow-up
-          </v-icon>
-          Al
-        </v-btn>
+        <div class="column">
+          <div>
+            <v-btn
+                class="mt-6 mr-2 pl-1"
+                tile
+                color="rgb(248, 73, 96)"
+                @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
+            >
+              <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
+                mdi-arrow-down
+              </v-icon>
+              Sat
+            </v-btn>
+            <v-btn
+                class="mt-6 mr-6 pl-1"
+                tile
+                color="rgb(2, 192, 118)"
+                @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
+            >
+              <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
+                mdi-arrow-up
+              </v-icon>
+              Al
+            </v-btn>
+          </div>
+          <div>
+            <span style="font-size: 10px;">*Bu bir yatırım oyunudur.</span>
+          </div>
+        </div>
         <v-btn
           class="mt-6 mr-6"
           fab
@@ -452,24 +459,32 @@
       </v-app-bar>
 
       <v-footer v-if="$vuetify.breakpoint.smAndDown" app bottom fixed padless style="background: rgb(29, 36, 96);">
-        <v-row class="pl-4 pr-4">
-          <v-col>
-            <v-btn block
-                   color="rgb(2, 192, 118)"
-                   style="color: #fff;"
-                   @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
-              AL
-            </v-btn>
-          </v-col>
-          <v-col>
-            <v-btn block
-                   color="rgb(248, 73, 96)"
-                   style="color: #fff;"
-                   @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
-              SAT
-            </v-btn>
-          </v-col>
-        </v-row>
+        <div class="column" style="width: 100%;">
+          <div>
+            <v-row class="pl-4 pr-4">
+              <v-col>
+                <v-btn block
+                       color="rgb(2, 192, 118)"
+                       style="color: #fff;"
+                       @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
+                  AL
+                </v-btn>
+              </v-col>
+              <v-col>
+                <v-btn block
+                       color="rgb(248, 73, 96)"
+                       style="color: #fff;"
+                       @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
+                  SAT
+                </v-btn>
+              </v-col>
+            </v-row>
+          </div>
+          <div style="text-align: center;">
+            <span style="font-size:10px;color:#fff;">*Bu bir yatırım oyunudur.</span>
+          </div>
+        </div>
+
       </v-footer>
 
       <v-main :class="{ 'v-main-light': $store.state.isLight }">
