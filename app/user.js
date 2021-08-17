@@ -26,6 +26,7 @@ module.exports = function(app,io){
                 if (user) {
                     res.send("ALREADY");
                 } else {
+                    console.log(user)
                     if(req.body.profileImage.indexOf("googleusercontent")>0){
                         req.body.active = 1;
                     }else{
@@ -40,26 +41,28 @@ module.exports = function(app,io){
                             }
                             req.body.profileImage = filename;
                         });
-                        var mailOptions = {
-                            from: secret.gmail.auth.user,
-                            to: req.body.email,
-                            subject: 'Para.Guru Hesap Aktivasyon',
-                            html: utils.mailTemplate(req.body.userId,req.body.url)
-                        };
-                        transporter.sendMail(mailOptions, function(error, info){
-                            if (error) {
-                                console.log(error);
-                            } else {
-                                console.log('Email sent: ' + info.response);
-                            }
-                        });
                         req.body.active = 0;
+                        db.User.create(req.body)
+                            .then((u) => {
+                                var mailOptions = {
+                                    from: secret.gmail.auth.user,
+                                    to: req.body.email,
+                                    subject: 'Para.Guru Hesap Aktivasyon',
+                                    html: utils.mailTemplate(u["dataValues"]['id'])
+                                };
+                                transporter.sendMail(mailOptions, function(error, info){
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        console.log('Email sent: ' + info.response);
+                                    }
+                                });
+                            })
                     }
                     req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
                     req.body.balanceNow = 100000;
                     let now = new Date().toLocaleDateString()
                     req.body.balanceList = {};
-                    db.User.create(req.body);
                     res.send("OK");
                 }
             })
@@ -77,7 +80,7 @@ module.exports = function(app,io){
             from: secret.gmail.auth.user,
             to: req.body.email,
             subject: 'Para.Guru Hesap Aktivasyon',
-            html: utils.mailTemplate(req.body.userId,req.body.url)
+            html: utils.mailTemplate(req.body.userId)
         };
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {
@@ -135,7 +138,7 @@ module.exports = function(app,io){
                 plain: true
             })
                 .then((user) => {
-                    res.send("ACTIVATED");
+                    res.json(user[1]["dataValues"]);
                 })
         } else {
             res.send("Aktivasyon kodu hatalı");

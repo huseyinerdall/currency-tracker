@@ -49,7 +49,7 @@ function removeDashes(str) {
     return str.replaceAll('-', '');
 }
 
-function mailTemplate(userId,url) {
+function mailTemplate(userId) {
     return `
     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tbody>

@@ -49,8 +49,6 @@ function setGraph(wallet,allPrices){
       balance += temp;
     }
   }
-
-
   result[fkey] = f/balance*100;
   result[skey] = s/balance*100;
   result["diger"] = (balance-(f+s))/balance*100;

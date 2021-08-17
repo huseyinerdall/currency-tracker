@@ -262,11 +262,45 @@
                           ₺{{item.balanceNow | turkishCurrencyformat}}
                         </td>
                         <td v-if="!$vuetify.breakpoint.smAndDown">
-                          <v-row class="pa-0" v-if="!isNaN(item.graph[''])"
+                          <v-row class="pa-0" v-if="true"
                           :style="'width:'+(116+item.balanceNow/topUsers[0]['balanceNow']*100)+'px;'">
-                            <span style="font-size:10px;background: #DC143C;" class="text-center" :style="'width:'+Object.values(item.graph)[0]+'%;'">{{ Object.keys(item.graph)[0] | tocapitalize }}</span>
-                            <span style="font-size:10px;background: #228B22;" class="text-center" v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0" :style="'width:'+Object.values(item.graph)[1]+'%;'">{{ Object.keys(item.graph)[1] | tocapitalize }}</span>
-                            <span style="font-size:10px;background: #778899;" class="text-center" v-if="item.graph['diger']!=null && item.graph['diger']!=0 && item.graph['diger']!=undefined && item.graph['diger']>10" :style="'width:'+item.graph['diger']+'%;'">DİĞER</span>
+
+                            <v-tooltip top color="#ff3366">
+                              <template v-slot:activator="{ on, attrs }">
+                                <span
+                                    style="font-size:10px;background: #DC143C;height: 16px;"
+                                    class="text-center"
+                                    :style="'width:'+Object.values(item.graph)[0]+'%;'"
+                                    v-bind="attrs"
+                                    v-on="on"></span>
+                              </template>
+                              <span>{{ Object.keys(item.graph)[0] | tocapitalize }} : {{ Object.values(item.graph)[0].toFixed(2)+'%' }}</span>
+                            </v-tooltip>
+                            <v-tooltip top color="#228B22">
+                              <template v-slot:activator="{ on, attrs }">
+                                <span
+                                    style="font-size:10px;background: #228B22;height: 16px;"
+                                    class="text-center"
+                                    v-if="Object.keys(item.graph)[1] != 'undefined' || Object.values(item.graph)[1] != 0"
+                                    :style="'width:'+Object.values(item.graph)[1]+'%;'"
+                                    v-bind="attrs"
+                                    v-on="on"></span>
+                              </template>
+                              <span>{{ Object.keys(item.graph)[1] | tocapitalize }} : {{ Object.values(item.graph)[1].toFixed(2)+'%' }}</span>
+                            </v-tooltip>
+                            <v-tooltip top color="#778899">
+                              <template v-slot:activator="{ on, attrs }">
+                                <span
+                                    style="font-size:10px;background: #778899;height: 16px;"
+                                    class="text-center"
+                                    v-if="item.graph['diger']!=null && item.graph['diger']!=0 && item.graph['diger']!=undefined && item.graph['diger']>10"
+                                    :style="'width:'+item.graph['diger']+'%;'"
+                                    v-bind="attrs"
+                                    v-on="on"></span>
+                              </template>
+                              <span>DİĞER : {{ item.graph['diger'].toFixed(2) + '%' }}</span>
+                            </v-tooltip>
+
                           </v-row>
                           <v-row class="pa-0" v-else
                                  :style="'width:'+(116+item.balanceNow/topUsers[0]['balanceNow']*100)+'px;'">

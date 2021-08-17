@@ -31,13 +31,22 @@ export default {
           userid: this.$route.params.userid,
         })
         .then(response => {
-          if(response.data === "ACTIVATED"){
-            let temp = JSON.parse(localStorage.getItem('user'));
-            temp.active = 1;
-            localStorage.setItem('user',JSON.stringify(temp));
-            this.$router.push({
-              name: "UserWallet"
-            });
+          localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem(
+              "wallet",
+              JSON.stringify(JSON.parse(localStorage.getItem("user")).wallet)
+          );
+          localStorage.setItem("jwt", response.data.token);
+          this.$store.commit("login", true);
+          if (localStorage.getItem("jwt") != null) {
+            this.$emit("loggedIn");
+            if (this.$route.params.nextUrl != null) {
+              this.$router.push(this.$route.params.nextUrl);
+            } else {
+              this.$router.push({
+                name: "UserWallet"
+              });
+            }
           }
         });
 
