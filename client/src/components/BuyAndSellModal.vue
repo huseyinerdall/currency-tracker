@@ -12,7 +12,7 @@
         :style="
           $store.state.isLight
             ? 'background-color:#f9f9f9;'
-            : 'background-color:rgba(11,14,63,0.8);'
+            : 'background-color:rgba(11,14,63,0.98);'
         "
       >
         <div class="pa-4">
@@ -27,6 +27,23 @@
             >
           </v-btn>
           <div>
+
+            <div>
+              <v-tabs
+                  v-model="wealthChoice"
+                  height="24"
+                  background-color="transparent"
+                  dark
+                  class="ma-0 mb-3"
+                  style="margin-left: -12px !important;"
+                  @change="changeWealth"
+              >
+                <v-tab>KRİPTO</v-tab>
+                <v-tab>DÖVİZ</v-tab>
+                <v-tab>ALTIN</v-tab>
+              </v-tabs>
+            </div>
+
             <v-row>
               <v-avatar size="40">
                 <img :src="currentUnit.image" />
@@ -114,7 +131,8 @@
                       :dark="!$store.state.isLight"
                       :color="$store.state.isLight ? 'black' : 'white'"
                       placeholder="Miktarı Giriniz"
-                      @input="calculateSum"
+                      label="Miktar"
+                      @input="calculateSum(1)"
                     ></v-text-field>
                   </v-col>
                   <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 3" class="pb-0 pt-0">
@@ -130,6 +148,7 @@
                       :dark="!$store.state.isLight"
                       :color="$store.state.isLight ? 'black' : 'white'"
                       placeholder="0,00"
+                      label="Fiyat"
                       v-model="currentUnit.price"
                       readonly
                       @input="calculateSum(1)"
@@ -148,9 +167,10 @@
                       :dark="!$store.state.isLight"
                       :color="$store.state.isLight ? 'black' : 'white'"
                       placeholder="0,00"
+                      label="Fiyat"
                       v-model="currentUnitTLPrice"
                       readonly
-                      @input="calculateSum"
+                      @input="calculateSum(1)"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="1" class="text-center pb-0 pt-0 ma-0" :class="$vuetify.breakpoint.smAndDown ? 'mx-auto' : ''">
@@ -178,6 +198,7 @@
                       :dark="!$store.state.isLight"
                       readonly
                       placeholder="Toplam"
+                      label="Toplam"
                       v-model="calculatedSum"
                     ></v-text-field>
                   </v-col>
@@ -267,6 +288,7 @@
                             style="padding: 0 16px !important;font-size:12px !important;"
                             :dark="!$store.state.isLight"
                             placeholder="Miktarı Giriniz"
+                            label="Miktar"
                             @input="calculateSum(2)"
                           ></v-text-field>
                           <v-text-field
@@ -281,6 +303,7 @@
                             style="padding: 0 16px !important;font-size:12px !important;"
                             :dark="!$store.state.isLight"
                             placeholder="Fiyat Limitini Giriniz"
+                            label="Fiyat"
                           ></v-text-field>
                         </div>
                       </div>
@@ -315,6 +338,7 @@
                             :dark="!$store.state.isLight"
                             @input="calculateSum(3)"
                             placeholder="Miktarı Giriniz"
+                            label="Miktar"
                           ></v-text-field>
                           <v-datetime-picker
                             v-model="time"
@@ -416,7 +440,8 @@ export default {
     items: ["Hemen Al", "Ödeme Emri"],
     chosen: "price",
     data: [],
-    allUnits: [],
+    wealthChoice: 0,
+    //allUnits: [],
     images: [],
     currentUnit: "ABD DOLARI",
     currentUnitTLPrice: 1,
@@ -489,22 +514,6 @@ export default {
     }
     if (localStorage.getItem("coins250")) {
       this.data = JSON.parse(localStorage.getItem("coins250"));
-      let tempList = JSON.parse(localStorage.getItem("currencies")).concat(
-        JSON.parse(localStorage.getItem("golds"))
-      );
-
-      for (let i = 0; i < tempList.length; i++) {
-        this.data.push({
-          name: tempList[i]["type"],
-          shortName: "",
-          price: parseFloat(tempList[i]["Satış"].replace(",", ".")),
-          image: images[tempList[i]["type"]] || this.$store.state.api + "/gold.png",
-          isMajor: true
-        });
-      }
-      this.allUnits = this.data.map(arr => {
-        return arr["name"] + "-" + arr["shortName"].toUpperCase();
-      });
     }
 
     setInterval(()=>{
@@ -707,6 +716,47 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    changeWealth: function () {
+      let tempList = [];
+      switch (this.wealthChoice) {
+        case 0:
+          this.data = JSON.parse(localStorage.getItem("coins250"));
+          this.currentUnit = this.data[0];
+          break;
+        case 1:
+          this.data = [];
+          tempList = JSON.parse(localStorage.getItem("currencies"));
+          for (let i = 0; i < tempList.length; i++) {
+            this.data.push({
+              name: tempList[i]["type"],
+              shortName: "",
+              price: parseFloat(tempList[i]["Satış"].replace(",", ".")),
+              image: images[tempList[i]["type"]] || this.$store.state.api + "/gold.png",
+              isMajor: true
+            });
+          }
+          this.currentUnit = this.data[0];
+          break;
+        case 2:
+          this.data = [];
+          tempList = JSON.parse(localStorage.getItem("golds"));
+          for (let i = 0; i < tempList.length; i++) {
+            this.data.push({
+              name: tempList[i]["type"],
+              shortName: "",
+              price: tempList[i]["type"].indexOf('Ons Altın') > -1 ?
+                  parseFloat(tempList[i]["Satış"].replace('$','').replace('.','').replace(',','.')) * this.$store.state.dolar :
+                  parseFloat(tempList[i]["Satış"].replace('$','').replace('.','').replace(',','.')),
+              image: images[tempList[i]["type"]] || this.$store.state.api + "/gold.png",
+              isMajor: true
+            });
+          }
+          this.currentUnit = this.data[0];
+          break;
+        default:
+          this.data = JSON.parse(localStorage.getItem("coins250"));
+      }
     }
   },
   computed: mapState({

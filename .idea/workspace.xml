@@ -19,8 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Activation mail editted">
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Top 10 Users table fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -390,14 +391,10 @@
       <workItem from="1629094685764" duration="4187000" />
       <workItem from="1629111818832" duration="7023000" />
       <workItem from="1629132331739" duration="8245000" />
-      <workItem from="1629197908795" duration="3711000" />
-    </task>
-    <task id="LOCAL-00023" summary="pazartesi">
-      <created>1613416769936</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1613416769936</updated>
+      <workItem from="1629197908795" duration="5427000" />
+      <workItem from="1629272528812" duration="2509000" />
+      <workItem from="1629293320610" duration="3491000" />
+      <workItem from="1629305313668" duration="7254000" />
     </task>
     <task id="LOCAL-00024" summary="çarşamba">
       <created>1613547341263</created>
@@ -735,7 +732,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629201702651</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Top 10 Users table fixed">
+      <created>1629202488579</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1629202488579</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -775,6 +779,7 @@
     <MESSAGE value="User registration fixed" />
     <MESSAGE value="getTopUsers function fixed" />
     <MESSAGE value="Activation mail editted" />
-    <option name="LAST_COMMIT_MESSAGE" value="Activation mail editted" />
+    <MESSAGE value="Top 10 Users table fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Top 10 Users table fixed" />
   </component>
 </project>

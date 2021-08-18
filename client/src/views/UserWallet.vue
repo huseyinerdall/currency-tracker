@@ -263,7 +263,8 @@
                         </td>
                         <td v-if="!$vuetify.breakpoint.smAndDown">
                           <v-row class="pa-0"
-                          :style="'width:'+(116+item.balanceNow/topUsers[0]['balanceNow']*100)+'px;'">
+                          :style="'width:'+(116+item.balanceNow/topUsers[0]['balanceNow']*100)+'px;'"
+                          @click="displayDetails(item.wallet)">
 
                             <v-tooltip top color="#ff3366">
                               <template v-slot:activator="{ on, attrs }">
@@ -305,7 +306,8 @@
                         </td>
                         <v-row class="pa-0" v-if="$vuetify.breakpoint.smAndDown"
                                style="position: absolute;bottom: 0;left: 13px;right: 13px;"
-                               :style="'width:'+(50+item.balanceNow/topUsers[0]['balanceNow']*50)+'%;'">
+                               :style="'width:'+(50+item.balanceNow/topUsers[0]['balanceNow']*50)+'%;'"
+                               @click="displayDetails(item.wallet)">
 
                           <v-tooltip top color="#ff3366">
                             <template v-slot:activator="{ on, attrs }">
@@ -357,8 +359,15 @@
         </v-col>
 
       </v-row>
-
     </div>
+
+    <v-dialog
+        v-model="detailsDialog"
+        max-width="440"
+        class="details-dialog"
+    >
+      <apexchart type="donut" width="360" :options="detailsChartOptions" :series="detailsSeries"></apexchart>
+    </v-dialog>
 
   </div>
 </template>
@@ -750,6 +759,52 @@ export default {
       loading2: true,
       loading3: true,
       loading4: true,
+      detailsChartOptions: {
+        chart: {
+          width: "360",
+          type: 'donut',
+          foreColor: '#fff'
+        },
+        plotOptions: {
+          pie: {
+            startAngle: -90,
+            endAngle: 270
+          }
+        },
+        tooltip: {
+          y: {
+            formatter: function(val) {
+              return val.toFixed(2) + " ₺";
+            }
+          },
+          style: {
+            borderRadius: 10
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        fill: {
+          type: 'gradient',
+        },
+        title: {
+          text: ''
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: "100%"
+            },
+            legend: {
+              position: 'bottom',
+            }
+          }
+        }]
+      },
+      detailsSeries: [],
+      detailsDialog: false,
+      detailsLabels: []
     };
   },
   created() {
@@ -878,6 +933,21 @@ export default {
             this.loading4 = false;
           });
     },
+    displayDetails(details){
+      let temp = Object.values(details).filter((current)=>{
+        return current.amount > 0;
+      });
+      let series = [];
+      let label = [];
+      for (let i = 0; i < temp.length; i++) {
+        series.push(temp[i].amount*(this.allPrices[temp[i].shortName] || this.allPrices[shortToName[temp[i].shortName]]));
+        label.push(temp[i].shortName.toUpperCase())
+      }
+      console.log(series,label)
+      this.detailsDialog = true;
+      this.detailsSeries = series;
+      this.detailsChartOptions.labels = label;
+    },
     deleteOrder(orderId){
       axios
           .post(`${this.$store.state.api}/deleteorder`, {
@@ -977,6 +1047,9 @@ export default {
 }
 .v-data-table--fixed-header > .v-data-table__wrapper > table > thead > tr > th{
   background: transparent !important;
+}
+.v-dialog{
+  background-color: rgba(11,14,63,0.88) !important;
 }
 </style>
 <style scoped>
