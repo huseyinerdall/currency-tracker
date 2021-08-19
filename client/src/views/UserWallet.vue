@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="userwallet">
     <div>
       <v-row>
         <v-col class="col-md-12">
@@ -244,9 +244,9 @@
                       :light="$store.state.isLight"
                   >
                     <template v-slot:item="{ item }">
-                      <tr style="position: relative;"
+                      <tr
                           :style="$vuetify.breakpoint.smAndDown ? 'height: 50px;vertical-align: baseline;' : ''">
-                        <td style="font-size: 12px;">
+                        <td style="font-size: 10px;">
                           <v-row class="align-center">
                             <span class="ml-4 mr-4" v-html="(+item.sirano < 4) ? item.sirano+'*' : item.sirano+'&nbsp;&nbsp;'"></span>
                             <v-avatar size="32" class="ml-2 mr-2" v-if="item.profileImage == '' || item.profileImage.length == 4">
@@ -258,7 +258,7 @@
                             <span>{{item.fullName | tocapitalize}}</span>
                           </v-row>
                         </td>
-                        <td style="font-size: 12px;">
+                        <td style="font-size: 10px;">
                           ₺{{item.balanceNow | turkishCurrencyformat}}
                         </td>
                         <td v-if="!$vuetify.breakpoint.smAndDown">
@@ -305,8 +305,8 @@
                           </v-row>
                         </td>
                         <v-row class="pa-0" v-if="$vuetify.breakpoint.smAndDown"
-                               style="position: absolute;bottom: 0;left: 13px;right: 13px;"
-                               :style="'width:'+(50+item.balanceNow/topUsers[0]['balanceNow']*50)+'%;'"
+                               style="position: absolute;left: 13px;right: 13px;"
+                               :style="'width:'+(50+item.balanceNow/topUsers[0]['balanceNow']*50)+'%;'+'top:'+(67+(item.sirano-1)*50)+'px;'"
                                @click="displayDetails(item.wallet)">
 
                           <v-tooltip top color="#ff3366">
@@ -363,10 +363,11 @@
 
     <v-dialog
         v-model="detailsDialog"
-        max-width="440"
-        class="details-dialog"
+        max-width="380"
+        class="pa-2"
+        content-class="details-dialog"
     >
-      <apexchart type="donut" width="360" :options="detailsChartOptions" :series="detailsSeries"></apexchart>
+      <apexchart type="donut" width="360" height="420" :options="detailsChartOptions" :series="detailsSeries"></apexchart>
     </v-dialog>
 
   </div>
@@ -475,15 +476,7 @@ export default {
                   "Kas",
                   "Ara"
                 ],
-                days: [
-                  "Pazar",
-                  "Pazartesi",
-                  "Salı",
-                  "Çarşamba",
-                  "Perşembe",
-                  "Cuma",
-                  "Cumartesi"
-                ],
+                days: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"],
                 shortDays: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"]
               }
             }
@@ -765,6 +758,10 @@ export default {
           type: 'donut',
           foreColor: '#fff'
         },
+        legend: {
+          position: 'bottom',
+          offsetY: 10,
+        },
         plotOptions: {
           pie: {
             startAngle: -90,
@@ -798,6 +795,7 @@ export default {
             },
             legend: {
               position: 'bottom',
+              offsetY: 60
             }
           }
         }]
@@ -1048,8 +1046,11 @@ export default {
 .v-data-table--fixed-header > .v-data-table__wrapper > table > thead > tr > th{
   background: transparent !important;
 }
-.v-dialog{
+.v-dialog.details-dialog{
   background-color: rgba(11,14,63,0.88) !important;
+}
+.details-dialog.v-dialog:not(.v-dialog--fullscreen){
+  height: 420px;
 }
 </style>
 <style scoped>

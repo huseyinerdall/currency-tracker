@@ -180,7 +180,7 @@ Vue.filter("onlyTime", function(value) {
 });
 
 Vue.filter("uppercase", function(value) {
-  return value.toUpperCase();
+  return value.toUpperCase().replaceAll('-', ' ');
 });
 
 Vue.filter("tofixedftwo", function(value) {
