@@ -363,11 +363,16 @@
 
     <v-dialog
         v-model="detailsDialog"
-        max-width="380"
+        max-width="400"
         class="pa-2"
         content-class="details-dialog"
+        style="height:60%;"
     >
-      <apexchart type="donut" width="360" height="420" :options="detailsChartOptions" :series="detailsSeries"></apexchart>
+      <v-container
+          style="border: 1px solid #ddd;border-radius:0;position:relative;height: 100%;"
+      >
+        <apexchart type="donut" :options="detailsChartOptions" :series="detailsSeries"></apexchart>
+      </v-container>
     </v-dialog>
 
   </div>
@@ -753,14 +758,22 @@ export default {
       loading3: true,
       loading4: true,
       detailsChartOptions: {
+        labels: [],
         chart: {
-          width: "360",
           type: 'donut',
           foreColor: '#fff'
         },
         legend: {
           position: 'bottom',
-          offsetY: 10,
+          floating: true,
+          markers: {
+            radius:0,
+          },
+          itemMargin: {
+            horizontal: 4,
+            vertical: 0
+          },
+          offsetY: 10
         },
         plotOptions: {
           pie: {
@@ -791,11 +804,9 @@ export default {
           breakpoint: 480,
           options: {
             chart: {
-              width: "100%"
             },
             legend: {
-              position: 'bottom',
-              offsetY: 60
+              position: 'bottom'
             }
           }
         }]
@@ -937,14 +948,73 @@ export default {
       });
       let series = [];
       let label = [];
+      this.detailsSeries = [];
+      this.detailsChartOptions.labels = [];
       for (let i = 0; i < temp.length; i++) {
         series.push(temp[i].amount*(this.allPrices[temp[i].shortName] || this.allPrices[shortToName[temp[i].shortName]]));
-        label.push(temp[i].shortName.toUpperCase())
+        label.push(temp[i].shortName.toUpperCase().replaceAll('-',' '));
       }
-      console.log(series,label)
       this.detailsDialog = true;
       this.detailsSeries = series;
-      this.detailsChartOptions.labels = label;
+      this.detailsChartOptions = {
+        labels: label,
+        chart: {
+          width: "100%",
+          height: "auto",
+          type: 'donut',
+          foreColor: '#fff'
+        },
+        legend: {
+          position: 'bottom',
+          floating: true,
+          markers: {
+            radius:0,
+          },
+          itemMargin: {
+            horizontal: 4,
+            vertical: 0
+          },
+          offsetY: 40
+        },
+        plotOptions: {
+          pie: {
+            startAngle: -90,
+            endAngle: 270,
+            size: 100
+          }
+        },
+        tooltip: {
+          y: {
+            formatter: function(val) {
+              return val.toFixed(2) + " ₺";
+            }
+          },
+          style: {
+            borderRadius: 10
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        fill: {
+          type: 'gradient',
+        },
+        title: {
+          text: ''
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: "100%",
+            },
+            legend: {
+              position: 'bottom',
+              offsetY: 5
+            }
+          }
+        }]
+      };
     },
     deleteOrder(orderId){
       axios
@@ -1048,9 +1118,16 @@ export default {
 }
 .v-dialog.details-dialog{
   background-color: rgba(11,14,63,0.88) !important;
+  height: 60%;
 }
-.details-dialog.v-dialog:not(.v-dialog--fullscreen){
-  height: 420px;
+.details-dialog foreignObject,
+.details-dialog svg,
+.details-dialog .apexcharts-canvas{
+  height: 280px !important;
+}
+.details-dialog foreignObject,
+.details-dialog svg{
+  overflow: visible !important;
 }
 </style>
 <style scoped>
