@@ -1,10 +1,19 @@
 <template>
   <div class="login">
     <v-container>
+      <div class="owl owll">
+        <div class="hand owll"></div>
+        <div class="hand hand-r owll"></div>
+        <div class="arms owll">
+          <div class="arm owll"></div>
+          <div class="arm arm-r owll"></div>
+        </div>
+      </div>
       <v-row>
-        <v-col class="mx-auto col-sm-10 col-xs-12 col-lg-5">
+        <v-col class="mx-auto col-sm-10 col-xs-12 col-lg-5 pt-0">
           <v-text-field
             color="white"
+            type="email"
             dark
             label="E-posta"
             append-outer-icon="mdi-account"
@@ -17,6 +26,8 @@
             label="Parola"
             append-outer-icon="mdi-key-variant"
             v-model="password"
+            @focus="closeYourEyes"
+            @blur="openYourEyes"
           ></v-text-field>
           <v-row>
               <v-col class="pl-6 row justify-space-between">
@@ -40,31 +51,17 @@
                 </v-btn>
               </v-col>
           </v-row>
-          <GoogleLogin :params="params" :onSuccess="onSuccess" style="max-width: 100%;">
-            <v-btn color="red darken-1" class="white--text" tile block width="460" style="max-width: 100%;">
+          <GoogleLogin :params="params" :onSuccess="onSuccess" style="width: 98% !important;">
+            <v-btn color="red darken-1" class="white--text" tile style="max-width: 100%;width:100% !important;">
               Google İle
               <v-icon right dark>
                 mdi-google
               </v-icon>
             </v-btn>
           </GoogleLogin>
-<!--          <v-btn
-              color="#3b5998"
-              class="white&#45;&#45;text mt-2"
-              block tile
-              @click="authenticate('facebook')">
-            Facebook İLE
-            <v-icon right dark>
-              mdi-facebook
-            </v-icon>
-          </v-btn>-->
-
-<!--          <template>
-            <v-facebook-login app-id="543577080115436" style="width: 100%;" class="mt-2">
-            </v-facebook-login>
-          </template>-->
-
-
+          <v-col class="pa-0 pt-4">
+            <v-btn x-small tile link href="/passwdreset">Şifremi unuttum</v-btn>
+          </v-col>
         </v-col>
       </v-row>
     </v-container>
@@ -140,7 +137,8 @@ export default {
             })
             .then(response => {
               if (response.data == "ERROR") {
-                alert("Kullanıcı bulunamadı");
+                this.$toasted.error("Kullanıcı bulunamadı",{fullWidth:true,icon:'error',duration:2000})
+
                 return;
               } else {
                 localStorage.setItem(
@@ -170,13 +168,14 @@ export default {
               }
             })
             .catch(err => {
-              console.log(err);
+              this.overlay = false;
+              this.$toasted.error(err,{fullWidth:true,icon:'error',duration:2000})
             });
         });
     },
     login() {
       if (!this.email && !this.password) {
-        alert("Alanlar boş bırakılamaz!");
+        this.$toasted.error("Alanlar boş bırakılamaz!",{fullWidth:true,icon:'error',duration:1000})
         return;
       }
       axios
@@ -186,7 +185,7 @@ export default {
         })
         .then(response => {
           if (response.data == "ERROR") {
-            alert("Kullanıcı bulunamadı");
+            this.$toasted.error("Kullanıcı bulunamadı!",{fullWidth:true,icon:'error',duration:1000});
             return;
           } else {
             localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -210,6 +209,7 @@ export default {
           }
         })
         .catch(err => {
+          this.$toasted.error(err,{fullWidth:true,icon:'error',duration:1000});
           console.log(err);
         });
     },
@@ -275,8 +275,72 @@ export default {
           })
         }
       })
+    },
+    closeYourEyes(){
+      document.querySelectorAll('.owll').forEach((el) => {
+        el.classList.add('password');
+      })
+    },
+    openYourEyes(){
+      document.querySelectorAll('.owll').forEach((el) => {
+        el.classList.remove('password');
+      })
     }
   }
 };
 </script>
-<style scoped></style>
+<style>
+.owl {
+  margin: auto;
+  width: 211px;
+  height: 108px;
+  background-image: url("https://dash.readme.io/img/owl-login.png");
+  position: relative;
+}
+.owl .hand {
+  width: 34px;
+  height: 34px;
+  border-radius: 40px;
+  background-color: #472d20;
+  transform: scaleY(0.6);
+  position: absolute;
+  left: 14px;
+  bottom: -8px;
+  transition: 0.3s ease-out;
+}
+.owl .hand.password {
+  transform: translateX(42px) translateY(-15px) scale(0.7);
+}
+.owl .hand.hand-r {
+  left: 170px;
+}
+.owl .hand.hand-r.password {
+  transform: translateX(-42px) translateY(-15px) scale(0.7);
+}
+.owl .arms {
+  position: absolute;
+  top: 58px;
+  height: 41px;
+  width: 100%;
+  overflow: hidden;
+}
+.owl .arms .arm {
+  width: 40px;
+  height: 65px;
+  background-image: url("https://dash.readme.io/img/owl-login-arm.png");
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  transition: 0.3s ease-out;
+}
+.owl .arms .arm.password {
+  transform: translateX(40px) translateY(-40px);
+}
+.owl .arms .arm.arm-r {
+  left: 158px;
+  transform: scaleX(-1);
+}
+.owl .arms .arm.arm-r.password {
+  transform: translateX(-40px) translateY(-40px) scaleX(-1);
+}
+</style>

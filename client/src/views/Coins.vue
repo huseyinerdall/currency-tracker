@@ -8,14 +8,14 @@
         </v-col>
       </v-row>
     </v-container>
-    <CommentSidebar />
+<!--    <CommentSidebar />-->
   </div>
 </template>
 
 <script>
 import SinglePageGraph from "@/components/SinglePageGraphCoin.vue";
 import Description from "@/components/Description.vue";
-import CommentSidebar from "@/components/common/CommentSidebar.vue";
+/*import CommentSidebar from "@/components/common/CommentSidebar.vue";*/
 export default {
   name: "Coins",
   props: {
@@ -26,7 +26,7 @@ export default {
   components: {
     SinglePageGraph,
     Description,
-    CommentSidebar
+    /*CommentSidebar*/
   },
   created() {}
 };

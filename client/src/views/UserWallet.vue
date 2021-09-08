@@ -1,6 +1,22 @@
 <template>
-  <div id="app" class="userwallet">
+  <div class="userwallet">
+
     <div>
+      <v-alert
+          border="right"
+          colored-border
+          type="error"
+          elevation="2"
+          v-if="userinfo.active == 0"
+          dense
+          class="mt-6 caption"
+          dismissible
+      >
+        Hesabınız aktif değil.Bu haldeyken al sat yapamazsınız.Hesabı aktif hale getirmek için
+        <v-chip small>{{userinfo.email}}</v-chip> adresinize
+        <v-btn x-small @click="sendActivationCode">buraya</v-btn>
+        tıklayarak eposta gönderin.
+      </v-alert>
       <v-row>
         <v-col class="col-md-12">
           <v-row>
@@ -138,6 +154,7 @@
                         :dark="!$store.state.isLight"
                         :light="$store.state.isLight"
                         height="340"
+                        expand
                     >
                       <template v-slot:item="{ item }">
                         <tr>
@@ -253,7 +270,7 @@
                               <img :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
                             </v-avatar>
                             <v-avatar size="32" class="ml-2 mr-2" v-else>
-                              <img :src="item.profileImage.indexOf('googleusercontent')>0 ? item.profileImage : ($store.state.api + '/uploads/' + item.profileImage)" alt="" />
+                              <img :src="item.profileImage.indexOf('googleusercontent')>-1 ? item.profileImage : (item.profileImage.indexOf('avatars')>-1 ? item.profileImage : $store.state.api + '/uploads/' + item.profileImage)" alt="" />
                             </v-avatar>
                             <span>{{item.fullName | tocapitalize}}</span>
                           </v-row>
@@ -374,7 +391,7 @@
         <apexchart type="donut" :options="detailsChartOptions" :series="detailsSeries"></apexchart>
       </v-container>
     </v-dialog>
-
+    <IsEmailSendingModal />
   </div>
 </template>
 
@@ -388,6 +405,7 @@ import allImages from "@/assets/allimages";
 import shortToName from "@/assets/short-to-name.json";
 import moment from "moment";
 import _ from "lodash";
+import IsEmailSendingModal from "@/components/common/EmailSending";
 import EventBus from '../event-bus';
 let options = {
   type: "success",
@@ -397,7 +415,7 @@ let options = {
   duration: 1600,
   containerClass: "green accent-3 text-center",
   className: "text-center"
-};/*
+};
 let alertoptions = {
   type: "error",
   icon: "error",
@@ -406,7 +424,7 @@ let alertoptions = {
   duration: 1600,
   containerClass: "red accent-3 text-center",
   className: "text-center"
-};*/
+};
 export default {
   name: "UserWallet",
   data(app) {
@@ -813,8 +831,11 @@ export default {
       },
       detailsSeries: [],
       detailsDialog: false,
-      detailsLabels: []
+      detailsLabels: [],
     };
+  },
+  components: {
+    IsEmailSendingModal
   },
   created() {
     if (this.$vuetify.breakpoint.smAndDown) {
@@ -940,7 +961,10 @@ export default {
             }
             this.topUsers =  response.data;
             this.loading4 = false;
-          });
+          })
+          .catch(err=>{
+            this.$toasted.show(`${err}`, alertoptions);
+          })
     },
     displayDetails(details){
       let temp = Object.values(details).filter((current)=>{
@@ -952,7 +976,11 @@ export default {
       this.detailsChartOptions.labels = [];
       for (let i = 0; i < temp.length; i++) {
         series.push(temp[i].amount*(this.allPrices[temp[i].shortName] || this.allPrices[shortToName[temp[i].shortName]]));
-        label.push(temp[i].shortName.toUpperCase().replaceAll('-',' '));
+        try{
+          label.push(temp[i].shortName.toUpperCase().replaceAll('-',' '));
+        }catch (e){
+          label.push(temp[i].shortName.toUpperCase());
+        }
       }
       this.detailsDialog = true;
       this.detailsSeries = series;
@@ -1073,10 +1101,27 @@ export default {
           .catch(err => {
             console.log(err);
           });
+    },
+    sendActivationCode() {
+      this.$store.commit('isEmailSending',true)
+      axios
+          .post(`${this.$store.state.api}/sendactivation`, {
+            userId: this.$store.state.userinfo.id,
+            email: this.$store.state.userinfo.email
+          })
+      .then(response => {
+        if(response.data == "MAILOK"){
+          this.$store.commit('isEmailSending',false)
+        }
+      })
+      .catch(err=>{
+        console.log(err)
+      })
     }
   },
   computed: mapState({
-    userwalletdialog: state => state.userwalletdialog
+    userwalletdialog: state => state.userwalletdialog,
+    userinfo: state => state.userinfo,
   })
 };
 </script>

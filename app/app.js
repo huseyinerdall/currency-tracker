@@ -33,6 +33,7 @@ const admin = require('./admin.js');
 app.use(morgan('tiny'));
 app.use(cors({ credentials: true }));
 app.use('/robots.txt', express.static(path.join(__dirname, 'public/robots.txt')));
+app.use('/sitemap.xml', express.static(path.join(__dirname, 'public/sitemap.xml')));
 app.use('/admin',admin);
 app.use(bodyParser.json());
 app.use(express.static('public')) // static dosyaları serve etmek için
@@ -718,7 +719,7 @@ db.sequelize.sync().then(() => {
                     }
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log("Döviz datası alınamadı.."));
         // al sat yapılacak yer
         // burada açık emirlerin hepsi alınacak ve gerekli condition sağlanıyorsa işlem gerçekleştirilecek
 

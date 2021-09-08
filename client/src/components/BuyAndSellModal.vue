@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <v-dialog
       transition="dialog-bottom-transition"
       max-width="700"
@@ -14,6 +14,7 @@
             ? 'background-color:#f9f9f9;'
             : 'background-color:rgba(11,14,63,0.98);'
         "
+        class="buyandsellmodal"
       >
         <div class="pa-4">
           <v-btn
@@ -133,9 +134,11 @@
                       placeholder="Miktarı Giriniz"
                       label="Miktar"
                       @input="calculateSum(1)"
+                      :hint="wallet ? wallet[currentUnit.name].amount.toString() : 0..toString()"
+                      persistent-hint
                     ></v-text-field>
                   </v-col>
-                  <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 3" class="pb-0 pt-0">
+                  <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 3" class="pb-0 pt-sm-3">
                     <v-text-field
                       v-if="currentUnit.isMajor"
                       :style="
@@ -404,7 +407,7 @@
         </div>
       </v-container>
     </v-dialog>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -441,6 +444,7 @@ export default {
     chosen: "price",
     data: [],
     wealthChoice: 0,
+    wallet: null,
     //allUnits: [],
     images: [],
     currentUnit: "ABD DOLARI",
@@ -524,6 +528,7 @@ export default {
     this.currentUnit = this.data[0];
     this.currentUnitTLPrice = this.currentUnit["Tür"] == "Kripto" ? (this.currentUnit.price * this.$store.state.dolar).toFixed(2) :(this.currentUnit.price);
     this.chooseUnit();
+    this.getUserWallet();
   },
   methods: {
     chooseUnit() {
@@ -704,20 +709,25 @@ export default {
     emitMethod () {
       EventBus.$emit('boughtorsold');
     },
-    getUserWallet: function() {
-      axios
-        .post(`${this.$store.state.api}/getuserwallet`, {
-          id: JSON.parse(localStorage.getItem("user")).id
-        })
-        .then(response => {
-          console.log(response.data)
-          localStorage.setItem("wallet", JSON.stringify(response.data));
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    getUserWallet() {
+      if(!this.$store.state.userinfo) return;
+      try{
+        axios
+            .post(`${this.$store.state.api}/getuserwallet`, {
+              id: this.$store.state.userinfo.id
+            })
+            .then(response => {
+              localStorage.setItem("wallet", JSON.stringify(response.data));
+              this.wallet = response.data;
+            })
+            .catch(err => {
+              this.$toasted.error(err,{fullWidth:true,icon:"error"})
+            });
+      }catch(err){
+        this.$toasted.error(err,{fullWidth:true,icon:"error"})
+      }
     },
-    changeWealth: function () {
+    changeWealth() {
       let tempList = [];
       switch (this.wealthChoice) {
         case 0:
@@ -790,5 +800,8 @@ v-text-field__slot input,
 }
 .v-time-picker-title {
   justify-content: center !important;
+}
+.buyandsellmodal .v-text-field input{
+  padding: 0 !important;
 }
 </style>

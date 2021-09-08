@@ -8,15 +8,33 @@ const Op = db.Sequelize.Op;
 const SECRET_KEY = 'SI6ImM1Z';
 var upload = require('./utils/upload');
 const UPLOAD_FOLDER = path.join(__dirname,"public/uploads/");
+const multer  = require( 'multer' );
+const control = require('./control');
+var storage = multer.diskStorage(
+    {
+        destination: './public/uploads/',
+        filename: function ( req, file, cb ) {
+            console.log(req.headers.email);
+
+            cb( null, `${req.headers.email}.${'jpg'}`);
+        }
+    }
+);
+
+var upload = multer( { storage: storage } );
+
 const url = require('url');
 var nodemailer = require('nodemailer');
 const secret = require(__dirname + '/config/secret.json');
 let utils = require('./utils');
 var transporter = nodemailer.createTransport(secret.gmail);
-
+let temporaryPasswords = [];
 module.exports = function(app,io){
 
-    app.post('/register', (req, res) => {
+    app.post('/register', upload.single('file'), (req, res) => {
+        if(!control.emailControl(req.body.email)){
+            return new Error('Eposta adresi geçerli değil.')
+        }
         db.User.findOne({
             where: {
                 email: req.body.email
@@ -26,24 +44,21 @@ module.exports = function(app,io){
                 if (user) {
                     res.send("ALREADY");
                 } else {
-                    console.log(user)
-                    if(req.body.profileImage.indexOf("googleusercontent")>0){
+                    if(req.body.profileImage.indexOf("googleusercontent")>-1){
                         req.body.active = 1;
-                    }else{
-                        let filename = '';
-                        fs.readdirSync(UPLOAD_FOLDER).forEach(file => {
-                            if(file.includes("tempfilename")){
-                                let ext = path.extname(file);
-                                fs.rename(`${UPLOAD_FOLDER}tempfilename${ext}`, `${UPLOAD_FOLDER}${req.body.profileImage}${ext}`, function(err) {
-                                    if ( err ) console.log('ERROR: ' + err);
-                                });
-                                filename = `${req.body.profileImage}${ext}`;
-                            }
-                            req.body.profileImage = filename;
-                        });
+                    }else if(req.body.profileImage.indexOf("/avatars/")>-1){
                         req.body.active = 0;
-                        db.User.create(req.body)
-                            .then((u) => {
+                    }else{
+                        req.body.profileImage = `${req.body.email}.jpg`;
+                        req.body.active = 0;
+                    }
+                    req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
+                    req.body.balanceNow = 100000;
+                    let now = new Date().toLocaleDateString()
+                    req.body.balanceList = {};
+                    db.User.create(req.body)
+                        .then((u) => {
+                            try{
                                 var mailOptions = {
                                     from: secret.gmail.auth.user,
                                     to: req.body.email,
@@ -54,21 +69,150 @@ module.exports = function(app,io){
                                     if (error) {
                                         console.log(error);
                                     } else {
-                                        console.log('Email sent: ' + info.response);
+                                        console.log(info)
                                     }
                                 });
-                            })
-                    }
-                    req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
-                    req.body.balanceNow = 100000;
-                    let now = new Date().toLocaleDateString()
-                    req.body.balanceList = {};
-                    res.send("OK");
+                            }catch (e) {
+                                res.send('Eposta gönderilirken hata oluştu.');
+                            }
+                            res.json(u['dataValues']);
+                        })
+                    //res.json(req.body);
                 }
             })
             .catch(err => {
                 console.log(err)
                 res.send(err)
+            })
+    })
+
+    app.post('/changeusername', (req,res) => {
+        let desired = req.body.desired;
+        let userId = req.body.userId;
+        if(desired.length <5){
+            res.send('SHORT');
+        }
+        db.User.findOne({
+            where: {
+                id: userId
+            }
+        })
+            .then((user) =>{
+                db.User.update({
+                    fullName: desired
+                }, {
+                    where: { id: userId },
+                    returning: true,
+                    plain: true
+                })
+                    .then(result => {
+                        res.send("CHANGE")
+                    })
+            })
+            .catch((err)=>{console.log(err);return 0;})
+    })
+
+    app.post('/sendpasswd', (req,res) => {
+        let email = req.body.email;
+        db.User.findOne({
+            where: {
+                email: email
+            }
+        })
+            .then((user)=>{
+                if(!user){
+                    res.send('THEREISNOUSER');
+                    return;
+                }
+                if(user.dataValues.profileImage.indexOf("googleusercontent")>-1){
+                    res.send('GOOGLEUSER')
+                }
+                if(user){
+                    let ps = utils.generateProductKey();
+                    temporaryPasswords.push(ps);
+                    var mailOptions = {
+                        from: secret.gmail.auth.user,
+                        to: email,
+                        subject: 'Para.Guru Parola Sıfırlama',
+                        html: utils.passwdMailTemplate(ps)
+                    };
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            res.send("MAILOK");
+                        }
+                    });
+                }else{
+                    res.send('THEREISNOUSER')
+                }
+            })
+    })
+
+    app.post('/changepasswd', (req,res) => {
+        let desired = req.body.passwd1;
+        let passwd2 = req.body.passwd2;
+        let email = req.body.email;
+        let pin = req.body.pin.toString();
+        if(desired != passwd2){
+            res.send('NOTSAME');
+            return;
+        }
+        if(desired.length <8){
+            res.send('SHORT');
+            return;
+        }
+        if(!temporaryPasswords.includes(pin)){
+            res.send('PINERROR');
+            return;
+        }else{
+            db.User.findOne({
+                where: {
+                    email: email
+                }
+            })
+                .then((user) =>{
+                    db.User.update({
+                        passwd: bcrypt.hashSync(desired, 8)
+                    }, {
+                        where: { email: email },
+                        returning: true,
+                        plain: true
+                    })
+                        .then(result => {
+                            const index = array.indexOf(pin);
+                            if (index > -1) {
+                                temporaryPasswords.splice(index, 1);
+                            }
+                            res.send("CHANGE");
+                        })
+                })
+                .catch((err)=>{res.send(err);})
+        }
+
+    })
+
+    app.post('/isusernametaken',(req,res) => {
+        let desired = req.body.desired;
+        db.User.findOne({
+            where: {
+                fullName: desired
+            }
+        })
+            .then((user)=>{
+                res.send(!!user);
+            })
+    })
+
+    app.post('/isemailtaken',(req,res) => {
+        let desired = req.body.desired;
+        db.User.findOne({
+            where: {
+                email: desired
+            }
+        })
+            .then((user)=>{
+                res.send(!!user);
             })
     })
 
@@ -86,10 +230,9 @@ module.exports = function(app,io){
             if (error) {
                 console.log(error);
             } else {
-                console.log('Email sent: ' + info.response);
+                res.send("MAILOK");
             }
         });
-        res.send("MAILOK");
     })
 
     app.post('/avatar', upload.single('file'), (req, res) => {
@@ -118,7 +261,8 @@ module.exports = function(app,io){
         })
             .then(user => {
                 if(!user){res.send("ERROR");return;}
-                let passwordIsValid = bcrypt.compareSync(req.body.passwd, user.dataValues.passwd)
+                console.log(req.body.passwd,"*******")
+                let passwordIsValid = bcrypt.compareSync(req.body.passwd, user.dataValues.passwd);
                 if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
                 let token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: 86400 });
                 res.status(200).send({ auth: true, token: token, user: user });
@@ -234,7 +378,9 @@ module.exports = function(app,io){
 
     app.post('/getuserwallet', async(req, res) => {
         let userId = req.body.id;
-        console.log(userId)
+        if(!userId){
+            return new Error('Hesabınızı aktif hale getirmelisiniz.')
+        }
         db.User.findOne({
             where: {
                 id: userId
@@ -270,5 +416,30 @@ module.exports = function(app,io){
             .then((data)=>{
                 res.json(data.dataValues.balanceList);
             })
+    })
+
+    app.post('/contact', (req, res) => {
+        let fullName = req.body.fullName;
+        let email = req.body.email;
+        let subject = req.body.subject;
+        let message = req.body.message;
+        var mailOptions = {
+            from: "petiberi06@gmail.com",
+            to: ['huseyinerdal1058@gmail.com'],
+            subject: 'Para.Guru İletişim Formu',
+            html: `
+                <h1>${fullName}</h1>
+                <h1>${email}</h1>
+                <h1>${subject}</h1>
+                <h1>${message}</h1>
+            `
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                res.send(error.message);
+            } else {
+                res.send("MAILOK");
+            }
+        })
     })
 }

@@ -42,55 +42,6 @@
         <v-btn href="/userwallet" text :light="$store.state.isLight">
           <span class="mr-4">CÜZDAN</span>
         </v-btn>
-<!--        <v-menu offset-y style="margin-top: 30px;" v-if="$store.state.login">
-          <template v-slot:activator="{ attrs, on }">
-            <v-btn
-              class="white&#45;&#45;text ma-5"
-              v-bind="attrs"
-              v-on="on"
-              text
-              style="margin-top: 50px !important;font-weight:800;"
-              @click="isDropped = !isDropped"
-              :light="$store.state.isLight"
-            >
-              HESAP
-              <v-icon
-                size="16"
-                class="ml-2"
-                :class="[isDropped ? 'mdi-rotate-180' : '']"
-                >mdi-arrow-down</v-icon
-              >
-            </v-btn>
-          </template>
-
-          <v-list>
-            <v-list-item
-              dense
-              :light="$store.state.isLight"
-              @click="$store.commit('userwalletdialog')"
-            >
-              <v-list-item-title>Cüzdan</v-list-item-title>
-            </v-list-item>
-            <v-list-item
-              dense
-              :light="$store.state.isLight"
-              @click="$store.commit('userorderdialog')"
-            >
-              <v-list-item-title>Emirlerim</v-list-item-title>
-            </v-list-item>
-            <v-list-item
-              link
-              href="/profil"
-              dense
-              :light="$store.state.isLight"
-            >
-              <v-list-item-title>Profil</v-list-item-title>
-            </v-list-item>
-            <v-list-item link href="/logout" dense>
-              <v-list-item-title>Çıkış</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>-->
         <v-spacer></v-spacer>
         <div class="column">
           <div>
@@ -98,7 +49,9 @@
                 class="mt-6 mr-2 pl-1"
                 tile
                 color="rgb(248, 73, 96)"
-                @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
+                @click="$store.state.userinfo == null
+                ? ($route.path != '/login' ? $router.push({name:'Login'}) : $toasted.error('Giriş yapmalısın!',{fullWidth:true,icon:'error',duration:1000}))
+                : (($store.state.userinfo.active == 1) ? $store.commit('buyselldialog') : $store.commit('activatealert'))"
             >
               <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
                 mdi-arrow-down
@@ -109,7 +62,9 @@
                 class="mt-6 mr-6 pl-1"
                 tile
                 color="rgb(2, 192, 118)"
-                @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})"
+                @click="$store.state.userinfo == null
+                ? ($route.path != '/login' ? $router.push({name:'Login'}) : $toasted.error('Giriş yapmalısın!',{fullWidth:true,icon:'error',duration:1000}))
+                : (($store.state.userinfo.active == 1) ? $store.commit('buyselldialog') : $store.commit('activatealert'))"
             >
               <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
                 mdi-arrow-up
@@ -138,7 +93,7 @@
             bottom
             min-width="200px"
             rounded
-            v-if="$store.state.login || isAuthenticated"
+            v-if="($store.state.login || isAuthenticated) && $store.state.userinfo"
         >
           <template v-slot:activator="{ on }">
             <v-btn
@@ -148,7 +103,7 @@
                 v-on="on"
             >
               <v-avatar size="40">
-                <v-img v-if="user.profileImage!=''" :src="user.profileImage"></v-img>
+                <v-img v-if="user.profileImage!=''" :src="user.profileImage.indexOf('http')>-1 ? user.profileImage : $store.state.api+'/uploads/'+ user.profileImage"></v-img>
                 <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
               </v-avatar>
             </v-btn>
@@ -157,12 +112,12 @@
             <v-list-item-content class="justify-center pb-0">
               <div class="mx-auto text-center">
                 <v-avatar>
-                  <v-img v-if="user.profileImage!=''" :src="user.profileImage"></v-img>
+                  <v-img v-if="$store.state.userinfo" :src="$store.state.userinfo || $store.state.userinfo.profileImage"></v-img>
                   <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
                 </v-avatar>
-                <h3>{{ user.fullName }}</h3>
+                <h3>{{ $store.state.userinfo.fullName }}</h3>
                 <p class="text-caption mt-1">
-                  {{ user.email }}
+                  {{ $store.state.userinfo.email }}
                 </p>
                 <v-divider></v-divider>
                 <v-btn
@@ -246,7 +201,7 @@
             offset-x
             min-width="200px"
             rounded
-            v-if="$store.state.login || isAuthenticated"
+            v-if="($store.state.login || isAuthenticated) && $store.state.userinfo"
         >
           <template v-slot:activator="{ on }">
             <v-btn
@@ -256,7 +211,7 @@
                 v-on="on"
             >
               <v-avatar size="40">
-                <v-img v-if="user.profileImage!=''" :src="user.profileImage"></v-img>
+                <v-img v-if="$store.state.userinfo" :src="$store.state.userinfo || $store.state.userinfo.profileImage"></v-img>
                 <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
               </v-avatar>
 
@@ -266,12 +221,12 @@
             <v-list-item-content class="justify-center pb-0">
               <div class="mx-auto text-center">
                 <v-avatar>
-                  <v-img v-if="user.profileImage!=''" :src="user.profileImage"></v-img>
+                  <v-img v-if="$store.state.userinfo" :src="$store.state.userinfo || $store.state.userinfo.profileImage"></v-img>
                   <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
                 </v-avatar>
-                <h3>{{ user.fullName }}</h3>
+                <h3>{{ $store.state.userinfo.fullName }}</h3>
                 <p class="text-caption mt-1">
-                  {{ user.email }}
+                  {{ $store.state.userinfo || $store.state.userinfo.email }}
                 </p>
                 <v-divider></v-divider>
                 <v-btn
@@ -466,7 +421,10 @@
                 <v-btn block
                        color="rgb(2, 192, 118)"
                        style="color: #fff;"
-                       @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
+                       @click="$store.state.userinfo == null
+                                ? ($route.path != '/login' ? $router.push({name:'Login'}) : $toasted.error('Giriş yapmalısın!',{fullWidth:true,icon:'error',duration:1000}))
+                                : (($store.state.userinfo.active == 1) ? $store.commit('buyselldialog') : $store.commit('activatealert'))"
+                >
                   AL
                 </v-btn>
               </v-col>
@@ -474,7 +432,10 @@
                 <v-btn block
                        color="rgb(248, 73, 96)"
                        style="color: #fff;"
-                       @click="($store.state.login || isAuthenticated) ? $store.commit('buyselldialog') : $router.push({name:'Login'})">
+                       @click="$store.state.userinfo == null
+                                ? ($route.path != '/login' ? $router.push({name:'Login'}) : $toasted.error('Giriş yapmalısın!',{fullWidth:true,icon:'error',duration:1000}))
+                                : (($store.state.userinfo.active == 1) ? $store.commit('buyselldialog') : $store.commit('activatealert'))"
+                >
                   SAT
                 </v-btn>
               </v-col>
@@ -498,6 +459,21 @@
       <router-view />
     </v-app>
     <BuyAndSellModal />
+    <v-dialog v-if="$store.state.userinfo" v-model="$store.state.activatealert">
+      <v-alert
+          border="right"
+          colored-border
+          type="error"
+          elevation="2"
+          dense
+          class="mt-6"
+      >
+        Hesabınız aktif değil.Bu haldeyken al sat yapamazsınız.Hesabı aktif hale getirmek için
+        <v-chip small>{{ $store.state.userinfo.email}}</v-chip> adresinize
+        <v-btn x-small>buraya</v-btn>
+        tıklayarak eposta gönderin.
+      </v-alert>
+    </v-dialog>
   </main>
 </template>
 

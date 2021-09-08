@@ -6,7 +6,6 @@ import Logout from "../components/common/Logout.vue";
 import Register from "../views/Register.vue";
 import Coins from "../views/Coins.vue";
 import Golds from "../views/Golds.vue";
-import Wallet from "../views/Wallet.vue";
 import CryptoCurrencyPage from "../views/CryptoCurrencyPage.vue";
 import GoldsPage from "../views/GoldsPage.vue";
 import CurrenciesPage from "../views/CurrenciesPage.vue";
@@ -14,8 +13,11 @@ import Profile from "../views/Profile.vue";
 import CaprazKurlar from "../views/CaprazKurlar.vue";
 import UserWallet from "../views/UserWallet.vue";
 import PageNotFound from "../views/PageNotFound.vue";
+import PasswordReset from "../views/PasswordReset.vue";
 import Activate from "../views/Activate.vue";
 import Activating from "../views/Activating.vue";
+import Contact from "../views/Contact.vue";
+import store from "../store/index";
 // Admin Side
 function toCapitalize(str) {
   str = str
@@ -99,7 +101,17 @@ const routes = [
     name: "Register",
     component: Register,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
+      guest: true
+    }
+  },
+  {
+    path: "/passwdreset",
+    name: "PasswordReset",
+    component: PasswordReset,
+    meta: {
+      requiresAuth: false,
+      guest: true
     }
   },
   {
@@ -155,14 +167,6 @@ const routes = [
     }
   },
   {
-    path: "/wallet",
-    name: "Wallet",
-    component: Wallet,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
     path: "/userwallet",
     name: "UserWallet",
     component: UserWallet,
@@ -178,6 +182,14 @@ const routes = [
       requiresAuth: false
     }
   },
+  {
+    path: "/iletisim",
+    name: "Contact",
+    component: Contact,
+    meta: {
+      requiresAuth: false
+    }
+  },
   { path: "*", component: PageNotFound }
 ];
 
@@ -188,24 +200,22 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  /*if (localStorage.getItem('jwt') != null) {
-        if (to.matched.some(record => record.name == 'Login')) {
-            next({ name: 'Home' })
-        }
-    }*/
-  let user = JSON.parse(localStorage.getItem("user"));
+  store.commit('userinfo');
+  //store.commit('wallet');
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem("jwt") == null) {
+    if (!store.state.userinfo) {
       next({
         path: "/login",
         params: { nextUrl: to.fullPath }
       });
-    } else if (to.path == "/activating") {
+    } /*else if (null) {
       next();
-    } else if (user.active == 1 && to.path == "/activate") {
+    }*/ else if (to.path == "/activating") {
+      next();
+    } else if (store.state.userinfo.active == 1 && to.path == "/activate") {
       next({ name : "Home" });
-    } else if (user.active == 0 && to.path != "/logout") {
-      next({ name : "Activate" });
+    } else if (store.state.userinfo.active == 0 && to.path != "/logout") {
+      next();
     } else {
       if (to.matched.some(record => record.meta.is_admin)) {
         next();
@@ -216,6 +226,8 @@ router.beforeEach((to, from, next) => {
   } else if (to.matched.some(record => record.meta.guest)) {
     if (localStorage.getItem("jwt") == null) {
       next();
+    } else if (to.path == "/register") {
+      next('/userwallet');
     } else {
       next({ name: "Home" });
     }

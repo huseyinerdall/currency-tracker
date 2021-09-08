@@ -252,6 +252,7 @@ Atari
 API3
 PARSIQ
 */
+/*
 const prev = require('./static/seo.json');
 const next = require('./static/seooo.json');
 let temp = {};
@@ -264,4 +265,15 @@ for (const key in prev) {
 
 fs.writeFileSync("./static/new.json",JSON.stringify(temp),(err) => {
     res.send("NO");
+});*/
+
+const testFolder = './public/avatars/';
+let temp = [];
+fs.readdir(testFolder, (err, files) => {
+    console.log(files)
+    files.forEach(file => {
+        temp.push(file);
+    });
 });
+
+console.log(temp)

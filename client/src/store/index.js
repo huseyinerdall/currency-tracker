@@ -16,23 +16,30 @@ export default new Vuex.Store({
     status: "",
     commentDrawer: false,
     buyselldialog: false,
+    activatealert: false,
     userwalletdialog: false,
+    userinfo: null,
+    wallet: null,
     userorderdialog: false,
     isLight: localStorage.getItem("light") == "true",
     login: false,
-    dolar: 1
+    dolar: 1,
+    isEmailSending: false
   },
   getters: {
     isAuthenticated: state => !!state.token,
     authStatus: state => state.status,
     commentDrawer: state => state.commentDrawer,
     buyselldialog: state => state.buyselldialog,
+    activatealert: state => state.activatealert,
     userwalletdialog: state => state.userwalletdialog,
+    userinfo: state => state.userinfo,
+    wallet: state => state.wallet,
     userorderdialog: state => state.userorderdialog,
     isLight: state => state.isLight,
     login: state => state.login || !!localStorage.getItem("user"),
-    dolar: state => state.dolar
-
+    dolar: state => state.dolar,
+    isEmailSending: state => state.isEmailSending,
   },
   mutations: {
     ["AUTH_REQUEST"]: state => {
@@ -51,8 +58,17 @@ export default new Vuex.Store({
     buyselldialog(state) {
       state.buyselldialog = !state.buyselldialog;
     },
+    activatealert(state) {
+      state.activatealert = !state.activatealert;
+    },
     userwalletdialog(state) {
       state.userwalletdialog = !state.userwalletdialog;
+    },
+    userinfo(state) {
+      state.userinfo = JSON.parse(localStorage.getItem("user"));
+    },
+    wallet(state) {
+      state.userinfo = JSON.parse(localStorage.getItem("wallet"));
     },
     userorderdialog(state) {
       state.userorderdialog = !state.userorderdialog;
@@ -74,7 +90,10 @@ export default new Vuex.Store({
       connection.onmessage = function(event) {
         state.dolar = parseFloat(event.data);
       }
-    }
+    },
+    isEmailSending(state,yesOrNo) {
+      state.isEmailSending = yesOrNo
+    },
   },
   actions: {
     ["AUTH_REQUEST"]: ({ commit, dispatch }, user) => {

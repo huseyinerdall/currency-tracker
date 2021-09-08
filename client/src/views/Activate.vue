@@ -12,7 +12,9 @@
         >
           <div class="mt-6 display-1 white--text text-center">Hesabını Aktif Et</div>
           <div class="body-1 mx-auto mt-4 white--text" style="width: 80%;">
-            Kayıt olduğunuz eposta adresinize bir ileti attık ve buradaki bağlantıyı kullanarak hesabını aktif hale getirebilirsin.Eğer gelen kutunda görünmüyorsa gereksiz klasörünü kontrol edebilirsin.
+            Kayıt olduğunuz eposta adresinize
+            <v-chip small>{{user.email}}</v-chip>
+            bir ileti attık ve buradaki bağlantıyı kullanarak hesabını aktif hale getirebilirsin.Eğer gelen kutunda görünmüyorsa gereksiz klasörünü kontrol edebilirsin.
           </div>
           <div class="row justify-space-around mt-4">
             <v-btn
@@ -46,18 +48,21 @@ export default {
   name: "Activate",
   data() {
     return {
-      emailsending: false
+      emailsending: false,
+      user: {}
     }
+  },
+  created(){
+    this.user = JSON.parse(localStorage.getItem("user"));
   },
   components: {},
   methods: {
     sendactivation() {
       this.emailsending = true;
-      let user = JSON.parse(localStorage.getItem("user"));
       axios
           .post(`${this.$store.state.api}/sendactivation`, {
-            email: user.email,
-            userId: user.id,
+            email: this.user.email,
+            userId: this.user.id,
             url: this.$store.state.api
           })
           .then(res => {
