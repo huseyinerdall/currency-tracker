@@ -19,233 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Details dialog added">
-      <change afterPath="$PROJECT_DIR$/app/errors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/ICP.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/001-gamer.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/002-user.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/003-man.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/004-man-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/005-profile.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/006-man-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/007-worker.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/008-man-3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/009-girl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/010-cowboy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/011-boy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/012-princess.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/013-superhero.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/014-cat.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/015-girl-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/016-ghost.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/017-mad-scientist.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/018-robot.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/019-zombie.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/020-fashion-blogger.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/021-astronaut.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/022-user-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/023-man-4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/024-woman.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/025-girl-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/026-man-5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/027-ninja.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/028-woman-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/029-avatar.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/030-man-6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/031-arab-woman.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/032-user-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/033-user-3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/034-astronaut-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/035-man-7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/036-woman-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/037-girl-3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/038-woman-3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/039-man-8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/040-man-9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/041-boy-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/042-dog.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/043-mask.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/044-bandit.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/045-knight.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/046-unicorn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/047-chinese.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/048-man-10.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/049-woman-4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/050-man-11.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/051-woman-5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/052-doctor.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/053-dad.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/054-monster.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/055-rich.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/056-rich-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/057-sheik.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/bot9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/female9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/public/avatars/male9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/001-gamer.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/002-user.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/003-man.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/004-man-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/005-profile.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/006-man-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/007-worker.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/008-man-3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/009-girl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/010-cowboy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/011-boy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/012-princess.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/013-superhero.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/014-cat.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/015-girl-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/016-ghost.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/017-mad-scientist.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/018-robot.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/019-zombie.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/020-fashion-blogger.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/021-astronaut.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/022-user-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/023-man-4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/024-woman.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/025-girl-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/026-man-5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/027-ninja.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/028-woman-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/029-avatar.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/030-man-6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/031-arab-woman.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/032-user-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/033-user-3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/034-astronaut-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/035-man-7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/036-woman-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/037-girl-3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/038-woman-3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/039-man-8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/040-man-9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/041-boy-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/042-dog.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/043-mask.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/044-bandit.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/045-knight.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/046-unicorn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/047-chinese.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/048-man-10.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/049-woman-4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/050-man-11.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/051-woman-5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/052-doctor.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/053-dad.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/054-monster.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/055-rich.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/056-rich-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/057-sheik.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/bot9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/female9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/avatars/male9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/emailsending.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/assets/emailsending1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/common/EmailSending.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/Contact.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/PasswordReset.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
+    <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Avatars Forgotten Password">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/.jpg.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/adem-elmas.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/eeee.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/hs-jsj.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/huseyin-erdal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/hüseyin-erdal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/jjkjk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/ont.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/ont.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/qqq.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/uploads/selami-oztürk.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/public/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/temp.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/temp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/EmtiaTable.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/LatestNews.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.example.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/TCMBCurrencyTable.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/TodaySummary.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserOrders.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserWallet.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserWalletModal.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Activate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Activate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Coins.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Coins.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Emtias.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/secret.example.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Golds.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/News.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/control.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Wallet.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-center/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-center/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-center/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-center/package.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -637,14 +418,7 @@
       <workItem from="1630951775258" duration="4689000" />
       <workItem from="1630995313987" duration="22626000" />
       <workItem from="1631031163126" duration="329000" />
-      <workItem from="1631082589882" duration="15079000" />
-    </task>
-    <task id="LOCAL-00027" summary="perşembe">
-      <created>1613677536107</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1613677536107</updated>
+      <workItem from="1631082589882" duration="16594000" />
     </task>
     <task id="LOCAL-00028" summary="perşembe">
       <created>1613677593564</created>
@@ -982,7 +756,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629392994772</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Avatars Forgotten Password">
+      <created>1631101201930</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1631101201931</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1027,6 +808,7 @@
     <MESSAGE value="Activation mail editted" />
     <MESSAGE value="Top 10 Users table fixed" />
     <MESSAGE value="Details dialog added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Details dialog added" />
+    <MESSAGE value="Avatars Forgotten Password" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avatars Forgotten Password" />
   </component>
 </project>

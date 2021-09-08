@@ -112,7 +112,7 @@
             <v-list-item-content class="justify-center pb-0">
               <div class="mx-auto text-center">
                 <v-avatar>
-                  <v-img v-if="$store.state.userinfo" :src="$store.state.userinfo || $store.state.userinfo.profileImage"></v-img>
+                  <v-img v-if="!!$store.state.userinfo" :src="$store.state.userinfo.profileImage"></v-img>
                   <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
                 </v-avatar>
                 <h3>{{ $store.state.userinfo.fullName }}</h3>
@@ -226,7 +226,7 @@
                 </v-avatar>
                 <h3>{{ $store.state.userinfo.fullName }}</h3>
                 <p class="text-caption mt-1">
-                  {{ $store.state.userinfo || $store.state.userinfo.email }}
+                  {{ $store.state.userinfo.email }}
                 </p>
                 <v-divider></v-divider>
                 <v-btn

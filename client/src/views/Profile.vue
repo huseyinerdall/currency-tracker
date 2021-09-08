@@ -113,6 +113,15 @@ let options = {
   containerClass: "green accent-3 text-center",
   className: "text-center"
 };
+let alertOptions = {
+  type: "alert",
+  icon: "error",
+  fullWidth: true,
+  position: "top-center",
+  duration: 1600,
+  containerClass: "green accent-3 text-center",
+  className: "text-center"
+};
 export default {
   name: "Profile",
   data(app) {
@@ -204,13 +213,16 @@ export default {
               userId: this.$store.state.userinfo.id
             })
             .then(res =>{
-              let temp = this.$store.state.userinfo;
-              temp['fullName'] = this.fullName
-              localStorage.setItem('user',JSON.stringify(temp));
-              this.$store.commit('userinfo');
+              if(res.data == 'SHORT'){
+                this.$toasted.show(`En az 5 karakter!`, alertOptions);
+              }
               if(res.data == "CHANGE") {
+                let temp = this.$store.state.userinfo;
+                temp['fullName'] = this.fullName
+                localStorage.setItem('user',JSON.stringify(temp));
+                this.$store.commit('userinfo');
                 setTimeout(() => {
-                  this.$toasted.show(`Kullanıcı adınız başarılı bir şekilde diğiştirildi.`, options);
+                  this.$toasted.show(`Kullanıcı adınız başarılı bir şekilde değiştirildi.`, options);
                   this.icon = 'mdi-pencil-circle';
                 }, 1200)
               }

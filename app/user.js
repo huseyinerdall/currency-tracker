@@ -91,6 +91,7 @@ module.exports = function(app,io){
         let userId = req.body.userId;
         if(desired.length <5){
             res.send('SHORT');
+            return;
         }
         db.User.findOne({
             where: {
