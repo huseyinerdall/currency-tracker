@@ -6,32 +6,44 @@ const db = require("./models");
 const path = require('path');
 const Op = db.Sequelize.Op;
 const SECRET_KEY = 'SI6ImM1Z';
-var upload = require('./utils/upload');
 const UPLOAD_FOLDER = path.join(__dirname,"public/uploads/");
 const multer  = require( 'multer' );
 const control = require('./control');
-var storage = multer.diskStorage(
+var primaryStorage = multer.diskStorage(
     {
         destination: './public/uploads/',
         filename: function ( req, file, cb ) {
-            console.log(req.headers.email);
-
+            cb( null, `${req.headers.email}.${'jpg'}`);
+        }
+    }
+);
+var secondaryStorage = multer.diskStorage(
+    {
+        destination: 'C:\\Users\\hebil\\Desktop\\uploads',
+        filename: function ( req, file, cb ) {
             cb( null, `${req.headers.email}.${'jpg'}`);
         }
     }
 );
 
-var upload = multer( { storage: storage } );
+let uploadP = multer( { storage: primaryStorage } );
+let uploadS = multer( { storage: secondaryStorage } );
 
 const url = require('url');
-var nodemailer = require('nodemailer');
+let nodemailer = require('nodemailer');
 const secret = require(__dirname + '/config/secret.json');
 let utils = require('./utils');
 var transporter = nodemailer.createTransport(secret.gmail);
 let temporaryPasswords = [];
+function fileUpload(req, res, next) {
+    uploadP.single('file')(req, res, next);
+    uploadS.single('file')(req, res, next);
+}
+
+
 module.exports = function(app,io){
 
-    app.post('/register', upload.single('file'), (req, res) => {
+    app.post('/register', fileUpload, (req, res) => {
         if(!control.emailControl(req.body.email)){
             return new Error('Eposta adresi geçerli değil.')
         }
@@ -181,7 +193,7 @@ module.exports = function(app,io){
                         plain: true
                     })
                         .then(result => {
-                            const index = array.indexOf(pin);
+                            const index = temporaryPasswords.indexOf(pin);
                             if (index > -1) {
                                 temporaryPasswords.splice(index, 1);
                             }
@@ -236,7 +248,7 @@ module.exports = function(app,io){
         });
     })
 
-    app.post('/avatar', upload.single('file'), (req, res) => {
+    app.post('/avatar', fileUpload, (req, res) => {
 
         if (!req.file) {
             console.log("No file received");
@@ -442,5 +454,20 @@ module.exports = function(app,io){
                 res.send("MAILOK");
             }
         })
+    })
+
+    app.post('/getuserinfo', (req,res) => {
+        let userId = req.body.id;
+        if(!userId){
+            return new Error('Hesabınızı aktif hale getirmelisiniz.')
+        }
+        db.User.findOne({
+            where: {
+                id: userId
+            }
+        })
+            .then((data)=>{
+                res.json(data.dataValues.active);
+            })
     })
 }

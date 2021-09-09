@@ -26,21 +26,25 @@
           text
           style="margin-left: 2%;"
           :light="$store.state.isLight"
+          class="pa-1"
         >
           <span class="mr-4">DÖVİZ</span>
         </v-btn>
-        <v-btn href="/altin-fiyatlari" text :light="$store.state.isLight">
+        <v-btn href="/altin-fiyatlari" text :light="$store.state.isLight" class="pa-1">
           <span class="mr-4">ALTIN</span>
           <!--<v-icon>mdi-home</v-icon>-->
         </v-btn>
-        <v-btn href="/kripto-paralar" text :light="$store.state.isLight">
+        <v-btn href="/kripto-paralar" text :light="$store.state.isLight" class="pa-1">
           <span class="mr-4">KRİPTO PARA</span>
         </v-btn>
-        <v-btn href="/capraz-kurlar" text :light="$store.state.isLight">
+        <v-btn href="/capraz-kurlar" text :light="$store.state.isLight" class="pa-1">
           <span class="mr-4">ÇAPRAZ KURLAR</span>
         </v-btn>
-        <v-btn href="/userwallet" text :light="$store.state.isLight">
+        <v-btn href="/userwallet" text :light="$store.state.isLight" class="pa-1">
           <span class="mr-4">CÜZDAN</span>
+        </v-btn>
+        <v-btn href="/kripto-para-borsalari" text :light="$store.state.isLight" class="pa-1">
+          <span class="mr-4">BORSALAR</span>
         </v-btn>
         <v-spacer></v-spacer>
         <div class="column">
@@ -325,7 +329,7 @@
             <v-list-item-group dark>
               <v-list-item to="/doviz" @click="dialog = false">
                 <v-list-item-icon>
-                  <v-icon>mdi-home-currency-usd</v-icon>
+                  <v-icon>mdi-currency-usd</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>
@@ -386,6 +390,23 @@
                       :dark="!$store.state.isLight"
                     >
                       ÇAPRAZ KURLAR
+                    </v-btn>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider color="#0059b2"></v-divider>
+              <v-list-item to="/kripto-para-borsalari" @click="dialog = false">
+                <v-list-item-icon>
+                  <v-icon>mdi-swap-horizontal-bold</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    <v-btn
+                        text
+                        :light="$store.state.isLight"
+                        :dark="!$store.state.isLight"
+                    >
+                      BORSALAR
                     </v-btn>
                   </v-list-item-title>
                 </v-list-item-content>
@@ -459,6 +480,7 @@
       <router-view />
     </v-app>
     <BuyAndSellModal />
+    <CookiePopup />
     <v-dialog v-if="$store.state.userinfo" v-model="$store.state.activatealert">
       <v-alert
           border="right"
@@ -481,13 +503,15 @@
 //import VueJwtDecode from "vue-jwt-decode";
 import Footer from "./components/common/Footer";
 import BuyAndSellModal from "./components/BuyAndSellModal";
+import CookiePopup from "@/components/common/CookiePopup";
 
 export default {
   name: "App",
 
   components: {
     Footer,
-    BuyAndSellModal
+    BuyAndSellModal,
+    CookiePopup
   },
 
   data: () => ({
@@ -495,7 +519,11 @@ export default {
     dialog: false,
     isDropped: false,
     clock: "",
+    cookiePopup: false
   }),
+  beforeCreate() {
+    localStorage.length > 0 ? this.$store.commit('cookiepopup',false) : this.$store.commit('cookiepopup',true)
+  },
   methods: {
     updateTime: function() {
       var cd = new Date();

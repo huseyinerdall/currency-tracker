@@ -20,13 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Avatars Forgotten Password">
+      <change afterPath="$PROJECT_DIR$/client/src/components/CryptoExchangesTable.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/common/CookiePopup.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/views/Exchanges.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/.jpg.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GlobalInfos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GlobalInfos.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/Footer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -418,14 +427,8 @@
       <workItem from="1630951775258" duration="4689000" />
       <workItem from="1630995313987" duration="22626000" />
       <workItem from="1631031163126" duration="329000" />
-      <workItem from="1631082589882" duration="16594000" />
-    </task>
-    <task id="LOCAL-00028" summary="perşembe">
-      <created>1613677593564</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1613677593564</updated>
+      <workItem from="1631082589882" duration="18032000" />
+      <workItem from="1631168739739" duration="15935000" />
     </task>
     <task id="LOCAL-00029" summary="perşembe">
       <created>1613678908528</created>
@@ -763,7 +766,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631101201931</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Avatars Forgotten Password">
+      <created>1631102607458</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1631102607458</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

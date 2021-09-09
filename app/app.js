@@ -410,6 +410,14 @@ app.get('/global',(req,res) =>{
         })
 })
 
+app.get('/exchanges',(req,res) =>{
+    let result = {};
+    axios.get(`https://api.coingecko.com/api/v3/exchanges`)
+        .then((response) => {
+            res.json(response.data);
+        })
+})
+
 app.get('/pariteler', async(req, res) => {
     let temp;
     let BEGIN = moment().subtract(1, 'd').toDate() || DEFAULT;

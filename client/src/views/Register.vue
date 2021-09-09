@@ -113,10 +113,10 @@
                     <v-avatar
                         size="48px"
                     >
-                      <img
+<!--                      <img
                           alt="Avatar"
                           :src="avatars[i-1]"
-                      >
+                      >-->
                     </v-avatar>
                   </v-tab>
                 </v-tabs>
@@ -271,7 +271,7 @@ export default {
                       } else {
                         this.$router.push("Activate");
                       }
-                      this.$router.push("Activate");
+                      //this.$router.push("Activate");
                     });
               } else {
                 console.log("Hata oluştu");

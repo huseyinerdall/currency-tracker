@@ -9,6 +9,7 @@ import Golds from "../views/Golds.vue";
 import CryptoCurrencyPage from "../views/CryptoCurrencyPage.vue";
 import GoldsPage from "../views/GoldsPage.vue";
 import CurrenciesPage from "../views/CurrenciesPage.vue";
+import Exchanges from "../views/Exchanges.vue";
 import Profile from "../views/Profile.vue";
 import CaprazKurlar from "../views/CaprazKurlar.vue";
 import UserWallet from "../views/UserWallet.vue";
@@ -18,6 +19,7 @@ import Activate from "../views/Activate.vue";
 import Activating from "../views/Activating.vue";
 import Contact from "../views/Contact.vue";
 import store from "../store/index";
+import axios from "axios";
 // Admin Side
 function toCapitalize(str) {
   str = str
@@ -44,6 +46,14 @@ const routes = [
     path: "/kripto-paralar",
     name: "CryptoCurrencyPage",
     component: CryptoCurrencyPage,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: "/kripto-para-borsalari",
+    name: "Exchanges",
+    component: Exchanges,
     meta: {
       requiresAuth: false
     }
@@ -119,7 +129,8 @@ const routes = [
     name: "Activate",
     component: Activate,
     meta: {
-      activate: true
+      activate: true,
+      requiresAuth: true
     }
   },
   {
@@ -201,6 +212,26 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   store.commit('userinfo');
+  if(store.state.userinfo == null){
+    1;
+  }else if(store.state.userinfo.active == 0){
+    axios
+        .post(`${store.state.api}/getuserinfo`,{
+          id: store.state.userinfo.id
+        })
+        .then((userinfo) => {
+          if (userinfo.data == 1){
+            let temp = store.state.userinfo;
+            temp.active = 1
+            localStorage.setItem('user',JSON.stringify(temp));
+            localStorage.setItem('jwt','activated');
+            router.push({name: 'Home'})
+          }
+        })
+  }else{
+    //if user is active
+    1;
+  }
   //store.commit('wallet');
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.state.userinfo) {
@@ -212,7 +243,7 @@ router.beforeEach((to, from, next) => {
       next();
     }*/ else if (to.path == "/activating") {
       next();
-    } else if (store.state.userinfo.active == 1 && to.path == "/activate") {
+    } else if (store.state.userinfo.active == 1 && to.path.toLowerCase() == "/activate") {
       next({ name : "Home" });
     } else if (store.state.userinfo.active == 0 && to.path != "/logout") {
       next();

@@ -117,7 +117,7 @@
                 style="border-radius: 0;"
               >
                 <v-row style="margin-top: 20px;" :class="$vuetify.breakpoint.smAndDown ? 'flex-column' : 'flex-row'">
-                  <v-col class="pb-0 pt-0" :cols="$vuetify.breakpoint.smAndDown ? 12 : 3">
+                  <v-col class="pb-0 pt-0 mb-4" :cols="$vuetify.breakpoint.smAndDown ? 12 : 3">
                     <v-text-field
                       v-model="orderNowAmount"
                       type="number"
@@ -138,7 +138,7 @@
                       persistent-hint
                     ></v-text-field>
                   </v-col>
-                  <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 3" class="pb-0 pt-sm-3">
+                  <v-col :cols="$vuetify.breakpoint.smAndDown ? 12 : 3" class="pb-0" style="padding-top: 0;">
                     <v-text-field
                       v-if="currentUnit.isMajor"
                       :style="

@@ -13,7 +13,7 @@
     <v-row class="global">
       <div>
         <span class="amber--text">Aktif Sayı:</span>
-        {{ data["active_cryptocurrencies"] }}
+        {{ data != null ? data["active_cryptocurrencies"] : 1000 }}
       </div>
       <div>
         <span class="amber--text">Toplam Hacim:</span>
@@ -36,13 +36,15 @@ export default {
     data: null
   }),
   methods: {
-    getGlobalInfos: function () {
+    getGlobalInfos() {
       axios
           .get(`${this.$store.state.api}/global`)
           .then(res => {
             this.data = res.data;
-            console.log(res.data)
-          });
+          })
+      .catch(err=>{
+        this.$toasted.show(err,{fullWidth:true})
+      })
     }
   },
   created() {

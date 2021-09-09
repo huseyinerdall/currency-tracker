@@ -16,6 +16,7 @@ export default new Vuex.Store({
     status: "",
     commentDrawer: false,
     buyselldialog: false,
+    cookiepopup: false,
     activatealert: false,
     userwalletdialog: false,
     userinfo: null,
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     authStatus: state => state.status,
     commentDrawer: state => state.commentDrawer,
     buyselldialog: state => state.buyselldialog,
+    cookiepopup: state => state.cookiepopup,
     activatealert: state => state.activatealert,
     userwalletdialog: state => state.userwalletdialog,
     userinfo: state => state.userinfo,
@@ -57,6 +59,9 @@ export default new Vuex.Store({
     },
     buyselldialog(state) {
       state.buyselldialog = !state.buyselldialog;
+    },
+    cookiepopup(state,s) {
+      state.cookiepopup = s;
     },
     activatealert(state) {
       state.activatealert = !state.activatealert;

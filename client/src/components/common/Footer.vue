@@ -21,6 +21,11 @@
         {{ new Date().getFullYear() }} —
         <strong>{{ $store.state.appName }}</strong>
       </v-card-text>
+      <v-card-text>
+        <v-btn href="/iletisim" x-small tile text link>
+          İLETİŞİM
+        </v-btn>
+      </v-card-text>
     </v-card>
   </v-footer>
 </template>
