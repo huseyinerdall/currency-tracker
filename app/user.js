@@ -44,6 +44,7 @@ function fileUpload(req, res, next) {
 module.exports = function(app,io){
 
     app.post('/register', fileUpload, (req, res) => {
+        let result = "";
         if(!control.emailControl(req.body.email)){
             return new Error('Eposta adresi geçerli değil.')
         }
@@ -54,7 +55,9 @@ module.exports = function(app,io){
         })
             .then(user => {
                 if (user) {
-                    res.send("ALREADY");
+                    result = "ALREADY";
+                    ("ALREADY")
+                    return;
                 } else {
                     if(req.body.profileImage.indexOf("googleusercontent")>-1){
                         req.body.active = 1;
@@ -70,31 +73,31 @@ module.exports = function(app,io){
                     req.body.balanceList = {};
                     db.User.create(req.body)
                         .then((u) => {
-                            try{
-                                var mailOptions = {
-                                    from: secret.gmail.auth.user,
-                                    to: req.body.email,
-                                    subject: 'Para.Guru Hesap Aktivasyon',
-                                    html: utils.mailTemplate(u["dataValues"]['id'])
-                                };
-                                transporter.sendMail(mailOptions, function(error, info){
-                                    if (error) {
-                                        console.log(error);
-                                    } else {
-                                        console.log(info)
-                                    }
-                                });
-                            }catch (e) {
-                                res.send('Eposta gönderilirken hata oluştu.');
-                            }
+                            var mailOptions = {
+                                from: secret.gmail.auth.user,
+                                to: req.body.email,
+                                subject: 'Para.Guru Hesap Aktivasyon',
+                                html: utils.mailTemplate(u["dataValues"]['id'])
+                            };
+                            transporter.sendMail(mailOptions, function(error, info){
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    console.log("MAILOK")
+                                }
+                            });
                             res.json(u['dataValues']);
+                            return;
+                        })
+                        .catch(err=>{
+                            console.log(err);
+                            return;
                         })
                     //res.json(req.body);
                 }
             })
             .catch(err => {
                 console.log(err)
-                res.send(err)
             })
     })
 
