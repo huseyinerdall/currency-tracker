@@ -125,6 +125,7 @@ export default {
   },
   methods:{
     sendUs(){
+      this.$store.commit('isEmailSending',true);
       this.sending = true;
       axios
           .post(`${this.$store.state.api}/contact`, {
@@ -137,6 +138,7 @@ export default {
         if(result.data === "MAILOK"){
           this.sending = false;
         }
+        this.$store.commit('isEmailSending',false)
         this.$toasted.show(
             `Emailiniz bize ulaştı.En kısa sürede dönüş sağlanacaktır.`,
             options

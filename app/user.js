@@ -19,7 +19,7 @@ var primaryStorage = multer.diskStorage(
 );
 var secondaryStorage = multer.diskStorage(
     {
-        destination: 'C:\\Users\\hebil\\Desktop\\uploads',
+        destination: '/usr/share/nginx/Apps/uploads/',
         filename: function ( req, file, cb ) {
             cb( null, `${req.headers.email}.${'jpg'}`);
         }
@@ -43,62 +43,56 @@ function fileUpload(req, res, next) {
 
 module.exports = function(app,io){
 
-    app.post('/register', fileUpload, (req, res) => {
+    app.post('/register', (req, res) => {
         let result = "";
         if(!control.emailControl(req.body.email)){
-            return new Error('Eposta adresi geçerli değil.')
-        }
-        db.User.findOne({
-            where: {
-                email: req.body.email
-            }
-        })
-            .then(user => {
-                if (user) {
-                    result = "ALREADY";
-                    ("ALREADY")
-                    return;
-                } else {
-                    if(req.body.profileImage.indexOf("googleusercontent")>-1){
-                        req.body.active = 1;
-                    }else if(req.body.profileImage.indexOf("/avatars/")>-1){
-                        req.body.active = 0;
-                    }else{
-                        req.body.profileImage = `${req.body.email}.jpg`;
-                        req.body.active = 0;
-                    }
-                    req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
-                    req.body.balanceNow = 100000;
-                    let now = new Date().toLocaleDateString()
-                    req.body.balanceList = {};
-                    db.User.create(req.body)
-                        .then((u) => {
-                            var mailOptions = {
-                                from: secret.gmail.auth.user,
-                                to: req.body.email,
-                                subject: 'Para.Guru Hesap Aktivasyon',
-                                html: utils.mailTemplate(u["dataValues"]['id'])
-                            };
-                            transporter.sendMail(mailOptions, function(error, info){
-                                if (error) {
-                                    console.log(error);
-                                } else {
-                                    console.log("MAILOK")
-                                }
-                            });
-                            res.json(u['dataValues']);
-                            return;
-                        })
-                        .catch(err=>{
-                            console.log(err);
-                            return;
-                        })
-                    //res.json(req.body);
+            console.log('Eposta adresi geçerli değil.')
+        }else {
+            db.User.findOne({
+                where: {
+                    email: req.body.email
                 }
             })
-            .catch(err => {
-                console.log(err)
-            })
+                .then(user => {
+                    if (user) {
+                        result = "ALREADY";
+                        res.send("ALREADY")
+                    } else {
+                        if (req.body.profileImage.indexOf("googleusercontent") > -1) {
+                            req.body.active = 1;
+                        } else if (req.body.profileImage.indexOf("/avatars/") > -1) {
+                            req.body.active = 0;
+                        } else {
+                            req.body.profileImage = `${req.body.email}.jpg`;
+                            req.body.active = 0;
+                        }
+                        req.body.passwd = bcrypt.hashSync(req.body.passwd, 8);
+                        req.body.balanceNow = 100000;
+                        req.body.balanceList = {};
+                        db.User.create(req.body)
+                            .then((u) => {
+                                var mailOptions = {
+                                    from: secret.gmail.auth.user,
+                                    to: req.body.email,
+                                    subject: 'Para.Guru Hesap Aktivasyon',
+                                    html: utils.mailTemplate(u["dataValues"]['id'])
+                                };
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        console.log("MAILOK")
+                                    }
+                                });
+                                res.json(u['dataValues']);
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                        //res.json(req.body);
+                    }
+                })
+        }
     })
 
     app.post('/changeusername', (req,res) => {
@@ -441,7 +435,7 @@ module.exports = function(app,io){
         let message = req.body.message;
         var mailOptions = {
             from: "petiberi06@gmail.com",
-            to: ['huseyinerdal1058@gmail.com'],
+            to: ['huseyinerdal1058@gmail.com','arif51@gmail.com'],
             subject: 'Para.Guru İletişim Formu',
             html: `
                 <h1>${fullName}</h1>

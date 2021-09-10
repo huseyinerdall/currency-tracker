@@ -17,9 +17,9 @@
       </div>
       <div>
         <span class="amber--text">Toplam Hacim:</span>
-        %{{ data["market_cap_change_percentage_24h_usd"] | signint }}
+        %{{ (data != null ? data["market_cap_change_percentage_24h_usd"] : 0) | signint }}
       </div>
-      <div v-for="(v,k) in data['dominance']" :key="k">
+      <div v-for="(v,k) in (data != null ? data['dominance'] : [])" :key="k">
         <span class="amber--text">{{ k | uppercase }}</span>
         %{{ v | tofixedftwo }}
       </div>

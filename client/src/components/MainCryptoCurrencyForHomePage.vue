@@ -96,7 +96,7 @@
             <v-sparkline
               style="height: 30px"
               :value="item.sparkline"
-              :color="item.pricechange24h >= 0 ? 'green' : 'red'"
+              :color="item.pricechange7d >= 0 ? 'green' : 'red'"
               line-width="2"
               padding="6"
             ></v-sparkline>
@@ -227,7 +227,7 @@ export default {
           filterable: false
         },
         {
-          text: "24S",
+          text: "7G",
           value: "sparkline",
           sortable: false,
           align: "start",

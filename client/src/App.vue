@@ -481,7 +481,7 @@
     </v-app>
     <BuyAndSellModal />
     <CookiePopup />
-    <v-dialog v-if="$store.state.userinfo" v-model="$store.state.activatealert">
+    <v-dialog v-if="$store.state.userinfo" v-model="$store.state.activatealert" style="z-index: 99 !important;">
       <v-alert
           border="right"
           colored-border
@@ -492,10 +492,11 @@
       >
         Hesabınız aktif değil.Bu haldeyken al sat yapamazsınız.Hesabı aktif hale getirmek için
         <v-chip small>{{ $store.state.userinfo.email}}</v-chip> adresinize
-        <v-btn x-small>buraya</v-btn>
+        <v-btn x-small @click="sendActivationCode">buraya</v-btn>
         tıklayarak eposta gönderin.
       </v-alert>
     </v-dialog>
+    <EmailSendingModal />
   </main>
 </template>
 
@@ -504,11 +505,31 @@
 import Footer from "./components/common/Footer";
 import BuyAndSellModal from "./components/BuyAndSellModal";
 import CookiePopup from "@/components/common/CookiePopup";
-
+import axios from "axios";
+import EmailSendingModal from "@/components/common/EmailSending";
+let options = {
+  type: "success",
+  icon: "check",
+  fullWidth: true,
+  position: "top-center",
+  duration: 1600,
+  containerClass: "green accent-3 text-center",
+  className: "text-center"
+};
+let alertoptions = {
+  type: "error",
+  icon: "error",
+  fullWidth: true,
+  position: "top-center",
+  duration: 1600,
+  containerClass: "red accent-3 text-center",
+  className: "text-center"
+};
 export default {
   name: "App",
 
   components: {
+    EmailSendingModal,
     Footer,
     BuyAndSellModal,
     CookiePopup
@@ -538,6 +559,25 @@ export default {
                         ? "0" + cd.getSeconds()
                         : cd.getSeconds()
                     }`;
+    },
+    sendActivationCode() {
+      this.$store.commit('activatealert')
+      this.$store.commit('isEmailSending',true)
+      axios
+          .post(`${this.$store.state.api}/sendactivation`, {
+            userId: this.$store.state.userinfo.id,
+            email: this.$store.state.userinfo.email
+          })
+          .then(response => {
+            if(response.data == "MAILOK"){
+              this.$store.commit('isEmailSending',false);
+              this.$toasted.show('Aktivasyon linki epostanıza gönderildi.Bağlantıyı kullanıp hesabınızı aktif hale getirebilirsiniz.',options)
+            }
+          })
+          .catch(err=>{
+            this.$toasted.show(err,alertoptions);
+            console.log(err)
+          })
     }
   },
   created() {

@@ -29,7 +29,7 @@
               <tr
                   style="height: 30px;border-bottom:1px solid rgba(255,255,255,.3);"
               >
-                <td style="font-weight: 600;width:100px;">Kullanıcı Adı</td>
+                <td style="font-weight: 600;width:100px;padding-bottom: 18px !important;">Kullanıcı Adı</td>
                 <td>
                   <v-text-field
                     :value="userinfo.fullName"

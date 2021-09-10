@@ -114,17 +114,17 @@ Vue.filter("binayracveondalik", function(value) {
 
 Vue.filter("signint", function(value) {
   try {
-    if (value >= 0) return "+" + value.toFixed(4);
-    return value.toFixed(4);
+    if (value >= 0) return "+" + value.toFixed(4).replace('.',',');
+    return value.toFixed(4).replace('.',',');
   } catch (e) {
-    return "+0.0000";
+    return "+0,0000";
   }
 });
 
 Vue.filter("signintt", function(value) {
   try {
-    if (value >= 0) return "+" + value.toFixed(4);
-    return value.toFixed(4);
+    if (value >= 0) return "+" + value.toFixed(4).replace('.',',');
+    return value.toFixed(4).replace('.',',');
   } catch (e) {
     return "+0.0000";
   }
@@ -185,12 +185,12 @@ Vue.filter("uppercase", function(value) {
 
 Vue.filter("tofixedftwo", function(value) {
   value = +value;
-  return value.toFixed(2);
+  return value.toFixed(2).replace('.',',');
 });
 
 Vue.filter("tofixedfour", function(value) {
   value = +value;
-  return value.toFixed(4);
+  return value.toFixed(4).replace('.',',');
 });
 
 Vue.filter("tosymbol", function(value) {

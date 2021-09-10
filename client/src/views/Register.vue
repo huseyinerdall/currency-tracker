@@ -113,10 +113,10 @@
                     <v-avatar
                         size="48px"
                     >
-<!--                      <img
+                      <img
                           alt="Avatar"
                           :src="avatars[i-1]"
-                      >-->
+                      >
                     </v-avatar>
                   </v-tab>
                 </v-tabs>
@@ -256,7 +256,7 @@ export default {
                       fullName: this.fullName || this.guestID,
                       email: this.email,
                       passwd: this.password1,
-                      profileImage: this.avatars[this.avatar]
+                      profileImage: this.email+'.jpg'
                     })
                     .then(res => {
                       if (res.data == "ALREADY") {

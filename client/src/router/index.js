@@ -18,6 +18,7 @@ import PasswordReset from "../views/PasswordReset.vue";
 import Activate from "../views/Activate.vue";
 import Activating from "../views/Activating.vue";
 import Contact from "../views/Contact.vue";
+import ExchangeDetailPage from "@/views/ExchangeDetailPage";
 import store from "../store/index";
 import axios from "axios";
 // Admin Side
@@ -174,6 +175,20 @@ const routes = [
           .toLocaleUpperCase("tr-TR")
           .split("-")
           .join(" ")
+      };
+    }
+  },
+  {
+    path: "/borsalar/:exchangeid",
+    name: "ExchangeDetailPage",
+    component: ExchangeDetailPage,
+    meta: {
+      requiresAuth: false
+    },
+    props(route) {
+      // <-- props as a Function
+      return {
+        exchangeid: route.params.exchangeid
       };
     }
   },

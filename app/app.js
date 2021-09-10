@@ -418,6 +418,15 @@ app.get('/exchanges',(req,res) =>{
         })
 })
 
+app.get('/borsalar/:exchangeid', (req, res) => {
+    let exchangeId = req.params["exchangeid"];
+    axios.get(`https://api.coingecko.com/api/v3/exchanges/${exchangeId}/tickers`)
+        .then(async(response) => {
+            res.json(response.data);
+        })
+        .catch(err => console.error("Kripto para datası alınamıyor!!!"));
+})
+
 app.get('/pariteler', async(req, res) => {
     let temp;
     let BEGIN = moment().subtract(1, 'd').toDate() || DEFAULT;

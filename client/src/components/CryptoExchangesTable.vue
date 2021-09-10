@@ -28,14 +28,16 @@
           <td
               :class="{ 'black--text': $store.state.isLight }"
           >
-            <a :href="item.url"
-               target="_blank"
-               :style="`font-size: 10px !important;`"
-               style="text-underline: none;"
-               class="body-1 text-uppercase btn-link white--text"
+            <router-link
+                :to="{ name: 'ExchangeDetailPage', params: { exchangeid: item.id } }"
+                tag="span"
+                class="body-1"
+                :style="
+                  `font-size: ${$store.state.tdFontSize} !important;cursor:pointer;`
+              "
             >
               {{ item.name }}
-            </a>
+            </router-link>
           </td>
           <td  v-if="!$vuetify.breakpoint.smAndDown" :class="{ 'black--text': $store.state.isLight }">
             <h3
@@ -84,7 +86,7 @@
           >
             <h3
                 :style="`font-size: ${$store.state.tdFontSize} !important;`"
-            >{{ item.trade_volume_24h_btc | tofixedftwo }}</h3
+            >{{ item.trade_volume_24h_btc | turkishCurrencyformat }}</h3
             >
           </td>
         </tr>
