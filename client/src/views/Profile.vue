@@ -120,7 +120,7 @@
                 <td style="font-weight: 600;width:100px;">Hacim</td>
                 <td>
                   <v-text-field
-                      :value="_.sum(userinfo.volume)"
+                      :value="userinfo.volume || 0"
                       disabled
                       dark
                       hide-details
