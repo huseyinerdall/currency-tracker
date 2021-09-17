@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         active: { type: DataTypes.STRING, defaultValue: 0 },
         balanceNow: DataTypes.FLOAT,
         balanceList: { type: DataTypes.JSON, defaultValue: initialbalancelist },
-        /*volumeList: { type: DataTypes.JSON, defaultValue: [] },*/
+        volume: { type: DataTypes.JSON, defaultValue: [] },
     }, {
         sequelize,
         modelName: 'User',

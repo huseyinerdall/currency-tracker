@@ -24,6 +24,10 @@ class Trade{
                     temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);
                     temp[wealth]["amount"] = parseFloat(amount) + temp[wealth]["amount"];
                     temp[wealth].cost = parseFloat(tradePurpose) + (parseFloat(temp[wealth].cost)||0);
+                    if (user.volume == null) {
+                        user.volume = [];
+                    }
+                    user.volume[new Date().getDate()] = parseFloat(user.volume[new Date().getDate()]) + parseFloat(tradePurpose);
                     user.wallet = temp;
                     db.User.update({
                         wallet: temp
@@ -73,6 +77,10 @@ class Trade{
                     temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"]["amount"]||0) + parseFloat(tradePurpose);
                     temp[wealth].amount = parseFloat(temp[wealth].amount) - parseFloat(amount);
                     temp[wealth].cost = (parseFloat(temp[wealth].cost)||0) - parseFloat(tradePurpose);
+                    if (user.volume == null) {
+                        user.volume = [];
+                    }
+                    user.volume[new Date().getDate()] = parseFloat(user.volume[new Date().getDate()]) + parseFloat(tradePurpose);
                     user.wallet = temp;
                     db.User.update({
                         wallet: temp

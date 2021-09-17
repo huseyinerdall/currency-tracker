@@ -11,7 +11,7 @@
             >
               <v-row class="align-center pl-4">
                 <v-avatar
-                    size="100"
+                    size="50"
                 >
                   <v-img
                       :src="exchange.image"

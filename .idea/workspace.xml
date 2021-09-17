@@ -20,22 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="Contact page, Exhange page added">
-      <change afterPath="$PROJECT_DIR$/client/src/views/ExchangeDetailPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/.jpg.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/coins.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/coins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CryptoExchangesTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CryptoExchangesTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/GlobalInfos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GlobalInfos.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainCryptoCurrencyForHomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainCryptoCurrencyForHomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Contact.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Contact.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/ExchangeDetailPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/ExchangeDetailPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -429,14 +424,10 @@
       <workItem from="1631031163126" duration="329000" />
       <workItem from="1631082589882" duration="18032000" />
       <workItem from="1631168739739" duration="18807000" />
-      <workItem from="1631255988225" duration="12850000" />
-    </task>
-    <task id="LOCAL-00031" summary="pazar">
-      <created>1614518059165</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1614518059165</updated>
+      <workItem from="1631255988225" duration="15780000" />
+      <workItem from="1631386412984" duration="594000" />
+      <workItem from="1631803840210" duration="4337000" />
+      <workItem from="1631858900047" duration="6926000" />
     </task>
     <task id="LOCAL-00032" summary="pazar">
       <created>1614518402605</created>
@@ -774,7 +765,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631188659768</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Contact page, Exhange page added">
+      <created>1631270089931</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1631270089932</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

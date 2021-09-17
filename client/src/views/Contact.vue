@@ -117,8 +117,9 @@ export default {
   },
   created() {
     try {
-      this.fullName = JSON.parse(localStorage.getItem('user'))['fullName'];
-      this.email = JSON.parse(localStorage.getItem('user'))['email'];
+      let {fullName, email} = this.$store.state.userinfo;
+      this.fullName = fullName;//this.$store.state.userinfo.fullName;
+      this.email = email; //this.$store.state.userinfo.email;
     }catch (e) {
       console.log(e)
     }

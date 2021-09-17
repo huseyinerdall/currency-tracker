@@ -3,17 +3,42 @@
     <v-container>
       <v-row>
         <v-col class="d-flex flex-column col-md-6 col-12">
-          <div style="height: 200px;">
-            <v-avatar size="180" color="red" rounded>
+          <div style="height: 200px;" class="d-flex flex-row align-center pl-lg-8">
+            <v-avatar size="180" rounded>
               <img
-                  v-if="userinfo.profileImage"
-                  :src="userinfo.profileImage"
+                  v-if="$store.state.userinfo.profileImage"
+                  :src="$store.state.userinfo.profileImage.indexOf('http')>-1 ? $store.state.userinfo.profileImage : $store.state.api+'/uploads/'+ $store.state.userinfo.profileImage"
                   alt="avatar"
               />
               <span v-else class="white&#45;&#45;text headline">{{
-                  userinfo.fullName | nameAvatar
+                  $store.state.userinfo.fullName | nameAvatar
                 }}</span>
             </v-avatar>
+
+            <v-container text-xs-center>
+              <v-btn
+                  color="primary"
+                  class="text-none ml-6"
+                  rounded
+                  depressed
+                  :loading="isSelecting"
+                  @click="onButtonClick"
+              >
+                <v-icon left>
+                  mdi-camera
+                </v-icon>
+                Yükle
+              </v-btn>
+              <input
+                  ref="file"
+                  class="d-none"
+                  type="file"
+                  id="file"
+                  accept="image/*"
+                  @change="onFileChanged"
+              >
+            </v-container>
+
           </div>
           <div>
             <v-card color="transparent">
@@ -82,6 +107,20 @@
                 <td>
                   <v-text-field
                       :value="userinfo.createdAt | dateStandartFormat"
+                      disabled
+                      dark
+                      hide-details
+                      class="pa-0 mt-0"
+                      style="font-size: 12px;"
+                  ></v-text-field></td>
+              </tr>
+              <tr
+                  style="height: 30px;border-bottom:1px solid rgba(255,255,255,.3);padding-top: 6px;"
+              >
+                <td style="font-weight: 600;width:100px;">Hacim</td>
+                <td>
+                  <v-text-field
+                      :value="_.sum(userinfo.volume)"
                       disabled
                       dark
                       hide-details
@@ -162,6 +201,9 @@ export default {
   },
   computed: mapState({
     userinfo: state => state.userinfo,
+    buttonText() {
+      return this.selectedFile ? this.selectedFile.name : this.defaultButtonText;
+    }
   }),
   methods: {
     onButtonClick() {
@@ -182,13 +224,24 @@ export default {
       const formData = new FormData();
       formData.append("file", this.file);
       axios
-        .post(`${this.$store.state.api}/avatar`, formData, {
+        .post(`${this.$store.state.api}/changeprofileimage`, formData, {
           headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            email: this.$store.state.userinfo.email
           }
         })
         .then(res => {
-          console.log(res);
+          if (res.data.success) {
+            this.$toasted.show(`Profil görseliniz başarıyla yüklendi.`, options);
+            if(this.$store.state.userinfo.profileImage.indexOf('https')>-1){
+              let temp = JSON.parse(localStorage.getItem('user'));
+              temp.profileImage = this.$store.state.userinfo.email + '.jpg';
+              localStorage.setItem('user',JSON.stringify(temp));
+            }
+            location.reload();
+          } else {
+            this.$toasted.show(`Görsel yüklenirken hata oluştu.`, alertOptions);
+          }
         });
     },
     isUserNameTaken: _.debounce(function(v) {

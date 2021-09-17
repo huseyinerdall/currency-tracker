@@ -9,9 +9,11 @@ const SECRET_KEY = 'SI6ImM1Z';
 const UPLOAD_FOLDER = path.join(__dirname,"public/uploads/");
 const multer  = require( 'multer' );
 const control = require('./control');
+let pPath = './public/uploads/';
+let sPath = '/usr/share/nginx/Apps/uploads/';
 var primaryStorage = multer.diskStorage(
     {
-        destination: './public/uploads/',
+        destination: pPath,
         filename: function ( req, file, cb ) {
             cb( null, `${req.headers.email}.${'jpg'}`);
         }
@@ -19,7 +21,7 @@ var primaryStorage = multer.diskStorage(
 );
 var secondaryStorage = multer.diskStorage(
     {
-        destination: '/usr/share/nginx/Apps/uploads/',
+        destination: sPath,
         filename: function ( req, file, cb ) {
             cb( null, `${req.headers.email}.${'jpg'}`);
         }
@@ -260,6 +262,27 @@ module.exports = function(app,io){
         }
     });
 
+    app.post('/changeprofileimage', fileUpload, (req, res) => {
+        console.log(req.headers.filename)
+        if (!req.file) {
+            console.log("No file received");
+            return res.send({
+                success: false
+            });
+        } else {
+            console.log("Dosya yüklendi");
+            /*try {
+                fs.unlinkSync(pPath+req.headers.filename)
+                fs.unlinkSync(sPath+req.headers.filename)
+            } catch(err) {
+                console.error(err)
+            }*/
+            return res.send({
+                success: true
+            })
+        }
+    });
+
     app.post('/login', (req, res) => {
         if (!req.body.email || !req.body.passwd) {
             res.send("Alanlar boş bırakılamaz!")
@@ -438,10 +461,10 @@ module.exports = function(app,io){
             to: ['huseyinerdal1058@gmail.com','arif51@gmail.com'],
             subject: 'Para.Guru İletişim Formu',
             html: `
-                <h1>${fullName}</h1>
-                <h1>${email}</h1>
-                <h1>${subject}</h1>
-                <h1>${message}</h1>
+                <h3>Kullanıcı Adı : ${fullName}</h3>
+                <h3>Email : ${email}</h3>
+                <h3>Konu : ${subject}</h3>
+                <h3>Mesaj : ${message}</h3>
             `
         };
         transporter.sendMail(mailOptions, function(error, info){
