@@ -22,8 +22,8 @@
       </div>
     </v-row>
 
-    <v-row class="pl-4 pr-4">
-      <v-row class="pl-4 pr-4 justify-space-between" style="font-size: 18px;">
+    <v-row class="pl-4 pr-4 mt-0">
+      <v-row class="pl-4 pr-4 justify-space-between align-center" style="font-size: 18px;">
         <div
           class="mt-2"
           :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'"
@@ -65,7 +65,7 @@
         </div>
       </v-row>
       <v-row
-        class="d-flex flex-row justify-space-between pl-md-4 pr-md-2 mt-2 mt-md-0"
+        class="d-flex flex-row justify-space-between pl-md-4 pr-md-2 mt-lg-0 mb-lg-4"
       >
         <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
         <v-btn-toggle
@@ -88,7 +88,7 @@
       </v-row>
     </v-row>
 
-    <div id="chart" style="border: 1px solid #ddd;" class="mt-2">
+    <div id="chart" style="border: 1px solid #ddd;" class="mt-6">
       <apexchart
         ref="realtimeChart"
         class="ma-0 pa-0"
@@ -294,7 +294,7 @@ export default {
             month: "MMM 'yy",
             day: "dd MMM",
             hour: "HH:mm"
-          },
+          }
         },
         axisTicks: {
           color: app.$store.state.isLight ? "#000" : "#ffffff"

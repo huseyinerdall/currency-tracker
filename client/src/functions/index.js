@@ -23,9 +23,9 @@ function search(nameKey, array) {
   return res;
 }
 
-function setGraph(wallet,allPrices){
+function setGraph(wallet, allPrices) {
   let result = {};
-  let balance,temp;
+  let balance, temp;
   let f = 0;
   let s = 0;
   let fkey = "";
@@ -33,14 +33,15 @@ function setGraph(wallet,allPrices){
   temp = 0;
   balance = 0;
   for (const w in wallet) {
-    if(parseFloat(wallet[w]["amount"])>0){
-      if(w == "TÜRK LİRASI"){
-        temp = parseFloat(allPrices["TRY"])*parseFloat(wallet[w]["amount"]) ||0;
-      }else{
-        temp = parseFloat(allPrices[w])*parseFloat(wallet[w]["amount"]) ||0;
+    if (parseFloat(wallet[w]["amount"]) > 0) {
+      if (w == "TÜRK LİRASI") {
+        temp =
+          parseFloat(allPrices["TRY"]) * parseFloat(wallet[w]["amount"]) || 0;
+      } else {
+        temp = parseFloat(allPrices[w]) * parseFloat(wallet[w]["amount"]) || 0;
       }
 
-      if(f<temp){
+      if (f < temp) {
         s = f;
         skey = fkey;
         f = temp;
@@ -49,15 +50,18 @@ function setGraph(wallet,allPrices){
       balance += temp;
     }
   }
-  result[fkey] = f/balance*100;
-  result[skey] = s/balance*100;
-  result["diger"] = (balance-(f+s))/balance*100;
+  result[fkey] = (f / balance) * 100;
+  result[skey] = (s / balance) * 100;
+  result["diger"] = ((balance - (f + s)) / balance) * 100;
   result["total"] = balance;
   return result;
 }
 
-function turkishPriceToEngPrice(price){
-  return price.replace("$","").replace(".","").replace(",",".");
+function turkishPriceToEngPrice(price) {
+  return price
+    .replace("$", "")
+    .replace(".", "")
+    .replace(",", ".");
 }
 
 module.exports = { search, setGraph, turkishPriceToEngPrice };

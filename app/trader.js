@@ -13,6 +13,7 @@ class Trade{
     ){
         return new Promise((resolve,reject) => {
             let temp = {};
+            let volume = [];
             db.User.findOne({
                 where: {
                     id: userId
@@ -21,16 +22,19 @@ class Trade{
                 .then((user) =>{
                     let tradePurpose = parseFloat(amount) * parseFloat(wealthPrice.toString().replace(',','.'));
                     temp = user.dataValues.wallet;
+                    volume = user.dataValues.volume;
                     temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"].amount) - parseFloat(tradePurpose);
                     temp[wealth]["amount"] = parseFloat(amount) + temp[wealth]["amount"];
                     temp[wealth].cost = parseFloat(tradePurpose) + (parseFloat(temp[wealth].cost)||0);
-                    if (user.volume == null) {
-                        user.volume = [];
-                    }
-                    user.volume[new Date().getDate()] = parseFloat(user.volume[new Date().getDate()]) + parseFloat(tradePurpose);
+                    /*if(volume != null){
+                        volume[new Date().getDate()] = parseFloat(volume[new Date().getDate()]) + parseFloat(tradePurpose);
+                    } else {
+                        volume[new Date().getDate()] = parseFloat(tradePurpose);
+                    }*/
                     user.wallet = temp;
                     db.User.update({
-                        wallet: temp
+                        wallet: temp,
+                        volume: volume
                     }, {
                         where: { id: userId },
                         returning: true,
@@ -66,6 +70,7 @@ class Trade{
     ){
         return new Promise((resolve,reject) => {
             let temp = {};
+            let volume = [];
             db.User.findOne({
                 where: {
                     id: userId
@@ -74,16 +79,20 @@ class Trade{
                 .then((user) =>{
                     let tradePurpose = parseFloat(amount) * parseFloat(wealthPrice);
                     temp = user.dataValues.wallet;
+                    volume = user.dataValues.volume;
                     temp["TÜRK LİRASI"]["amount"] = parseFloat(temp["TÜRK LİRASI"]["amount"]||0) + parseFloat(tradePurpose);
                     temp[wealth].amount = parseFloat(temp[wealth].amount) - parseFloat(amount);
                     temp[wealth].cost = (parseFloat(temp[wealth].cost)||0) - parseFloat(tradePurpose);
-                    if (user.volume == null) {
-                        user.volume = [];
-                    }
-                    user.volume[new Date().getDate()] = parseFloat(user.volume[new Date().getDate()]) + parseFloat(tradePurpose);
+                    /*if(volume != null){
+                        volume[new Date().getDate()] = parseFloat(volume[new Date().getDate()]) + parseFloat(tradePurpose);
+                    } else {
+                        volume = [];
+                        volume[new Date().getDate()] = parseFloat(tradePurpose);
+                    }*/
                     user.wallet = temp;
                     db.User.update({
-                        wallet: temp
+                        wallet: temp,
+                        volume: volume
                     }, {
                         where: { id: userId },
                         returning: true,

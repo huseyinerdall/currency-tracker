@@ -8,7 +8,7 @@
         </v-col>
       </v-row>
     </v-container>
-<!--    <CommentSidebar />-->
+    <!--    <CommentSidebar />-->
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
   },
   components: {
     SinglePageGraphGold,
-    Description,
+    Description
     /*CommentSidebar*/
   },
   created() {}

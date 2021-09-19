@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bintl-table">
     <v-list
       style="border: 1px solid #ddd;"
       class="mt-1 pt-0"
@@ -53,11 +53,11 @@
       <v-list-item
         v-for="value in data"
         :key="value.type"
-        style="padding: 0 0 0 10px !important;"
+        style="height:32.3px;padding: 0 0 0 10px !important;border-bottom: 1px solid #ddd;"
       >
         <v-list-item-content>
           <v-row>
-            <v-col cols="2" class="">
+            <v-col cols="2" class="d-flex align-center">
               <div
                 :class="$store.state.isLight ? 'black--text' : 'white--text'"
                 style="font-size:14px;margin-top:-2px;"
@@ -65,11 +65,11 @@
                 {{ bintltable[value.type] }}
               </div>
             </v-col>
-            <v-col cols="10" style="height: 10px;" class="pt-2">
+            <v-col cols="10">
               <v-progress-linear
                 v-if="value.value > 0"
                 color="rgb(2, 192, 118)"
-                height="16"
+                height="24"
                 :value="(1000 + value.value) / 20"
               >
                 <template v-slot:default="{}">
@@ -81,7 +81,7 @@
               <v-progress-linear
                 v-else
                 color="rgb(248, 73, 96)"
-                height="16"
+                height="24"
                 :value="(1000 + value.value) / 20"
               >
                 <template v-slot:default="{}">
@@ -93,8 +93,6 @@
             </v-col>
           </v-row>
         </v-list-item-content>
-
-        <v-list-item-icon> </v-list-item-icon>
       </v-list-item>
     </v-list>
   </div>
@@ -169,5 +167,8 @@ export default {
 }
 .pinkk {
   color: #ff3366 !important;
+}
+.bintl-table .v-list-item--dense, .v-list--dense .v-list-item{
+  min-height: 28px !important;
 }
 </style>

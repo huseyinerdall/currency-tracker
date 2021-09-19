@@ -347,14 +347,13 @@ export default {
 
     try {
       const ws = new WebSocket("ws://localhost:8081/");
-      ws.onmessage = ({data}) => {
-        this.message =  data;
+      ws.onmessage = ({ data }) => {
+        this.message = data;
         console.log(this.message);
-      }
-    } catch(err) {
+      };
+    } catch (err) {
       console.log(err);
     }
-
   },
   watch: {
     drawer() {

@@ -1,11 +1,19 @@
 <template>
   <div class="home">
-    <v-container>
+    <v-container class="pt-lg-4">
       <v-row>
-        <v-col cols="12" md="8" :class="[$vuetify.breakpoint.smAndDown ? 'pa-0' : '']">
+        <v-col
+          cols="12"
+          md="8"
+          :class="[$vuetify.breakpoint.smAndDown ? 'pa-0' : '']"
+        >
           <MainDoviz />
         </v-col>
-        <v-col cols="12" md="4" :class="[$vuetify.breakpoint.smAndDown ? 'pa-0' : '']">
+        <v-col
+          cols="12"
+          md="4"
+          :class="[$vuetify.breakpoint.smAndDown ? 'pa-0' : '']"
+        >
           <BinTLTable />
         </v-col>
       </v-row>

@@ -30,29 +30,39 @@
             @blur="openYourEyes"
           ></v-text-field>
           <v-row>
-              <v-col class="pl-6 row justify-space-between">
-                <v-btn color="blue-grey" class="white--text" @click="login" tile>
-                  GİRİŞ
-                  <v-icon right dark>
-                    mdi-login
-                  </v-icon>
-                </v-btn>
-                <v-btn
-                    color="blue-grey"
-                    style="text-decoration: none;"
-                    class="white--text"
-                    href="/register"
-                    tile
-                >
-                  KAYDOL
-                  <v-icon right dark>
-                    mdi-login
-                  </v-icon>
-                </v-btn>
-              </v-col>
+            <v-col class="pl-6 row justify-space-between">
+              <v-btn color="blue-grey" class="white--text" @click="login" tile>
+                GİRİŞ
+                <v-icon right dark>
+                  mdi-login
+                </v-icon>
+              </v-btn>
+              <v-btn
+                color="blue-grey"
+                style="text-decoration: none;"
+                class="white--text"
+                href="/register"
+                tile
+              >
+                KAYDOL
+                <v-icon right dark>
+                  mdi-login
+                </v-icon>
+              </v-btn>
+            </v-col>
           </v-row>
-          <GoogleLogin :params="params" :onSuccess="onSuccess" style="width: 98% !important;">
-            <v-btn color="red darken-1" class="white--text" tile style="max-width: 100%;width:100% !important;">
+          <GoogleLogin
+            :params="params"
+            :onSuccess="onSuccess"
+            class="mt-4"
+            style="width: 98% !important;"
+          >
+            <v-btn
+              color="red darken-1"
+              class="white--text"
+              tile
+              style="max-width: 100%;width:100% !important;"
+            >
               Google İle
               <v-icon right dark>
                 mdi-google
@@ -104,11 +114,11 @@ export default {
         width: 460,
         height: 38,
         longtitle: true
-      },
+      }
     };
   },
   components: {
-    GoogleLogin,
+    GoogleLogin
     //VFacebookLogin,
   },
   methods: {
@@ -137,7 +147,11 @@ export default {
             })
             .then(response => {
               if (response.data == "ERROR") {
-                this.$toasted.error("Kullanıcı bulunamadı",{fullWidth:true,icon:'error',duration:2000})
+                this.$toasted.error("Kullanıcı bulunamadı", {
+                  fullWidth: true,
+                  icon: "error",
+                  duration: 2000
+                });
 
                 return;
               } else {
@@ -169,13 +183,21 @@ export default {
             })
             .catch(err => {
               this.overlay = false;
-              this.$toasted.error(err,{fullWidth:true,icon:'error',duration:2000})
+              this.$toasted.error(err, {
+                fullWidth: true,
+                icon: "error",
+                duration: 2000
+              });
             });
         });
     },
     login() {
       if (!this.email && !this.password) {
-        this.$toasted.error("Alanlar boş bırakılamaz!",{fullWidth:true,icon:'error',duration:1000})
+        this.$toasted.error("Alanlar boş bırakılamaz!", {
+          fullWidth: true,
+          icon: "error",
+          duration: 1000
+        });
         return;
       }
       axios
@@ -185,7 +207,11 @@ export default {
         })
         .then(response => {
           if (response.data == "ERROR") {
-            this.$toasted.error("Kullanıcı bulunamadı!",{fullWidth:true,icon:'error',duration:1000});
+            this.$toasted.error("Kullanıcı bulunamadı!", {
+              fullWidth: true,
+              icon: "error",
+              duration: 1000
+            });
             return;
           } else {
             localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -209,22 +235,31 @@ export default {
           }
         })
         .catch(err => {
-          this.$toasted.error(err,{fullWidth:true,icon:'error',duration:1000});
+          this.$toasted.error(err, {
+            fullWidth: true,
+            icon: "error",
+            duration: 1000
+          });
           console.log(err);
         });
     },
-    authenticate: function (provider) {
+    authenticate: function(provider) {
       this.overlay = true;
       const app = this;
-      this.$auth.authenticate(provider).then(function () {
+      this.$auth.authenticate(provider).then(function() {
         // Execute application logic after successful social authentication
-        let token = app.$auth.getToken()
-        if (provider === 'facebook') {
-          app.$http.get('https://graph.facebook.com/v3.0/me?fields=id,name,email,picture', {
-            params: { access_token: token }
-          }).then(function (response) {
-            app.profile = response;
-            axios
+        let token = app.$auth.getToken();
+        if (provider === "facebook") {
+          app.$http
+            .get(
+              "https://graph.facebook.com/v3.0/me?fields=id,name,email,picture",
+              {
+                params: { access_token: token }
+              }
+            )
+            .then(function(response) {
+              app.profile = response;
+              axios
                 .post(`${this.$store.state.api}/register`, {
                   fullName: response.data.name,
                   email: response.data.email,
@@ -233,58 +268,58 @@ export default {
                 })
                 .then(() => {
                   axios
-                      .post(`${app.$store.state.api}/login`, {
-                        email: response.data.email,
-                        passwd: "1"
-                      })
-                      .then(response => {
-                        if (response.data == "ERROR") {
-                          alert("Kullanıcı bulunamadı");
-                          return;
-                        } else {
-                          localStorage.setItem(
-                              "user",
-                              JSON.stringify(response.data.user)
-                          );
-                          localStorage.setItem(
-                              "wallet",
-                              JSON.stringify(
-                                  JSON.parse(localStorage.getItem("user")).wallet
-                              )
-                          );
-                          localStorage.setItem("jwt", response.data.token);
-                          app.overlay = false;
-                          app.$store.commit("login", true);
-                        }
+                    .post(`${app.$store.state.api}/login`, {
+                      email: response.data.email,
+                      passwd: "1"
+                    })
+                    .then(response => {
+                      if (response.data == "ERROR") {
+                        alert("Kullanıcı bulunamadı");
+                        return;
+                      } else {
+                        localStorage.setItem(
+                          "user",
+                          JSON.stringify(response.data.user)
+                        );
+                        localStorage.setItem(
+                          "wallet",
+                          JSON.stringify(
+                            JSON.parse(localStorage.getItem("user")).wallet
+                          )
+                        );
+                        localStorage.setItem("jwt", response.data.token);
+                        app.overlay = false;
+                        app.$store.commit("login", true);
+                      }
 
-                        if (localStorage.getItem("jwt") != null) {
-                          app.$emit("loggedIn");
-                          if (app.$route.params.nextUrl != null) {
-                            app.$router.push(app.$route.params.nextUrl);
-                          } else {
-                            app.$router.push({
-                              name: "Home"
-                            });
-                          }
+                      if (localStorage.getItem("jwt") != null) {
+                        app.$emit("loggedIn");
+                        if (app.$route.params.nextUrl != null) {
+                          app.$router.push(app.$route.params.nextUrl);
+                        } else {
+                          app.$router.push({
+                            name: "Home"
+                          });
                         }
-                      })
-                      .catch(err => {
-                        console.log(err);
-                      });
+                      }
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });
                 });
-          })
+            });
         }
-      })
+      });
     },
-    closeYourEyes(){
-      document.querySelectorAll('.owll').forEach((el) => {
-        el.classList.add('password');
-      })
+    closeYourEyes() {
+      document.querySelectorAll(".owll").forEach(el => {
+        el.classList.add("password");
+      });
     },
-    openYourEyes(){
-      document.querySelectorAll('.owll').forEach((el) => {
-        el.classList.remove('password');
-      })
+    openYourEyes() {
+      document.querySelectorAll(".owll").forEach(el => {
+        el.classList.remove("password");
+      });
     }
   }
 };

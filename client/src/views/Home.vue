@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div>
+    <div class="mt-4">
       <v-row>
         <v-col class="col-md-12">
           <v-row>
@@ -14,7 +14,7 @@
           </v-row>
         </v-col>
       </v-row>
-      <CurrencyConverter />
+      <CurrencyConverter class="mt-4" />
       <MainCryptoCurrencyForHomePage :coin="coin" />
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <v-card
     style="border: 1px solid #ddd;border-radius:0;color:#fff;"
-    class="mb-6 pa-0"
+    class="mb-6 pa-0 pt-2"
     :style="
       $store.state.isLight
         ? 'background-color:rgba(255,255,255,.3);'

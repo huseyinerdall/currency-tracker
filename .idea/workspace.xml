@@ -20,12 +20,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="volume column added,user can change image">
+      <change afterPath="$PROJECT_DIR$/client/src/components/PRGRIcon.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/UserGeneralSituation.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/.jpg.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/uploads/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/allimages.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/allimages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/avatars.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/avatars.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/shortname-convert.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/shortname-convert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BinTLTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CryptoExchangesTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CryptoExchangesTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CurrencyConverter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Description.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Description.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/GlobalInfos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/GlobalInfos.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Golds.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainDoviz.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphCoin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SinglePageGraphGold.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CommentSidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/CookiePopup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/CookiePopup.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/EmailSending.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/EmailSending.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/functions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Activate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Activate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Activating.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Activating.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Coins.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Coins.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Contact.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Contact.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CryptoCurrencyPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/CurrenciesPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/ExchangeDetailPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/ExchangeDetailPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Exchanges.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Exchanges.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Golds.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Golds.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/GoldsPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/PageNotFound.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/PageNotFound.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/PasswordReset.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/PasswordReset.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/vue.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +81,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/user.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/models/user.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/trader.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/src/views/UserWallet.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/app.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1l8XycQLb9n0xFGVGY9Riyy7KQ8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -48,7 +103,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/assets" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -59,8 +114,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\public" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets" />
+      <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\public" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\client\src\assets\avatars" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\models" />
       <recent name="C:\Users\hebil\Desktop\currency-tracker-last\app\public\flags" />
@@ -422,14 +477,10 @@
       <workItem from="1631255988225" duration="15780000" />
       <workItem from="1631386412984" duration="594000" />
       <workItem from="1631803840210" duration="4337000" />
-      <workItem from="1631858900047" duration="7507000" />
-    </task>
-    <task id="LOCAL-00033" summary="pazar">
-      <created>1614519277787</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1614519277788</updated>
+      <workItem from="1631858900047" duration="23031000" />
+      <workItem from="1631893247167" duration="2458000" />
+      <workItem from="1631973633881" duration="17554000" />
+      <workItem from="1632028456676" duration="4633000" />
     </task>
     <task id="LOCAL-00034" summary="pazar">
       <created>1616220753548</created>
@@ -767,7 +818,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631866559194</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="volume column added,user can change image">
+      <created>1631866924588</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1631866924588</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

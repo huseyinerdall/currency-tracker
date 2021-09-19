@@ -53,7 +53,7 @@ export default {
     } else if (this.$route.params.gold) {
       this.$route.params.gold;
     }
-  },
+  }
   /*mounted() {
     let tradingViewScript = document.createElement('script');
     tradingViewScript.setAttribute('src', 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js');

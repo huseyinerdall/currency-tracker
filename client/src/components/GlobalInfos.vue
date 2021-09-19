@@ -1,14 +1,14 @@
 <template>
   <v-container
-      class="ma-0 mt-4 pa-0"
-      style="border: 1px solid #ddd;min-height: 48px;"
-      :style="[
-                          $store.state.isLight
-                            ? 'color:#rgba(0,0,0,0.87); background-color:rgba(255,255,255,.3);'
-                            : 'color:#ffffff !important;background-color:rgba(0,0,0,.3);'
-                        ]"
-      :dark="!$store.state.isLight"
-      :light="$store.state.isLight"
+    class="ma-0 mt-4 pa-2"
+    style="border: 1px solid #ddd;min-height: 48px;"
+    :style="[
+      $store.state.isLight
+        ? 'color:#rgba(0,0,0,0.87); background-color:rgba(255,255,255,.3);'
+        : 'color:#ffffff !important;background-color:rgba(0,0,0,.3);'
+    ]"
+    :dark="!$store.state.isLight"
+    :light="$store.state.isLight"
   >
     <v-row class="global">
       <div>
@@ -17,9 +17,12 @@
       </div>
       <div>
         <span class="amber--text">Toplam Hacim:</span>
-        %{{ (data != null ? data["market_cap_change_percentage_24h_usd"] : 0) | signint }}
+        %{{
+          (data != null ? data["market_cap_change_percentage_24h_usd"] : 0)
+            | signint
+        }}
       </div>
-      <div v-for="(v,k) in (data != null ? data['dominance'] : [])" :key="k">
+      <div v-for="(v, k) in data != null ? data['dominance'] : []" :key="k">
         <span class="amber--text">{{ k | uppercase }}</span>
         %{{ v | tofixedftwo }}
       </div>
@@ -38,13 +41,13 @@ export default {
   methods: {
     getGlobalInfos() {
       axios
-          .get(`${this.$store.state.api}/global`)
-          .then(res => {
-            this.data = res.data;
-          })
-      .catch(err=>{
-        this.$toasted.show(err,{fullWidth:true})
-      })
+        .get(`${this.$store.state.api}/global`)
+        .then(res => {
+          this.data = res.data;
+        })
+        .catch(err => {
+          this.$toasted.show(err, { fullWidth: true });
+        });
     }
   },
   created() {
@@ -53,12 +56,12 @@ export default {
 };
 </script>
 <style>
-.global{
+.global {
   width: 100%;
   justify-content: space-around;
-  margin-left:0 !important;
+  margin-left: 0 !important;
 }
-.global div{
+.global div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,7 +72,6 @@ export default {
   color: #fff;
   font-size: 14px;
 }
-.global div span{
-
+.global div span {
 }
 </style>

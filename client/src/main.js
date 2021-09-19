@@ -104,7 +104,7 @@ Vue.filter("binayracveondalik", function(value) {
   let temp = parseFloat(value);
   try {
     value = new Intl.NumberFormat("tr-TR", { minimumFractionDigits: 4 }).format(
-      temp
+        temp
     );
     return value;
   } catch (e) {

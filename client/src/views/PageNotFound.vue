@@ -42,10 +42,10 @@ export default {
   left: 20%;
   top: 8%;
 }
-.middle-ikon{
-  left:39%;
+.middle-ikon {
+  left: 39%;
 }
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 768px) {
   .err {
     color: #ffffff;
     font-size: 11rem;
@@ -53,8 +53,8 @@ export default {
     left: 0;
     top: 8%;
   }
-  .middle-ikon{
-    left:25%;
+  .middle-ikon {
+    left: 25%;
   }
 }
 

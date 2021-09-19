@@ -30,47 +30,98 @@
         >
           <span class="mr-4">DÖVİZ</span>
         </v-btn>
-        <v-btn href="/altin-fiyatlari" text :light="$store.state.isLight" class="pa-1">
+        <v-btn
+          href="/altin-fiyatlari"
+          text
+          :light="$store.state.isLight"
+          class="pa-1"
+        >
           <span class="mr-4">ALTIN</span>
           <!--<v-icon>mdi-home</v-icon>-->
         </v-btn>
-        <v-btn href="/kripto-paralar" text :light="$store.state.isLight" class="pa-1">
+        <v-btn
+          href="/kripto-paralar"
+          text
+          :light="$store.state.isLight"
+          class="pa-1"
+        >
           <span class="mr-4">KRİPTO PARA</span>
         </v-btn>
-        <v-btn href="/capraz-kurlar" text :light="$store.state.isLight" class="pa-1">
+        <v-btn
+          href="/capraz-kurlar"
+          text
+          :light="$store.state.isLight"
+          class="pa-1"
+        >
           <span class="mr-4">ÇAPRAZ KURLAR</span>
         </v-btn>
-        <v-btn href="/userwallet" text :light="$store.state.isLight" class="pa-1">
+        <v-btn
+          href="/userwallet"
+          text
+          :light="$store.state.isLight"
+          class="pa-1"
+        >
           <span class="mr-4">CÜZDAN</span>
         </v-btn>
-        <v-btn href="/kripto-para-borsalari" text :light="$store.state.isLight" class="pa-1">
+        <v-btn
+          href="/kripto-para-borsalari"
+          text
+          :light="$store.state.isLight"
+          class="pa-1"
+        >
           <span class="mr-4">BORSALAR</span>
         </v-btn>
         <v-spacer></v-spacer>
         <div class="column">
           <div>
             <v-btn
-                class="mt-6 mr-2 pl-1"
-                tile
-                color="rgb(248, 73, 96)"
-                @click="$store.state.userinfo == null
-                ? ($route.path != '/login' ? $router.push({name:'Login'}) : $toasted.error('Giriş yapmalısın!',{fullWidth:true,icon:'error',duration:1000}))
-                : (($store.state.userinfo.active == 1) ? $store.commit('buyselldialog') : $store.commit('activatealert'))"
+              class="mt-6 mr-2 pl-1"
+              tile
+              color="rgb(248, 73, 96)"
+              @click="
+                $store.state.userinfo == null
+                  ? $route.path != '/login'
+                    ? $router.push({ name: 'Login' })
+                    : $toasted.error('Giriş yapmalısın!', {
+                        fullWidth: true,
+                        icon: 'error',
+                        duration: 1000
+                      })
+                  : $store.state.userinfo.active == 1
+                  ? $store.commit('buyselldialog')
+                  : $store.commit('activatealert')
+              "
             >
-              <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
+              <v-icon
+                left
+                style="background-color: rgba(0,0,0,.1);height: 38px;"
+              >
                 mdi-arrow-down
               </v-icon>
               Sat
             </v-btn>
             <v-btn
-                class="mt-6 mr-6 pl-1"
-                tile
-                color="rgb(2, 192, 118)"
-                @click="$store.state.userinfo == null
-                ? ($route.path != '/login' ? $router.push({name:'Login'}) : $toasted.error('Giriş yapmalısın!',{fullWidth:true,icon:'error',duration:1000}))
-                : (($store.state.userinfo.active == 1) ? $store.commit('buyselldialog') : $store.commit('activatealert'))"
+              class="mt-6 mr-6 pl-1"
+              tile
+              color="rgb(2, 192, 118)"
+              @click="
+                $store.state.userinfo == null
+                  ? $route.path != '/login'
+                    ? $router.push({ name: 'Login' })
+                    : $toasted.error('Giriş yapmalısın!', {
+                        fullWidth: true,
+                        icon: 'error',
+                        duration: 1000
+                      })
+                  : $store.state.userinfo.active == 1
+                  ? $store.commit('buyselldialog')
+                  : $store.commit('activatealert')
+              "
             >
-              <v-icon left style="background-color: rgba(0,0,0,.1);height: 38px;">
+              <v-icon
+                left
+                style="background-color: rgba(0,0,0,.1);height: 38px;"
+              >
                 mdi-arrow-up
               </v-icon>
               Al
@@ -94,21 +145,33 @@
         </v-btn>
 
         <v-menu
-            bottom
-            min-width="200px"
-            rounded
-            v-if="($store.state.login || isAuthenticated) && $store.state.userinfo"
+          bottom
+          min-width="200px"
+          rounded
+          v-if="
+            ($store.state.login || isAuthenticated) && $store.state.userinfo
+          "
         >
           <template v-slot:activator="{ on }">
-            <v-btn
-                class="mt-6 mr-6"
-                icon
-                small
-                v-on="on"
-            >
+            <v-btn class="mt-6 mr-6" icon small v-on="on">
               <v-avatar size="40">
-                <v-img v-if="user.profileImage!=''" :src="user.profileImage.indexOf('http')>-1 ? user.profileImage : $store.state.api+'/uploads/'+ user.profileImage"></v-img>
-                <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
+                <v-img
+                  v-if="user.profileImage != ''"
+                  :src="
+                    user.profileImage.indexOf('http') > -1
+                      ? user.profileImage
+                      : $store.state.api +
+                        '/uploads/' +
+                        user.profileImage +
+                        '?fornocache=' +
+                        eight
+                  "
+                ></v-img>
+                <img
+                  v-else
+                  :src="$store.state.api + '/defaultuserprofileimage.png'"
+                  alt=""
+                />
               </v-avatar>
             </v-btn>
           </template>
@@ -116,38 +179,38 @@
             <v-list-item-content class="justify-center pb-0">
               <div class="mx-auto text-center">
                 <v-avatar>
-                  <v-img v-if="!!$store.state.userinfo" :src="$store.state.userinfo.profileImage"></v-img>
-                  <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
+                  <v-img
+                    v-if="!!$store.state.userinfo"
+                    :src="
+                      user.profileImage.indexOf('http') > -1
+                        ? user.profileImage
+                        : $store.state.api +
+                          '/uploads/' +
+                          user.profileImage +
+                          '?fornocache=' +
+                          eight
+                    "
+                  ></v-img>
+                  <img
+                    v-else
+                    :src="$store.state.api + '/defaultuserprofileimage.png'"
+                    alt=""
+                  />
                 </v-avatar>
                 <h3>{{ $store.state.userinfo.fullName }}</h3>
                 <p class="text-caption mt-1">
                   {{ $store.state.userinfo.email }}
                 </p>
                 <v-divider></v-divider>
-                <v-btn
-                    depressed
-                    rounded
-                    text
-                    href="/profil"
-                >
+                <v-btn depressed rounded text href="/profil">
                   PROFİL
                 </v-btn>
                 <v-divider></v-divider>
-                <v-btn
-                    depressed
-                    rounded
-                    text
-                    href="/userwallet"
-                >
+                <v-btn depressed rounded text href="/userwallet">
                   CÜZDAN
                 </v-btn>
                 <v-divider></v-divider>
-                <v-btn
-                    depressed
-                    rounded
-                    text
-                    href="/logout"
-                >
+                <v-btn depressed rounded text href="/logout">
                   ÇIKIŞ
                 </v-btn>
               </div>
@@ -202,61 +265,72 @@
         </v-btn>
 
         <v-menu
-            offset-x
-            min-width="200px"
-            rounded
-            v-if="($store.state.login || isAuthenticated) && $store.state.userinfo"
+          offset-x
+          min-width="200px"
+          rounded
+          v-if="
+            ($store.state.login || isAuthenticated) && $store.state.userinfo
+          "
         >
           <template v-slot:activator="{ on }">
-            <v-btn
-                class="mr-1"
-                icon
-                small
-                v-on="on"
-            >
+            <v-btn class="mr-1" icon small v-on="on">
               <v-avatar size="40">
-                <v-img v-if="$store.state.userinfo" :src="user.profileImage.indexOf('http')>-1 ? user.profileImage : $store.state.api+'/uploads/'+ user.profileImage"></v-img>
-                <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
+                <v-img
+                  v-if="$store.state.userinfo"
+                  :src="
+                    user.profileImage.indexOf('http') > -1
+                      ? user.profileImage
+                      : $store.state.api +
+                        '/uploads/' +
+                        user.profileImage +
+                        '?fornocache=' +
+                        eight
+                  "
+                ></v-img>
+                <img
+                  v-else
+                  :src="$store.state.api + '/defaultuserprofileimage.png'"
+                  alt=""
+                />
               </v-avatar>
-
             </v-btn>
           </template>
           <v-card>
             <v-list-item-content class="justify-center pb-0">
               <div class="mx-auto text-center">
                 <v-avatar>
-                  <v-img v-if="$store.state.userinfo" :src="user.profileImage.indexOf('http')>-1 ? user.profileImage : $store.state.api+'/uploads/'+ user.profileImage"></v-img>
-                  <img v-else :src="$store.state.api + '/defaultuserprofileimage.png'" alt="" />
+                  <v-img
+                    v-if="$store.state.userinfo"
+                    :src="
+                      user.profileImage.indexOf('http') > -1
+                        ? user.profileImage
+                        : $store.state.api +
+                          '/uploads/' +
+                          user.profileImage +
+                          '?fornocache=' +
+                          eight
+                    "
+                  ></v-img>
+                  <img
+                    v-else
+                    :src="$store.state.api + '/defaultuserprofileimage.png'"
+                    alt=""
+                  />
                 </v-avatar>
                 <h3>{{ $store.state.userinfo.fullName }}</h3>
                 <p class="text-caption mt-1">
                   {{ $store.state.userinfo.email }}
                 </p>
                 <v-divider></v-divider>
-                <v-btn
-                    depressed
-                    rounded
-                    text
-                    href="/profil"
-                >
+                <v-btn depressed rounded text href="/profil">
                   PROFİL
                 </v-btn>
                 <v-divider></v-divider>
-                <v-btn
-                    depressed
-                    rounded
-                    text
-                    href="/userwallet"
-                >
+                <v-btn depressed rounded text href="/userwallet">
                   CÜZDAN
                 </v-btn>
                 <v-divider></v-divider>
-                <v-btn
-                    depressed
-                    rounded
-                    text
-                    href="/logout"
-                >
+                <v-btn depressed rounded text href="/logout">
                   ÇIKIŞ
                 </v-btn>
               </div>
@@ -402,9 +476,9 @@
                 <v-list-item-content>
                   <v-list-item-title>
                     <v-btn
-                        text
-                        :light="$store.state.isLight"
-                        :dark="!$store.state.isLight"
+                      text
+                      :light="$store.state.isLight"
+                      :dark="!$store.state.isLight"
                     >
                       BORSALAR
                     </v-btn>
@@ -419,9 +493,9 @@
                 <v-list-item-content>
                   <v-list-item-title>
                     <v-btn
-                        text
-                        :light="$store.state.isLight"
-                        :dark="!$store.state.isLight"
+                      text
+                      :light="$store.state.isLight"
+                      :dark="!$store.state.isLight"
                     >
                       CÜZDAN
                     </v-btn>
@@ -434,28 +508,57 @@
         </v-dialog>
       </v-app-bar>
 
-      <v-footer v-if="$vuetify.breakpoint.smAndDown" app bottom fixed padless style="background: rgb(29, 36, 96);">
+      <v-footer
+        v-if="$vuetify.breakpoint.smAndDown"
+        app
+        bottom
+        fixed
+        padless
+        style="background: rgb(29, 36, 96);"
+      >
         <div class="column" style="width: 100%;">
           <div>
             <v-row class="pl-4 pr-4">
               <v-col>
-                <v-btn block
-                       color="rgb(2, 192, 118)"
-                       style="color: #fff;"
-                       @click="$store.state.userinfo == null
-                                ? ($route.path != '/login' ? $router.push({name:'Login'}) : $toasted.error('Giriş yapmalısın!',{fullWidth:true,icon:'error',duration:1000}))
-                                : (($store.state.userinfo.active == 1) ? $store.commit('buyselldialog') : $store.commit('activatealert'))"
+                <v-btn
+                  block
+                  color="rgb(2, 192, 118)"
+                  style="color: #fff;"
+                  @click="
+                    $store.state.userinfo == null
+                      ? $route.path != '/login'
+                        ? $router.push({ name: 'Login' })
+                        : $toasted.error('Giriş yapmalısın!', {
+                            fullWidth: true,
+                            icon: 'error',
+                            duration: 1000
+                          })
+                      : $store.state.userinfo.active == 1
+                      ? $store.commit('buyselldialog')
+                      : $store.commit('activatealert')
+                  "
                 >
                   AL
                 </v-btn>
               </v-col>
               <v-col>
-                <v-btn block
-                       color="rgb(248, 73, 96)"
-                       style="color: #fff;"
-                       @click="$store.state.userinfo == null
-                                ? ($route.path != '/login' ? $router.push({name:'Login'}) : $toasted.error('Giriş yapmalısın!',{fullWidth:true,icon:'error',duration:1000}))
-                                : (($store.state.userinfo.active == 1) ? $store.commit('buyselldialog') : $store.commit('activatealert'))"
+                <v-btn
+                  block
+                  color="rgb(248, 73, 96)"
+                  style="color: #fff;"
+                  @click="
+                    $store.state.userinfo == null
+                      ? $route.path != '/login'
+                        ? $router.push({ name: 'Login' })
+                        : $toasted.error('Giriş yapmalısın!', {
+                            fullWidth: true,
+                            icon: 'error',
+                            duration: 1000
+                          })
+                      : $store.state.userinfo.active == 1
+                      ? $store.commit('buyselldialog')
+                      : $store.commit('activatealert')
+                  "
                 >
                   SAT
                 </v-btn>
@@ -463,10 +566,11 @@
             </v-row>
           </div>
           <div style="text-align: center;">
-            <span style="font-size:10px;color:#fff;">*Bu bir yatırım oyunudur.</span>
+            <span style="font-size:10px;color:#fff;"
+              >*Bu bir yatırım oyunudur.</span
+            >
           </div>
         </div>
-
       </v-footer>
 
       <v-main :class="{ 'v-main-light': $store.state.isLight }">
@@ -481,17 +585,22 @@
     </v-app>
     <BuyAndSellModal />
     <CookiePopup />
-    <v-dialog v-if="$store.state.userinfo" v-model="$store.state.activatealert" style="z-index: 99 !important;">
+    <v-dialog
+      v-if="$store.state.userinfo"
+      v-model="$store.state.activatealert"
+      style="z-index: 99 !important;"
+    >
       <v-alert
-          border="right"
-          colored-border
-          type="error"
-          elevation="2"
-          dense
-          class="mt-6"
+        border="right"
+        colored-border
+        type="error"
+        elevation="2"
+        dense
+        class="mt-6 mb-0"
       >
-        Hesabınız aktif değil.Bu haldeyken al sat yapamazsınız.Hesabı aktif hale getirmek için
-        <v-chip small>{{ $store.state.userinfo.email}}</v-chip> adresinize
+        Hesabınız aktif değil.Bu haldeyken al sat yapamazsınız.Hesabı aktif hale
+        getirmek için
+        <v-chip small>{{ $store.state.userinfo.email }}</v-chip> adresinize
         <v-btn x-small @click="sendActivationCode">buraya</v-btn>
         tıklayarak eposta gönderin.
       </v-alert>
@@ -540,10 +649,13 @@ export default {
     dialog: false,
     isDropped: false,
     clock: "",
-    cookiePopup: false
+    cookiePopup: false,
+    eight: "qqqqqqqq"
   }),
   beforeCreate() {
-    localStorage.length > 0 ? this.$store.commit('cookiepopup',false) : this.$store.commit('cookiepopup',true)
+    localStorage.length > 0
+      ? this.$store.commit("cookiepopup", false)
+      : this.$store.commit("cookiepopup", true);
   },
   methods: {
     updateTime: function() {
@@ -561,27 +673,33 @@ export default {
                     }`;
     },
     sendActivationCode() {
-      this.$store.commit('activatealert')
-      this.$store.commit('isEmailSending',true)
+      this.$store.commit("activatealert");
+      this.$store.commit("isEmailSending", true);
       axios
-          .post(`${this.$store.state.api}/sendactivation`, {
-            userId: this.$store.state.userinfo.id,
-            email: this.$store.state.userinfo.email
-          })
-          .then(response => {
-            if(response.data == "MAILOK"){
-              this.$store.commit('isEmailSending',false);
-              this.$toasted.show('Aktivasyon linki epostanıza gönderildi.Bağlantıyı kullanıp hesabınızı aktif hale getirebilirsiniz.',options)
-            }
-          })
-          .catch(err=>{
-            this.$toasted.show(err,alertoptions);
-            console.log(err)
-          })
+        .post(`${this.$store.state.api}/sendactivation`, {
+          userId: this.$store.state.userinfo.id,
+          email: this.$store.state.userinfo.email
+        })
+        .then(response => {
+          if (response.data == "MAILOK") {
+            this.$store.commit("isEmailSending", false);
+            this.$toasted.show(
+              "Aktivasyon linki epostanıza gönderildi.Bağlantıyı kullanıp hesabınızı aktif hale getirebilirsiniz.",
+              options
+            );
+          }
+        })
+        .catch(err => {
+          this.$toasted.show(err, alertoptions);
+          console.log(err);
+        });
     }
   },
   created() {
-    this.$store.commit('dolar');
+    this.eight = Math.random()
+      .toString(36)
+      .slice(2);
+    this.$store.commit("dolar");
     setInterval(this.updateTime, 1000);
     //this.isAuthenticated = !!(localStorage.getItem("user"))||(localStorage.getItem("user") != undefined);
   },
@@ -590,16 +708,19 @@ export default {
   },
   computed: {
     user() {
-      try{
-        return JSON.parse(localStorage.getItem("user")) ||null;
-      }catch (e) {
+      try {
+        return JSON.parse(localStorage.getItem("user")) || null;
+      } catch (e) {
         console.log(e);
         localStorage.removeItem("user");
         return null;
       }
     },
     isAuthenticated() {
-      return !!(localStorage.getItem("user"))||(localStorage.getItem("user") != undefined);
+      return (
+        !!localStorage.getItem("user") ||
+        localStorage.getItem("user") != undefined
+      );
     }
   }
 };
@@ -637,7 +758,7 @@ export default {
   border-bottom: 1px solid #0059b2;
   background-color: #f9f9f9 !important;
 }
-.v-application a{
+.v-application a {
   font-weight: 400;
 }
 </style>

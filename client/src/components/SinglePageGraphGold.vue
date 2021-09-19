@@ -37,8 +37,8 @@
         </div>
       </div>
     </v-row>
-    <v-row class="pl-4 pr-4">
-      <v-row class="pl-4 pr-4 justify-space-between" style="font-size: 18px;">
+    <v-row class="pl-4 pr-4 mt-0">
+      <v-row class="pl-4 pr-4 justify-space-between align-center" style="font-size: 18px;">
         <div
           class="mt-2"
           :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'"
@@ -58,41 +58,34 @@
         <div
           class="mt-2"
           :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'"
-          :class="[
-            degisim.indexOf('-')<0
-              ? 'green--text'
-              : 'red--text'
-          ]"
+          :class="[degisim.indexOf('-') < 0 ? 'green--text' : 'red--text']"
         >
-          {{ (parseFloat(satis) * parseFloat(degisim.replace('%','').replace(',','.')))/100 | signint }}
-          <v-icon color="red" v-if="!degisim.indexOf('-')<0"
-            >mdi-trending-down</v-icon>
-          <v-icon
-            color="green"
-            v-else-if="degisim.indexOf('-')<0"
-            >mdi-trending-up</v-icon>
-          <v-icon
-            color="gray"
-            v-else-if="degisim.indexOf('0,00')>-1"
+          {{
+            ((parseFloat(satis) *
+              parseFloat(degisim.replace("%", "").replace(",", "."))) /
+              100)
+              | signint
+          }}
+          <v-icon color="red" v-if="!degisim.indexOf('-') < 0"
+            >mdi-trending-down</v-icon
+          >
+          <v-icon color="green" v-else-if="degisim.indexOf('-') < 0"
+            >mdi-trending-up</v-icon
+          >
+          <v-icon color="gray" v-else-if="degisim.indexOf('0,00') > -1"
             >mdi-trending-neutral</v-icon
           >
         </div>
         <div
           class="mt-2"
           :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'"
-          :class="[
-            degisim.indexOf('-')<0
-              ? 'green--text'
-              : 'red--text'
-          ]"
+          :class="[degisim.indexOf('-') < 0 ? 'green--text' : 'red--text']"
         >
-          {{
-            degisim
-          }}
+          {{ degisim }}
         </div>
       </v-row>
       <v-row
-        class="d-flex flex-row justify-space-between pl-md-4 pr-md-2 mt-2 mt-md-0"
+        class="d-flex flex-row justify-space-between pl-md-4 pr-md-2 mt-lg-0 mb-lg-4"
       >
         <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
         <v-btn-toggle
@@ -394,23 +387,35 @@ export default {
       });
 
     axios.get(`${this.$store.state.api}/gold/${this.gold}`).then(response => {
-      this.close = response.data["close"].replace('$','').replace('.','').replace(',','.');
+      this.close = response.data["close"]
+        .replace("$", "")
+        .replace(".", "")
+        .replace(",", ".");
     });
     axios
       .get("https://finans.truncgil.com/today.json")
       .then(async response => {
         let gold = apiT[this.gold];
-        let sepetalis = (
-          (parseFloat(response.data["USD"]["Alış"].toString().replace(',','.')) +
-            parseFloat(response.data["EUR"]["Alış"].toString().replace(',','.'))) /
-          2
-        );
-        let sepetsatis = (
-          (parseFloat(response.data["USD"]["Satış"].toString().replace(',','.')) +
-            parseFloat(response.data["EUR"]["Satış"].toString().replace(',','.'))) /
-          2
-        );
-        response.data["SEPET KUR"] = { Alış: sepetalis.toString().replace('.',','), Satış: sepetsatis.toString().replace('.',',') };
+        let sepetalis =
+          (parseFloat(
+            response.data["USD"]["Alış"].toString().replace(",", ".")
+          ) +
+            parseFloat(
+              response.data["EUR"]["Alış"].toString().replace(",", ".")
+            )) /
+          2;
+        let sepetsatis =
+          (parseFloat(
+            response.data["USD"]["Satış"].toString().replace(",", ".")
+          ) +
+            parseFloat(
+              response.data["EUR"]["Satış"].toString().replace(",", ".")
+            )) /
+          2;
+        response.data["SEPET KUR"] = {
+          Alış: sepetalis.toString().replace(".", ","),
+          Satış: sepetsatis.toString().replace(".", ",")
+        };
         //response.data[gold]["time"] = response.data["Update_Date"];
         if (
           gold.indexOf("Altın") > 0 ||
@@ -424,8 +429,14 @@ export default {
         ) {
           response.data[gold]["type"] = this.gold;
         }
-        this.alis = response.data[gold]["Alış"].replace('$','').replace('.','').replace(',','.');
-        this.satis = response.data[gold]["Satış"].replace('$','').replace('.','').replace(',','.');
+        this.alis = response.data[gold]["Alış"]
+          .replace("$", "")
+          .replace(".", "")
+          .replace(",", ".");
+        this.satis = response.data[gold]["Satış"]
+          .replace("$", "")
+          .replace(".", "")
+          .replace(",", ".");
         this.updatetime = response.data["Update_Date"];
         this.type = response.data[gold]["Tür"];
         this.degisim = response.data[gold]["Değişim"];
@@ -510,9 +521,18 @@ export default {
           axios
             .get(`${this.$store.state.api}/gold/${this.gold}`)
             .then(response => {
-              this.alis = response.data["Alış"].replace('$','').replace('.','').replace(',','.');
-              this.satis = response.data["Satış"].replace('$','').replace('.','').replace(',','.');
-              this.close = response.data["close"].replace('$','').replace('.','').replace(',','.');
+              this.alis = response.data["Alış"]
+                .replace("$", "")
+                .replace(".", "")
+                .replace(",", ".");
+              this.satis = response.data["Satış"]
+                .replace("$", "")
+                .replace(".", "")
+                .replace(",", ".");
+              this.close = response.data["close"]
+                .replace("$", "")
+                .replace(".", "")
+                .replace(",", ".");
               this.updatetime = response.data["time"];
               this.type = response.data["Tür"];
             });

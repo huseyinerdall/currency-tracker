@@ -14,20 +14,17 @@ export default {
   name: "Exchanges",
   metaInfo() {
     return {
-      title:
-          "Para.Guru | Kripto Para Borsaları Binance Paribu Bitexen",
+      title: "Para.Guru | Kripto Para Borsaları Binance Paribu Bitexen",
       meta: [
         {
           vmid: "description",
           name: "description",
-          content:
-              "Kripto para borsaları hakkında bilgiler."
+          content: "Kripto para borsaları hakkında bilgiler."
         },
         {
           vmid: "keywords",
           name: "keywords",
-          content:
-              "Kripto para borsaları"
+          content: "Kripto para borsaları"
         }
       ]
     };

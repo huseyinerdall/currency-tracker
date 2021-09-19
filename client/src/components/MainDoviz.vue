@@ -397,7 +397,7 @@ export default {
 .convert-dropdown .v-icon.v-icon {
   color: #ffc107 !important;
 }
-.main-doviz .v-data-table__wrapper{
+.main-doviz .v-data-table__wrapper {
   overflow-x: hidden !important;
 }
 </style>

@@ -1,15 +1,12 @@
 <template>
   <div>
     <v-overlay
-        v-model="$store.state.isEmailSending"
-        :opacity="1"
-        :color="
-        $store.state.isLight ? '#fff' : '#'
-      "
+      v-model="$store.state.isEmailSending"
+      :opacity="1"
+      :color="$store.state.isLight ? '#fff' : '#'"
     >
       <div class="emailsendinggif">Eposta gönderiliyor...</div>
     </v-overlay>
-
   </div>
 </template>
 
@@ -17,15 +14,9 @@
 import { mapState } from "vuex";
 export default {
   name: "EmailSendingModal",
-  data: () => ({
-
-  }),
-  created() {
-
-  },
-  methods: {
-
-  },
+  data: () => ({}),
+  created() {},
+  methods: {},
   computed: mapState({
     isEmailSending: state => state.isEmailSending
   })

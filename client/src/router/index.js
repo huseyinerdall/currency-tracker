@@ -24,12 +24,12 @@ import axios from "axios";
 // Admin Side
 function toCapitalize(str) {
   str = str
-    .split("-")
-    .map(
-      w =>
-        w[0].toLocaleUpperCase("tr-TR") + w.substr(1).toLocaleLowerCase("tr-TR")
-    )
-    .join(" ");
+      .split("-")
+      .map(
+          w =>
+              w[0].toLocaleUpperCase("tr-TR") + w.substr(1).toLocaleLowerCase("tr-TR")
+      )
+      .join(" ");
   return str;
 }
 Vue.use(VueRouter);
@@ -156,8 +156,8 @@ const routes = [
       // <-- props as a Function
       return {
         gold: toCapitalize(route.params.gold)
-          .split("-")
-          .join(" ")
+            .split("-")
+            .join(" ")
       };
     }
   },
@@ -172,9 +172,9 @@ const routes = [
       // <-- props as a Function
       return {
         gold: route.params.gold
-          .toLocaleUpperCase("tr-TR")
-          .split("-")
-          .join(" ")
+            .toLocaleUpperCase("tr-TR")
+            .split("-")
+            .join(" ")
       };
     }
   },

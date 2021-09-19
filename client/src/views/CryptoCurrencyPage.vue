@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <v-container class="pa-0">
+    <v-container class="pa-0 pt-lg-4">
       <GlobalInfos />
       <MainCryptoCurrency :coin="coin" />
     </v-container>

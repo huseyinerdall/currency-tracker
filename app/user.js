@@ -15,6 +15,12 @@ var primaryStorage = multer.diskStorage(
     {
         destination: pPath,
         filename: function ( req, file, cb ) {
+            fs.unlink(pPath + `${req.headers.email}.${'jpg'}`, (err) => {
+                if (err) {
+                    console.error(err)
+                    return;
+                }
+            })
             cb( null, `${req.headers.email}.${'jpg'}`);
         }
     }
@@ -23,6 +29,12 @@ var secondaryStorage = multer.diskStorage(
     {
         destination: sPath,
         filename: function ( req, file, cb ) {
+            fs.unlink(sPath + `${req.headers.email}.${'jpg'}`, (err) => {
+                if (err) {
+                    console.error(err)
+                    return;
+                }
+            })
             cb( null, `${req.headers.email}.${'jpg'}`);
         }
     }
@@ -263,7 +275,6 @@ module.exports = function(app,io){
     });
 
     app.post('/changeprofileimage', fileUpload, (req, res) => {
-        console.log(req.headers.filename)
         if (!req.file) {
             console.log("No file received");
             return res.send({
