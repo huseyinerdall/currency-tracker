@@ -1,6 +1,5 @@
 <template>
   <div class="userwallet pt-lg-4">
-    <UserGeneralSituation :situation="[balanceNow, avaibleTRY, 0]" />
     <div>
       <v-alert
         border="right"
@@ -204,7 +203,7 @@
                   :light="$store.state.isLight"
                   height="340"
                   :expanded.sync="expanded"
-                  show-expand
+                  :show-expand="$vuetify.breakpoint.smAndDown"
                   single-expand
                 >
                   <template v-slot:item="{ item, expand, isExpanded }">
@@ -239,13 +238,13 @@
                           {{ item.Amount }}
                         </div>
                       </td>
-                      <!--                          <td style="font-size: 11px;">
+                      <td style="font-size: 11px;" v-if="!$vuetify.breakpoint.smAndDown">
                             <div class="d-flex flex-column">
                               <span v-text="item.OrderType == 'time' ? 'Tarihe Göre' : 'Fiyata Göre'"></span>
                               <span style="font-size: 11px;" v-if="item.OrderType == 'time'">{{ (item.Parameter.indexOf('z') > 0 ? new Date(item.Parameter).toLocaleString('tr') : new Date(item.createdAt).toLocaleDateString() )}}</span>
                               <span v-else>{{item.Parameter}}</span>
                             </div>
-                          </td>-->
+                      </td>
                       <td>
                         <v-btn
                           style="border: 1px solid #eee;"
@@ -296,25 +295,32 @@
                           </v-icon>
                         </v-btn>
                       </td>
-                      <!--                          <td style="font-size: 11px;">
+                      <td style="font-size: 11px;" v-if="!$vuetify.breakpoint.smAndDown">
                             <div v-if="item.Closed == 1">
-                              <span class="green&#45;&#45;text">GERÇEKLEŞTİ</span>
+                              <span class="green--text">GERÇEKLEŞTİ</span>
                             </div>
                             <div v-else-if="item.Closed == -1">
-                              <span class="yellow&#45;&#45;text">İPTAL EDİLDİ</span>
+                              <span class="yellow--text">İPTAL EDİLDİ</span>
                             </div>
                             <div v-else>
-                              <span class="red&#45;&#45;text">BEKLİYOR</span>
+                              <span class="red--text">BEKLİYOR</span>
                             </div>
-                          </td>-->
-                      <td style="font-size: 11px;">
+                      </td>
+                      <td v-if="!$vuetify.breakpoint.smAndDown">
+                        <span
+                            style="font-size: 11px;"
+                        >
+                          {{ item.createdAt | dateStandartFormat }}
+                        </span>
+                      </td>
+                      <td style="font-size: 11px;" v-if="$vuetify.breakpoint.smAndDown">
                         <v-btn icon @click="expand(!isExpanded)">
                           <v-icon>mdi-plus</v-icon>
                         </v-btn>
                       </td>
                     </tr>
                   </template>
-                  <template v-slot:expanded-item="{ headers, item }">
+                  <template v-slot:expanded-item="{ headers, item }" v-if="$vuetify.breakpoint.smAndDown">
                     <td :colspan="headers.length" style="font-size: 11px;">
                       <v-row class="justify-start pl-2">
                         <v-col class="text-left">
@@ -449,7 +455,7 @@
                             'width:' +
                               (116 +
                                 (item.balanceNow / topUsers[0]['balanceNow']) *
-                                  100) +
+                                  100 ) +
                               'px;'
                           "
                           @click="displayDetails(item.wallet)"
@@ -525,9 +531,9 @@
                         style="position: absolute;left: 13px;right: 13px;"
                         :style="
                           'width:' +
-                            (50 +
+                            (19.3 +
                               (item.balanceNow / topUsers[0]['balanceNow']) *
-                                50) +
+                                80) +
                             '%;' +
                             'top:' +
                             (67 + (item.sirano - 1) * 50) +
@@ -646,7 +652,6 @@ import moment from "moment";
 import _ from "lodash";
 import IsEmailSendingModal from "@/components/common/EmailSending";
 import EventBus from "../event-bus";
-import UserGeneralSituation from "@/components/UserGeneralSituation";
 let options = {
   type: "success",
   icon: "check",
@@ -880,7 +885,6 @@ export default {
       avaibleBalance: 0,
       balance: 0,
       balanceNow: 0,
-      avaibleTRY: JSON.parse(localStorage.getItem("wallet"))["TÜRK LİRASI"]["amount"],
       orderHeaders: [
         {
           text: "EMİRLERİM",
@@ -900,7 +904,7 @@ export default {
             ? "pinkk caption"
             : "amber--text accent-3 caption text-center"
         },
-        /*{
+        {
           text: "TİP",
           value: "buyOrSell",
           sortable: false,
@@ -908,7 +912,7 @@ export default {
           class: this.$store.state.isLight
             ? "pinkk caption"
             : "amber--text accent-3 caption",
-        },*/
+        },
         {
           text: "",
           value: "buyOrSell",
@@ -918,7 +922,7 @@ export default {
             ? "pinkk caption"
             : "amber--text accent-3 caption"
         },
-        /*{
+        {
           text: "DURUM",
           value: "Closed",
           sortable: false,
@@ -926,8 +930,8 @@ export default {
           class: this.$store.state.isLight
             ? "pinkk caption"
             : "amber--text accent-3 caption",
-        },*/
-        /*{
+        },
+        {
           text: "TARİH/SAAT",
           value: "createdAt",
           sortable: false,
@@ -935,7 +939,7 @@ export default {
             ? "pinkk caption"
             : "amber--text accent-3 caption",
           align: "end"
-        },*/
+        },
         { text: "", value: "data-table-expand", align: "end" }
       ],
       headers: [
@@ -981,8 +985,6 @@ export default {
             : "amber--text accent-3 caption"
         }
       ],
-      walletLoaded: false,
-      orders: [],
       topUserHeaders: [
         {
           text: "EN İYİ OYUNCULAR",
@@ -990,8 +992,8 @@ export default {
           sortable: false,
           value: "fullName",
           class: this.$store.state.isLight
-            ? "pinkk caption"
-            : "amber--text accent-3 caption",
+              ? "pinkk caption"
+              : "amber--text accent-3 caption",
           width: !app.$vuetify.breakpoint.smAndDown ? "210px" : "auto"
         },
         {
@@ -999,8 +1001,8 @@ export default {
           value: "balanceNow",
           sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk caption"
-            : "amber--text accent-3 caption",
+              ? "pinkk caption"
+              : "amber--text accent-3 caption",
           width: "130px"
         },
         {
@@ -1008,10 +1010,12 @@ export default {
           value: "graph",
           sortable: false,
           class: this.$store.state.isLight
-            ? "pinkk caption"
-            : "amber--text accent-3 caption"
+              ? "pinkk caption"
+              : "amber--text accent-3 caption"
         }
       ],
+      walletLoaded: false,
+      orders: [],
       topUsers: [],
       allPrices: JSON.parse(localStorage.getItem("allprices")),
       shortNames: shortNames,
@@ -1084,11 +1088,13 @@ export default {
     };
   },
   components: {
-    UserGeneralSituation,
     IsEmailSendingModal
   },
   created() {
     if (this.$vuetify.breakpoint.smAndDown) {
+      this.orderHeaders.splice(2,1);
+      this.orderHeaders.splice(3,1);
+      this.orderHeaders.splice(3,1);
       this.chartOptions.responsive = [
         {
           breakpoint: 768,
@@ -1111,6 +1117,8 @@ export default {
         }
       ];
       this.topUserHeaders.pop();
+    }else{
+      this.orderHeaders.pop()
     }
     let app = this;
     var socket = io.connect(`${this.$store.state.addr}`);

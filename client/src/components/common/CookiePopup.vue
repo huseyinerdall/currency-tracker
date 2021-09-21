@@ -9,14 +9,14 @@
       max-width="400"
     >
       <v-container
-        style="font-size: 12px;border: 1px solid #ddd;border-radius:0;"
+        style="font-size: 12px;border-radius:0;"
         class="row"
       >
         <v-row>
           <v-col>
             {{ text }}
           </v-col>
-          <v-col cols="2">
+          <v-col cols="2" class="d-flex align-center">
             <v-btn
               text
               tile

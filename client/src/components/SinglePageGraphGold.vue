@@ -7,7 +7,7 @@
         </v-avatar>
       </div>
 
-      <div class="flex-column d-flex ml-2" style="width: 200px;">
+      <div class="flex-column d-flex ml-2 mb-md-6" style="width: 200px;">
         <div>
           <h4 :style="$store.state.isLight ? 'color:#000;' : 'color:#fff;'">
             {{ gold | shorten }} {{ type == "Altın" ? "" : "-" }}

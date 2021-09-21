@@ -24,52 +24,62 @@
         <v-btn
           href="/doviz"
           text
-          style="margin-left: 2%;"
+          tile
           :light="$store.state.isLight"
-          class="pa-1"
+          class="pl-2 pr-2 ml-1"
         >
-          <span class="mr-4">DÖVİZ</span>
+          <span>DÖVİZ</span>
         </v-btn>
         <v-btn
           href="/altin-fiyatlari"
           text
+          tile
           :light="$store.state.isLight"
-          class="pa-1"
+          class="pl-2 pr-2 ml-3"
         >
-          <span class="mr-4">ALTIN</span>
+          <span>ALTIN</span>
           <!--<v-icon>mdi-home</v-icon>-->
         </v-btn>
         <v-btn
           href="/kripto-paralar"
           text
+          tile
           :light="$store.state.isLight"
-          class="pa-1"
+          class="pl-2 pr-2 ml-3"
         >
-          <span class="mr-4">KRİPTO PARA</span>
+          <span>KRİPTO PARA</span>
         </v-btn>
         <v-btn
           href="/capraz-kurlar"
           text
+          tile
           :light="$store.state.isLight"
-          class="pa-1"
+          class="pl-2 pr-2 ml-3"
         >
-          <span class="mr-4">ÇAPRAZ KURLAR</span>
+          <span>ÇAPRAZ KURLAR</span>
+        </v-btn>
+        <v-btn
+            href="/kripto-para-borsalari"
+            text
+            tile
+            :light="$store.state.isLight"
+            class="pl-2 pr-2 ml-3"
+        >
+          <span>BORSALAR</span>
         </v-btn>
         <v-btn
           href="/userwallet"
           text
+          tile
           :light="$store.state.isLight"
-          class="pa-1"
+          class="pl-2 pr-2 ml-3"
         >
-          <span class="mr-4">CÜZDAN</span>
-        </v-btn>
-        <v-btn
-          href="/kripto-para-borsalari"
-          text
-          :light="$store.state.isLight"
-          class="pa-1"
-        >
-          <span class="mr-4">BORSALAR</span>
+          <v-badge
+              color="pink"
+              dot
+          >
+            <span class="amber--text">CÜZDAN</span>
+          </v-badge>
         </v-btn>
         <v-spacer></v-spacer>
         <div class="column">
@@ -202,15 +212,15 @@
                   {{ $store.state.userinfo.email }}
                 </p>
                 <v-divider></v-divider>
-                <v-btn depressed rounded text href="/profil">
+                <v-btn depressed text block tile href="/profil">
                   PROFİL
                 </v-btn>
                 <v-divider></v-divider>
-                <v-btn depressed rounded text href="/userwallet">
+                <v-btn depressed block tile text href="/userwallet">
                   CÜZDAN
                 </v-btn>
                 <v-divider></v-divider>
-                <v-btn depressed rounded text href="/logout">
+                <v-btn depressed block text tile href="/logout">
                   ÇIKIŞ
                 </v-btn>
               </div>
@@ -322,15 +332,15 @@
                   {{ $store.state.userinfo.email }}
                 </p>
                 <v-divider></v-divider>
-                <v-btn depressed rounded text href="/profil">
+                <v-btn depressed block tile text href="/profil">
                   PROFİL
                 </v-btn>
                 <v-divider></v-divider>
-                <v-btn depressed rounded text href="/userwallet">
+                <v-btn depressed block tile text href="/userwallet">
                   CÜZDAN
                 </v-btn>
                 <v-divider></v-divider>
-                <v-btn depressed rounded text href="/logout">
+                <v-btn depressed block tile text href="/logout">
                   ÇIKIŞ
                 </v-btn>
               </div>
@@ -574,7 +584,7 @@
       </v-footer>
 
       <v-main :class="{ 'v-main-light': $store.state.isLight }">
-        <v-container>
+        <v-container class="mt-3">
           <router-view />
         </v-container>
       </v-main>
@@ -760,5 +770,8 @@ export default {
 }
 .v-application a {
   font-weight: 400;
+}
+.v-application a:hover {
+  text-decoration: none;
 }
 </style>

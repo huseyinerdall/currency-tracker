@@ -1,5 +1,6 @@
 <template>
   <div class="main-doviz">
+
     <v-data-table
       :headers="headers"
       :items="data"
@@ -17,6 +18,7 @@
       dense
       :dark="!$store.state.isLight"
       :light="$store.state.isLight"
+      v-show="goldloaded"
     >
       <template v-slot:header.time="{ header }">
         <div class="convert-dropdown row">
@@ -184,7 +186,7 @@ import io from "socket.io-client";
 export default {
   data() {
     return {
-      goldloaded: true,
+      goldloaded: false,
       headers: [
         {
           text: "Döviz Kurları",
@@ -267,7 +269,8 @@ export default {
         app.data.pop();
         app.data.pop();
       }
-      this.overlay = false;
+      //this.overlay = false;
+      this.goldloaded = true;
     }
 
     const socket = io.connect(`${this.$store.state.addr}`);
@@ -287,6 +290,7 @@ export default {
         }
       }
       //app.overlay = false;
+      app.goldloaded = true;
     });
   },
   computed: {

@@ -123,6 +123,14 @@ export default {
   },
   methods: {
     googlelogin() {
+      if(!navigator.cookieEnabled){
+        this.$toasted.error(`Giriş yapabilmek için çerezlere izin vermelisiniz!Bilgi için -> <a href="https://support.google.com/accounts/answer/61416">tıklayın</a>`, {
+          fullWidth: true,
+          icon: "error",
+          duration: 2000
+        });
+        return;
+      }
       this.overlay = true;
       axios.get(`${this.$store.state.api}/google`).then(response => {
         console.log(response.data);
@@ -192,6 +200,14 @@ export default {
         });
     },
     login() {
+      if(!navigator.cookieEnabled){
+        this.$toasted.error(`Giriş yapabilmek için çerezlere izin vermelisiniz!Bilgi için -> <a href="https://support.google.com/accounts/answer/61416">tıklayın</a>`, {
+          fullWidth: true,
+          icon: "error",
+          duration: 2000
+        });
+        return;
+      }
       if (!this.email && !this.password) {
         this.$toasted.error("Alanlar boş bırakılamaz!", {
           fullWidth: true,
