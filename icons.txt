@@ -1,3 +1,0 @@
-mdi-trending-down
-mdi-trending-neutral
-mdi-trending-up
