@@ -51,6 +51,15 @@
         </v-row>
       </v-subheader>
       <v-list-item
+          v-if="loading"
+          style="height:32.3px;padding: 0 0 0 10px !important;border-bottom: 1px solid #ddd;height: 460px;"
+      >
+        <div style="position: absolute;top:50%;left:50%;margin-top: -62px;margin-left: -97px;">
+          <Loading />
+          <span style="color: #fff;text-align: center">Güncel Datalar Yükleniyor...</span>
+        </div>
+      </v-list-item>
+      <v-list-item
         v-for="value in data"
         :key="value.type"
         style="height:32.3px;padding: 0 0 0 10px !important;border-bottom: 1px solid #ddd;"
@@ -101,6 +110,7 @@
 <script>
 //import io from "socket.io-client";
 import axios from "axios";
+import Loading from "@/components/Loading";
 export default {
   name: "BinTLTable",
   data: () => ({
@@ -121,7 +131,8 @@ export default {
       XRP: "XRP",
       DOGE: "DOGE",
       USDT: "USDT"
-    }
+    },
+    loading: true
   }),
   created() {
     this.getData();
@@ -134,8 +145,8 @@ export default {
         })
         .then(response => {
           //let fetchedData = response.data;
-          console.log(response.data);
           this.data = response.data;
+          this.loading = false;
         });
     }
   },
@@ -143,6 +154,9 @@ export default {
     time() {
       this.getData();
     }
+  },
+  components: {
+    Loading,
   }
 };
 </script>
@@ -170,5 +184,8 @@ export default {
 }
 .bintl-table .v-list-item--dense, .v-list--dense .v-list-item{
   min-height: 28px !important;
+}
+.bintl-table .v-list {
+  padding: 0 !important;
 }
 </style>

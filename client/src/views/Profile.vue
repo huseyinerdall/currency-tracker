@@ -43,6 +43,18 @@
                 </v-icon>
                 Yükle
               </v-btn>
+              <v-btn
+                  color="primary"
+                  class="text-none ml-6 mt-4"
+                  rounded
+                  depressed
+                  @click="pickAvatar"
+              >
+                <v-icon left>
+                  mdi-camera
+                </v-icon>
+                Avatar
+              </v-btn>
               <input
                 ref="file"
                 class="d-none"
@@ -164,6 +176,63 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <v-dialog
+        v-model="avatarDialog"
+        max-width="600"
+        transition="dialog-bottom-transition"
+        style="border-radius: 0;background:#fff;overflow-x: hidden;"
+    >
+      <v-card style="background: transparent;">
+        <div class="pa-1">
+          <v-item-group
+              v-model="selected"
+              mandatory
+          >
+            <v-row>
+              <v-col
+                  v-for="(item, i) in avatars"
+                  :key="i"
+                  cols="6"
+                  md="2"
+                  class="pa-0"
+              >
+                <v-item v-slot="{ active, toggle }">
+                  <v-img
+                      :lazy-src="item"
+                      :src="avatarsPath+item"
+                      class="text-right"
+                      @click="toggle"
+                  >
+                    <v-btn
+                        icon
+                        dark
+                    >
+                      <v-icon color="pink">
+                        {{ active ? 'mdi-check-bold' : 'mdi-check-outline' }}
+                      </v-icon>
+                    </v-btn>
+                  </v-img>
+                </v-item>
+              </v-col>
+            </v-row>
+          </v-item-group>
+        </div>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+              color="pink"
+              block
+              tile
+              class="white--text"
+              @click="setAvatar"
+          >
+            DEĞİŞTİR
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 
@@ -178,6 +247,7 @@ let options = {
   type: "success",
   icon: "check",
   fullWidth: true,
+  avatarsPath: process.env.VUE_APP_API_URL + '/avatars/',
   position: "top-center",
   duration: 1600,
   containerClass: "green accent-3 text-center",
@@ -252,7 +322,12 @@ export default {
       balanceNow: 0,
       avaibleTRY: JSON.parse(localStorage.getItem("wallet"))["TÜRK LİRASI"][
         "amount"
-      ]
+      ],
+      avatars: [],
+      selected: [],
+      avatar: 0,
+      avatarsPath: process.env.VUE_APP_API_URL + '/avatars/',
+      avatarDialog: false
     };
   },
   components: {
@@ -275,6 +350,14 @@ export default {
         }
       );
       this.$refs.file.click();
+    },
+    pickAvatar() {
+      this.avatarDialog = !this.avatarDialog;
+      this.file = null;
+      fetch(`${this.$store.state.api}/allavatars`)
+          .then(response => response.json())
+          .then(data => this.avatars = data)
+          .catch(err=>{console.log(err)})
     },
     onFileChanged() {
       this.file = this.$refs.file.files[0];
@@ -344,6 +427,29 @@ export default {
             }
           });
       }
+    },
+    setAvatar(){
+      const app = this;
+      axios
+          .post(`${this.$store.state.api}/changeavatar`, {
+            desired: this.avatarsPath+this.avatars[this.selected],
+            userId: this.$store.state.userinfo.id
+          })
+          .then(res => {
+            if (res.data == "CHANGE") {
+              let temp = this.$store.state.userinfo;
+              temp["profileImage"] = this.avatarsPath+this.avatars[this.selected];
+              localStorage.setItem("user", JSON.stringify(temp));
+              this.$store.commit("userinfo");
+              setTimeout(() => {
+                app.avatarDialog = false;
+                this.$toasted.show(
+                    `Profil resmi başarılı bir şekilde değiştirildi.`,
+                    options
+                );
+              }, 200);
+            }
+          });
     },
     save() {}
   },

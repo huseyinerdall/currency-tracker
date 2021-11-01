@@ -89,6 +89,12 @@ class UserWallet{
         });
     }
 
+    getTopUsersLight(numberOfUsers=6,currenntUser=1){
+        return db.sequelize.query(`select row_number() over (order by "balanceNow" desc) as "sirano", "fullName","profileImage","balanceNow" from "Users" order by "balanceNow" desc limit ${numberOfUsers}`,null,{
+            raw: true
+        });
+    }
+
 }
 
 module.exports = new UserWallet();

@@ -7,6 +7,8 @@
       hide-default-footer
       :loading="!coinloaded"
       :items-per-page="itemPerPage"
+      no-data-text="Güncel Datalar Yükleniyor..."
+      loading-text="Güncel Datalar Yükleniyor..."
       :page.sync="page"
       @page-count="pageCount = $event"
       style="border: 1px solid #ddd;border-radius:0;"
@@ -22,6 +24,10 @@
       :dark="!$store.state.isLight"
       :light="$store.state.isLight"
     >
+      <template v-slot:loading>
+        <Loading />
+        <span>Güncel Datalar Yükleniyor...</span>
+      </template>
       <template v-slot:item="{ item }">
         <tr
           :class="{
@@ -162,6 +168,7 @@
 <script>
 //import coins from '../assets/coins.json';
 import io from "socket.io-client";
+import Loading from "@/components/Loading";
 
 export default {
   props: {
@@ -173,7 +180,7 @@ export default {
     return {
       coinloaded: true,
       isHomepage: true,
-      overlay: true,
+      overlay: false,
       page: 1,
       pageCount: 0,
       itemPerPage: 50,
@@ -472,6 +479,9 @@ export default {
         ];
       }
     }
+  },
+  components: {
+    Loading,
   }
 };
 </script>

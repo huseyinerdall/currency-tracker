@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <TopUsers v-if="$vuetify.breakpoint.mdAndUp" />
     <div class="mt-4">
       <v-row>
         <v-col class="col-md-12">
@@ -27,6 +28,7 @@ import MainCryptoCurrencyForHomePage from "@/components/MainCryptoCurrencyForHom
 import Golds from "@/components/Golds.vue";
 import MainDoviz from "@/components/MainDoviz.vue";
 import CurrencyConverter from "@/components/CurrencyConverter.vue";
+import TopUsers from "@/components/TopUsers.vue";
 /*import Calculator from "@/components/Calculator.vue";*/
 /*import CurrencyMatrixTable from "@/components/CurrencyMatrixTable.vue";
 import TCMBCurrencyTable from "@/components/TCMBCurrencyTable.vue";*/
@@ -64,7 +66,8 @@ export default {
     MainCryptoCurrencyForHomePage,
     Golds,
     CurrencyConverter,
-    MainDoviz
+    MainDoviz,
+    TopUsers
   }
 };
 </script>

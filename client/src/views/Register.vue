@@ -101,23 +101,6 @@
                 </v-btn>
               </v-file-input>
             </v-col>
-            <transition name="slide-fade">
-              <v-col v-show="avatarTab" class="avatars mb-4">
-                <v-tabs
-                  dark
-                  background-color="transparent"
-                  show-arrows
-                  v-model="avatar"
-                >
-                  <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                  <v-tab v-for="i in avatars.length" :key="i">
-                    <v-avatar size="48px">
-                      <img alt="Avatar" :src="avatars[i - 1]" />
-                    </v-avatar>
-                  </v-tab>
-                </v-tabs>
-              </v-col>
-            </transition>
           </v-row>
           <v-row class="mb-4">
             <v-btn
@@ -142,12 +125,56 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <v-dialog
+        v-model="avatarDialog"
+        max-width="600"
+        transition="dialog-bottom-transition"
+        style="border-radius: 0;background:#fff;"
+    >
+      <v-card style="background: transparent;">
+        <div class="pa-1">
+          <v-item-group
+              v-model="selected"
+              mandatory
+          >
+            <v-row>
+              <v-col
+                  v-for="(item, i) in avatars"
+                  :key="i"
+                  cols="6"
+                  md="2"
+                  class="pa-0"
+              >
+                <v-item v-slot="{ active, toggle }">
+                  <v-img
+                        :lazy-src="item"
+                        :src="avatarsPath+item"
+                        class="text-right"
+                        @click="toggle"
+                  >
+                    <v-btn
+                        icon
+                        dark
+                    >
+                      <v-icon color="pink">
+                        {{ active ? 'mdi-check-bold' : 'mdi-check-outline' }}
+                      </v-icon>
+                    </v-btn>
+                  </v-img>
+                </v-item>
+              </v-col>
+            </v-row>
+          </v-item-group>
+        </div>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import avatars from "@/assets/avatars";
 import _ from "lodash";
 export default {
   name: "Login",
@@ -155,6 +182,7 @@ export default {
   data() {
     return {
       email: "",
+      avatarsPath: process.env.VUE_APP_API_URL + '/avatars/',
       fullName: "",
       password1: "",
       password2: "",
@@ -183,11 +211,12 @@ export default {
         usernametaken: () => !this.usernametaken || `Bu kullanıcı adı alınmış.`,
         emailtaken: () => !this.usernametaken || `Bu email adresi kullanılmış.`
       },
-      avatars: avatars,
+      avatars: [],
       avatar: 0,
-      avatarTab: false,
+      avatarDialog: false,
       usernametaken: false,
-      emailtaken: false
+      emailtaken: false,
+      selected: [],
     };
   },
   created() {
@@ -221,8 +250,12 @@ export default {
         });
     }, 400),
     pickAvatar() {
-      this.avatarTab = !this.avatarTab;
+      this.avatarDialog = !this.avatarDialog;
       this.file = null;
+      fetch(`${this.$store.state.api}/allavatars`)
+          .then(response => response.json())
+          .then(data => this.avatars = data)
+          .catch(err=>{console.log(err)})
     },
     register() {
       if (this.file) {
@@ -273,7 +306,7 @@ export default {
             fullName: this.fullName || this.guestID,
             email: this.email,
             passwd: this.password1,
-            profileImage: this.avatars[this.avatar]
+            profileImage: this.avatarsPath+this.avatars[this.selected]
           })
           .then(res => {
             if (res.data == "ALREADY") {

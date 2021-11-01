@@ -6,6 +6,8 @@
       :items="data"
       hide-default-footer
       :loading="!goldloaded"
+      no-data-text="Güncel Datalar Yükleniyor..."
+      loading-text="Güncel Datalar Yükleniyor..."
       disable-pagination
       style="border: 1px solid #ddd;border-radius:0;"
       :style="[
@@ -18,8 +20,11 @@
       dense
       :dark="!$store.state.isLight"
       :light="$store.state.isLight"
-      v-show="goldloaded"
     >
+      <template v-slot:loading>
+        <Loading />
+        <span>Güncel Datalar Yükleniyor...</span>
+      </template>
       <template v-slot:header.time="{ header }">
         <div class="convert-dropdown row">
           {{ (header.text = "") }}
@@ -181,6 +186,7 @@
 
 <script>
 //import axios from "axios";
+import Loading from "@/components/Loading";
 import io from "socket.io-client";
 
 export default {
@@ -372,6 +378,9 @@ export default {
         this.denominator = this.$store.state.dolar;
       }
     }
+  },
+  components: {
+    Loading,
   }
 };
 </script>

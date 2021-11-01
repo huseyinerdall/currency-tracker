@@ -3,6 +3,7 @@ let express = require('express');
 const WebSocket = require('ws');
 const EventEmitter = require('events');
 const CustomEventEmitters = new EventEmitter();
+CustomEventEmitters.setMaxListeners(0); // unlimited
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -249,6 +250,13 @@ app.get('/gettopusers', async (req, res) => {
         })
 })
 
+app.get('/gettopusers/light', async (req, res) => {
+    UserWallet.getTopUsersLight()
+        .then((data)=>{
+            res.json(data[0]);
+        })
+})
+
 app.post('/getcoinaccordingtotimerange', async(req, res) => {
     let time = req.body.time || 1;
     //let coinID = utils.search(req.params["coinName"], coins)["id"];
@@ -338,6 +346,25 @@ app.post('/golddescriptions', async(req, res) => {
     res.send(data);
 })
 
+function fefefe () {
+    //YYYYMMDD
+    db.sequelize.query(`
+        select "Satis" from "ABDDOLARIs" where "created_at">='20210922' and "created_at"<'20210921' limit 1;
+        `,null,{
+        raw: true
+    })
+        .then((data)=>{
+            console.log(data[0])
+        })
+        .catch(err=>console.log(err))
+}
+fefefe()
+
+
+let factRes = []
+let factRes30 = []
+let golds = []
+let currencies = []
 app.post('/bintltable', async(req, res) => {
     let time = req.body.time || 1;
     let temp;
@@ -636,10 +663,6 @@ db.sequelize.sync().then(() => {
 
     let M = {}; // coin değişimini tespit için
     let C = {}; // döviz değişimini tespit için
-    let factRes = [];
-    let factRes30 = [];
-    let golds = [];
-    let currencies = [];
     let dolar = 1;
     allPrices["TRY"] = 1;
     let ters = {};
@@ -732,7 +755,6 @@ db.sequelize.sync().then(() => {
                         }
                         currencies.push(response.data[element]);
                         allPrices[api[element]] = parseFloat(response.data[element]["Satış"].replace(",","."));
-
                     }
                 }
             })

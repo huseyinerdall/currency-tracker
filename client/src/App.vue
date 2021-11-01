@@ -513,6 +513,22 @@
                 </v-list-item-content>
               </v-list-item>
               <v-divider color="#0059b2"></v-divider>
+              <v-list-item to="/contact" @click="dialog = false">
+                <v-list-item-icon>
+                  <v-icon>mdi-contactless-payment</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    <v-btn
+                        text
+                        :light="$store.state.isLight"
+                        :dark="!$store.state.isLight"
+                    >
+                      İLETİŞİM
+                    </v-btn>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list-item-group>
           </v-card>
         </v-dialog>
@@ -773,5 +789,17 @@ export default {
 }
 .v-application a:hover {
   text-decoration: none;
+}
+.v-data-table__empty-wrapper td{
+  color: #fff !important;
+}
+@media screen and (min-width: 768px) {
+  .v-data-table__empty-wrapper {
+    height: 510px;
+  }
+}
+.v-progress-linear__background{
+  background-color: #e91e63 !important;
+  border-color: #e91e63 !important;
 }
 </style>

@@ -1,5 +1,5 @@
 let moment = require('moment');
-let fs = require('fs');
+let fs,{promises} = require('fs');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require("./models");
@@ -124,6 +124,29 @@ module.exports = function(app,io){
             .then((user) =>{
                 db.User.update({
                     fullName: desired
+                }, {
+                    where: { id: userId },
+                    returning: true,
+                    plain: true
+                })
+                    .then(result => {
+                        res.send("CHANGE")
+                    })
+            })
+            .catch((err)=>{console.log(err);return 0;})
+    })
+
+    app.post('/changeavatar', (req,res) => {
+        let desired = req.body.desired;
+        let userId = req.body.userId;
+        db.User.findOne({
+            where: {
+                id: userId
+            }
+        })
+            .then((user) =>{
+                db.User.update({
+                    profileImage: desired
                 }, {
                     where: { id: userId },
                     returning: true,
@@ -501,4 +524,13 @@ module.exports = function(app,io){
                 res.json(data.dataValues.active);
             })
     })
+
+    app.get('/allavatars', async (req, res) => {
+        try {
+            const files = await promises.readdir(path.join(__dirname, 'public/avatars/'));
+            res.status(200).json(files);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    });
 }

@@ -271,9 +271,12 @@ const testFolder = './public/avatars/';
 let temp = [];
 fs.readdir(testFolder, (err, files) => {
     console.log(files)
+    fs.writeFileSync("./static/avatars.json",JSON.stringify(files),(err) => {
+        console.log(err)
+    });
     files.forEach(file => {
         temp.push(file);
     });
 });
 
-console.log(temp)
+

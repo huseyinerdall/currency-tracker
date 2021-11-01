@@ -1,5 +1,30 @@
 <template>
   <div class="userwallet pt-lg-4">
+    <div class="d-flex row justify-space-between pl-3 pr-3 mt-2 mb-3">
+
+      <ShareNetwork
+          v-for="network in networks"
+          :network="network.network"
+          :key="network.network"
+          :url="sharing.url"
+          :title="sharing.title"
+          :description="sharing.description"
+          :quote="sharing.quote"
+          :hashtags="sharing.hashtags"
+          :twitterUser="sharing.twitterUser"
+      >
+        <v-btn
+          :color="network.color"
+          class="text--white"
+          tile
+          block
+          :width="$vuetify.breakpoint.smAndDown ? '' :'200'"
+        >
+          <v-icon color="white">{{ network.icon  }}</v-icon>
+          <span class="white--text">{{ network.name }}</span>
+        </v-btn>
+      </ShareNetwork>
+    </div>
     <div>
       <v-alert
         border="right"
@@ -26,12 +51,10 @@
                 :loading="loading1"
               >
                 <template slot="progress">
-                  <v-progress-circular
-                    color="white"
-                    height="12"
-                    indeterminate
-                    style="position: absolute;top:48%;left:48%;"
-                  ></v-progress-circular>
+                  <div style="position: absolute;top:50%;left:50%;margin-top: -62px;margin-left: -97px;">
+                    <Loading />
+                    <span style="color: #fff;text-align: center">Güncel Datalar Yükleniyor...</span>
+                  </div>
                 </template>
                 <v-row>
                   <v-col class="ml-2">
@@ -93,12 +116,10 @@
             <v-col cols="12" md="6">
               <v-card style="background: transparent;" :loading="loading2">
                 <template slot="progress">
-                  <v-progress-circular
-                    color="white"
-                    height="12"
-                    indeterminate
-                    style="position: absolute;top:48%;left:48%;"
-                  ></v-progress-circular>
+                  <div style="position: absolute;top:50%;left:50%;margin-top: -62px;margin-left: -97px;">
+                    <Loading />
+                    <span style="color: #fff;text-align: center">Güncel Datalar Yükleniyor...</span>
+                  </div>
                 </template>
                 <v-data-table
                   :headers="headers"
@@ -175,12 +196,10 @@
             <v-col cols="12" md="6">
               <v-card style="background: transparent;" :loading="loading3">
                 <template slot="progress">
-                  <v-progress-circular
-                    color="white"
-                    height="12"
-                    indeterminate
-                    style="position: absolute;top:48%;left:48%;"
-                  ></v-progress-circular>
+                  <div style="position: absolute;top:50%;left:50%;margin-top: -62px;margin-left: -97px;">
+                    <Loading />
+                    <span style="color: #fff;text-align: center">Güncel Datalar Yükleniyor...</span>
+                  </div>
                 </template>
                 <v-data-table
                   :headers="orderHeaders"
@@ -370,12 +389,10 @@
             <v-col cols="12" md="6">
               <v-card style="background: transparent;" :loading="loading4">
                 <template slot="progress">
-                  <v-progress-circular
-                    color="white"
-                    height="12"
-                    indeterminate
-                    style="position: absolute;top:48%;left:48%;"
-                  ></v-progress-circular>
+                  <div style="position: absolute;top:50%;left:50%;margin-top: -62px;margin-left: -97px;">
+                    <Loading />
+                    <span style="color: #fff;text-align: center">Güncel Datalar Yükleniyor...</span>
+                  </div>
                 </template>
                 <v-data-table
                   :headers="topUserHeaders"
@@ -652,6 +669,7 @@ import moment from "moment";
 import _ from "lodash";
 import IsEmailSendingModal from "@/components/common/EmailSending";
 import EventBus from "../event-bus";
+import Loading from "@/components/Loading";
 let options = {
   type: "success",
   icon: "check",
@@ -669,11 +687,25 @@ let alertoptions = {
   duration: 1600,
   containerClass: "red accent-3 text-center",
   className: "text-center"
-};
+}
 export default {
   name: "UserWallet",
   data(app) {
     return {
+      sharing: {
+        url: 'https://para.guru',
+        title: 'Sanal Para ile emtia ve kripto dünyasında yerini al.',
+        description: '',
+        quote: 'Sanal Para ile emtia ve kripto dünyasında yerini al.',
+        hashtags: 'para.guru,bitcoin,gurucoin',
+        twitterUser: 'wwwparaguru'
+      },
+      networks: [
+        { network: 'reddit', name: 'Reddit', icon: 'mdi-reddit', color: '#ff4500' },
+        { network: 'twitter', name: 'Twitter', icon: 'mdi-twitter', color: '#1da1f2' },
+        { network: 'telegram', name: 'Telegram', icon: 'mdi-send-outline', color: '#0088cc' },
+        { network: 'facebook', name: 'Facebook', icon: 'mdi-facebook', color: '#1877f2' },
+      ],
       i: 1,
       userBalanceList: [
         {
@@ -1084,11 +1116,12 @@ export default {
       detailsDialog: false,
       detailsLabels: [],
       isExpanded: false,
-      expanded: []
+      expanded: [],
     };
   },
   components: {
-    IsEmailSendingModal
+    IsEmailSendingModal,
+    Loading
   },
   created() {
     if (this.$vuetify.breakpoint.smAndDown) {

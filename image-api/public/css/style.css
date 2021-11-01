@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:600,800");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    min-height: 100vh;
+    color: #434248;
+    background: linear-gradient(to bottom, #859dfb, #aba7fd);
+    font-family: "Montserrat", sans-serif;
+}
+
+/* horizontally center the container making up the monitor */
+main {
+    background: #ffffff;
+    width: 80vw;
+    max-width: 750px;
+    margin: 1.5rem auto;
+    box-shadow: 0 2px 15px hsla(0, 0%, 0%, 0.2);
+    border-radius: 12px;
+}
+nav {
+    text-align: center;
+    background: hsla(0, 0%, 0%, 0.015);
+    padding: 0.75rem 1rem;
+    /* position relative for the pseudo element */
+    position: relative;
+}
+
+nav h2 {
+    font-weight: 600;
+    letter-spacing: -0.05rem;
+    font-size: 0.9rem;
+}
+
+/* display the heading and svg in a centered column */
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+}
+section h1 {
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+/* have the svg occupy a sizeable portion of the wrapping container */
+section svg {
+    margin-top: 2.5rem;
+    width: 90%;
+    height: auto;
+}

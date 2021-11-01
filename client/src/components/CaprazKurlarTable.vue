@@ -895,6 +895,12 @@
           <td>{{ data[0]["time"] | onlyTime }}</td>
         </tr>
       </tbody>
+      <tbody v-else style="height: 513px;position: relative;">
+        <div style="position: absolute;top:50%;left:50%;margin-top: -62px;margin-left: -97px;">
+          <Loading />
+          <span style="color: #fff;text-align: center">Güncel Datalar Yükleniyor...</span>
+        </div>
+      </tbody>
     </table>
   </div>
 </template>
@@ -904,6 +910,7 @@
 import currencies from "../assets/currencies.js";
 //import io from "socket.io-client";
 import axios from "axios";
+import Loading from "@/components/Loading";
 
 export default {
   data() {
@@ -938,7 +945,10 @@ export default {
       this.data = response.data;
     });
   },
-  methods: {}
+  methods: {},
+  components: {
+    Loading
+  }
 };
 </script>
 

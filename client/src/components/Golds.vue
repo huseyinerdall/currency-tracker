@@ -5,6 +5,8 @@
       :items="data"
       hide-default-footer
       :loading="!goldloaded"
+      no-data-text="Güncel Datalar Yükleniyor..."
+      loading-text="Güncel Datalar Yükleniyor..."
       disable-pagination
       style="border: 1px solid #ddd;border-radius:0;"
       :style="[
@@ -18,6 +20,10 @@
       :dark="!$store.state.isLight"
       :light="$store.state.isLight"
     >
+      <template v-slot:loading>
+        <Loading />
+        <span>Güncel Datalar Yükleniyor...</span>
+      </template>
       <template v-slot:header.time="{ header }">
         <div class="convert-dropdown row">
           {{ (header.text = "") }}
@@ -188,11 +194,12 @@
 <script>
 //import axios from "axios";
 import io from "socket.io-client";
+import Loading from "@/components/Loading";
 
 export default {
   data(app) {
     return {
-      goldloaded: true,
+      goldloaded: false,
       headers: [
         {
           text: "Altın Kurları",
@@ -267,6 +274,7 @@ export default {
     if (localStorage.getItem("golds")) {
       app.data = JSON.parse(localStorage.getItem("golds"));
       this.overlay = false;
+      this.goldloaded = true;
     }
 
     var socket = io.connect(`${this.$store.state.addr}`);
@@ -274,6 +282,7 @@ export default {
       app.data = fetchedData;
       localStorage.setItem("golds", JSON.stringify(fetchedData));
       //app.overlay = false;
+      app.goldloaded = true;
     });
   },
   computed: {
@@ -346,6 +355,9 @@ export default {
         this.headers.pop();
       }
     }
+  },
+  components: {
+    Loading,
   },
   methods: {
     convertTable: function() {
