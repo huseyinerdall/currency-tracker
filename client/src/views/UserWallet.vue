@@ -133,7 +133,6 @@
                   :dark="!$store.state.isLight"
                   :light="$store.state.isLight"
                   sort-by.sync="amount"
-                  loading="true"
                 >
                   <template v-slot:item="{ item }">
                     <tr @click="props.expanded = !props.expanded">

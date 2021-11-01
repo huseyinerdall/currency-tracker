@@ -17,8 +17,13 @@
         <p style="max-width: 110px;font-size: 12px;color:rgba(255,255,255,.8)" class="ma-0 pa-0">₺ {{ new Intl.NumberFormat("tr-TR").format(user.balanceNow)}}</p>
       </div>
 
-        <div style="height: 160px;width: 140px;border:1px solid #ffc107;"
+        <div style="height: 160px;width: 140px;border:1px solid #ffc107;cursor: pointer;"
              class="d-flex align-center justify-center block"
+             @click="
+                $store.state.userinfo == null
+                  ? $router.push({ name: 'Register' })
+                  : $router.push({ name: 'UserWallet' })
+              "
              @mouseover="focused = true" @mouseleave="focused = false">
           <div class="d-flex flex-column justify-center">
             <v-btn

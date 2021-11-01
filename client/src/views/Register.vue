@@ -167,6 +167,18 @@
             </v-row>
           </v-item-group>
         </div>
+        <v-card-actions class="pa-0">
+          <v-spacer></v-spacer>
+          <v-btn
+              color="pink"
+              block
+              tile
+              class="white--text"
+              @click="setAvatar"
+          >
+            TAMAM
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
 
@@ -256,6 +268,9 @@ export default {
           .then(response => response.json())
           .then(data => this.avatars = data)
           .catch(err=>{console.log(err)})
+    },
+    setAvatar() {
+      this.avatarDialog = false;
     },
     register() {
       if (this.file) {

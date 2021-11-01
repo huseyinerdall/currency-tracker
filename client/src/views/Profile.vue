@@ -218,7 +218,7 @@
             </v-row>
           </v-item-group>
         </div>
-        <v-card-actions>
+        <v-card-actions class="pa-0">
           <v-spacer></v-spacer>
           <v-btn
               color="pink"
@@ -572,5 +572,8 @@ export default {
   animation-duration: 400ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+.v-dialog:not(.v-dialog--fullscreen){
+  overflow-x: hidden;
 }
 </style>
