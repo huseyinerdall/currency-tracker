@@ -652,6 +652,52 @@
         ></apexchart>
       </v-container>
     </v-dialog>
+
+    <v-speed-dial
+        v-model="fab"
+        bottom
+        right
+        direction="top"
+        fixed
+        transition="slide-y-reverse-transition"
+    >
+      <template v-slot:activator>
+        <v-btn
+            v-model="fab"
+            color="blue darken-2"
+            dark
+            fab
+        >
+          <v-icon v-if="fab">
+            mdi-close
+          </v-icon>
+          <v-icon v-else>
+            mdi-share-variant
+          </v-icon>
+        </v-btn>
+      </template>
+      <ShareNetwork
+          v-for="network in networks"
+          :network="network.network"
+          :key="network.network"
+          :url="sharing.url"
+          :title="sharing.title"
+          :description="sharing.description"
+          :quote="sharing.quote"
+          :hashtags="sharing.hashtags"
+          :twitterUser="sharing.twitterUser"
+      >
+        <v-btn
+            fab
+            dark
+            small
+            :color="network.color"
+        >
+          <v-icon>{{network.icon}}</v-icon>
+        </v-btn>
+      </ShareNetwork>
+    </v-speed-dial>
+
     <IsEmailSendingModal />
   </div>
 </template>
@@ -706,6 +752,8 @@ export default {
         { network: 'facebook', name: 'Facebook', icon: 'mdi-facebook', color: '#1877f2' },
       ],
       i: 1,
+      fab: false,
+      fling: false,
       userBalanceList: [
         {
           data: [1, 2, 3, 4, 56, 8]
@@ -1616,5 +1664,12 @@ h3 {
 .theme--light.v-text-field--solo > .v-input__control > .v-input__slot {
   background: transparent !important;
   color: #fff !important;
+}
+.userwallet .v-speed-dial {
+  position: fixed;
+}
+
+.userwallet .v-btn--floating {
+  position: relative;
 }
 </style>

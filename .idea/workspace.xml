@@ -20,10 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="avatars added">
+      <change afterPath="$PROJECT_DIR$/app/public/avatars/107557.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/public/avatars/57633.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/TopUsers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TopUsers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Profile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BuyAndSellModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -464,14 +464,7 @@
       <workItem from="1635176957941" duration="3964000" />
       <workItem from="1635267975073" duration="1624000" />
       <workItem from="1635657164026" duration="17033000" />
-      <workItem from="1635779541857" duration="15493000" />
-    </task>
-    <task id="LOCAL-00037" summary="salı">
-      <created>1616487611055</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1616487611055</updated>
+      <workItem from="1635779541857" duration="17804000" />
     </task>
     <task id="LOCAL-00038" summary="salı">
       <created>1616959011485</created>
@@ -809,7 +802,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635795355141</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="avatars added">
+      <created>1635796595374</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1635796595374</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

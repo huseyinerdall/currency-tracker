@@ -44,7 +44,7 @@
               </v-tabs>
             </div>
 
-            <v-row>
+            <v-row class="mt-2">
               <v-avatar size="40">
                 <img :src="currentUnit.image" />
               </v-avatar>
