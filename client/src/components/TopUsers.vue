@@ -10,15 +10,17 @@
       :dark="!$store.state.isLight"
       :light="$store.state.isLight"
   >
-    <div class="d-flex flex-row justify-space-between">
-      <div v-for="user in topUsers" style="width: calc(100%/7)" :key="user.sirano">
+
+    <div>
+      <vue-horizontal>
+        <div v-for="user in topUsers" class="top-user" :key="user.sirano">
         <v-img :src="user.profileImage" width="140" style="border:1px solid #000;min-height: 160px;"></v-img>
         <p style="max-width: 110px;font-size: 12px;color:rgba(255,255,255,.8)" class="text-truncate text-capitalize ma-0 pa-0">{{user.fullName}}</p>
         <p style="max-width: 110px;font-size: 12px;color:rgba(255,255,255,.8)" class="ma-0 pa-0">₺ {{ new Intl.NumberFormat("tr-TR").format(user.balanceNow)}}</p>
       </div>
 
-        <div style="height: 160px;width: 140px;border:1px solid #ffc107;cursor: pointer;"
-             class="d-flex align-center justify-center block"
+        <div style="border:1px solid #ffc107;cursor: pointer;height:160px"
+             class="d-flex align-center justify-center block top-user"
              @click="
                 $store.state.userinfo == null
                   ? $router.push({ name: 'Register' })
@@ -40,15 +42,15 @@
             </v-btn>
             <v-btn tile color="transparent" class="white--text mx-auto">OYUNA GİR</v-btn>
           </div>
-
         </div>
-
+      </vue-horizontal>
     </div>
   </v-container>
 </template>
 
 <script>
 import axios from "axios";
+import VueHorizontal from "vue-horizontal";
 
 let alertoptions = {
   type: "error",
@@ -69,6 +71,7 @@ export default {
     this.getTopUsers()
   },
   components: {
+    VueHorizontal,
   },
   props: {
   },
@@ -120,5 +123,16 @@ export default {
 
 .block:after {
   filter: blur(50px);
+}
+
+.top-user {
+  width: calc(100%/7);
+}
+
+@media screen and (max-width: 768px){
+   .top-user{
+     width: calc(100%/3);
+     margin-left: 8px;
+   }
 }
 </style>

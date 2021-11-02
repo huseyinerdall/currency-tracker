@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <TopUsers v-if="$vuetify.breakpoint.mdAndUp" />
+    <TopUsers />
     <div class="mt-4">
       <v-row>
         <v-col class="col-md-12">

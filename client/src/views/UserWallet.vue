@@ -1,8 +1,9 @@
 <template>
   <div class="userwallet pt-lg-4">
-    <div class="d-flex row justify-space-between pl-3 pr-3 mt-2 mb-3">
+    <div class="d-flex row justify-space-between pl-3 pr-3 mt-2 mb-3" v-if="$vuetify.breakpoint.mdAndUp">
 
       <ShareNetwork
+
           v-for="network in networks"
           :network="network.network"
           :key="network.network"
