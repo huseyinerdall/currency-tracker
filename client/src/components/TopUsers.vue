@@ -40,7 +40,7 @@
                 mdi-plus
               </v-icon>
             </v-btn>
-            <v-btn tile color="transparent" class="white--text mx-auto">OYUNA GİR</v-btn>
+            <v-btn tile color="transparent" class="white--text mx-auto" style="box-shadow: none;">OYUNA GİR</v-btn>
           </div>
         </div>
       </vue-horizontal>
@@ -134,5 +134,8 @@ export default {
      width: calc(100%/3);
      margin-left: 8px;
    }
+}
+.top-user .v-btn--is-elevated{
+  box-shadow: none !important;
 }
 </style>

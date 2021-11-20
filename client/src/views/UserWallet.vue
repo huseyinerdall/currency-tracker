@@ -50,6 +50,7 @@
               <v-card
                 style="border: 1px solid #ddd;border-radius:6px;background: transparent;"
                 :loading="loading1"
+                id="share-image"
               >
                 <template slot="progress">
                   <div style="position: absolute;top:50%;left:50%;margin-top: -62px;margin-left: -97px;">
@@ -716,6 +717,7 @@ import _ from "lodash";
 import IsEmailSendingModal from "@/components/common/EmailSending";
 import EventBus from "../event-bus";
 import Loading from "@/components/Loading";
+import { toPng } from 'html-to-image';
 let options = {
   type: "success",
   icon: "check",
@@ -1470,6 +1472,18 @@ export default {
       } else {
         this.expanded.push(item);
       }
+    },
+    createShareImage() {
+      let node = document.getElementById('share-image');
+      toPng(node)
+          .then(function (dataUrl) {
+            var img = new Image();
+            img.src = dataUrl;
+            document.body.appendChild(img);
+          })
+          .catch(function (error) {
+            console.error('oops, something went wrong!', error);
+          });
     }
   },
   computed: mapState({

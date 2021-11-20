@@ -373,5 +373,24 @@ class Trade{
                 .catch((err)=>{reject(err);})
         })
     }
+
+    setUserWallet(userId, wallet) {
+        db.User.findOne({
+            where: {
+                id: userId
+            }
+        })
+            .then((user) =>{
+                user.wallet = wallet;
+                db.User.update({
+                    wallet: wallet
+                }, {
+                    where: { id: userId },
+                    returning: true,
+                    plain: true
+                })
+            })
+            .catch((err)=>{console.log(err);return 0;})
+    }
 }
 module.exports = new Trade();

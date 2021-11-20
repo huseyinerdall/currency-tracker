@@ -20,12 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2026c643-aaad-4aad-8bc5-1d69a8769839" name="Default Changelist" comment="avatars added">
+      <change afterPath="$PROJECT_DIR$/app/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/trader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/short-to-name.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/short-to-name.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/TopUsers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TopUsers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Home.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserWallet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserWallet.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -467,14 +474,14 @@
       <workItem from="1635267975073" duration="1624000" />
       <workItem from="1635657164026" duration="17033000" />
       <workItem from="1635779541857" duration="17804000" />
-      <workItem from="1635831258087" duration="4363000" />
-    </task>
-    <task id="LOCAL-00038" summary="salı">
-      <created>1616959011485</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1616959011486</updated>
+      <workItem from="1635831258087" duration="5873000" />
+      <workItem from="1635867245889" duration="7624000" />
+      <workItem from="1635954878179" duration="4357000" />
+      <workItem from="1635968327335" duration="577000" />
+      <workItem from="1636195823512" duration="6923000" />
+      <workItem from="1636267243221" duration="212000" />
+      <workItem from="1637172549664" duration="147000" />
+      <workItem from="1637399617074" duration="604000" />
     </task>
     <task id="LOCAL-00039" summary="persembe">
       <created>1617266992015</created>
@@ -812,7 +819,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635796595374</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="avatars added">
+      <created>1635839651392</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1635839651393</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

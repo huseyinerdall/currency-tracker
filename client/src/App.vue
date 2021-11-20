@@ -513,7 +513,7 @@
                 </v-list-item-content>
               </v-list-item>
               <v-divider color="#0059b2"></v-divider>
-              <v-list-item to="/contact" @click="dialog = false">
+              <v-list-item to="/iletisim" @click="dialog = false">
                 <v-list-item-icon>
                   <v-icon>mdi-contactless-payment</v-icon>
                 </v-list-item-icon>
